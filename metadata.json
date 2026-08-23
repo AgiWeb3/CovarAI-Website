@@ -1,0 +1,6 @@
+{
+  "name": "CovarAI - Enterprise Agent Confidential Computing",
+  "description": "CovarAI 企业级大模型安全计算平台官网 - 融合 TrustGate 与 CovarPri，为全球企业智能体构建零信任密态基建，实现绝对数据主权与硬件级隔离。",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
