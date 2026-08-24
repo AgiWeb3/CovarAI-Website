@@ -87,30 +87,31 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
 
         {/* Center: Desktop Navigation Links */}
-        <div className="hidden lg:flex items-center space-x-6">
+        <div className="hidden lg:flex items-center space-x-6 xl:space-x-8">
           {activeView === 'home' ? (
             <>
-              {/* Home View Nav Links */}
+              {/* Solutions Dropdown Menu */}
               <div className="relative group py-2">
                 <a
                   href="#solutions"
-                  className="text-sm font-medium text-gray-300 hover:text-cyan-400 transition-colors flex items-center gap-1"
+                  className="text-sm font-medium text-gray-300 hover:text-cyan-400 transition-colors flex items-center gap-1.5"
                 >
                   <span>{t.solutions}</span>
                   <ChevronDown className="w-3.5 h-3.5 text-gray-400 group-hover:rotate-180 transition-transform" />
                 </a>
 
                 {/* Submenu for specific industries */}
-                <div className="absolute top-full left-0 mt-1 w-44 rounded-xl bg-zinc-950/95 border border-white/10 shadow-2xl backdrop-blur-xl py-2 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all">
+                <div className="absolute top-full left-0 mt-1 w-48 rounded-xl bg-zinc-950/95 border border-white/10 shadow-2xl backdrop-blur-xl py-2 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all z-50">
                   <button
                     onClick={() => {
                       onSelectIndustry('legal');
                       const el = document.getElementById('solutions');
                       el?.scrollIntoView({ behavior: 'smooth' });
                     }}
-                    className="w-full text-left px-4 py-2 text-xs text-gray-300 hover:bg-white/5 hover:text-cyan-300 transition-colors"
+                    className="w-full text-left px-4 py-2.5 text-xs text-gray-300 hover:bg-white/5 hover:text-cyan-300 transition-colors flex items-center justify-between"
                   >
-                    {t.legal}
+                    <span>{t.legal}</span>
+                    <span className="text-[10px] font-mono text-cyan-400/80">FRE 502</span>
                   </button>
                   <button
                     onClick={() => {
@@ -118,9 +119,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                       const el = document.getElementById('solutions');
                       el?.scrollIntoView({ behavior: 'smooth' });
                     }}
-                    className="w-full text-left px-4 py-2 text-xs text-gray-300 hover:bg-white/5 hover:text-purple-300 transition-colors"
+                    className="w-full text-left px-4 py-2.5 text-xs text-gray-300 hover:bg-white/5 hover:text-purple-300 transition-colors flex items-center justify-between"
                   >
-                    {t.healthcare}
+                    <span>{t.healthcare}</span>
+                    <span className="text-[10px] font-mono text-purple-400/80">HIPAA</span>
                   </button>
                   <button
                     onClick={() => {
@@ -128,44 +130,15 @@ export const Navbar: React.FC<NavbarProps> = ({
                       const el = document.getElementById('solutions');
                       el?.scrollIntoView({ behavior: 'smooth' });
                     }}
-                    className="w-full text-left px-4 py-2 text-xs text-gray-300 hover:bg-white/5 hover:text-emerald-300 transition-colors"
+                    className="w-full text-left px-4 py-2.5 text-xs text-gray-300 hover:bg-white/5 hover:text-emerald-300 transition-colors flex items-center justify-between"
                   >
-                    {t.finance}
+                    <span>{t.finance}</span>
+                    <span className="text-[10px] font-mono text-emerald-400/80">Quant</span>
                   </button>
                 </div>
               </div>
 
-              <button
-                onClick={() => {
-                  onSelectIndustry('legal');
-                  const el = document.getElementById('solutions');
-                  el?.scrollIntoView({ behavior: 'smooth' });
-                }}
-                className="text-xs text-gray-400 hover:text-cyan-300 transition-colors"
-              >
-                {t.legal}
-              </button>
-              <button
-                onClick={() => {
-                  onSelectIndustry('healthcare');
-                  const el = document.getElementById('solutions');
-                  el?.scrollIntoView({ behavior: 'smooth' });
-                }}
-                className="text-xs text-gray-400 hover:text-purple-300 transition-colors"
-              >
-                {t.healthcare}
-              </button>
-              <button
-                onClick={() => {
-                  onSelectIndustry('finance');
-                  const el = document.getElementById('solutions');
-                  el?.scrollIntoView({ behavior: 'smooth' });
-                }}
-                className="text-xs text-gray-400 hover:text-emerald-300 transition-colors"
-              >
-                {t.finance}
-              </button>
-
+              {/* Value & ROI */}
               <a
                 href="#values"
                 className="text-sm font-medium text-gray-300 hover:text-cyan-400 transition-colors py-1"
@@ -179,7 +152,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   onViewChange('products');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className="px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-cyan-300 text-xs font-semibold border border-cyan-500/30 flex items-center gap-1.5 transition-all glow-cyan cursor-pointer"
+                className="px-3.5 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-cyan-300 text-xs font-semibold border border-cyan-500/30 flex items-center gap-1.5 transition-all glow-cyan cursor-pointer"
               >
                 <Cpu className="w-3.5 h-3.5 text-cyan-400" />
                 <span>{t.productsTech}</span>
@@ -226,11 +199,12 @@ export const Navbar: React.FC<NavbarProps> = ({
             </>
           )}
 
-          {/* Whitepaper - Temporarily Disabled / Grayed out */}
+          {/* Whitepaper - Disabled / Updating state until official release */}
           <div
             className="text-sm font-medium text-gray-500 flex items-center gap-1.5 cursor-not-allowed opacity-60 select-none py-1"
-            title={lang === 'en' ? 'Whitepaper is currently being updated' : '技术白皮书正在更新中，敬请期待'}
+            title={lang === 'en' ? 'Whitepaper is currently being updated for official release' : '技术白皮书正在更新中，正式版发布后开放下载'}
           >
+            <FileText className="w-3.5 h-3.5 text-gray-500" />
             <span>{t.whitepaper}</span>
             <span className="text-[10px] px-1.5 py-0.5 rounded bg-zinc-800 text-gray-400 border border-zinc-700 flex items-center gap-1 font-mono">
               <Clock className="w-2.5 h-2.5" />

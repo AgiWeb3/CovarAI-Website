@@ -40,21 +40,30 @@ export const BusinessHero: React.FC<BusinessHeroProps> = ({
         <h1
           data-aos="fade-up"
           data-aos-delay="100"
-          className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white mb-6 leading-[1.15]"
+          className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white mb-6 leading-tight max-w-4xl mx-auto"
         >
-          <span className="block">{translations[lang].businessHero.title.split('，')[0] || translations[lang].businessHero.title}</span>
-          <span className="block bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-purple-300 to-white mt-2">
-            {translations[lang].businessHero.title.includes('，') 
-              ? translations[lang].businessHero.title.split('，')[1] 
-              : lang === 'en' ? 'Absolute Sovereignty for Regulated Enterprises' : ''}
-          </span>
+          {lang === 'en' ? (
+            <>
+              <span>Deploy Frontier AI. </span>
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-purple-300 to-white">
+                Zero Cloud Leaks. 100% Compliant.
+              </span>
+            </>
+          ) : (
+            <>
+              <span className="block">{translations[lang].businessHero.title.split('，')[0] || translations[lang].businessHero.title}</span>
+              <span className="block bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-purple-300 to-white mt-2">
+                {translations[lang].businessHero.title.split('，')[1] || ''}
+              </span>
+            </>
+          )}
         </h1>
 
         {/* Subtitle / Value Proposition */}
         <p
           data-aos="fade-up"
           data-aos-delay="200"
-          className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-10 font-normal"
+          className="text-sm sm:text-base lg:text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8 font-normal"
         >
           {t.subtitle}
         </p>
@@ -114,12 +123,15 @@ export const BusinessHero: React.FC<BusinessHeroProps> = ({
             <span>{t.ctaTech}</span>
           </button>
 
-          <button
-            onClick={onOpenWhitepaper}
-            className="w-full sm:w-auto text-xs text-gray-400 hover:text-cyan-300 font-mono underline underline-offset-4 transition-colors py-2"
+          <div
+            className="w-full sm:w-auto text-xs text-gray-500 flex items-center justify-center gap-1.5 font-mono py-2 cursor-not-allowed opacity-60 select-none"
+            title={lang === 'en' ? 'Whitepaper is currently being updated for official release' : '技术白皮书正在更新中，正式版发布后开放下载'}
           >
-            {translations[lang].nav.whitepaper} (PDF)
-          </button>
+            <span>{translations[lang].nav.whitepaper}</span>
+            <span className="text-[10px] px-1.5 py-0.5 rounded bg-zinc-800 text-gray-400 border border-zinc-700 font-mono">
+              {lang === 'en' ? 'Updating' : '更新中'}
+            </span>
+          </div>
         </div>
 
         {/* Key Commercial Metrics Strip */}

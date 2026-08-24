@@ -22,34 +22,37 @@ export const ProductsTechView: React.FC<ProductsTechViewProps> = ({
 }) => {
   return (
     <div className="animate-fade-in">
-      {/* Top Breadcrumb & Switcher Header */}
+      {/* Top Navigation Strip */}
       <div className="pt-6 pb-2 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="p-3 sm:p-4 rounded-2xl bg-white/5 border border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 backdrop-blur-xl">
+        <div className="p-3 sm:p-4 rounded-2xl bg-zinc-950/80 border border-white/10 flex flex-row items-center justify-between gap-4 backdrop-blur-xl">
           <div className="flex items-center gap-3">
             <button
               onClick={onBackToHome}
-              className="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white border border-white/10 transition-colors flex items-center gap-1.5 text-xs font-semibold cursor-pointer"
+              className="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-cyan-300 hover:text-white border border-cyan-500/20 transition-colors flex items-center gap-1.5 text-xs font-semibold cursor-pointer"
             >
-              <ArrowLeft className="w-4 h-4" />
+              <ArrowLeft className="w-3.5 h-3.5" />
               <span>{translations[lang].nav.switchToHome}</span>
             </button>
             <div className="h-4 w-[1px] bg-white/20 hidden sm:block" />
-            <div className="flex items-center gap-2 text-xs font-mono text-cyan-400">
-              <Cpu className="w-4 h-4" />
-              <span>{translations[lang].nav.productsTech} · Deep-Tech Architecture</span>
+            <div className="hidden sm:flex items-center gap-2 text-xs font-mono text-gray-400">
+              <Cpu className="w-3.5 h-3.5 text-cyan-400" />
+              <span>{translations[lang].nav.productsTech}</span>
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
-            <button
-              onClick={onOpenWhitepaper}
-              className="px-3.5 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-gray-200 text-xs font-mono border border-white/10 transition-colors cursor-pointer"
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div
+              className="px-3 py-1.5 rounded-xl bg-white/5 text-gray-500 text-xs font-mono border border-white/5 cursor-not-allowed opacity-60 select-none flex items-center gap-1.5"
+              title={lang === 'en' ? 'Whitepaper is currently being updated for official release' : '技术白皮书正在更新中，正式版发布后开放下载'}
             >
-              {translations[lang].nav.whitepaper} (PDF)
-            </button>
+              <span>{translations[lang].nav.whitepaper}</span>
+              <span className="text-[9px] px-1 py-0.2 rounded bg-zinc-800 text-zinc-400 border border-zinc-700">
+                {lang === 'en' ? 'Updating' : '更新中'}
+              </span>
+            </div>
             <button
               onClick={onRequestDemo}
-              className="px-4 py-1.5 rounded-xl bg-cyan-500 text-black hover:bg-cyan-400 font-bold text-xs flex items-center gap-1.5 shadow-lg transition-all cursor-pointer"
+              className="px-3.5 py-1.5 rounded-xl bg-cyan-500 text-black hover:bg-cyan-400 font-bold text-xs flex items-center gap-1.5 shadow-lg transition-all cursor-pointer"
             >
               <Sparkles className="w-3.5 h-3.5" />
               <span>{translations[lang].nav.requestDemo}</span>

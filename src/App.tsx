@@ -29,8 +29,24 @@ export default function App() {
   const [preselectedScenario, setPreselectedScenario] = useState<string | undefined>();
 
   useEffect(() => {
-    document.documentElement.lang = lang;
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang === 'zh-TW' ? 'zh-TW' : 'en';
     document.documentElement.setAttribute('data-lang', lang);
+
+    // Dynamic SEO Titles & Meta Description Updates for Search Engines & Social Sharing
+    if (activeView === 'products') {
+      document.title = lang === 'en'
+        ? 'CovarAI Tech — Algebraic Covariance & Zero-Plaintext MoE Architecture'
+        : lang === 'zh-TW'
+        ? 'CovarAI 產品與技術架構 — 代數協變混淆與零明文 MoE 密態計算'
+        : 'CovarAI 产品与技术架构 — 代数协变混淆与零明文 MoE 密态计算';
+    } else {
+      document.title = lang === 'en'
+        ? 'CovarAI — Confidential AI Infrastructure for Regulated Enterprises'
+        : lang === 'zh-TW'
+        ? 'CovarAI — 企業級大模型密態計算與智能體安全基礎設施'
+        : 'CovarAI — 企业级大模型密态计算与智能体安全基础设施';
+    }
+
     if (window.AOS) {
       window.AOS.init({
         duration: 800,

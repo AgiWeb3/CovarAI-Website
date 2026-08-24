@@ -1,0 +1,7 @@
+# Robots.txt for CovarAI Confidential Computing Platform
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# Sitemaps
+Sitemap: https://covarai.com/sitemap.xml
