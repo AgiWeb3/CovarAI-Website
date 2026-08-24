@@ -49,52 +49,52 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full backdrop-blur-xl bg-black/80 border-b border-white/10 transition-all">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+    <header className="sticky top-0 z-40 w-full backdrop-blur-xl bg-black/85 border-b border-white/10 transition-all">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-2 sm:gap-4 flex-nowrap w-full">
         {/* Left: Brand Logo & Title */}
-        <div className="flex items-center space-x-3">
+        <div className="shrink-0 flex items-center">
           <button
             onClick={() => {
               onViewChange('home');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className="flex items-center space-x-3 group cursor-pointer text-left"
+            className="flex items-center space-x-2.5 sm:space-x-3 group cursor-pointer text-left"
           >
             {/* High-tech Geometric Logo */}
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-600 via-indigo-600 to-cyan-400 p-[1px] shadow-lg shadow-cyan-500/20 group-hover:shadow-cyan-500/40 transition-all duration-300">
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-purple-600 via-indigo-600 to-cyan-400 p-[1px] shadow-lg shadow-cyan-500/20 group-hover:shadow-cyan-500/40 transition-all duration-300 shrink-0">
               <div className="w-full h-full bg-black rounded-[11px] flex items-center justify-center relative overflow-hidden">
-                <div className="w-5 h-5 bg-gradient-to-tr from-purple-500 to-cyan-400 rounded-sm rotate-45 flex items-center justify-center">
-                  <div className="w-2 h-2 bg-black rounded-xs"></div>
+                <div className="w-4 h-4 sm:w-5 sm:h-5 bg-gradient-to-tr from-purple-500 to-cyan-400 rounded-sm rotate-45 flex items-center justify-center">
+                  <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-black rounded-xs"></div>
                 </div>
                 <div className="absolute inset-0 bg-cyan-400/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
               </div>
             </div>
 
             <div>
-              <div className="flex items-center gap-2">
-                <span className="text-xl font-bold tracking-tight text-white group-hover:text-cyan-300 transition-colors">
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <span className="text-lg sm:text-xl font-bold tracking-tight text-white group-hover:text-cyan-300 transition-colors">
                   Covar<span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-sky-300">AI</span>
                 </span>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-950/80 text-cyan-300 border border-cyan-500/30">
+                <span className="text-[9px] sm:text-[10px] font-mono px-1.5 sm:px-2 py-0.5 rounded-full bg-cyan-950/80 text-cyan-300 border border-cyan-500/30">
                   v3.1
                 </span>
               </div>
-              <span className="text-[10px] text-gray-400 font-mono tracking-wider block">
-                {lang === 'en' ? 'ZERO-TRUST CONFIDENTIAL AGENT INFRA' : '大模型零信任密态基建'}
+              <span className="text-[8px] sm:text-[9px] text-gray-400 font-mono tracking-wider block uppercase whitespace-nowrap">
+                {lang === 'en' ? 'Confidential Agent Infra' : '大模型零信任密态基建'}
               </span>
             </div>
           </button>
         </div>
 
         {/* Center: Desktop Navigation Links */}
-        <div className="hidden lg:flex items-center space-x-6 xl:space-x-8">
+        <div className="hidden lg:flex items-center space-x-4 xl:space-x-6 shrink-0">
           {activeView === 'home' ? (
             <>
               {/* Solutions Dropdown Menu */}
               <div className="relative group py-2">
                 <a
                   href="#solutions"
-                  className="text-sm font-medium text-gray-300 hover:text-cyan-400 transition-colors flex items-center gap-1.5"
+                  className="text-xs xl:text-sm font-medium text-gray-300 hover:text-cyan-400 transition-colors flex items-center gap-1 whitespace-nowrap"
                 >
                   <span>{t.solutions}</span>
                   <ChevronDown className="w-3.5 h-3.5 text-gray-400 group-hover:rotate-180 transition-transform" />
@@ -141,7 +141,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               {/* Value & ROI */}
               <a
                 href="#values"
-                className="text-sm font-medium text-gray-300 hover:text-cyan-400 transition-colors py-1"
+                className="text-xs xl:text-sm font-medium text-gray-300 hover:text-cyan-400 transition-colors py-1 whitespace-nowrap"
               >
                 {t.valueProps}
               </a>
@@ -152,7 +152,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   onViewChange('products');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className="px-3.5 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-cyan-300 text-xs font-semibold border border-cyan-500/30 flex items-center gap-1.5 transition-all glow-cyan cursor-pointer"
+                className="px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-cyan-300 text-xs font-semibold border border-cyan-500/30 flex items-center gap-1.5 transition-all glow-cyan cursor-pointer whitespace-nowrap"
               >
                 <Cpu className="w-3.5 h-3.5 text-cyan-400" />
                 <span>{t.productsTech}</span>
@@ -160,39 +160,58 @@ export const Navbar: React.FC<NavbarProps> = ({
             </>
           ) : (
             <>
-              {/* Products View Nav Links */}
+              {/* Products View: Solutions Home button */}
               <button
                 onClick={() => {
                   onViewChange('home');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className="text-sm font-medium text-cyan-300 hover:text-white transition-colors flex items-center gap-1.5"
+                className="text-xs xl:text-sm font-medium text-cyan-300 hover:text-white transition-colors flex items-center gap-1.5 whitespace-nowrap cursor-pointer"
               >
                 <Layers className="w-3.5 h-3.5 text-cyan-400" />
                 <span>{t.switchToHome}</span>
               </button>
 
-              <a
-                href="#crisis"
-                className="text-sm font-medium text-gray-300 hover:text-cyan-400 transition-colors py-1"
-              >
-                {t.crisis}
-              </a>
-              <a
-                href="#onion"
-                className="text-sm font-medium text-gray-300 hover:text-cyan-400 transition-colors py-1"
-              >
-                {t.onion}
-              </a>
-              <a
-                href="#performance"
-                className="text-sm font-medium text-gray-300 hover:text-cyan-400 transition-colors py-1"
-              >
-                {t.performance}
-              </a>
+              {/* Architecture Dropdown Menu (Challenge, Onion Defense, Benchmarks) */}
+              <div className="relative group py-2">
+                <a
+                  href="#onion"
+                  className="text-xs xl:text-sm font-medium text-gray-300 hover:text-cyan-400 transition-colors flex items-center gap-1 whitespace-nowrap"
+                >
+                  <span>{t.architecture || (lang === 'en' ? 'Architecture' : '架构与实测')}</span>
+                  <ChevronDown className="w-3.5 h-3.5 text-gray-400 group-hover:rotate-180 transition-transform" />
+                </a>
+
+                {/* Submenu for Architecture Sections */}
+                <div className="absolute top-full left-0 mt-1 w-52 rounded-xl bg-zinc-950/95 border border-white/10 shadow-2xl backdrop-blur-xl py-2 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all z-50">
+                  <a
+                    href="#crisis"
+                    className="block px-4 py-2.5 text-xs text-gray-300 hover:bg-white/5 hover:text-cyan-300 transition-colors"
+                  >
+                    <div className="font-medium">{t.crisis}</div>
+                    <div className="text-[10px] text-gray-500 font-mono">Vulnerability Matrix</div>
+                  </a>
+                  <a
+                    href="#onion"
+                    className="block px-4 py-2.5 text-xs text-gray-300 hover:bg-white/5 hover:text-cyan-300 transition-colors"
+                  >
+                    <div className="font-medium">{t.onion}</div>
+                    <div className="text-[10px] text-gray-500 font-mono">TrustGate · TEE · CovarPri</div>
+                  </a>
+                  <a
+                    href="#performance"
+                    className="block px-4 py-2.5 text-xs text-gray-300 hover:bg-white/5 hover:text-cyan-300 transition-colors"
+                  >
+                    <div className="font-medium">{t.performance}</div>
+                    <div className="text-[10px] text-gray-500 font-mono">DeepSeek 671B &lt;3.5% Delta</div>
+                  </a>
+                </div>
+              </div>
+
+              {/* Delivery Matrix */}
               <a
                 href="#deployment"
-                className="text-sm font-medium text-gray-300 hover:text-cyan-400 transition-colors py-1"
+                className="text-xs xl:text-sm font-medium text-gray-300 hover:text-cyan-400 transition-colors py-1 whitespace-nowrap"
               >
                 {t.deployment}
               </a>
@@ -201,12 +220,12 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* Whitepaper - Disabled / Updating state until official release */}
           <div
-            className="text-sm font-medium text-gray-500 flex items-center gap-1.5 cursor-not-allowed opacity-60 select-none py-1"
+            className="text-xs xl:text-sm font-medium text-gray-500 flex items-center gap-1.5 cursor-not-allowed opacity-60 select-none py-1 whitespace-nowrap"
             title={lang === 'en' ? 'Whitepaper is currently being updated for official release' : '技术白皮书正在更新中，正式版发布后开放下载'}
           >
             <FileText className="w-3.5 h-3.5 text-gray-500" />
             <span>{t.whitepaper}</span>
-            <span className="text-[10px] px-1.5 py-0.5 rounded bg-zinc-800 text-gray-400 border border-zinc-700 flex items-center gap-1 font-mono">
+            <span className="text-[9px] xl:text-[10px] px-1.5 py-0.5 rounded bg-zinc-800 text-gray-400 border border-zinc-700 flex items-center gap-1 font-mono">
               <Clock className="w-2.5 h-2.5" />
               {lang === 'en' ? 'UPDATING' : '更新中'}
             </span>
@@ -214,13 +233,13 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
 
         {/* Right: Language Selector & Request Demo CTA */}
-        <div className="flex items-center space-x-3 sm:space-x-4">
+        <div className="shrink-0 flex items-center space-x-2 sm:space-x-3">
           {/* Language Switcher */}
           <div className="relative">
             <button
               id="lang-switch-btn"
               onClick={() => setLangMenuOpen(!langMenuOpen)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium text-gray-300 hover:text-white bg-white/5 border border-white/10 hover:border-cyan-500/40 transition-all cursor-pointer"
+              className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full text-xs font-medium text-gray-300 hover:text-white bg-white/5 border border-white/10 hover:border-cyan-500/40 transition-all cursor-pointer whitespace-nowrap"
               aria-label="Language Selector"
             >
               <Globe className="w-3.5 h-3.5 text-cyan-400" />
@@ -255,7 +274,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <button
             id="nav-request-demo-btn"
             onClick={() => onOpenDemo()}
-            className="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-400 hover:to-purple-500 text-white font-bold text-xs sm:text-sm shadow-lg shadow-cyan-500/20 active:scale-95 transition-all cursor-pointer"
+            className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-400 hover:to-purple-500 text-white font-bold text-xs sm:text-sm shadow-lg shadow-cyan-500/20 active:scale-95 transition-all cursor-pointer whitespace-nowrap"
           >
             <span>{t.requestDemo}</span>
           </button>
@@ -264,10 +283,10 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div className="lg:hidden">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition-colors cursor-pointer"
+              className="p-1.5 sm:p-2 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition-colors cursor-pointer"
               aria-label="Open Navigation Menu"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" />}
             </button>
           </div>
         </div>
