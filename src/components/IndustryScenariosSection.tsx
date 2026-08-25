@@ -38,6 +38,9 @@ export const IndustryScenariosSection: React.FC<IndustryScenariosSectionProps> =
   const [isSimulating, setIsSimulating] = useState(false);
   const [simulatedComplete, setSimulatedComplete] = useState(false);
 
+  // Mobile segmented sub-tab state ('solution' | 'cases' | 'simulator' | 'all')
+  const [mobileSubTab, setMobileSubTab] = useState<'solution' | 'cases' | 'simulator' | 'all'>('solution');
+
   const handleRunSimulation = () => {
     setIsSimulating(true);
     setSimulatedComplete(false);
@@ -174,8 +177,53 @@ export const IndustryScenariosSection: React.FC<IndustryScenariosSectionProps> =
           </button>
         </div>
 
-        {/* 2-Column: Pain Points vs CovarAI Solutions */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
+        {/* Mobile Progressive Disclosure Segmented Switcher (Visible on < lg screens) */}
+        <div className="lg:hidden mb-8 p-1 rounded-2xl bg-black/60 border border-white/10 flex items-center justify-between gap-1 overflow-x-auto">
+          <button
+            onClick={() => setMobileSubTab('solution')}
+            className={`flex-1 py-2 px-2.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
+              mobileSubTab === 'solution'
+                ? 'bg-cyan-500 text-black font-bold shadow-md'
+                : 'text-gray-400 hover:text-white'
+            }`}
+          >
+            {lang === 'en' ? 'Pain & Solution' : '痛点与解法'}
+          </button>
+          <button
+            onClick={() => setMobileSubTab('cases')}
+            className={`flex-1 py-2 px-2.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
+              mobileSubTab === 'cases'
+                ? 'bg-purple-600 text-white font-bold shadow-md'
+                : 'text-gray-400 hover:text-white'
+            }`}
+          >
+            {lang === 'en' ? 'Use Cases' : '落地案例'}
+          </button>
+          <button
+            onClick={() => setMobileSubTab('simulator')}
+            className={`flex-1 py-2 px-2.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
+              mobileSubTab === 'simulator'
+                ? 'bg-emerald-500 text-black font-bold shadow-md'
+                : 'text-gray-400 hover:text-white'
+            }`}
+          >
+            {lang === 'en' ? 'Live Simulator' : '密态仿真'}
+          </button>
+          <button
+            onClick={() => setMobileSubTab('all')}
+            className={`py-2 px-2.5 rounded-xl text-[11px] font-mono whitespace-nowrap transition-all cursor-pointer ${
+              mobileSubTab === 'all'
+                ? 'bg-white/20 text-white font-bold'
+                : 'text-gray-500 hover:text-gray-300'
+            }`}
+            title={lang === 'en' ? 'Show all sections at once' : '展开全部内容'}
+          >
+            {lang === 'en' ? 'All' : '全部'}
+          </button>
+        </div>
+
+        {/* 2-Column: Pain Points vs CovarAI Solutions (Shown on desktop OR when mobileSubTab is 'solution' / 'all') */}
+        <div className={`grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10 ${mobileSubTab !== 'solution' && mobileSubTab !== 'all' ? 'hidden lg:grid' : ''}`}>
           {/* Column A: Pain Points & Risks */}
           <div className="space-y-4">
             <div className="flex items-center gap-2 text-rose-400 font-bold text-sm sm:text-base mb-2">
@@ -231,8 +279,8 @@ export const IndustryScenariosSection: React.FC<IndustryScenariosSectionProps> =
           </div>
         </div>
 
-        {/* Section C: Real-World Use Cases & Enterprise ROI */}
-        <div className="pt-8 border-t border-white/10 mb-10">
+        {/* Section C: Real-World Use Cases & Enterprise ROI (Shown on desktop OR when mobileSubTab is 'cases' / 'all') */}
+        <div className={`pt-8 border-t border-white/10 mb-10 ${mobileSubTab !== 'cases' && mobileSubTab !== 'all' ? 'hidden lg:block' : ''}`}>
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-2 text-white font-bold text-base sm:text-lg">
               <Zap className="w-4 h-4 text-cyan-400" />
@@ -270,8 +318,8 @@ export const IndustryScenariosSection: React.FC<IndustryScenariosSectionProps> =
           </div>
         </div>
 
-        {/* Section D: Interactive Live Pipeline Simulator */}
-        <div className="p-6 sm:p-8 rounded-2xl bg-black/60 border border-white/10">
+        {/* Section D: Interactive Live Pipeline Simulator (Shown on desktop OR when mobileSubTab is 'simulator' / 'all') */}
+        <div className={`p-6 sm:p-8 rounded-2xl bg-black/60 border border-white/10 ${mobileSubTab !== 'simulator' && mobileSubTab !== 'all' ? 'hidden lg:block' : ''}`}>
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
             <div>
               <div className="flex items-center gap-2 text-xs font-mono text-cyan-400 uppercase tracking-wider mb-1">

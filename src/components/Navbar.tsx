@@ -87,7 +87,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
 
         {/* Center: Desktop Navigation Links */}
-        <div className="hidden lg:flex items-center space-x-4 xl:space-x-6 shrink-0">
+        <div className="hidden lg:flex items-center space-x-3 xl:space-x-5 shrink-0">
           {activeView === 'home' ? (
             <>
               {/* Solutions Dropdown Menu */}
@@ -108,7 +108,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                       const el = document.getElementById('solutions');
                       el?.scrollIntoView({ behavior: 'smooth' });
                     }}
-                    className="w-full text-left px-4 py-2.5 text-xs text-gray-300 hover:bg-white/5 hover:text-cyan-300 transition-colors flex items-center justify-between"
+                    className="w-full text-left px-4 py-2.5 text-xs text-gray-300 hover:bg-white/5 hover:text-cyan-300 transition-colors flex items-center justify-between cursor-pointer"
                   >
                     <span>{t.legal}</span>
                     <span className="text-[10px] font-mono text-cyan-400/80">FRE 502</span>
@@ -119,7 +119,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                       const el = document.getElementById('solutions');
                       el?.scrollIntoView({ behavior: 'smooth' });
                     }}
-                    className="w-full text-left px-4 py-2.5 text-xs text-gray-300 hover:bg-white/5 hover:text-purple-300 transition-colors flex items-center justify-between"
+                    className="w-full text-left px-4 py-2.5 text-xs text-gray-300 hover:bg-white/5 hover:text-purple-300 transition-colors flex items-center justify-between cursor-pointer"
                   >
                     <span>{t.healthcare}</span>
                     <span className="text-[10px] font-mono text-purple-400/80">HIPAA</span>
@@ -130,7 +130,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                       const el = document.getElementById('solutions');
                       el?.scrollIntoView({ behavior: 'smooth' });
                     }}
-                    className="w-full text-left px-4 py-2.5 text-xs text-gray-300 hover:bg-white/5 hover:text-emerald-300 transition-colors flex items-center justify-between"
+                    className="w-full text-left px-4 py-2.5 text-xs text-gray-300 hover:bg-white/5 hover:text-emerald-300 transition-colors flex items-center justify-between cursor-pointer"
                   >
                     <span>{t.finance}</span>
                     <span className="text-[10px] font-mono text-emerald-400/80">Quant</span>
@@ -172,7 +172,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <span>{t.switchToHome}</span>
               </button>
 
-              {/* Architecture Dropdown Menu (Challenge, Onion Defense, Benchmarks) */}
+              {/* Architecture Dropdown Menu (Challenge, Onion Defense, Benchmarks, Delivery) */}
               <div className="relative group py-2">
                 <a
                   href="#onion"
@@ -186,48 +186,55 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <div className="absolute top-full left-0 mt-1 w-52 rounded-xl bg-zinc-950/95 border border-white/10 shadow-2xl backdrop-blur-xl py-2 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all z-50">
                   <a
                     href="#crisis"
-                    className="block px-4 py-2.5 text-xs text-gray-300 hover:bg-white/5 hover:text-cyan-300 transition-colors"
+                    className="block px-4 py-2 text-xs text-gray-300 hover:bg-white/5 hover:text-cyan-300 transition-colors"
                   >
                     <div className="font-medium">{t.crisis}</div>
                     <div className="text-[10px] text-gray-500 font-mono">Vulnerability Matrix</div>
                   </a>
                   <a
                     href="#onion"
-                    className="block px-4 py-2.5 text-xs text-gray-300 hover:bg-white/5 hover:text-cyan-300 transition-colors"
+                    className="block px-4 py-2 text-xs text-gray-300 hover:bg-white/5 hover:text-cyan-300 transition-colors"
                   >
                     <div className="font-medium">{t.onion}</div>
                     <div className="text-[10px] text-gray-500 font-mono">TrustGate · TEE · CovarPri</div>
                   </a>
                   <a
                     href="#performance"
-                    className="block px-4 py-2.5 text-xs text-gray-300 hover:bg-white/5 hover:text-cyan-300 transition-colors"
+                    className="block px-4 py-2 text-xs text-gray-300 hover:bg-white/5 hover:text-cyan-300 transition-colors"
                   >
                     <div className="font-medium">{t.performance}</div>
                     <div className="text-[10px] text-gray-500 font-mono">DeepSeek 671B &lt;3.5% Delta</div>
                   </a>
+                  <a
+                    href="#deployment"
+                    className="block px-4 py-2 text-xs text-gray-300 hover:bg-white/5 hover:text-cyan-300 transition-colors"
+                  >
+                    <div className="font-medium">{t.deployment}</div>
+                    <div className="text-[10px] text-gray-500 font-mono">SaaS Gateway · Appliance</div>
+                  </a>
                 </div>
               </div>
 
-              {/* Delivery Matrix */}
+              {/* Delivery Matrix on XL+ */}
               <a
                 href="#deployment"
-                className="text-xs xl:text-sm font-medium text-gray-300 hover:text-cyan-400 transition-colors py-1 whitespace-nowrap"
+                className="hidden xl:inline-block text-xs xl:text-sm font-medium text-gray-300 hover:text-cyan-400 transition-colors py-1 whitespace-nowrap"
               >
                 {t.deployment}
               </a>
             </>
           )}
 
-          {/* Whitepaper - Disabled / Updating state until official release */}
+          {/* Whitepaper - Updating state */}
           <div
             className="text-xs xl:text-sm font-medium text-gray-500 flex items-center gap-1.5 cursor-not-allowed opacity-60 select-none py-1 whitespace-nowrap"
             title={lang === 'en' ? 'Whitepaper is currently being updated for official release' : '技术白皮书正在更新中，正式版发布后开放下载'}
           >
             <FileText className="w-3.5 h-3.5 text-gray-500" />
-            <span>{t.whitepaper}</span>
+            <span className="hidden xl:inline">{t.whitepaper}</span>
             <span className="text-[9px] xl:text-[10px] px-1.5 py-0.5 rounded bg-zinc-800 text-gray-400 border border-zinc-700 flex items-center gap-1 font-mono">
               <Clock className="w-2.5 h-2.5" />
-              {lang === 'en' ? 'UPDATING' : '更新中'}
+              <span>{lang === 'en' ? 'UPDATING' : '更新中'}</span>
             </span>
           </div>
         </div>

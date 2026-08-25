@@ -38,74 +38,175 @@ export const PromptSandboxMatrix: React.FC<PromptSandboxMatrixProps> = ({ lang }
   const scenarios = {
     healthcare: {
       id: 'healthcare' as const,
-      name: lang === 'en' ? 'Clinical / PHI Diagnosis' : '医疗 / PHI 真实病历研判',
+      name:
+        lang === 'en'
+          ? 'Clinical / PHI Diagnosis'
+          : lang === 'zh-TW'
+          ? '醫療 / PHI 真實病歷研判'
+          : '医疗 / PHI 真实病历研判',
       icon: HeartPulse,
       color: 'emerald',
-      rawPrompt: '患者: 张*华, 身份证: 110108198403125678, 确诊非小细胞肺癌(NSCLC) EGFR L858R突变，现评估特异性第三代靶向药奥希替尼与PD-L1联合给药方案及药物相互作用毒性分析。',
-      sensitiveEntities: ['张*华', '110108198403125678', 'NSCLC EGFR L858R', '奥希替尼'],
-      trustGateScrubbed: '患者: [PHI_USER_FPE_984], 身份证: [ID_TOKEN_FPE_441], 确诊[ONCOLOGY_BIOMARKER_L858R]，现评估特异性第三代靶向药[DRUG_CODE_AZD9291]与PD-L1联合给药方案及相互作用毒性。',
+      rawPrompt:
+        lang === 'en'
+          ? 'Patient: John Doe, SSN: 110-84-0312, Confirmed NSCLC with EGFR L858R mutation. Evaluate specific 3rd-gen targeted inhibitor Osimertinib combined with anti-PD-L1 regimen, drug-drug interaction toxicity, and resistance markers.'
+          : lang === 'zh-TW'
+          ? '患者: 張*華, 身分證: 110108198403125678, 確診非小細胞肺癌(NSCLC) EGFR L858R突變，現評估特異性第三代標靶藥奧希替尼與PD-L1聯合給藥方案及藥物相互作用毒性分析。'
+          : '患者: 张*华, 身份证: 110108198403125678, 确诊非小细胞肺癌(NSCLC) EGFR L858R突变，现评估特异性第三代靶向药奥希替尼与PD-L1联合给药方案及药物相互作用毒性分析。',
+      sensitiveEntities:
+        lang === 'en'
+          ? ['John Doe', 'SSN: 110-84-0312', 'NSCLC EGFR L858R', 'Osimertinib']
+          : lang === 'zh-TW'
+          ? ['張*華', '110108198403125678', 'NSCLC EGFR L858R', '奧希替尼']
+          : ['张*华', '110108198403125678', 'NSCLC EGFR L858R', '奥希替尼'],
+      trustGateScrubbed:
+        lang === 'en'
+          ? 'Patient: [PHI_USER_FPE_984], SSN: [ID_TOKEN_FPE_441], Confirmed [ONCOLOGY_BIOMARKER_L858R]. Evaluate targeted inhibitor [DRUG_CODE_AZD9291] with anti-PD-L1 regimen and interaction toxicity.'
+          : lang === 'zh-TW'
+          ? '患者: [PHI_USER_FPE_984], 身分證: [ID_TOKEN_FPE_441], 確診[ONCOLOGY_BIOMARKER_L858R]，現評估特異性第三代標靶藥[DRUG_CODE_AZD9291]與PD-L1聯合給藥方案及相互作用毒性。'
+          : '患者: [PHI_USER_FPE_984], 身份证: [ID_TOKEN_FPE_441], 确诊[ONCOLOGY_BIOMARKER_L858R]，现评估特异性第三代靶向药[DRUG_CODE_AZD9291]与PD-L1联合给药方案及相互作用毒性。',
       covarTokens: [
         'TENSOR_P[0x88A1] · X[L858R] · Q⁻¹',
         'GAUSSIAN_PERTURB_σ=0.038 // ENTROPY=99.98%',
         'MLA_LATENT_KV[0x4F12] · MATMUL_OBF',
         'MOE_GATE_ROUTER[EXP_14, EXP_29] // MASKED',
       ],
-      cloudGpuView: 'Executing 671B MoE Forward Pass on Encrypted Tensors. Intermediate activations = Pure Mathematical High-Entropy Noise (Loss=0.00, Privacy Leakage=0.000%).',
-      decryptedOutput: '【临床决策支持建议】基于密态表征推演：三代EGFR-TKI联合PD-L1具有潜在间质性肺炎(ILD)叠加风险，建议维持靶向单药维持治疗，并监测外周血ctDNA丰度以动态评估耐药突变。',
+      cloudGpuView:
+        lang === 'en'
+          ? 'Executing 671B MoE Forward Pass on Encrypted Tensors. Intermediate activations = Pure Mathematical High-Entropy Noise (Loss=0.00, Privacy Leakage=0.000%).'
+          : 'Executing 671B MoE Forward Pass on Encrypted Tensors. Intermediate activations = Pure Mathematical High-Entropy Noise (Loss=0.00, Privacy Leakage=0.000%).',
+      decryptedOutput:
+        lang === 'en'
+          ? '[Clinical Decision Support] Based on confidential tensor synthesis: Combined 3rd-gen EGFR-TKI and PD-L1 poses elevated interstitial lung disease (ILD) risk. Recommend monotherapy continuation with peripheral blood ctDNA tracking for dynamic resistance profiling.'
+          : lang === 'zh-TW'
+          ? '【臨床決策支援建議】基於密態表徵推演：三代EGFR-TKI聯合PD-L1具有潛在間質性肺炎(ILD)疊加風險，建議維持標靶單藥維持治療，並監測外周血ctDNA豐度以動態評估耐藥突變。'
+          : '【临床决策支持建议】基于密态表征推演：三代EGFR-TKI联合PD-L1具有潜在间质性肺炎(ILD)叠加风险，建议维持靶向单药维持治疗，并监测外周血ctDNA丰度以动态评估耐药突变。',
       complianceTag: 'HIPAA Safe Harbor · GDPR Art.9 Certified',
     },
     finance: {
       id: 'finance' as const,
-      name: lang === 'en' ? 'M&A / Valuation Secrets' : '投行 / 金融绝密并购底稿',
+      name:
+        lang === 'en'
+          ? 'M&A / Valuation Secrets'
+          : lang === 'zh-TW'
+          ? '投行 / 金融絕密併購底稿'
+          : '投行 / 金融绝密并购底稿',
       icon: Building2,
       color: 'cyan',
-      rawPrompt: '【绝密并购底稿 Project Titan】标的公司 ABC Global 2026年EBITDA预估 $1.45B，未公开协同溢价估值上限 $18.6B，隐性衍生品负债敞口 $320M，测算杠杆收购(LBO) IRR收益率与破产清算边界。',
-      sensitiveEntities: ['Project Titan', 'ABC Global', '$1.45B', '$18.6B', '$320M'],
-      trustGateScrubbed: '【绝密并购底稿 [M&A_CODE_44A]】标的公司 [TARGET_ENTITY_ENC] 2026年EBITDA预估 [FIN_VAL_1], 未公开协同溢价上限 [FIN_VAL_2], 隐性衍生品敞口 [FIN_VAL_3], 测算LBO IRR与清算边界。',
+      rawPrompt:
+        lang === 'en'
+          ? '[RESTRICTED M&A DOSSIER Project Titan] Target ABC Global 2026 EBITDA forecast $1.45B, undisclosed synergy ceiling $18.6B, off-balance derivative liabilities $320M. Calculate leveraged buyout (LBO) IRR returns and liquidation boundary.'
+          : lang === 'zh-TW'
+          ? '【絕密併購底稿 Project Titan】標的公司 ABC Global 2026年EBITDA預估 $1.45B，未公開協同溢價估值上限 $18.6B，隱性衍生品負債敞口 $320M，測算槓桿收購(LBO) IRR收益率與破產清算邊界。'
+          : '【绝密并购底稿 Project Titan】标的公司 ABC Global 2026年EBITDA预估 $1.45B，未公开协同溢价估值上限 $18.6B，隐性衍生品负债敞口 $320M，测算杠杆收购(LBO) IRR收益率与破产清算边界。',
+      sensitiveEntities:
+        lang === 'en'
+          ? ['Project Titan', 'ABC Global', '$1.45B', '$18.6B', '$320M']
+          : ['Project Titan', 'ABC Global', '$1.45B', '$18.6B', '$320M'],
+      trustGateScrubbed:
+        lang === 'en'
+          ? '[RESTRICTED M&A DOSSIER [M&A_CODE_44A]] Target [TARGET_ENTITY_ENC] 2026 EBITDA forecast [FIN_VAL_1], undisclosed synergy ceiling [FIN_VAL_2], derivative liabilities [FIN_VAL_3]. Calculate LBO IRR and liquidation boundary.'
+          : lang === 'zh-TW'
+          ? '【絕密併購底稿 [M&A_CODE_44A]】標的公司 [TARGET_ENTITY_ENC] 2026年EBITDA預估 [FIN_VAL_1], 未公開協同溢價上限 [FIN_VAL_2], 隱性衍生品敞口 [FIN_VAL_3], 測算LBO IRR與清算邊界。'
+          : '【绝密并购底稿 [M&A_CODE_44A]】标的公司 [TARGET_ENTITY_ENC] 2026年EBITDA预估 [FIN_VAL_1], 未公开协同溢价上限 [FIN_VAL_2], 隐性衍生品敞口 [FIN_VAL_3], 测算LBO IRR与清算边界。',
       covarTokens: [
         'MATRIX_COVAR_P[TITAN] · W_WEIGHTS · Q⁻¹',
         'FPE_FLOAT_OBFUSCATION[1.45B] // NOISE_SIG',
         'MLA_KV_COMPRESS[VALUATION_DCF] · PERMUTED',
         'MCP_ACTION_LOCK[EXTERNAL_EXPORT=DENIED]',
       ],
-      cloudGpuView: 'Processing financial tensor products. Cloud nodes only see randomized matrices with zero semantic arbitrage capability.',
-      decryptedOutput: '【LBO财务模型结论】基准情景下IRR达24.8%，债务杠杆倍数(Debt/EBITDA)为4.8x；当衍生品负债触发清算条款时，需在第3年注入$150M过桥资金以维持偿债覆盖率(DSCR > 1.35x)。',
+      cloudGpuView:
+        'Processing financial tensor products. Cloud nodes only see randomized matrices with zero semantic arbitrage capability.',
+      decryptedOutput:
+        lang === 'en'
+          ? '[LBO Financial Model Conclusion] Base scenario yields 24.8% IRR with 4.8x Debt/EBITDA leverage. If derivative liabilities trigger settlement terms, inject $150M bridge liquidity in Year 3 to preserve DSCR > 1.35x.'
+          : lang === 'zh-TW'
+          ? '【LBO財務模型結論】基準情景下IRR達24.8%，債務槓桿倍數(Debt/EBITDA)為4.8x；當衍生品負債觸發清算條款時，需在第3年注入$150M過橋資金以維持償債覆蓋率(DSCR > 1.35x)。'
+          : '【LBO财务模型结论】基准情景下IRR达24.8%，债务杠杆倍数(Debt/EBITDA)为4.8x；当衍生品负债触发清算条款时，需在第3年注入$150M过桥资金以维持偿债覆盖率(DSCR > 1.35x)。',
       complianceTag: 'SEC Insider Trading Defense · Strict NDA',
     },
     codeAudit: {
       id: 'codeAudit' as const,
-      name: lang === 'en' ? 'Core IP / Zero-Day Audit' : '代码审计 / 高频交易核心资产',
+      name:
+        lang === 'en'
+          ? 'Core IP / Zero-Day Audit'
+          : lang === 'zh-TW'
+          ? '程式碼審計 / 高頻交易核心資產'
+          : '代码审计 / 高频交易核心资产',
       icon: Code2,
       color: 'purple',
-      rawPrompt: '审查高频量化撮合引擎关键内核: `MatchOrderBook(Order* incoming, RingBuffer<Order>& book)`，检查纳秒级无锁队列中的内存逃逸漏洞及私有动态滑点补偿公式 `alpha = (depth_ask - depth_bid) * gamma_spread` 是否存在零日竞态利用点。',
-      sensitiveEntities: ['MatchOrderBook', 'RingBuffer<Order>& book', 'alpha = (depth_ask - depth_bid) * gamma_spread'],
-      trustGateScrubbed: '审查高频撮合关键内核: `[CORE_KERNEL_FPE_01]`，检查纳秒级无锁队列中的内存逃逸漏洞及私有动态补偿公式 `[ALPHA_SECRET_FORMULA_99]` 是否存在零日竞态利用点。',
+      rawPrompt:
+        lang === 'en'
+          ? 'Audit high-frequency trading matching kernel: `MatchOrderBook(Order* incoming, RingBuffer<Order>& book)`. Verify lock-free queue memory escapements and proprietary dynamic spread compensation formula `alpha = (depth_ask - depth_bid) * gamma_spread` for zero-day race exploits.'
+          : lang === 'zh-TW'
+          ? '審查高頻量化撮合引擎關鍵內核: `MatchOrderBook(Order* incoming, RingBuffer<Order>& book)`，檢查奈秒級無鎖隊列中的記憶體逃逸漏洞及私有動態滑點補償公式 `alpha = (depth_ask - depth_bid) * gamma_spread` 是否存在零日競態利用點。'
+          : '审查高频量化撮合引擎关键内核: `MatchOrderBook(Order* incoming, RingBuffer<Order>& book)`，检查纳秒级无锁队列中的内存逃逸漏洞及私有动态滑点补偿公式 `alpha = (depth_ask - depth_bid) * gamma_spread` 是否存在零日竞态利用点。',
+      sensitiveEntities: [
+        'MatchOrderBook',
+        'RingBuffer<Order>& book',
+        'alpha = (depth_ask - depth_bid) * gamma_spread',
+      ],
+      trustGateScrubbed:
+        lang === 'en'
+          ? 'Audit HFT matching kernel: `[CORE_KERNEL_FPE_01]`. Verify lock-free queue memory escapements and dynamic spread compensation formula `[ALPHA_SECRET_FORMULA_99]` for zero-day race exploits.'
+          : lang === 'zh-TW'
+          ? '審查高頻撮合關鍵內核: `[CORE_KERNEL_FPE_01]`，檢查奈秒級無鎖隊列中的記憶體逃逸漏洞及私有動態補償公式 `[ALPHA_SECRET_FORMULA_99]` 是否存在零日競態利用點。'
+          : '审查高频撮合关键内核: `[CORE_KERNEL_FPE_01]`，检查纳秒级无锁队列中的内存逃逸漏洞及私有动态补偿公式 `[ALPHA_SECRET_FORMULA_99]` 是否存在零日竞态利用点。',
       covarTokens: [
         'AST_NODE_PERMUTATION[MATCH_ENGINE]',
         'TENSOR_ORTHOGONAL_P · EMBED(ALPHA) · Q⁻¹',
         'ZERO_KNOWLEDGE_KV_STREAM // 0xCC741',
         'COT_THINK_CHAIN[CONFIDENTIAL_ENCLAVE_LOCKED]',
       ],
-      cloudGpuView: 'Synthesizing C++ AST vulnerability graphs within secure confidential enclaves. No proprietary algorithmic alpha leaked.',
-      decryptedOutput: '【安全审计与补丁报告】发现无锁队列在极端并发下存在 ABA 问题导致内存屏障失效。已生成密态安全补丁：引入 `std::atomic<uint64_t> seq_tag` 实现版本双字 CAS，同时保持纳秒级吞吐不变。',
+      cloudGpuView:
+        'Synthesizing C++ AST vulnerability graphs within secure confidential enclaves. No proprietary algorithmic alpha leaked.',
+      decryptedOutput:
+        lang === 'en'
+          ? '[Security Audit & Patch Report] Identified ABA hazard in lock-free queue under extreme concurrency causing memory barrier failure. Generated confidential patch: introduced `std::atomic<uint64_t> seq_tag` double-word CAS, preserving sub-microsecond throughput.'
+          : lang === 'zh-TW'
+          ? '【安全審計與補丁報告】發現無鎖隊列在極端並發下存在 ABA 問題導致記憶體屏障失效。已生成密態安全補丁：引入 `std::atomic<uint64_t> seq_tag` 實現版本雙字 CAS，同時保持奈秒級吞吐不變。'
+          : '【安全审计与补丁报告】发现无锁队列在极端并发下存在 ABA 问题导致内存屏障失效。已生成密态安全补丁：引入 `std::atomic<uint64_t> seq_tag` 实现版本双字 CAS，同时保持纳秒级吞吐不变。',
       complianceTag: 'Proprietary IP Shield · Zero Alpha Leakage',
     },
     legal: {
       id: 'legal' as const,
-      name: lang === 'en' ? 'Legal / Deposition Strategy' : '律所特权 / 司法研判口供',
+      name:
+        lang === 'en'
+          ? 'Legal / Deposition Strategy'
+          : lang === 'zh-TW'
+          ? '律所特權 / 司法研判口供'
+          : '律所特权 / 司法研判口供',
       icon: Scale,
       color: 'blue',
-      rawPrompt: '【律师-客户特权材料 PRIVILEGED & CONFIDENTIAL】证人李某在半导体光刻胶侵权案中的宣誓口供笔录，客户最高和解底线 $45,000,000，我方秘密抗辩论据基于美国证据规则 FRE 502 及先例案 Qualcomm v. Broadcom，评估陪审团反驳策略。',
-      sensitiveEntities: ['李某', '光刻胶侵权案', '$45,000,000', 'FRE 502', 'Qualcomm v. Broadcom'],
-      trustGateScrubbed: '【律师-客户特权材料 [PRIVILEGED_SEAL]】证人 [WITNESS_TOKEN_9] 在 [PATENT_CASE_ENC] 中的宣誓口供笔录，客户最高和解底线 [SETTLEMENT_ENC], 我方秘密抗辩论据基于 [EVIDENCE_RULE] 与先例，评估反驳策略。',
+      rawPrompt:
+        lang === 'en'
+          ? '[PRIVILEGED & CONFIDENTIAL Deposition File] Sworn testimony of witness Dr. Li in semiconductor photoresist patent dispute. Client settlement threshold ceiling $45,000,000. Defense arguments under FRE 502 and Qualcomm v. Broadcom precedents; evaluate jury counter-strategy.'
+          : lang === 'zh-TW'
+          ? '【律師-客戶特權材料 PRIVILEGED & CONFIDENTIAL】證人李某在半導體光刻膠侵權案中的宣誓口供筆錄，客戶最高和解底線 $45,000,000，我方秘密抗辯論據基於美國證據規則 FRE 502 及先例案 Qualcomm v. Broadcom，評估陪審團反駁策略。'
+          : '【律师-客户特权材料 PRIVILEGED & CONFIDENTIAL】证人李某在半导体光刻胶侵权案中的宣誓口供笔录，客户最高和解底线 $45,000,000，我方秘密抗辩论据基于美国证据规则 FRE 502 及先例案 Qualcomm v. Broadcom，评估陪审团反驳策略。',
+      sensitiveEntities:
+        lang === 'en'
+          ? ['Dr. Li', 'Photoresist Patent Dispute', '$45,000,000', 'FRE 502', 'Qualcomm v. Broadcom']
+          : ['李某', '光刻胶侵权案', '$45,000,000', 'FRE 502', 'Qualcomm v. Broadcom'],
+      trustGateScrubbed:
+        lang === 'en'
+          ? '[PRIVILEGED & CONFIDENTIAL [PRIVILEGED_SEAL]] Sworn testimony of witness [WITNESS_TOKEN_9] in [PATENT_CASE_ENC]. Client settlement ceiling [SETTLEMENT_ENC]. Defense arguments under [EVIDENCE_RULE] and precedents; evaluate counter-strategy.'
+          : lang === 'zh-TW'
+          ? '【律師-客戶特權材料 [PRIVILEGED_SEAL]】證人 [WITNESS_TOKEN_9] 在 [PATENT_CASE_ENC] 中的宣誓口供筆錄，客戶最高和解底線 [SETTLEMENT_ENC], 我方秘密抗辯論據基於 [EVIDENCE_RULE] 與先例，評估反駁策略。'
+          : '【律师-客户特权材料 [PRIVILEGED_SEAL]】证人 [WITNESS_TOKEN_9] 在 [PATENT_CASE_ENC] 中的宣誓口供笔录，客户最高和解底线 [SETTLEMENT_ENC], 我方秘密抗辩论据基于 [EVIDENCE_RULE] 与先例，评估反驳策略。',
       covarTokens: [
         'LEGAL_PRIVILEGE_SEAL[FRE_502_IMMUNE]',
         'NON_INVERTIBLE_TENSOR · W_MOE · P⁻¹',
         'REASONING_COT_SHIELD[<think> PROTECTED]',
         'STREAM_TENSOR_HASH[SHA256_ATTESTED]',
       ],
-      cloudGpuView: 'Generating multi-jurisdictional legal precedents. Cloud provider has zero evidentiary access, maintaining absolute attorney-client privilege.',
-      decryptedOutput: '【司法抗辩研判备忘录】根据 FRE 502(a)，本密态交互不构成特权弃权；建议在动议听证会中重点攻击原告关于均等论(Doctrine of Equivalents)的举证瑕疵，并将和解交涉节点设定在陪审团筛选程序之前。',
+      cloudGpuView:
+        'Generating multi-jurisdictional legal precedents. Cloud provider has zero evidentiary access, maintaining absolute attorney-client privilege.',
+      decryptedOutput:
+        lang === 'en'
+          ? '[Legal Strategy Memorandum] Pursuant to FRE 502(a), this confidential transaction does not waive privilege. Recommend targeting plaintiff\'s Doctrine of Equivalents proof deficiencies at the motion hearing prior to jury empanelment.'
+          : lang === 'zh-TW'
+          ? '【司法抗辯研判備忘錄】根據 FRE 502(a)，本密態交互不構成特權棄權；建議在動議聽證會中重點攻擊原告關於均等論(Doctrine of Equivalents)的舉證瑕疵，並將和解交涉節點設定在陪審團篩選程序之前。'
+          : '【司法抗辩研判备忘录】根据 FRE 502(a)，本密态交互不构成特权弃权；建议在动议听证会中重点攻击原告关于均等论(Doctrine of Equivalents)的举证瑕疵，并将和解交涉节点设定在陪审团筛选程序之前。',
       complianceTag: 'FRE 502 Non-Waiver · Attorney-Client Privilege',
     },
   };

@@ -387,10 +387,10 @@ export const OnionArchitecture: React.FC<OnionArchitectureProps> = ({ lang }) =>
                 }`}
               >
                 <div className="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-semibold">
-                  Layer 1 · 外层
+                  {lang === 'en' ? 'Layer 1 · Outer' : lang === 'zh-TW' ? 'Layer 1 · 外層' : 'Layer 1 · 外层'}
                 </div>
                 <div className="text-xs sm:text-sm font-bold text-white truncate">
-                  TrustGate 网关
+                  {lang === 'en' ? 'TrustGate Gateway' : lang === 'zh-TW' ? 'TrustGate 網關' : 'TrustGate 网关'}
                 </div>
               </button>
 
@@ -404,10 +404,10 @@ export const OnionArchitecture: React.FC<OnionArchitectureProps> = ({ lang }) =>
                 }`}
               >
                 <div className="text-[10px] font-mono uppercase tracking-wider text-purple-400 font-semibold">
-                  Layer 2 · 夹层
+                  {lang === 'en' ? 'Layer 2 · Enclave' : lang === 'zh-TW' ? 'Layer 2 · 夾層' : 'Layer 2 · 夹层'}
                 </div>
                 <div className="text-xs sm:text-sm font-bold text-white truncate">
-                  EnclaveX 飞地
+                  {lang === 'en' ? 'EnclaveX TEE' : lang === 'zh-TW' ? 'EnclaveX 飛地' : 'EnclaveX 飞地'}
                 </div>
               </button>
 
@@ -421,10 +421,10 @@ export const OnionArchitecture: React.FC<OnionArchitectureProps> = ({ lang }) =>
                 }`}
               >
                 <div className="text-[10px] font-mono uppercase tracking-wider text-sky-400 font-semibold">
-                  Layer 3 · 内核
+                  {lang === 'en' ? 'Layer 3 · Kernel' : lang === 'zh-TW' ? 'Layer 3 · 核心' : 'Layer 3 · 内核'}
                 </div>
                 <div className="text-xs sm:text-sm font-bold text-white truncate">
-                  CovarPri 混淆
+                  {lang === 'en' ? 'CovarPri Obfuscation' : lang === 'zh-TW' ? 'CovarPri 混淆' : 'CovarPri 混淆'}
                 </div>
               </button>
             </div>
@@ -627,22 +627,41 @@ export const OnionArchitecture: React.FC<OnionArchitectureProps> = ({ lang }) =>
             <div className="space-y-6 mb-8">
               
               {/* ITEM 1: CovarPri */}
+              {/* ITEM 1: CovarPri Covariant Obfuscation */}
               <div className="p-4 rounded-2xl bg-cyan-950/20 border border-cyan-500/30 relative overflow-hidden">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2 text-xs font-mono">
                   <div className="flex items-center gap-2">
                     <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse" />
                     <span className="font-bold text-white text-sm">
-                      CovarPri 代数协变混淆 (Our Scheme)
+                      {lang === 'en'
+                        ? 'CovarPri Algebraic Covariant Obfuscation (Our Scheme)'
+                        : lang === 'zh-TW'
+                        ? 'CovarPri 代數協變混淆 (Our Scheme)'
+                        : 'CovarPri 代数协变混淆 (Our Scheme)'}
                     </span>
                     <span className="px-2 py-0.5 rounded bg-cyan-900/60 text-cyan-300 text-[10px] border border-cyan-700">
-                      密态零泄露 · 工业生产可用
+                      {lang === 'en'
+                        ? 'Zero-Leak Confidential · Production Ready'
+                        : lang === 'zh-TW'
+                        ? '密態零洩漏 · 工業生產可用'
+                        : '密态零泄露 · 工业生产可用'}
                     </span>
                   </div>
                   <div className="text-cyan-300 font-bold text-sm">
                     {benchmarkView === 'throughput' ? (
-                      <span>138.8 Tokens/sec <span className="text-slate-400 text-xs font-normal">(98.6% 原生吞吐)</span></span>
+                      <span>
+                        138.8 Tokens/sec{' '}
+                        <span className="text-slate-400 text-xs font-normal">
+                          ({lang === 'en' ? '98.6% Native Speed' : lang === 'zh-TW' ? '98.6% 原生吞吐' : '98.6% 原生吞吐'})
+                        </span>
+                      </span>
                     ) : (
-                      <span>7.2 ms / token <span className="text-slate-400 text-xs font-normal">(开销 &lt; 1.4%)</span></span>
+                      <span>
+                        7.2 ms / token{' '}
+                        <span className="text-slate-400 text-xs font-normal">
+                          ({lang === 'en' ? 'Overhead < 1.4%' : lang === 'zh-TW' ? '開銷 < 1.4%' : '开销 < 1.4%'})
+                        </span>
+                      </span>
                     )}
                   </div>
                 </div>
@@ -669,17 +688,35 @@ export const OnionArchitecture: React.FC<OnionArchitectureProps> = ({ lang }) =>
                   <div className="flex items-center gap-2">
                     <span className="w-2.5 h-2.5 rounded-full bg-slate-400" />
                     <span className="font-bold text-slate-200 text-sm">
-                      传统原生公有云明文基线 (Plaintext GPU)
+                      {lang === 'en'
+                        ? 'Traditional Plaintext GPU Baseline (Public Cloud)'
+                        : lang === 'zh-TW'
+                        ? '傳統原生公有雲明文基準 (Plaintext GPU)'
+                        : '传统原生公有云明文基线 (Plaintext GPU)'}
                     </span>
                     <span className="px-2 py-0.5 rounded bg-slate-800 text-slate-400 text-[10px]">
-                      原生基准 · 存在明文暴露风险
+                      {lang === 'en'
+                        ? 'Native Baseline · Plaintext Exposure Risk'
+                        : lang === 'zh-TW'
+                        ? '原生基準 · 存在明文暴露風險'
+                        : '原生基准 · 存在明文暴露风险'}
                     </span>
                   </div>
                   <div className="text-slate-300 font-bold text-sm">
                     {benchmarkView === 'throughput' ? (
-                      <span>140.8 Tokens/sec <span className="text-slate-500 text-xs font-normal">(100% 基线)</span></span>
+                      <span>
+                        140.8 Tokens/sec{' '}
+                        <span className="text-slate-500 text-xs font-normal">
+                          ({lang === 'en' ? '100% Baseline' : lang === 'zh-TW' ? '100% 基準' : '100% 基线'})
+                        </span>
+                      </span>
                     ) : (
-                      <span>7.1 ms / token <span className="text-slate-500 text-xs font-normal">(基准 0% Overhead)</span></span>
+                      <span>
+                        7.1 ms / token{' '}
+                        <span className="text-slate-500 text-xs font-normal">
+                          ({lang === 'en' ? '0% Overhead' : lang === 'zh-TW' ? '基準 0% 損耗' : '基准 0% Overhead'})
+                        </span>
+                      </span>
                     )}
                   </div>
                 </div>
@@ -706,17 +743,35 @@ export const OnionArchitecture: React.FC<OnionArchitectureProps> = ({ lang }) =>
                   <div className="flex items-center gap-2">
                     <span className="w-2.5 h-2.5 rounded-full bg-red-500" />
                     <span className="font-bold text-red-300 text-sm">
-                      传统全同态加密方案 (FHE Schemes)
+                      {lang === 'en'
+                        ? 'Traditional Fully Homomorphic Encryption (FHE Schemes)'
+                        : lang === 'zh-TW'
+                        ? '傳統全同態加密方案 (FHE Schemes)'
+                        : '传统全同态加密方案 (FHE Schemes)'}
                     </span>
                     <span className="px-2 py-0.5 rounded bg-red-950 text-red-400 text-[10px] border border-red-800 font-bold">
-                      ⚠️ 1000x 延迟断崖 · 生产不可用
+                      {lang === 'en'
+                        ? '⚠️ 1000x Latency Cliff · Unviable for Production'
+                        : lang === 'zh-TW'
+                        ? '⚠️ 1000x 延遲斷崖 · 生產不可用'
+                        : '⚠️ 1000x 延迟断崖 · 生产不可用'}
                     </span>
                   </div>
                   <div className="text-red-400 font-bold text-sm">
                     {benchmarkView === 'throughput' ? (
-                      <span>0.14 Tokens/sec <span className="text-red-500 text-xs font-normal">(需 7.2 秒生成 1 个字)</span></span>
+                      <span>
+                        0.14 Tokens/sec{' '}
+                        <span className="text-red-500 text-xs font-normal">
+                          ({lang === 'en' ? '7.2 sec per token' : lang === 'zh-TW' ? '需 7.2 秒生成 1 個字' : '需 7.2 秒生成 1 个字'})
+                        </span>
+                      </span>
                     ) : (
-                      <span>7,200.0 ms / token <span className="text-red-500 text-xs font-normal">(慢 1000 倍 / +99,900%)</span></span>
+                      <span>
+                        7,200.0 ms / token{' '}
+                        <span className="text-red-500 text-xs font-normal">
+                          ({lang === 'en' ? '1000x Slower / +99,900%' : lang === 'zh-TW' ? '慢 1000 倍 / +99,900%' : '慢 1000 倍 / +99,900%'})
+                        </span>
+                      </span>
                     )}
                   </div>
                 </div>
@@ -728,15 +783,23 @@ export const OnionArchitecture: React.FC<OnionArchitectureProps> = ({ lang }) =>
                     <div className="h-4 w-full bg-slate-900 rounded-full overflow-hidden p-0.5 border border-slate-800 flex items-center">
                       <div className="h-full bg-gradient-to-r from-red-600 via-red-500 to-rose-400 rounded-l-full w-[85%] relative flex items-center justify-end pr-2">
                         <span className="text-[9px] font-mono font-black text-black bg-white/90 px-1.5 py-0.2 rounded">
-                          // ⚡ 1000x 越界截断 (Axis Break)
+                          {lang === 'en' ? '// ⚡ 1000x Axis Break (Truncated)' : '// ⚡ 1000x 越界截斷 (Axis Break)'}
                         </span>
                       </div>
                       <div className="w-[15%] h-full bg-stripes-red animate-pulse flex items-center justify-center">
-                        <span className="text-[10px] text-red-400 font-bold font-mono">&gt;&gt; 爆表</span>
+                        <span className="text-[10px] text-red-400 font-bold font-mono">
+                          {lang === 'en' ? '>> OVERFLOW' : '>> 爆表'}
+                        </span>
                       </div>
                     </div>
                     <div className="mt-1.5 flex items-center justify-between text-[11px] font-mono text-red-400/90">
-                      <span>* 注：若按真实 1:1 线性比例绘制，FHE 柱长需向右延伸超过 72 米（屏幕宽度的 100 倍）</span>
+                      <span>
+                        {lang === 'en'
+                          ? '* Note: On a 1:1 linear scale, the FHE bar would extend >72 meters (>100x screen width)'
+                          : lang === 'zh-TW'
+                          ? '* 註：若按真實 1:1 線性比例繪製，FHE 柱長需向右延伸超過 72 米（螢幕寬度的 100 倍）'
+                          : '* 注：若按真实 1:1 线性比例绘制，FHE 柱长需向右延伸超过 72 米（屏幕宽度的 100 倍）'}
+                      </span>
                       <span className="font-bold text-red-300">1000x Slowdown</span>
                     </div>
                   </div>
@@ -749,8 +812,10 @@ export const OnionArchitecture: React.FC<OnionArchitectureProps> = ({ lang }) =>
                       />
                     </div>
                     <div className="mt-1.5 flex items-center justify-between text-[11px] font-mono text-slate-400">
-                      <span>log₁₀(7200ms) ≈ 3.86 (数量级指数级放大)</span>
-                      <span className="text-red-400 font-bold">3 个数量级性能鸿沟 (3 Orders of Magnitude)</span>
+                      <span>log₁₀(7200ms) ≈ 3.86</span>
+                      <span className="text-red-400 font-bold">
+                        {lang === 'en' ? '3 Orders of Magnitude Latency Gap' : lang === 'zh-TW' ? '3 個數量級效能鴻溝 (3 Orders of Magnitude)' : '3 个数量级性能鸿沟 (3 Orders of Magnitude)'}
+                      </span>
                     </div>
                   </div>
                 ) : (
@@ -762,8 +827,16 @@ export const OnionArchitecture: React.FC<OnionArchitectureProps> = ({ lang }) =>
                       />
                     </div>
                     <div className="mt-1.5 flex items-center justify-between text-[11px] font-mono text-red-400">
-                      <span>吞吐量仅 0.14 字符/秒（几乎停滞）</span>
-                      <span className="font-bold">仅为原生速度的 0.1%</span>
+                      <span>
+                        {lang === 'en'
+                          ? 'Throughput is only 0.14 tokens/sec (unusable)'
+                          : lang === 'zh-TW'
+                          ? '吞吐量僅 0.14 字元/秒（幾乎停滯）'
+                          : '吞吐量仅 0.14 字符/秒（几乎停滞）'}
+                      </span>
+                      <span className="font-bold">
+                        {lang === 'en' ? 'Only 0.1% of Native TPS' : lang === 'zh-TW' ? '僅為原生速度的 0.1%' : '仅为原生速度的 0.1%'}
+                      </span>
                     </div>
                   </div>
                 )}
@@ -775,7 +848,11 @@ export const OnionArchitecture: React.FC<OnionArchitectureProps> = ({ lang }) =>
               <div className="text-xs font-mono uppercase tracking-wider text-slate-400 mb-4 flex items-center justify-between">
                 <span className="flex items-center gap-2 text-white font-bold">
                   <Shield className="w-4 h-4 text-cyan-400" />
-                  大模型密态计算工程全维度矩阵对比 (Engineering Benchmark Matrix)
+                  {lang === 'en'
+                    ? 'Confidential LLM Engineering Benchmark Matrix'
+                    : lang === 'zh-TW'
+                    ? '大模型密態計算工程全維度矩陣對比 (Engineering Benchmark Matrix)'
+                    : '大模型密态计算工程全维度矩阵对比 (Engineering Benchmark Matrix)'}
                 </span>
                 <span className="text-[11px] text-cyan-400">DeepSeek-671B MoE / Qwen-2.5-MoE</span>
               </div>
@@ -784,58 +861,68 @@ export const OnionArchitecture: React.FC<OnionArchitectureProps> = ({ lang }) =>
                 <table className="w-full text-left text-xs font-mono">
                   <thead>
                     <tr className="border-b border-slate-800 text-slate-400">
-                      <th className="pb-3 pr-4">对比维度</th>
-                      <th className="pb-3 px-4 text-cyan-400 font-bold">CovarPri (本方案)</th>
-                      <th className="pb-3 px-4 text-slate-300">传统公有云明文 (Plaintext)</th>
-                      <th className="pb-3 pl-4 text-red-400">全同态加密 (FHE)</th>
+                      <th className="pb-3 pr-4">{lang === 'en' ? 'Comparison Dimension' : lang === 'zh-TW' ? '對比維度' : '对比维度'}</th>
+                      <th className="pb-3 px-4 text-cyan-400 font-bold">{lang === 'en' ? 'CovarPri (Our Scheme)' : lang === 'zh-TW' ? 'CovarPri (本方案)' : 'CovarPri (本方案)'}</th>
+                      <th className="pb-3 px-4 text-slate-300">{lang === 'en' ? 'Native Plaintext GPU' : lang === 'zh-TW' ? '傳統公有雲明文 (Plaintext)' : '传统公有云明文 (Plaintext)'}</th>
+                      <th className="pb-3 pl-4 text-red-400">{lang === 'en' ? 'Fully Homomorphic (FHE)' : lang === 'zh-TW' ? '全同態加密 (FHE)' : '全同态加密 (FHE)'}</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-800/60 text-slate-300">
                     <tr>
-                      <td className="py-3 pr-4 font-bold text-white">单 Token 延迟 (TPOT)</td>
+                      <td className="py-3 pr-4 font-bold text-white">
+                        {lang === 'en' ? 'Time Per Output Token (TPOT)' : lang === 'zh-TW' ? '單 Token 延遲 (TPOT)' : '单 Token 延迟 (TPOT)'}
+                      </td>
                       <td className="py-3 px-4 text-cyan-300 font-bold">7.2 ms <span className="text-[10px] text-emerald-400">(+1.4%)</span></td>
-                      <td className="py-3 px-4 text-slate-400">7.1 ms (基准)</td>
-                      <td className="py-3 pl-4 text-red-400 font-bold">7,200.0 ms <span className="text-[10px] text-red-500">(1000x 慢)</span></td>
+                      <td className="py-3 px-4 text-slate-400">7.1 ms ({lang === 'en' ? 'Baseline' : lang === 'zh-TW' ? '基準' : '基准'})</td>
+                      <td className="py-3 pl-4 text-red-400 font-bold">7,200.0 ms <span className="text-[10px] text-red-500">({lang === 'en' ? '1000x Slower' : lang === 'zh-TW' ? '1000x 慢' : '1000x 慢'})</span></td>
                     </tr>
                     <tr>
-                      <td className="py-3 pr-4 font-bold text-white">首字生成延迟 (TTFT)</td>
-                      <td className="py-3 px-4 text-cyan-300 font-bold">32 ms <span className="text-[10px] text-emerald-400">(瞬时响应)</span></td>
+                      <td className="py-3 pr-4 font-bold text-white">
+                        {lang === 'en' ? 'Time to First Token (TTFT)' : lang === 'zh-TW' ? '首字生成延遲 (TTFT)' : '首字生成延迟 (TTFT)'}
+                      </td>
+                      <td className="py-3 px-4 text-cyan-300 font-bold">32 ms <span className="text-[10px] text-emerald-400">({lang === 'en' ? 'Instant Response' : lang === 'zh-TW' ? '瞬時響應' : '瞬时响应'})</span></td>
                       <td className="py-3 px-4 text-slate-400">30 ms</td>
-                      <td className="py-3 pl-4 text-red-400 font-bold">45,000 ms <span className="text-[10px] text-red-500">(卡顿45秒)</span></td>
+                      <td className="py-3 pl-4 text-red-400 font-bold">45,000 ms <span className="text-[10px] text-red-500">({lang === 'en' ? '45s Stall' : lang === 'zh-TW' ? '卡頓45秒' : '卡顿45秒'})</span></td>
                     </tr>
                     <tr>
-                      <td className="py-3 pr-4 font-bold text-white">生成吞吐速率 (TPS)</td>
-                      <td className="py-3 px-4 text-cyan-300 font-bold">138.8 tok/s <span className="text-[10px] text-emerald-400">(打字机极速)</span></td>
+                      <td className="py-3 pr-4 font-bold text-white">
+                        {lang === 'en' ? 'Generation Throughput (TPS)' : lang === 'zh-TW' ? '生成吞吐速率 (TPS)' : '生成吞吐速率 (TPS)'}
+                      </td>
+                      <td className="py-3 px-4 text-cyan-300 font-bold">138.8 tok/s <span className="text-[10px] text-emerald-400">({lang === 'en' ? 'Ultra Fast' : lang === 'zh-TW' ? '打字機極速' : '打字机极速'})</span></td>
                       <td className="py-3 px-4 text-slate-400">140.8 tok/s</td>
-                      <td className="py-3 pl-4 text-red-400 font-bold">0.14 tok/s <span className="text-[10px] text-red-500">(几乎停滞)</span></td>
+                      <td className="py-3 pl-4 text-red-400 font-bold">0.14 tok/s <span className="text-[10px] text-red-500">({lang === 'en' ? 'Nearly Stalled' : lang === 'zh-TW' ? '幾乎停滯' : '几乎停滞'})</span></td>
                     </tr>
                     <tr>
-                      <td className="py-3 pr-4 font-bold text-white">云端明文泄露风险</td>
+                      <td className="py-3 pr-4 font-bold text-white">
+                        {lang === 'en' ? 'Cloud Plaintext Exposure Risk' : lang === 'zh-TW' ? '雲端明文洩漏風險' : '云端明文泄露风险'}
+                      </td>
                       <td className="py-3 px-4 text-emerald-400 font-bold flex items-center gap-1.5">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> 0% (数学级乱码态)
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> 0% ({lang === 'en' ? 'Mathematically Obfuscated' : lang === 'zh-TW' ? '數學級亂碼態' : '数学级乱码态'})
                       </td>
                       <td className="py-3 px-4 text-rose-400 font-bold flex items-center gap-1.5">
-                        <XCircle className="w-3.5 h-3.5 text-rose-400" /> 100% (完全裸奔)
+                        <XCircle className="w-3.5 h-3.5 text-rose-400" /> 100% ({lang === 'en' ? 'Unprotected Plaintext' : lang === 'zh-TW' ? '完全裸奔' : '完全裸奔'})
                       </td>
                       <td className="py-3 pl-4 text-emerald-400 font-bold flex items-center gap-1.5">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> 0% (密态计算)
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> 0% ({lang === 'en' ? 'Encrypted State' : lang === 'zh-TW' ? '密態計算' : '密态计算'})
                       </td>
                     </tr>
                     <tr>
-                      <td className="py-3 pr-4 font-bold text-white">超大模型 (70B/671B) 生产可用性</td>
+                      <td className="py-3 pr-4 font-bold text-white">
+                        {lang === 'en' ? '671B MoE Production Feasibility' : lang === 'zh-TW' ? '超大模型 (70B/671B) 生產可用性' : '超大模型 (70B/671B) 生产可用性'}
+                      </td>
                       <td className="py-3 px-4 text-cyan-400 font-bold">
                         <span className="px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800">
-                          ✅ 即插即用生产落地
+                          {lang === 'en' ? '✅ Plug-and-Play Production' : lang === 'zh-TW' ? '✅ 即插即用生產落地' : '✅ 即插即用生产落地'}
                         </span>
                       </td>
                       <td className="py-3 px-4 text-amber-400">
                         <span className="px-2 py-0.5 rounded bg-amber-950/60 text-amber-300 border border-amber-800">
-                          ⚠️ 合规拦截受限
+                          {lang === 'en' ? '⚠️ Compliance Blocked' : lang === 'zh-TW' ? '⚠️ 合規攔截受限' : '⚠️ 合规拦截受限'}
                         </span>
                       </td>
                       <td className="py-3 pl-4 text-red-400">
                         <span className="px-2 py-0.5 rounded bg-red-950 text-red-400 border border-red-800">
-                          ❌ 算力爆炸无法商用
+                          {lang === 'en' ? '❌ Compute Exploded (Unusable)' : lang === 'zh-TW' ? '❌ 算力爆炸無法商用' : '❌ 算力爆炸无法商用'}
                         </span>
                       </td>
                     </tr>
@@ -848,7 +935,19 @@ export const OnionArchitecture: React.FC<OnionArchitectureProps> = ({ lang }) =>
                 <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 flex items-start gap-2.5 text-slate-300 text-xs leading-relaxed">
                   <Sparkles className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
                   <span>
-                    <strong>科学解析：</strong>传统全同态加密 (FHE) 会造成多项式环上的噪声爆炸与高昂乘法自举 (Bootstrapping) 开销，导致 1000~10000 倍的延迟剧增。<strong>CovarPri</strong> 采用代数协变矩阵扰动，使混淆因子在注意力机制点积内部自发抵消，以 <strong>&lt; 1.4%</strong> 极微小损耗实现了首个面向 671B 级超大模型的实用化零明文推理。
+                    {lang === 'en' ? (
+                      <>
+                        <strong>Scientific Insight: </strong>Traditional Fully Homomorphic Encryption (FHE) suffers from polynomial ring noise explosion and exorbitant multiplication bootstrapping costs, causing a 1,000x to 10,000x latency penalty. <strong>CovarPri</strong> uses algebraic covariant matrix perturbations where obfuscation factors cancel out naturally inside the Attention dot-product, achieving practical zero-plaintext confidential inference for 671B-class frontier MoE models with <strong>&lt; 1.4%</strong> overhead.
+                      </>
+                    ) : lang === 'zh-TW' ? (
+                      <>
+                        <strong>科學解析：</strong>傳統全同態加密 (FHE) 會造成多項式環上的噪聲爆炸與高昂乘法自舉 (Bootstrapping) 開銷，導致 1000~10000 倍的延遲劇增。<strong>CovarPri</strong> 採用代數協變矩陣擾動，使混淆因子在注意力機制點積內部自發抵消，以 <strong>&lt; 1.4%</strong> 極微小損耗實現了首個面向 671B 級超大模型的實用化零明文推理。
+                      </>
+                    ) : (
+                      <>
+                        <strong>科学解析：</strong>传统全同态加密 (FHE) 会造成多项式环上的噪声爆炸与高昂乘法自举 (Bootstrapping) 开销，导致 1000~10000 倍的延迟剧增。<strong>CovarPri</strong> 采用代数协变矩阵扰动，使混淆因子在注意力机制点积内部自发抵消，以 <strong>&lt; 1.4%</strong> 极微小损耗实现了首个面向 671B 级超大模型的实用化零明文推理。
+                      </>
+                    )}
                   </span>
                 </div>
 
@@ -856,11 +955,25 @@ export const OnionArchitecture: React.FC<OnionArchitectureProps> = ({ lang }) =>
                   <Shield className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
                   <div>
                     <span className="text-cyan-300 font-bold block mb-0.5">
-                      【架构边界说明 · 模型纳管分工】
+                      {lang === 'en' ? '[Architecture Scope & Model Management Governance]' : lang === 'zh-TW' ? '【架構邊界說明 · 模型納管分工】' : '【架构边界说明 · 模型纳管分工】'}
                     </span>
                     <span>
-                      • <strong>CovarPri 代数混淆</strong>：专用于<strong>最新开源与可控权重 MoE 架构</strong>（如 DeepSeek-V3/R1 671B MoE, Qwen-2.5-MoE, Mixtral 8x22B 等企业私有化或托管实例），因需对模型底层算子与权重张量进行协变变换。<br />
-                      • <strong>闭源黑盒 API (OpenAI / Claude)</strong>：因第三方商业模型权重与底层计算过程完全封闭，<strong>CovarPri 张量混淆对其无效</strong>。系统统一由 <strong>TrustGate 意图防火墙</strong>在客户端实施毫秒级 PII/PHI 实体动态脱敏、格式保留加密与 Tool Calling 动作锁兜底。
+                      {lang === 'en' ? (
+                        <>
+                          • <strong>CovarPri Algebraic Obfuscation</strong>: Tailored for <strong>open-weight & controllable MoE models</strong> (e.g., DeepSeek-V3/R1 671B MoE, Qwen-2.5-MoE, Mixtral 8x22B enterprise private/hosted instances), performing covariant transformations on underlying operators and tensors.<br />
+                          • <strong>Closed-Source Black-Box APIs (OpenAI / Claude)</strong>: Because third-party proprietary weights and kernels are completely opaque, <strong>CovarPri tensor obfuscation does not apply</strong>. The platform utilizes <strong>TrustGate Intent Firewall</strong> on the client-side for millisecond-level PII/PHI neural redaction, format-preserving tokenization, and Tool Calling action locks.
+                        </>
+                      ) : lang === 'zh-TW' ? (
+                        <>
+                          • <strong>CovarPri 代數混淆</strong>：專用於<strong>最新開源與可控權重 MoE 架構</strong>（如 DeepSeek-V3/R1 671B MoE, Qwen-2.5-MoE, Mixtral 8x22B 等企業私有化或託管實例），因需對模型底層算子與權重張量進行協變變換。<br />
+                          • <strong>閉源黑盒 API (OpenAI / Claude)</strong>：因第三方商業模型權重與底層計算過程完全封閉，<strong>CovarPri 張量混淆對其無效</strong>。系統統籌由 <strong>TrustGate 意圖防火牆</strong>在客戶端實施毫秒級 PII/PHI 實體動態脫敏、格式保留加密與 Tool Calling 動作鎖兜底。
+                        </>
+                      ) : (
+                        <>
+                          • <strong>CovarPri 代数混淆</strong>：专用于<strong>最新开源与可控权重 MoE 架构</strong>（如 DeepSeek-V3/R1 671B MoE, Qwen-2.5-MoE, Mixtral 8x22B 等企业私有化或托管实例），因需对模型底层算子与权重张量进行协变变换。<br />
+                          • <strong>闭源黑盒 API (OpenAI / Claude)</strong>：因第三方商业模型权重与底层计算过程完全封闭，<strong>CovarPri 张量混淆对其无效</strong>。系统统一由 <strong>TrustGate 意图防火墙</strong>在客户端实施毫秒级 PII/PHI 实体动态脱敏、格式保留加密与 Tool Calling 动作锁兜底。
+                        </>
+                      )}
                     </span>
                   </div>
                 </div>
@@ -872,14 +985,20 @@ export const OnionArchitecture: React.FC<OnionArchitectureProps> = ({ lang }) =>
               <div className="text-center max-w-3xl mx-auto mb-10">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/80 border border-cyan-500/40 text-cyan-400 text-xs font-mono mb-3">
                   <Network className="w-3.5 h-3.5" />
-                  <span>{lang === 'en' ? 'ENTERPRISE DEPLOYMENT TOPOLOGY' : '企业级三级部署拓扑与前沿范式'}</span>
+                  <span>{lang === 'en' ? 'ENTERPRISE DEPLOYMENT TOPOLOGY' : lang === 'zh-TW' ? '企業級三級部署拓撲與前沿範式' : '企业级三级部署拓扑与前沿范式'}</span>
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-2">
-                  {lang === 'en' ? 'Sovereign 3-Tier Topology & Frontier AI Defense' : '企业三级主权部署拓扑与前沿 AI 密态护城河'}
+                  {lang === 'en'
+                    ? 'Sovereign 3-Tier Topology & Frontier AI Defense'
+                    : lang === 'zh-TW'
+                    ? '企業三級主權部署拓撲與前沿 AI 密態護城河'
+                    : '企业三级主权部署拓扑与前沿 AI 密态护城河'}
                 </h3>
                 <p className="text-sm text-slate-400">
                   {lang === 'en'
                     ? 'From Agentic MCP protocol auditing to Reasoning Model CoT shielding and MLA tensor obfuscation.'
+                    : lang === 'zh-TW'
+                    ? '從 Multi-Agent MCP 協議零信任治理、Reasoning 模型長思維鏈防窺探，到 MLA 潛變量張量混淆的全棧落地方案。'
                     : '从 Multi-Agent MCP 协议零信任治理、Reasoning 模型长思维链防窥探，到 MLA 潜变量张量混淆的全栈落地方案。'}
                 </p>
               </div>
@@ -898,27 +1017,53 @@ export const OnionArchitecture: React.FC<OnionArchitectureProps> = ({ lang }) =>
                         <Shield className="w-5 h-5" />
                       </div>
                       <div>
-                        <h4 className="text-white font-bold text-base">企业主权内网 / 边缘安全域</h4>
+                        <h4 className="text-white font-bold text-base">
+                          {lang === 'en' ? 'Enterprise Sovereign Intranet / Edge' : lang === 'zh-TW' ? '企業主權內網 / 邊緣安全域' : '企业主权内网 / 边缘安全域'}
+                        </h4>
                         <span className="text-[11px] text-cyan-400 font-mono">100% On-Premise Sovereign Gateway</span>
                       </div>
                     </div>
                     <ul className="space-y-2.5 text-xs text-slate-300">
                       <li className="flex items-start gap-2">
                         <UserCheck className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
-                        <span><strong>TrustGate 意图/PII 准入：</strong>神经 NER 实时遮蔽敏感实体，拦截越权指令。</span>
+                        <span>
+                          {lang === 'en' ? (
+                            <><strong>TrustGate Intent/PII Ingress: </strong>Real-time Neural NER masks PII/PHI and blocks prompt injection & unauthorized instructions.</>
+                          ) : lang === 'zh-TW' ? (
+                            <><strong>TrustGate 意圖/PII 准入：</strong>神經 NER 實時遮蔽敏感實體，攔截越權指令。</>
+                          ) : (
+                            <><strong>TrustGate 意图/PII 准入：</strong>神经 NER 实时遮蔽敏感实体，拦截越权指令。</>
+                          )}
+                        </span>
                       </li>
                       <li className="flex items-start gap-2">
                         <Bot className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
-                        <span><strong>MCP 协议密态网关：</strong>对 Agent Tool Calling 与数据库读写施加零信任签名与动作锁。</span>
+                        <span>
+                          {lang === 'en' ? (
+                            <><strong>MCP Protocol Sovereign Gateway: </strong>Applies zero-trust cryptographic signatures & action locks on Agent Tool Calling & DB access.</>
+                          ) : lang === 'zh-TW' ? (
+                            <><strong>MCP 協議密態網關：</strong>對 Agent Tool Calling 與資料庫讀寫施加零信任簽名與動作鎖。</>
+                          ) : (
+                            <><strong>MCP 协议密态网关：</strong>对 Agent Tool Calling 与数据库读写施加零信任签名与动作锁。</>
+                          )}
+                        </span>
                       </li>
                       <li className="flex items-start gap-2">
                         <Key className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
-                        <span><strong>CovarPri 本地混淆器：</strong>生成正交排列矩阵 $P$ 与扰动，密钥永不出企业内网。</span>
+                        <span>
+                          {lang === 'en' ? (
+                            <><strong>CovarPri Local Obfuscator: </strong>Generates orthogonal perturbation matrix $P$; secrets never leave enterprise perimeter.</>
+                          ) : lang === 'zh-TW' ? (
+                            <><strong>CovarPri 本地混淆器：</strong>生成正交排列矩陣 $P$ 與擾動，金鑰永不出企業內網。</>
+                          ) : (
+                            <><strong>CovarPri 本地混淆器：</strong>生成正交排列矩阵 $P$ 与扰动，密钥永不出企业内网。</>
+                          )}
+                        </span>
                       </li>
                     </ul>
                   </div>
                   <div className="mt-4 pt-3 border-t border-slate-800 text-[11px] font-mono text-cyan-300/80 flex items-center justify-between">
-                    <span>输出：不可逆密态张量流</span>
+                    <span>{lang === 'en' ? 'Output: Irreversible Obfuscated Tensors' : lang === 'zh-TW' ? '輸出：不可逆密態張量流' : '输出：不可逆密态张量流'}</span>
                     <ArrowRight className="w-4 h-4 text-cyan-400" />
                   </div>
                 </div>
@@ -934,27 +1079,53 @@ export const OnionArchitecture: React.FC<OnionArchitectureProps> = ({ lang }) =>
                         <ArrowLeftRight className="w-5 h-5" />
                       </div>
                       <div>
-                        <h4 className="text-white font-bold text-base">零信任加密传输信道</h4>
+                        <h4 className="text-white font-bold text-base">
+                          {lang === 'en' ? 'Zero-Trust Encrypted Transport Channel' : lang === 'zh-TW' ? '零信任加密傳輸信道' : '零信任加密传输信道'}
+                        </h4>
                         <span className="text-[11px] text-purple-400 font-mono">Zero Plaintext on Public Network</span>
                       </div>
                     </div>
                     <ul className="space-y-2.5 text-xs text-slate-300">
                       <li className="flex items-start gap-2">
                         <Lock className="w-4 h-4 text-purple-400 flex-shrink-0 mt-0.5" />
-                        <span><strong>双向 mTLS 1.3 传输：</strong>端到端加密信道，防止链路窃听与中间人劫持。</span>
+                        <span>
+                          {lang === 'en' ? (
+                            <><strong>Bidirectional mTLS 1.3: </strong>End-to-end encrypted tunnels guarding against wiretapping and MITM tampering.</>
+                          ) : lang === 'zh-TW' ? (
+                            <><strong>雙向 mTLS 1.3 傳輸：</strong>端到端加密信道，防止鏈路竊聽與中間人劫持。</>
+                          ) : (
+                            <><strong>双向 mTLS 1.3 传输：</strong>端到端加密信道，防止链路窃听与中间人劫持。</>
+                          )}
+                        </span>
                       </li>
                       <li className="flex items-start gap-2">
                         <Binary className="w-4 h-4 text-purple-400 flex-shrink-0 mt-0.5" />
-                        <span><strong>纯代数扰动数据流：</strong>传输介质上无明文字符，截获即为无意义高维数学乱码。</span>
+                        <span>
+                          {lang === 'en' ? (
+                            <><strong>Pure Algebraic Perturbation Flow: </strong>No plaintext characters on wire; intercepts yield high-dimensional mathematical entropy.</>
+                          ) : lang === 'zh-TW' ? (
+                            <><strong>純代數擾動資料流：</strong>傳輸介質上無明文字元，截獲即為無意義高維數學亂碼。</>
+                          ) : (
+                            <><strong>纯代数扰动数据流：</strong>传输介质上无明文字符，截获即为无意义高维数学乱码。</>
+                          )}
+                        </span>
                       </li>
                       <li className="flex items-start gap-2">
                         <CheckCheck className="w-4 h-4 text-purple-400 flex-shrink-0 mt-0.5" />
-                        <span><strong>远程硬件度量验真：</strong>实时校验云端 GPU 宿主物理环境哈希值未被篡改。</span>
+                        <span>
+                          {lang === 'en' ? (
+                            <><strong>Remote Hardware Attestation: </strong>Continuously verifies cryptographic measurement of cloud GPU hosts.</>
+                          ) : lang === 'zh-TW' ? (
+                            <><strong>遠程硬體度量驗真：</strong>實時校驗雲端 GPU 宿主物理環境雜湊值未被篡改。</>
+                          ) : (
+                            <><strong>远程硬件度量验真：</strong>实时校验云端 GPU 宿主物理环境哈希值未被篡改。</>
+                          )}
+                        </span>
                       </li>
                     </ul>
                   </div>
                   <div className="mt-4 pt-3 border-t border-slate-800 text-[11px] font-mono text-purple-300/80 flex items-center justify-between">
-                    <span>信道安全性：数学 + 协议双重免疫</span>
+                    <span>{lang === 'en' ? 'Security: Mathematical + Protocol Dual-Immunity' : lang === 'zh-TW' ? '信道安全性：數學 + 協議雙重免疫' : '信道安全性：数学 + 协议双重免疫'}</span>
                     <ArrowRight className="w-4 h-4 text-purple-400" />
                   </div>
                 </div>
@@ -970,27 +1141,53 @@ export const OnionArchitecture: React.FC<OnionArchitectureProps> = ({ lang }) =>
                         <Cpu className="w-5 h-5" />
                       </div>
                       <div>
-                        <h4 className="text-white font-bold text-base">不可信公有云 / GPU 算力集群</h4>
+                        <h4 className="text-white font-bold text-base">
+                          {lang === 'en' ? 'Untrusted Public GPU Cloud Cluster' : lang === 'zh-TW' ? '不可信公有雲 / GPU 算力集群' : '不可信公有云 / GPU 算力集群'}
+                        </h4>
                         <span className="text-[11px] text-blue-400 font-mono">DeepSeek-671B MoE / H100 Cluster</span>
                       </div>
                     </div>
                     <ul className="space-y-2.5 text-xs text-slate-300">
                       <li className="flex items-start gap-2">
                         <Server className="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" />
-                        <span><strong>EnclaveX TEE 硬件物理隔离：</strong>云厂商与宿主 OS 无法窥视长思维链 (&lt;think&gt; CoT)。</span>
+                        <span>
+                          {lang === 'en' ? (
+                            <><strong>EnclaveX TEE Physical Isolation: </strong>Prevents CSPs and host OS from snooping long Chain-of-Thought (&lt;think&gt; CoT).</>
+                          ) : lang === 'zh-TW' ? (
+                            <><strong>EnclaveX TEE 硬體物理隔離：</strong>雲廠商與宿主 OS 無法窺視長思維鏈 (&lt;think&gt; CoT)。</>
+                          ) : (
+                            <><strong>EnclaveX TEE 硬件物理隔离：</strong>云厂商与宿主 OS 无法窥视长思维链 (&lt;think&gt; CoT)。</>
+                          )}
+                        </span>
                       </li>
                       <li className="flex items-start gap-2">
                         <Boxes className="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" />
-                        <span><strong>MLA & MoE 密态算子：</strong>在混淆的 Latent KV Cache 与动态路由门控上极速计算。</span>
+                        <span>
+                          {lang === 'en' ? (
+                            <><strong>MLA & MoE Confidential Operators: </strong>Ultra-fast computation on obfuscated Latent KV Cache & dynamic routing gates.</>
+                          ) : lang === 'zh-TW' ? (
+                            <><strong>MLA & MoE 密態算子：</strong>在混淆的 Latent KV Cache 與動態路由門控上極速計算。</>
+                          ) : (
+                            <><strong>MLA & MoE 密态算子：</strong>在混淆的 Latent KV Cache 与动态路由门控上极速计算。</>
+                          )}
+                        </span>
                       </li>
                       <li className="flex items-start gap-2">
                         <Zap className="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" />
-                        <span><strong>点积自发抵消还原：</strong>输出张量流回主权域解密，云端全程零明文接触。</span>
+                        <span>
+                          {lang === 'en' ? (
+                            <><strong>Dot-Product Self-Cancellation: </strong>Output tensors stream back to sovereign domain for recovery; zero plaintext on cloud.</>
+                          ) : lang === 'zh-TW' ? (
+                            <><strong>點積自發抵消還原：</strong>輸出張量流回主權域解密，雲端全程零明文接觸。</>
+                          ) : (
+                            <><strong>点积自发抵消还原：</strong>输出张量流回主权域解密，云端全程零明文接触。</>
+                          )}
+                        </span>
                       </li>
                     </ul>
                   </div>
                   <div className="mt-4 pt-3 border-t border-slate-800 text-[11px] font-mono text-blue-300/80 flex items-center justify-between">
-                    <span>算力利用率：98.6% 原生吞吐</span>
+                    <span>{lang === 'en' ? 'Efficiency: 98.6% Native GPU Throughput' : lang === 'zh-TW' ? '算力利用率：98.6% 原生吞吐' : '算力利用率：98.6% 原生吞吐'}</span>
                     <CheckCircle2 className="w-4 h-4 text-blue-400" />
                   </div>
                 </div>
@@ -1004,10 +1201,14 @@ export const OnionArchitecture: React.FC<OnionArchitectureProps> = ({ lang }) =>
                 <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 hover:border-purple-500/40 transition-colors">
                   <div className="flex items-center gap-2 text-purple-400 font-bold text-sm mb-2">
                     <BrainCircuit className="w-4 h-4" />
-                    <span>Reasoning 模型思维链 (CoT) 隐私</span>
+                    <span>{lang === 'en' ? 'Reasoning Model CoT Privacy' : lang === 'zh-TW' ? 'Reasoning 模型思維鏈 (CoT) 隱私' : 'Reasoning 模型思维链 (CoT) 隐私'}</span>
                   </div>
                   <p className="text-xs text-slate-400 leading-relaxed">
-                    针对 DeepSeek-R1、OpenAI o1 等推理模型的超长 <code className="text-purple-300 bg-purple-950/60 px-1 py-0.5 rounded">&lt;think&gt;</code> 中间推理 token 进行全密态封装，杜绝商业机密推理与敏感反思过程在云端被捕获。
+                    {lang === 'en'
+                      ? 'Confidential encapsulation of ultra-long intermediate <think> tokens in models like DeepSeek-R1 and OpenAI o1, eliminating risk of trade secret reasoning capture on cloud.'
+                      : lang === 'zh-TW'
+                      ? '針對 DeepSeek-R1、OpenAI o1 等推理模型的超長 <think> 中間推理 token 進行全密態封裝，杜絕商業機密推理與敏感反思過程在雲端被捕獲。'
+                      : '针对 DeepSeek-R1、OpenAI o1 等推理模型的超长 <think> 中间推理 token 进行全密态封装，杜绝商业机密推理与敏感反思过程在云端被捕获。'}
                   </p>
                 </div>
 
@@ -1015,10 +1216,14 @@ export const OnionArchitecture: React.FC<OnionArchitectureProps> = ({ lang }) =>
                 <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 hover:border-cyan-500/40 transition-colors">
                   <div className="flex items-center gap-2 text-cyan-400 font-bold text-sm mb-2">
                     <Workflow className="w-4 h-4" />
-                    <span>Agent & MCP 协议零信任防投毒</span>
+                    <span>{lang === 'en' ? 'Agent & MCP Zero-Trust Anti-Poisoning' : lang === 'zh-TW' ? 'Agent & MCP 協議零信任防投毒' : 'Agent & MCP 协议零信任防投毒'}</span>
                   </div>
                   <p className="text-xs text-slate-400 leading-relaxed">
-                    深度支持 Anthropic MCP 协议流量审计，在 Agent 进行 Tool Calling、网页检索及数据库操作时实施上下文投毒（Indirect Injection）动态拦截与双向熔断动作锁。
+                    {lang === 'en'
+                      ? 'Deep support for Anthropic MCP protocol traffic auditing, applying real-time indirect prompt injection interception and circuit breaker action locks during tool calling and DB queries.'
+                      : lang === 'zh-TW'
+                      ? '深度支援 Anthropic MCP 協議流量審計，在 Agent 進行 Tool Calling、網頁檢索及資料庫操作時實施上下文投毒（Indirect Injection）動態攔截與雙向熔斷動作鎖。'
+                      : '深度支持 Anthropic MCP 协议流量审计，在 Agent 进行 Tool Calling、网页检索及数据库操作时实施上下文投毒（Indirect Injection）动态拦截与双向熔断动作锁。'}
                   </p>
                 </div>
 
@@ -1026,10 +1231,14 @@ export const OnionArchitecture: React.FC<OnionArchitectureProps> = ({ lang }) =>
                 <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 hover:border-blue-500/40 transition-colors">
                   <div className="flex items-center gap-2 text-blue-400 font-bold text-sm mb-2">
                     <Zap className="w-4 h-4" />
-                    <span>MLA 潜变量与 MoE 动态门控协同</span>
+                    <span>{lang === 'en' ? 'MLA Latent KV & MoE Gating Synergy' : lang === 'zh-TW' ? 'MLA 潛變量與 MoE 動態門控協同' : 'MLA 潜变量与 MoE 动态门控协同'}</span>
                   </div>
                   <p className="text-xs text-slate-400 leading-relaxed">
-                    独家适配 DeepSeek-V3/R1 671B 的 MLA 压缩 KV Cache 与 MoE 稀疏专家激活门控，实现超大规模混合专家架构的原生 CUDA 密态张量加速与微秒级点积还原。
+                    {lang === 'en'
+                      ? 'Proprietary adaptation for DeepSeek-V3/R1 671B compressed Multi-Head Latent Attention (MLA) and MoE sparse gating, delivering native CUDA confidential tensor acceleration and microsecond-level reconstruction.'
+                      : lang === 'zh-TW'
+                      ? '獨家適配 DeepSeek-V3/R1 671B 的 MLA 壓縮 KV Cache 與 MoE 稀疏專家激活門控，實現超大規模混合專家架構的原生 CUDA 密態張量加速與微秒級點積還原。'
+                      : '独家适配 DeepSeek-V3/R1 671B 的 MLA 压缩 KV Cache 与 MoE 稀疏专家激活门控，实现超大规模混合专家架构的原生 CUDA 密态张量加速与微秒级点积还原。'}
                   </p>
                 </div>
 

@@ -9,6 +9,7 @@ interface CrisisSectionProps {
 
 export const CrisisSection: React.FC<CrisisSectionProps> = ({ lang }) => {
   const t = translations[lang].crisis;
+  const [mobileRiskTab, setMobileRiskTab] = React.useState<string>('legal');
 
   const getRiskIcon = (id: string) => {
     switch (id) {
@@ -56,11 +57,39 @@ export const CrisisSection: React.FC<CrisisSectionProps> = ({ lang }) => {
           </p>
         </div>
 
+        {/* Mobile Tab Switcher (Visible on < md screens) */}
+        <div className="md:hidden mb-8 p-1 rounded-2xl bg-white/5 border border-red-500/20 flex items-center justify-between gap-1 overflow-x-auto">
+          {t.cards.map((c) => (
+            <button
+              key={c.id}
+              onClick={() => setMobileRiskTab(c.id)}
+              className={`flex-1 py-2 px-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
+                mobileRiskTab === c.id
+                  ? 'bg-red-500/80 text-white font-bold shadow-md'
+                  : 'text-gray-400 hover:text-white'
+              }`}
+            >
+              {c.badge}
+            </button>
+          ))}
+          <button
+            onClick={() => setMobileRiskTab('all')}
+            className={`py-2 px-2.5 rounded-xl text-[11px] font-mono whitespace-nowrap transition-all cursor-pointer ${
+              mobileRiskTab === 'all'
+                ? 'bg-white/20 text-white font-bold'
+                : 'text-gray-500 hover:text-gray-300'
+            }`}
+          >
+            {lang === 'en' ? 'All' : '全部'}
+          </button>
+        </div>
+
         {/* 3 Warning-Themed Cards in Horizontal Layout */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
           {t.cards.map((card, idx) => {
             const isLegal = card.id === 'legal';
             const isHijack = card.id === 'hijack';
+            const isHiddenOnMobile = mobileRiskTab !== 'all' && mobileRiskTab !== card.id;
             
             const cardTheme = isLegal 
               ? 'bg-red-950/20 border-red-500/30 hover:border-red-500/60 text-red-500 title-red' 
@@ -75,7 +104,7 @@ export const CrisisSection: React.FC<CrisisSectionProps> = ({ lang }) => {
                 key={card.id}
                 data-aos="fade-up"
                 data-aos-delay={idx * 100 + 150}
-                className={`relative rounded-xl p-6 sm:p-7 flex flex-col justify-between border transition-all duration-300 group ${
+                className={`${isHiddenOnMobile ? 'hidden md:flex' : 'flex'} relative rounded-xl p-6 sm:p-7 flex-col justify-between border transition-all duration-300 group ${
                   isLegal
                     ? 'bg-red-950/20 border-red-500/30 hover:border-red-500/60 shadow-[0_0_25px_rgba(239,68,68,0.15)]'
                     : isHijack

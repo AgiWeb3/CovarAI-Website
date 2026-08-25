@@ -8,6 +8,7 @@ import { DeploymentCTA } from './components/DeploymentCTA';
 import { ProductsTechView } from './components/ProductsTechView';
 import { WhitepaperModal } from './components/WhitepaperModal';
 import { DemoModal } from './components/DemoModal';
+import { MobileQuickDrawer } from './components/MobileQuickDrawer';
 import { getInitialLanguage, persistLanguage } from './utils/language';
 
 // Declare AOS global for TypeScript
@@ -26,6 +27,7 @@ export default function App() {
   const [selectedIndustry, setSelectedIndustry] = useState<IndustryScenarioId>('legal');
   const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
   const [isWhitepaperModalOpen, setIsWhitepaperModalOpen] = useState(false);
+  const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
   const [preselectedScenario, setPreselectedScenario] = useState<string | undefined>();
 
   useEffect(() => {
@@ -159,6 +161,23 @@ export default function App() {
           />
         )}
       </main>
+
+      {/* Mobile Floating Quick Dock & Bottom Sheet Drawer */}
+      <MobileQuickDrawer
+        lang={lang}
+        activeView={activeView}
+        selectedIndustry={selectedIndustry}
+        isOpen={isMobileDrawerOpen}
+        onToggleOpen={() => setIsMobileDrawerOpen(!isMobileDrawerOpen)}
+        onClose={() => setIsMobileDrawerOpen(false)}
+        onViewChange={(view) => {
+          setActiveView(view);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
+        onSelectIndustry={handleSelectIndustry}
+        onRequestDemo={() => handleOpenDemoModal()}
+        onOpenWhitepaper={() => setIsWhitepaperModalOpen(true)}
+      />
 
       {/* Interactive Modals */}
       <WhitepaperModal
