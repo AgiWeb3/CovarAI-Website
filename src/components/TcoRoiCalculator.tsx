@@ -23,7 +23,7 @@ interface TcoRoiCalculatorProps {
   onRequestDemo?: (details?: string) => void;
 }
 
-type ModelType = 'deepseek671b' | 'minimax456b' | 'qwen25_72b' | 'mixtral8x22b' | 'llama33_70b';
+type ModelType = 'deepseek671b' | 'kimi_moe' | 'glm4_moe';
 type TimeHorizon = '1' | '3' | '5';
 
 export const TcoRoiCalculator: React.FC<TcoRoiCalculatorProps> = ({
@@ -36,7 +36,7 @@ export const TcoRoiCalculator: React.FC<TcoRoiCalculatorProps> = ({
   const [timeHorizon, setTimeHorizon] = useState<TimeHorizon>('3');
   const [isCopied, setIsCopied] = useState(false);
 
-  // Model Specs & Baseline Costs (Top-Ranked Frontier & MoE Models)
+  // Model Specs & Baseline Costs (Top Frontier Open-Source MoE Models: DeepSeek, Kimi, GLM)
   const modelData: Record<
     ModelType,
     {
@@ -54,63 +54,69 @@ export const TcoRoiCalculator: React.FC<TcoRoiCalculatorProps> = ({
   > = {
     deepseek671b: {
       name: 'DeepSeek-R1 / V3 (671B MoE · 37B Active)',
-      archBadge: '671B MoE · 128 Experts · MLA Attention',
-      gpuNeeded: '8x 8-GPU Pods (64x NVIDIA H800/H20 80GB + NVLink)',
-      serverHardwareCapex: 1850000, // $1.85M CapEx for high-density cluster
-      annualSysadminOpex: 360000, // $360k/yr MLOps + Infosec team
-      annualPowerPueOpex: 165000, // Power & Datacenter cooling PUE 1.3
+      archBadge:
+        lang === 'en'
+          ? '671B MoE · 128 Experts · MLA Latent Attention'
+          : lang === 'zh-TW'
+          ? '671B MoE · 128 路由專家 · MLA 潛在注意力'
+          : '671B MoE · 128 路由专家 · MLA 潜在注意力',
+      gpuNeeded:
+        lang === 'en'
+          ? '8x 8-GPU Pods (64x NVIDIA H800/H20 80GB + NVLink)'
+          : lang === 'zh-TW'
+          ? '8組 8卡機櫃 (64x NVIDIA H800/H20 80GB + NVLink)'
+          : '8组 8卡机柜 (64x NVIDIA H800/H20 80GB + NVLink)',
+      serverHardwareCapex: 1850000, // $1.85M CapEx: 8 high-density servers + 400G InfiniBand
+      annualSysadminOpex: 360000, // $360k/yr: 2 Senior MLOps + 1 Infosec specialist
+      annualPowerPueOpex: 165000, // Power & Datacenter cooling PUE 1.35
       publicCloudTokenCostPerM: 0.14, // $0.14 per 1M tokens on cloud confidential pool
       covarPriLicensePerM: 0.04, // $0.04 per 1M tokens
-      tag: lang === 'en' ? 'Global #1 Frontier MoE' : lang === 'zh-TW' ? '全球第一 671B MoE' : '全球第一 671B MoE',
+      tag: lang === 'en' ? 'DeepSeek 671B MoE' : lang === 'zh-TW' ? 'DeepSeek 671B MoE' : 'DeepSeek 671B MoE',
       isMoE: true,
     },
-    minimax456b: {
-      name: 'MiniMax-01 (456B MoE · 45.9B Active · 4M Context)',
-      archBadge: '456B MoE · Lightning Attention · 4M Window',
-      gpuNeeded: '6x 8-GPU Pods (48x NVIDIA H800/H100 80GB SXM5)',
-      serverHardwareCapex: 1420000,
-      annualSysadminOpex: 310000,
-      annualPowerPueOpex: 135000,
-      publicCloudTokenCostPerM: 0.12,
-      covarPriLicensePerM: 0.035,
-      tag: lang === 'en' ? '456B MoE · 4M Context' : lang === 'zh-TW' ? '456B MoE · 4M 超長上下文' : '456B MoE · 4M 超长上下文',
+    kimi_moe: {
+      name: 'Kimi k1.5 / Moonshot (480B MoE · 2M Context)',
+      archBadge:
+        lang === 'en'
+          ? '480B MoE · 2M Ultra-Long Context · Agentic SOTA'
+          : lang === 'zh-TW'
+          ? '480B MoE · 200萬超長上下文 · Agentic SOTA'
+          : '480B MoE · 200万超长上下文 · Agentic SOTA',
+      gpuNeeded:
+        lang === 'en'
+          ? '6x 8-GPU Pods (48x NVIDIA H800/H100 80GB SXM5)'
+          : lang === 'zh-TW'
+          ? '6組 8卡機櫃 (48x NVIDIA H800/H100 80GB SXM5)'
+          : '6组 8卡机柜 (48x NVIDIA H800/H100 80GB SXM5)',
+      serverHardwareCapex: 1420000, // $1.42M CapEx: 6 SXM5 nodes + RoCE/IB network
+      annualSysadminOpex: 310000, // $310k/yr: Long-context KV Cache & distributed reasoning MLOps
+      annualPowerPueOpex: 135000, // Long-context high-memory power & datacenter cooling
+      publicCloudTokenCostPerM: 0.12, // $0.12 per 1M tokens
+      covarPriLicensePerM: 0.035, // $0.035 per 1M tokens
+      tag: lang === 'en' ? 'Kimi k1.5 · 2M Context' : lang === 'zh-TW' ? 'Kimi k1.5 · 2M 上下文' : 'Kimi k1.5 · 2M 上下文',
       isMoE: true,
     },
-    qwen25_72b: {
-      name: 'Qwen-2.5-72B / Qwen-2.5-Coder-32B',
-      archBadge: '72B Dense / 32B Code SOTA · 128K Context',
-      gpuNeeded: '4x 8-GPU Pods (32x NVIDIA H800/A100 80GB)',
-      serverHardwareCapex: 880000,
-      annualSysadminOpex: 240000,
-      annualPowerPueOpex: 85000,
-      publicCloudTokenCostPerM: 0.08,
-      covarPriLicensePerM: 0.025,
-      tag: lang === 'en' ? 'Arena Top Open SOTA' : lang === 'zh-TW' ? '競技場登頂開源 SOTA' : '竞技场登顶开源 SOTA',
-      isMoE: false,
-    },
-    mixtral8x22b: {
-      name: 'Mixtral 8x22B (176B Sparse MoE · 39B Active)',
-      archBadge: '176B Sparse MoE · 64K Context · Native Tools',
-      gpuNeeded: '4x 8-GPU Pods (32x NVIDIA H100/H800 80GB)',
-      serverHardwareCapex: 980000,
-      annualSysadminOpex: 260000,
-      annualPowerPueOpex: 95000,
-      publicCloudTokenCostPerM: 0.10,
-      covarPriLicensePerM: 0.028,
-      tag: lang === 'en' ? '176B High-Throughput MoE' : lang === 'zh-TW' ? '176B 高吞吐 MoE' : '176B 高吞吐 MoE',
+    glm4_moe: {
+      name: 'GLM-4.6 / GLM-4-MoE (355B MoE · Zhipu AI)',
+      archBadge:
+        lang === 'en'
+          ? '355B MoE · MIT Open Weights · 200K Context'
+          : lang === 'zh-TW'
+          ? '355B MoE · MIT 開源權重 · 200K Context'
+          : '355B MoE · MIT 开源权重 · 200K Context',
+      gpuNeeded:
+        lang === 'en'
+          ? '4x 8-GPU Pods (32x NVIDIA H800/H100 80GB)'
+          : lang === 'zh-TW'
+          ? '4組 8卡機櫃 (32x NVIDIA H800/H100 80GB)'
+          : '4组 8卡机柜 (32x NVIDIA H800/H100 80GB)',
+      serverHardwareCapex: 960000, // $960k CapEx: 4 GPU servers + TOR switches
+      annualSysadminOpex: 250000, // $250k/yr: Zhipu AI stack tuning & private inference ops
+      annualPowerPueOpex: 92000, // Datacenter rack space & power
+      publicCloudTokenCostPerM: 0.09, // $0.09 per 1M tokens
+      covarPriLicensePerM: 0.026, // $0.026 per 1M tokens
+      tag: lang === 'en' ? 'GLM-4.6 · 355B MoE' : lang === 'zh-TW' ? 'GLM-4.6 · 355B MoE' : 'GLM-4.6 · 355B MoE',
       isMoE: true,
-    },
-    llama33_70b: {
-      name: 'Llama-3.3-70B-Instruct (Meta Frontier Flagship)',
-      archBadge: '70B Dense · 128K Context · 405B-Grade Efficiency',
-      gpuNeeded: '2x 8-GPU Pods (16x NVIDIA H100/A100 80GB)',
-      serverHardwareCapex: 520000,
-      annualSysadminOpex: 180000,
-      annualPowerPueOpex: 50000,
-      publicCloudTokenCostPerM: 0.06,
-      covarPriLicensePerM: 0.018,
-      tag: lang === 'en' ? 'Meta 70B Flagship Dense' : lang === 'zh-TW' ? 'Meta 70B 旗艦稠密' : 'Meta 70B 旗舰稠密',
-      isMoE: false,
     },
   };
 
@@ -148,19 +154,15 @@ export const TcoRoiCalculator: React.FC<TcoRoiCalculatorProps> = ({
     const carbonFactor =
       modelType === 'deepseek671b'
         ? 2.0
-        : modelType === 'minimax456b'
+        : modelType === 'kimi_moe'
         ? 1.6
-        : modelType === 'mixtral8x22b'
-        ? 1.4
-        : 1.0;
+        : 1.2;
     const carbonSavedTons = Math.round(dailyTokensM * 365 * years * 0.00042 * carbonFactor);
     const daysToDeployPrivate =
       modelType === 'deepseek671b'
         ? 180
-        : modelType === 'minimax456b'
+        : modelType === 'kimi_moe'
         ? 150
-        : modelType === 'mixtral8x22b'
-        ? 140
         : 120;
     const daysToDeployCovar = 1;
 
@@ -467,10 +469,10 @@ Time Horizon: ${years} Years
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
             <span className="text-xs text-slate-400 font-mono">
               {lang === 'en'
-                ? '* Based on industry standard 671B MoE power, datacenter cooling, MLOps, and spot GPU instances'
+                ? '* Based on frontier MoE cluster specs (64x/48x/32x GPU Pods), InfiniBand network, PUE 1.35 power cooling, and MLOps staff overhead'
                 : lang === 'zh-TW'
-                ? '* 基於業界標準 671B MoE 算力集群真實能耗、維運及雲端競價實例測算模型'
-                : '* 基于业界标准 671B MoE 算力集群真实能耗、运维及云端竞价实例测算模型'}
+                ? '* 基於前沿開源 MoE（DeepSeek/Kimi/GLM）真實集群規格（64卡/48卡/32卡 Pods）、InfiniBand 組網、PUE 1.35 能耗與 MLOps 維運測算'
+                : '* 基于前沿开源 MoE（DeepSeek/Kimi/GLM）真实集群规格（64卡/48卡/32卡 Pods）、InfiniBand 组网、PUE 1.35 能耗与 MLOps 运维测算'}
             </span>
             <button
               onClick={() => onRequestDemo?.(`TCO Simulation: ${currentModel.name}, ${dailyTokensM}M tokens/day, ${years}yr horizon`)}
