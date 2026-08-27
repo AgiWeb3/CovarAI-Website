@@ -1,10 +1,13 @@
 import React from 'react';
-import { ArrowLeft, Cpu, ShieldCheck, Sparkles } from 'lucide-react';
+import { ArrowLeft, Cpu, ShieldCheck, Sparkles, Layers, Code2, Flame } from 'lucide-react';
 import { Language } from '../types';
 import { translations } from '../translations';
 import { HeroSection } from './HeroSection';
 import { CrisisSection } from './CrisisSection';
 import { OnionArchitecture } from './OnionArchitecture';
+import { RedTeamPlayground } from './RedTeamPlayground';
+import { TechComparisonMatrix } from './TechComparisonMatrix';
+import { QuickstartIntegration } from './QuickstartIntegration';
 import { DeploymentCTA } from './DeploymentCTA';
 
 interface ProductsTechViewProps {
@@ -42,8 +45,8 @@ export const ProductsTechView: React.FC<ProductsTechViewProps> = ({
 
           <div className="flex items-center gap-2 sm:gap-3">
             <div
-              className="px-3 py-1.5 rounded-xl bg-white/5 text-gray-500 text-xs font-mono border border-white/5 cursor-not-allowed opacity-60 select-none flex items-center gap-1.5"
-              title={lang === 'en' ? 'Whitepaper is currently being updated for official release' : '技术白皮书正在更新中，正式版发布后开放下载'}
+              onClick={onOpenWhitepaper}
+              className="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white border border-white/10 text-xs font-mono flex items-center gap-1.5 transition-colors cursor-pointer"
             >
               <span>{translations[lang].nav.whitepaper}</span>
               <span className="text-[9px] px-1 py-0.2 rounded bg-zinc-800 text-zinc-400 border border-zinc-700">
@@ -73,6 +76,24 @@ export const ProductsTechView: React.FC<ProductsTechViewProps> = ({
       <CrisisSection lang={lang} />
 
       <OnionArchitecture lang={lang} />
+
+      {/* Red-Blue Team Adversarial Attack & Exploitation Playground */}
+      <RedTeamPlayground
+        lang={lang}
+        onRequestWhitepaper={onOpenWhitepaper}
+      />
+
+      {/* Mainstream Privacy Computing Comparison Matrix (FHE vs TEE vs SMPC vs CovarAI) */}
+      <TechComparisonMatrix
+        lang={lang}
+        onRequestDemo={onRequestDemo}
+      />
+
+      {/* 3-Line Code & Developer Quickstart Integration */}
+      <QuickstartIntegration
+        lang={lang}
+        onRequestDemo={onRequestDemo}
+      />
 
       <DeploymentCTA
         lang={lang}

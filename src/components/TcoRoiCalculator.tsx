@@ -15,6 +15,12 @@ import {
   Leaf,
   Layers,
   FileSpreadsheet,
+  Cpu,
+  Settings2,
+  HardDrive,
+  Users,
+  Activity,
+  Award,
 } from 'lucide-react';
 import { Language } from '../types';
 
@@ -23,8 +29,9 @@ interface TcoRoiCalculatorProps {
   onRequestDemo?: (details?: string) => void;
 }
 
-type ModelType = 'deepseek671b' | 'kimi_moe' | 'glm4_moe';
+type ModelType = 'deepseek671b' | 'kimi_moe' | 'glm4_moe' | 'qwen_max';
 type TimeHorizon = '1' | '3' | '5';
+type CurrencyType = 'USD' | 'CNY';
 
 export const TcoRoiCalculator: React.FC<TcoRoiCalculatorProps> = ({
   lang,
@@ -32,22 +39,32 @@ export const TcoRoiCalculator: React.FC<TcoRoiCalculatorProps> = ({
 }) => {
   // Input States
   const [modelType, setModelType] = useState<ModelType>('deepseek671b');
-  const [dailyTokensM, setDailyTokensM] = useState<number>(100); // 10M to 500M tokens/day
+  const [dailyTokensM, setDailyTokensM] = useState<number>(100); // 10M to 1000M tokens/day
   const [timeHorizon, setTimeHorizon] = useState<TimeHorizon>('3');
+  const [currency, setCurrency] = useState<CurrencyType>('USD');
   const [isCopied, setIsCopied] = useState(false);
 
-  // Model Specs & Baseline Costs (Top Frontier Open-Source MoE Models: DeepSeek, Kimi, GLM)
+  // Advanced custom sliders
+  const [showAdvanced, setShowAdvanced] = useState(false);
+  const [customPue, setCustomPue] = useState<number>(1.35); // 1.15 to 1.8
+  const [customOpsTeamSize, setCustomOpsTeamSize] = useState<number>(3); // 1 to 6 engineers
+
+  // Currency Exchange Rate USD to CNY (~7.25)
+  const rate = currency === 'CNY' ? 7.25 : 1.0;
+
+  // Model Specs & Baseline Costs (Top Frontier MoE Models: DeepSeek 671B, Kimi 480B, GLM-4 355B, Qwen 2.5 72B/MoE)
   const modelData: Record<
     ModelType,
     {
       name: string;
       archBadge: string;
       gpuNeeded: string;
-      serverHardwareCapex: number;
-      annualSysadminOpex: number;
-      annualPowerPueOpex: number;
-      publicCloudTokenCostPerM: number;
-      covarPriLicensePerM: number;
+      gpuCount: number;
+      serverHardwareCapexUSD: number;
+      baseSysadminOpexPerEngUSD: number;
+      basePowerPueOpexUSD: number;
+      publicCloudTokenCostPerMUSD: number;
+      covarPriLicensePerMUSD: number;
       tag: string;
       isMoE: boolean;
     }
@@ -62,16 +79,17 @@ export const TcoRoiCalculator: React.FC<TcoRoiCalculatorProps> = ({
           : '671B MoE · 128 路由专家 · MLA 潜在注意力',
       gpuNeeded:
         lang === 'en'
-          ? '8x 8-GPU Pods (64x NVIDIA H800/H20 80GB + NVLink)'
+          ? '8x 8-GPU Pods (64x NVIDIA H800/H20 80GB + InfiniBand)'
           : lang === 'zh-TW'
-          ? '8組 8卡機櫃 (64x NVIDIA H800/H20 80GB + NVLink)'
-          : '8组 8卡机柜 (64x NVIDIA H800/H20 80GB + NVLink)',
-      serverHardwareCapex: 1850000, // $1.85M CapEx: 8 high-density servers + 400G InfiniBand
-      annualSysadminOpex: 360000, // $360k/yr: 2 Senior MLOps + 1 Infosec specialist
-      annualPowerPueOpex: 165000, // Power & Datacenter cooling PUE 1.35
-      publicCloudTokenCostPerM: 0.14, // $0.14 per 1M tokens on cloud confidential pool
-      covarPriLicensePerM: 0.04, // $0.04 per 1M tokens
-      tag: lang === 'en' ? 'DeepSeek 671B MoE' : lang === 'zh-TW' ? 'DeepSeek 671B MoE' : 'DeepSeek 671B MoE',
+          ? '8組 8卡機櫃 (64x NVIDIA H800/H20 80GB + InfiniBand)'
+          : '8组 8卡机柜 (64x NVIDIA H800/H20 80GB + InfiniBand)',
+      gpuCount: 64,
+      serverHardwareCapexUSD: 1850000, // $1.85M CapEx
+      baseSysadminOpexPerEngUSD: 120000, // $120k/yr per senior MLOps/Infosec engineer
+      basePowerPueOpexUSD: 165000, // Power baseline at PUE 1.35
+      publicCloudTokenCostPerMUSD: 0.14, // $0.14 per 1M tokens on cloud confidential pool
+      covarPriLicensePerMUSD: 0.04, // $0.04 per 1M tokens
+      tag: 'DeepSeek 671B MoE',
       isMoE: true,
     },
     kimi_moe: {
@@ -88,12 +106,13 @@ export const TcoRoiCalculator: React.FC<TcoRoiCalculatorProps> = ({
           : lang === 'zh-TW'
           ? '6組 8卡機櫃 (48x NVIDIA H800/H100 80GB SXM5)'
           : '6组 8卡机柜 (48x NVIDIA H800/H100 80GB SXM5)',
-      serverHardwareCapex: 1420000, // $1.42M CapEx: 6 SXM5 nodes + RoCE/IB network
-      annualSysadminOpex: 310000, // $310k/yr: Long-context KV Cache & distributed reasoning MLOps
-      annualPowerPueOpex: 135000, // Long-context high-memory power & datacenter cooling
-      publicCloudTokenCostPerM: 0.12, // $0.12 per 1M tokens
-      covarPriLicensePerM: 0.035, // $0.035 per 1M tokens
-      tag: lang === 'en' ? 'Kimi k1.5 · 2M Context' : lang === 'zh-TW' ? 'Kimi k1.5 · 2M 上下文' : 'Kimi k1.5 · 2M 上下文',
+      gpuCount: 48,
+      serverHardwareCapexUSD: 1420000,
+      baseSysadminOpexPerEngUSD: 110000,
+      basePowerPueOpexUSD: 135000,
+      publicCloudTokenCostPerMUSD: 0.12,
+      covarPriLicensePerMUSD: 0.035,
+      tag: 'Kimi 480B MoE',
       isMoE: true,
     },
     glm4_moe: {
@@ -110,13 +129,37 @@ export const TcoRoiCalculator: React.FC<TcoRoiCalculatorProps> = ({
           : lang === 'zh-TW'
           ? '4組 8卡機櫃 (32x NVIDIA H800/H100 80GB)'
           : '4组 8卡机柜 (32x NVIDIA H800/H100 80GB)',
-      serverHardwareCapex: 960000, // $960k CapEx: 4 GPU servers + TOR switches
-      annualSysadminOpex: 250000, // $250k/yr: Zhipu AI stack tuning & private inference ops
-      annualPowerPueOpex: 92000, // Datacenter rack space & power
-      publicCloudTokenCostPerM: 0.09, // $0.09 per 1M tokens
-      covarPriLicensePerM: 0.026, // $0.026 per 1M tokens
-      tag: lang === 'en' ? 'GLM-4.6 · 355B MoE' : lang === 'zh-TW' ? 'GLM-4.6 · 355B MoE' : 'GLM-4.6 · 355B MoE',
+      gpuCount: 32,
+      serverHardwareCapexUSD: 960000,
+      baseSysadminOpexPerEngUSD: 100000,
+      basePowerPueOpexUSD: 92000,
+      publicCloudTokenCostPerMUSD: 0.09,
+      covarPriLicensePerMUSD: 0.026,
+      tag: 'GLM-4 355B MoE',
       isMoE: true,
+    },
+    qwen_max: {
+      name: 'Qwen 2.5 (72B Dense / MoE Equivalent)',
+      archBadge:
+        lang === 'en'
+          ? '72B Dense / Frontier Coding & Math SOTA'
+          : lang === 'zh-TW'
+          ? '72B 旗艦稠密 / 頂級代碼與數學推理'
+          : '72B 旗舰稠密 / 顶级代码与数学推理',
+      gpuNeeded:
+        lang === 'en'
+          ? '2x 8-GPU Pods (16x NVIDIA RTX 4090/A100 80GB)'
+          : lang === 'zh-TW'
+          ? '2組 8卡機櫃 (16x NVIDIA A100 80GB)'
+          : '2组 8卡机柜 (16x NVIDIA A100 80GB)',
+      gpuCount: 16,
+      serverHardwareCapexUSD: 480000,
+      baseSysadminOpexPerEngUSD: 90000,
+      basePowerPueOpexUSD: 48000,
+      publicCloudTokenCostPerMUSD: 0.06,
+      covarPriLicensePerMUSD: 0.018,
+      tag: 'Qwen 2.5 72B',
+      isMoE: false,
     },
   };
 
@@ -129,20 +172,29 @@ export const TcoRoiCalculator: React.FC<TcoRoiCalculatorProps> = ({
     const totalTokensM = annualTokensM * years;
 
     // 1. Private On-Premise Cluster Total Cost
-    const privateHardware = currentModel.serverHardwareCapex;
-    const privateSysadminTotal = currentModel.annualSysadminOpex * years;
-    const privatePowerTotal = currentModel.annualPowerPueOpex * years;
-    const privateHardwareDepreciationAndMaintenance = (privateHardware * 0.15) * years;
+    const hardwareCapex = currentModel.serverHardwareCapexUSD * rate;
+    const opsStaffAnnual = currentModel.baseSysadminOpexPerEngUSD * customOpsTeamSize * rate;
+    const opsStaffTotal = opsStaffAnnual * years;
+
+    const powerPueFactor = customPue / 1.35;
+    const powerAnnual = currentModel.basePowerPueOpexUSD * powerPueFactor * rate;
+    const powerTotal = powerAnnual * years;
+
+    const depreciationAndMaintTotal = hardwareCapex * 0.15 * years; // 15% annual maintenance/depreciation
     const privateTotalCost =
-      privateHardware +
-      privateSysadminTotal +
-      privatePowerTotal +
-      privateHardwareDepreciationAndMaintenance;
+      hardwareCapex +
+      opsStaffTotal +
+      powerTotal +
+      depreciationAndMaintTotal;
 
     // 2. CovarAI Sovereign Confidential Cloud Total Cost
-    const cloudComputeCost = totalTokensM * currentModel.publicCloudTokenCostPerM;
-    const covarPriSoftwareLicense = totalTokensM * currentModel.covarPriLicensePerM;
-    const sovereignEdgeGatewayCost = 25000 * years; // lightweight edge docker proxy server
+    const tokenPrice = currentModel.publicCloudTokenCostPerMUSD * rate;
+    const licensePrice = currentModel.covarPriLicensePerMUSD * rate;
+
+    const cloudComputeCost = totalTokensM * tokenPrice;
+    const covarPriSoftwareLicense = totalTokensM * licensePrice;
+    const sovereignEdgeGatewayCost = 25000 * rate * years; // local edge proxy appliance maintenance
+
     const covarTotalCost =
       cloudComputeCost +
       covarPriSoftwareLicense +
@@ -151,55 +203,95 @@ export const TcoRoiCalculator: React.FC<TcoRoiCalculatorProps> = ({
     // 3. Delta & ROI metrics
     const totalSavings = Math.max(0, privateTotalCost - covarTotalCost);
     const savingsPercent = Math.round((totalSavings / privateTotalCost) * 100);
+
     const carbonFactor =
       modelType === 'deepseek671b'
         ? 2.0
         : modelType === 'kimi_moe'
         ? 1.6
-        : 1.2;
-    const carbonSavedTons = Math.round(dailyTokensM * 365 * years * 0.00042 * carbonFactor);
+        : modelType === 'glm4_moe'
+        ? 1.2
+        : 0.8;
+    const carbonSavedTons = Math.round(dailyTokensM * 365 * years * 0.00042 * carbonFactor * (customPue / 1.35));
+
     const daysToDeployPrivate =
       modelType === 'deepseek671b'
         ? 180
         : modelType === 'kimi_moe'
         ? 150
-        : 120;
+        : modelType === 'glm4_moe'
+        ? 120
+        : 90;
     const daysToDeployCovar = 1;
+
+    // Per-Token Cost comparison (Cost per 1M tokens equivalent)
+    const privateCostPerM = privateTotalCost / totalTokensM;
+    const covarCostPerM = covarTotalCost / totalTokensM;
 
     return {
       totalTokensM,
       privateTotalCost,
-      privateHardware,
-      privateOpexTotal: privateSysadminTotal + privatePowerTotal + privateHardwareDepreciationAndMaintenance,
+      hardwareCapex,
+      opsStaffTotal,
+      powerTotal,
+      depreciationAndMaintTotal,
+      privateOpexTotal: opsStaffTotal + powerTotal + depreciationAndMaintTotal,
       covarTotalCost,
       cloudComputeCost,
       covarPriSoftwareLicense,
+      sovereignEdgeGatewayCost,
       totalSavings,
       savingsPercent,
       carbonSavedTons,
       daysToDeployPrivate,
       daysToDeployCovar,
+      privateCostPerM,
+      covarCostPerM,
     };
-  }, [dailyTokensM, modelType, years, currentModel]);
+  }, [
+    dailyTokensM,
+    modelType,
+    years,
+    currentModel,
+    rate,
+    customPue,
+    customOpsTeamSize,
+  ]);
 
   const formatCurrency = (val: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'USD',
+      currency: currency === 'CNY' ? 'CNY' : 'USD',
       maximumFractionDigits: 0,
     }).format(val);
   };
 
   const handleCopySummary = () => {
-    const summaryText = `[CovarAI TCO Assessment Report]
-Model Target: ${currentModel.name}
-Daily Throughput: ${dailyTokensM} Million tokens/day
-Time Horizon: ${years} Years
-- Private On-Premise Cluster TCO: ${formatCurrency(calculations.privateTotalCost)} (Capex: ${formatCurrency(calculations.privateHardware)}, Opex: ${formatCurrency(calculations.privateOpexTotal)})
-- CovarAI Sovereign Confidential Cloud TCO: ${formatCurrency(calculations.covarTotalCost)}
->>> Net Total Savings: ${formatCurrency(calculations.totalSavings)} (${calculations.savingsPercent}% Cost Reduction)
->>> Time-to-Market: 1 Day vs ${calculations.daysToDeployPrivate} Days
->>> Compliance Legal Penalty Risk: 0.00 (Zero-Plaintext Exemption)`;
+    const sym = currency === 'CNY' ? '¥' : '$';
+    const summaryText = `[CovarAI Enterprise TCO Audit Report]
+Model Architecture: ${currentModel.name} (${currentModel.gpuCount}x GPU Pods)
+Daily Token Throughput: ${dailyTokensM}M Tokens/Day | Evaluation Horizon: ${years} Years
+Currency: ${currency} | PUE: ${customPue} | Ops Team: ${customOpsTeamSize} Engineers
+--------------------------------------------------
+1. Traditional Private Cluster TCO: ${formatCurrency(calculations.privateTotalCost)}
+   - Hardware CapEx: ${formatCurrency(calculations.hardwareCapex)}
+   - MLOps Staffing OpEx: ${formatCurrency(calculations.opsStaffTotal)}
+   - Power / Cooling PUE OpEx: ${formatCurrency(calculations.powerTotal)}
+   - Depreciation & Maint: ${formatCurrency(calculations.depreciationAndMaintTotal)}
+   - Equivalent Cost per 1M Tokens: ${sym}${calculations.privateCostPerM.toFixed(3)}
+   - Deployment Lead Time: ${calculations.daysToDeployPrivate} Days
+
+2. CovarAI Sovereign Confidential Cloud TCO: ${formatCurrency(calculations.covarTotalCost)}
+   - Hardware CapEx: ${sym}0.00 (Zero Upfront)
+   - Public Cloud Confidential GPU Compute: ${formatCurrency(calculations.cloudComputeCost)}
+   - CovarPri Obfuscation License: ${formatCurrency(calculations.covarPriSoftwareLicense)}
+   - Sovereign Edge Gateway: ${formatCurrency(calculations.sovereignEdgeGatewayCost)}
+   - Equivalent Cost per 1M Tokens: ${sym}${calculations.covarCostPerM.toFixed(3)}
+   - Deployment Lead Time: 1 Day (Instant Docker Container)
+--------------------------------------------------
+>>> NET COST SAVINGS: ${formatCurrency(calculations.totalSavings)} (-${calculations.savingsPercent}%)
+>>> Carbon Footprint Abatement: ~${calculations.carbonSavedTons} Tons CO2
+>>> Legal / Privilege Violation Liability: $0.00 (Zero-Plaintext Exemption Guarantee)`;
 
     navigator.clipboard?.writeText(summaryText);
     setIsCopied(true);
@@ -207,13 +299,13 @@ Time Horizon: ${years} Years
   };
 
   return (
-    <div id="tco-calculator" className="relative p-6 sm:p-10 rounded-3xl bg-gradient-to-b from-slate-900/90 via-slate-950 to-black border border-white/10 glow-cyan">
-      {/* Header Badge */}
+    <div id="tco-calculator" className="relative p-6 sm:p-10 rounded-3xl bg-gradient-to-b from-slate-900/95 via-slate-950 to-black border border-white/10 glow-cyan">
+      {/* Header Badge & Currency Switcher */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-6 border-b border-white/10">
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/80 border border-cyan-500/40 text-cyan-300 text-xs font-mono mb-2">
             <Calculator className="w-3.5 h-3.5 text-cyan-400" />
-            <span>{lang === 'en' ? 'ENTERPRISE TCO & ROI SIMULATOR' : '企业 TCO 成本与算力收益对比计算器'}</span>
+            <span>{lang === 'en' ? 'ENTERPRISE TCO & ROI SIMULATOR' : '企业 TCO 成本与算力收益全景测算器'}</span>
           </div>
           <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
             {lang === 'en'
@@ -222,16 +314,36 @@ Time Horizon: ${years} Years
           </h3>
           <p className="text-xs sm:text-sm text-slate-400 mt-1">
             {lang === 'en'
-              ? 'Calculate 3-year hardware CapEx, MLOps OpEx, cooling, and compute cost differentials in real-time.'
-              : '实时测算数亿级 Token 吞吐下，重资产硬件采购、专业运维团队与零信任弹性算力的总拥有成本差距。'}
+              ? 'Comprehensive breakdown of CapEx, MLOps payroll, PUE cooling, maintenance, and unit token economics.'
+              : '全面量化数亿级 Token 吞吐下，重资产硬件采购、专业运维团队薪酬、机房能耗与零信任弹性算力的总拥有成本差距。'}
           </p>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-wrap">
+          {/* Currency Toggle */}
+          <div className="flex rounded-xl bg-slate-900 border border-slate-800 p-1">
+            <button
+              onClick={() => setCurrency('USD')}
+              className={`px-2.5 py-1 text-xs font-mono rounded-lg transition-colors cursor-pointer ${
+                currency === 'USD' ? 'bg-cyan-500 text-black font-bold' : 'text-gray-400 hover:text-white'
+              }`}
+            >
+              USD ($)
+            </button>
+            <button
+              onClick={() => setCurrency('CNY')}
+              className={`px-2.5 py-1 text-xs font-mono rounded-lg transition-colors cursor-pointer ${
+                currency === 'CNY' ? 'bg-cyan-500 text-black font-bold' : 'text-gray-400 hover:text-white'
+              }`}
+            >
+              CNY (¥)
+            </button>
+          </div>
+
           <button
             onClick={handleCopySummary}
             className="px-3.5 py-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-mono flex items-center gap-1.5 transition-colors cursor-pointer"
-            title="Copy TCO Summary"
+            title="Export TCO Assessment"
           >
             <FileSpreadsheet className="w-3.5 h-3.5 text-cyan-400" />
             <span>{isCopied ? (lang === 'en' ? 'COPIED!' : '已复制测算表') : (lang === 'en' ? 'Export Summary' : '导出测算数据')}</span>
@@ -249,7 +361,7 @@ Time Horizon: ${years} Years
           <div>
             <label className="text-xs font-mono text-cyan-400 block mb-2.5 font-bold uppercase tracking-wider flex items-center gap-2">
               <Layers className="w-4 h-4" />
-              <span>1. {lang === 'en' ? 'Model Scale & Architecture' : '目标大模型基座架构'}</span>
+              <span>1. {lang === 'en' ? 'Target Model Architecture' : '目标大模型基座架构'}</span>
             </label>
             <div className="space-y-2.5">
               {(Object.keys(modelData) as ModelType[]).map((key) => {
@@ -260,7 +372,7 @@ Time Horizon: ${years} Years
                     key={key}
                     type="button"
                     onClick={() => setModelType(key)}
-                    className={`w-full text-left p-3.5 rounded-xl border transition-all cursor-pointer flex flex-col sm:flex-row sm:items-center justify-between gap-2 ${
+                    className={`w-full text-left p-3 rounded-xl border transition-all cursor-pointer flex flex-col sm:flex-row sm:items-center justify-between gap-2 ${
                       isSelected
                         ? 'bg-cyan-950/40 border-cyan-500 text-white shadow-md glow-cyan'
                         : 'bg-slate-900/50 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700'
@@ -318,8 +430,8 @@ Time Horizon: ${years} Years
             />
 
             <div className="flex justify-between text-[10px] font-mono text-slate-400">
-              <span>10M ({lang === 'en' ? 'Department Trial' : lang === 'zh-TW' ? '部門級試用' : '部门级试用'})</span>
-              <span>100M ({lang === 'en' ? 'Production Line' : lang === 'zh-TW' ? '核心生產線' : '核心生产线'})</span>
+              <span>10M ({lang === 'en' ? 'Dept POC' : lang === 'zh-TW' ? '部門試點' : '部门试点'})</span>
+              <span>100M ({lang === 'en' ? 'Production Line' : lang === 'zh-TW' ? '核心業務線' : '核心业务线'})</span>
               <span>500M+ ({lang === 'en' ? 'Enterprise-Wide' : lang === 'zh-TW' ? '全行/全院級' : '全行/全院级'})</span>
             </div>
           </div>
@@ -328,7 +440,7 @@ Time Horizon: ${years} Years
           <div>
             <label className="text-xs font-mono text-emerald-400 block mb-2 font-bold uppercase tracking-wider flex items-center gap-2">
               <Clock className="w-4 h-4" />
-              <span>3. {lang === 'en' ? 'Evaluation Horizon' : lang === 'zh-TW' ? '測算週期與攤銷年限' : '测算周期与摊销年限'}</span>
+              <span>3. {lang === 'en' ? 'Evaluation Horizon & Amortization' : lang === 'zh-TW' ? '測算週期與硬體攤銷年限' : '测算周期与硬件摊销年限'}</span>
             </label>
             <div className="grid grid-cols-3 gap-2">
               {(['1', '3', '5'] as TimeHorizon[]).map((yr) => (
@@ -346,6 +458,62 @@ Time Horizon: ${years} Years
                 </button>
               ))}
             </div>
+          </div>
+
+          {/* Advanced Custom Param Toggle (PUE & MLOps Staff) */}
+          <div className="pt-2 border-t border-slate-800">
+            <button
+              onClick={() => setShowAdvanced(!showAdvanced)}
+              className="text-xs font-mono text-slate-400 hover:text-cyan-300 flex items-center gap-1.5 transition-colors cursor-pointer"
+            >
+              <Settings2 className="w-3.5 h-3.5" />
+              <span>
+                {showAdvanced
+                  ? (lang === 'en' ? 'Hide Advanced Data Center Parameters' : '收起高级机房与运维参数')
+                  : (lang === 'en' ? 'Customize PUE & MLOps Team Payroll' : '自定义机房 PUE 能耗与运维团队编制')}
+              </span>
+            </button>
+
+            {showAdvanced && (
+              <div className="mt-3 p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-4">
+                <div>
+                  <div className="flex justify-between text-xs font-mono text-slate-300 mb-1">
+                    <span>{lang === 'en' ? 'Data Center PUE Index:' : '机房能耗 PUE 指标:'}</span>
+                    <span className="text-cyan-300 font-bold">{customPue.toFixed(2)}</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="1.15"
+                    max="1.80"
+                    step="0.05"
+                    value={customPue}
+                    onChange={(e) => setCustomPue(Number(e.target.value))}
+                    className="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-cyan-400"
+                  />
+                  <div className="flex justify-between text-[9px] font-mono text-slate-500 mt-1">
+                    <span>1.15 (Green DC)</span>
+                    <span>1.35 (Industry Avg)</span>
+                    <span>1.80 (Standard Server Room)</span>
+                  </div>
+                </div>
+
+                <div>
+                  <div className="flex justify-between text-xs font-mono text-slate-300 mb-1">
+                    <span>{lang === 'en' ? 'Dedicated MLOps & Infosec Team Size:' : '专职 MLOps 与安全运维团队规模:'}</span>
+                    <span className="text-purple-300 font-bold">{customOpsTeamSize} {lang === 'en' ? 'Engineers' : '人'}</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="1"
+                    max="6"
+                    step="1"
+                    value={customOpsTeamSize}
+                    onChange={(e) => setCustomOpsTeamSize(Number(e.target.value))}
+                    className="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-purple-400"
+                  />
+                </div>
+              </div>
+            )}
           </div>
 
         </div>
@@ -369,20 +537,32 @@ Time Horizon: ${years} Years
                 <div className="text-2xl sm:text-3xl font-black font-mono text-red-400">
                   {formatCurrency(calculations.privateTotalCost)}
                 </div>
+                <div className="text-[11px] font-mono text-slate-400 mt-1">
+                  {lang === 'en' ? 'Unit Cost: ' : '综合单价: '}
+                  <span className="text-red-300 font-bold">{currency === 'CNY' ? '¥' : '$'}{calculations.privateCostPerM.toFixed(3)}</span> / 1M Tokens
+                </div>
               </div>
 
               <div className="space-y-1.5 text-[11px] font-mono text-slate-400 border-t border-slate-800 pt-3">
                 <div className="flex justify-between">
                   <span>{lang === 'en' ? 'Hardware CapEx:' : lang === 'zh-TW' ? '硬體採購 (CapEx):' : '硬件采购 (CapEx):'}</span>
-                  <span className="text-slate-300">{formatCurrency(calculations.privateHardware)}</span>
+                  <span className="text-slate-300">{formatCurrency(calculations.hardwareCapex)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>{lang === 'en' ? 'MLOps & Cooling OpEx:' : lang === 'zh-TW' ? '維運與機房 (OpEx):' : '运维与机房 (OpEx):'}</span>
-                  <span className="text-slate-300">{formatCurrency(calculations.privateOpexTotal)}</span>
+                  <span>{lang === 'en' ? 'MLOps Payroll (OpEx):' : lang === 'zh-TW' ? '運維薪酬 (OpEx):' : '运维薪酬 (OpEx):'}</span>
+                  <span className="text-slate-300">{formatCurrency(calculations.opsStaffTotal)}</span>
                 </div>
                 <div className="flex justify-between">
+                  <span>{lang === 'en' ? 'Power & PUE Cooling:' : lang === 'zh-TW' ? '機房電費與空調:' : '机房电费与空调:'}</span>
+                  <span className="text-slate-300">{formatCurrency(calculations.powerTotal)}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>{lang === 'en' ? 'Depreciation & Maint:' : lang === 'zh-TW' ? '硬體折舊與維保:' : '硬件折旧与维保:'}</span>
+                  <span className="text-slate-300">{formatCurrency(calculations.depreciationAndMaintTotal)}</span>
+                </div>
+                <div className="flex justify-between pt-1 border-t border-slate-800/80">
                   <span>{lang === 'en' ? 'Deployment Lead Time:' : lang === 'zh-TW' ? '交付週期:' : '交付周期:'}</span>
-                  <span className="text-red-400">
+                  <span className="text-red-400 font-bold">
                     {calculations.daysToDeployPrivate} {lang === 'en' ? 'Days (Procurement Lead Time)' : lang === 'zh-TW' ? '天 (漫長採購配置)' : '天 (漫长采购配置)'}
                   </span>
                 </div>
@@ -402,6 +582,10 @@ Time Horizon: ${years} Years
                 <div className="text-2xl sm:text-3xl font-black font-mono text-cyan-300">
                   {formatCurrency(calculations.covarTotalCost)}
                 </div>
+                <div className="text-[11px] font-mono text-cyan-300/80 mt-1">
+                  {lang === 'en' ? 'Unit Cost: ' : '综合单价: '}
+                  <span className="text-emerald-300 font-bold">{currency === 'CNY' ? '¥' : '$'}{calculations.covarCostPerM.toFixed(3)}</span> / 1M Tokens
+                </div>
               </div>
 
               <div className="space-y-1.5 text-[11px] font-mono text-slate-300 border-t border-cyan-900/50 pt-3">
@@ -410,12 +594,20 @@ Time Horizon: ${years} Years
                   <span className="text-emerald-400 font-bold">$0 ({lang === 'en' ? 'Zero Hardware Upfront' : lang === 'zh-TW' ? '零重資產墊資' : '零重资产垫资'})</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>{lang === 'en' ? 'Compute + Obfuscation License:' : lang === 'zh-TW' ? '公有算力 + 密態許可:' : '公有算力 + 密态许可:'}</span>
-                  <span className="text-cyan-300">{formatCurrency(calculations.cloudComputeCost + calculations.covarPriSoftwareLicense)}</span>
+                  <span>{lang === 'en' ? 'Public Cloud GPU Compute:' : lang === 'zh-TW' ? '彈性公有 GPU 算力:' : '弹性公有 GPU 算力:'}</span>
+                  <span className="text-cyan-300">{formatCurrency(calculations.cloudComputeCost)}</span>
                 </div>
                 <div className="flex justify-between">
+                  <span>{lang === 'en' ? 'CovarPri Obfuscation License:' : lang === 'zh-TW' ? 'CovarPri 密態核心許可:' : 'CovarPri 密态核心许可:'}</span>
+                  <span className="text-cyan-300">{formatCurrency(calculations.covarPriSoftwareLicense)}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>{lang === 'en' ? 'Sovereign Edge Gateway:' : lang === 'zh-TW' ? '內網代理網關維保:' : '内网代理网关维保:'}</span>
+                  <span className="text-cyan-300">{formatCurrency(calculations.sovereignEdgeGatewayCost)}</span>
+                </div>
+                <div className="flex justify-between pt-1 border-t border-cyan-900/80">
                   <span>{lang === 'en' ? 'Deployment Lead Time:' : lang === 'zh-TW' ? '交付週期:' : '交付周期:'}</span>
-                  <span className="text-cyan-400 font-bold">
+                  <span className="text-emerald-400 font-bold">
                     {lang === 'en' ? '1 Day (Instant Docker Appliance)' : lang === 'zh-TW' ? '1 天即刻上線 (Docker 鏡像)' : '1 天即刻上线 (Docker 镜像)'}
                   </span>
                 </div>
@@ -469,13 +661,13 @@ Time Horizon: ${years} Years
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
             <span className="text-xs text-slate-400 font-mono">
               {lang === 'en'
-                ? '* Based on frontier MoE cluster specs (64x/48x/32x GPU Pods), InfiniBand network, PUE 1.35 power cooling, and MLOps staff overhead'
+                ? `* Based on actual ${currentModel.gpuCount}x GPU server pods, InfiniBand topology, PUE ${customPue.toFixed(2)}, and ${customOpsTeamSize}-engineer MLOps team overhead.`
                 : lang === 'zh-TW'
-                ? '* 基於前沿開源 MoE（DeepSeek/Kimi/GLM）真實集群規格（64卡/48卡/32卡 Pods）、InfiniBand 組網、PUE 1.35 能耗與 MLOps 維運測算'
-                : '* 基于前沿开源 MoE（DeepSeek/Kimi/GLM）真实集群规格（64卡/48卡/32卡 Pods）、InfiniBand 组网、PUE 1.35 能耗与 MLOps 运维测算'}
+                ? `* 基於 ${currentModel.gpuCount} 卡專用集群硬體、InfiniBand 組網、PUE ${customPue.toFixed(2)} 能耗及 ${customOpsTeamSize} 人 MLOps 維運團隊測算。`
+                : `* 基于 ${currentModel.gpuCount} 卡专用集群硬件、InfiniBand 组网、PUE ${customPue.toFixed(2)} 能耗及 ${customOpsTeamSize} 人 MLOps 运维团队测算。`}
             </span>
             <button
-              onClick={() => onRequestDemo?.(`TCO Simulation: ${currentModel.name}, ${dailyTokensM}M tokens/day, ${years}yr horizon`)}
+              onClick={() => onRequestDemo?.(`TCO Simulation: ${currentModel.name}, ${dailyTokensM}M tokens/day, ${years}yr horizon, PUE ${customPue}, Team: ${customOpsTeamSize}`)}
               className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-black text-xs font-bold font-mono flex items-center justify-center gap-2 shadow-lg glow-cyan transition-all active:scale-95 cursor-pointer"
             >
               <Sparkles className="w-3.5 h-3.5" />

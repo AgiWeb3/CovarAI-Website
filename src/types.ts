@@ -1,5 +1,5 @@
 export type Language = 'zh-CN' | 'zh-TW' | 'en';
-export type ActivePageView = 'home' | 'products';
+export type ActivePageView = 'home' | 'executive' | 'security' | 'developer' | 'products';
 export type IndustryScenarioId = 'legal' | 'healthcare' | 'finance';
 
 export interface NavItem {
@@ -100,8 +100,42 @@ export interface DeploymentModel {
   title: string;
   targetAudience: string;
   coreValue: string;
-  iconType: 'cloud' | 'server';
+  iconType: 'cloud' | 'server' | 'network';
   features: string[];
   recommendedBadge?: string;
+}
+
+export interface PocStep {
+  day: string;
+  phase: string;
+  duration: string;
+  tasks: string[];
+  deliverable: string;
+  badge: string;
+}
+
+export interface DeploymentModeDetail {
+  id: string;
+  modeNumber: string;
+  title: string;
+  targetAudience: string;
+  coreValue: string;
+  iconType: 'cloud' | 'network' | 'server';
+  recommendedBadge?: string;
+  specs: {
+    setupTime: string;
+    networkReq: string;
+    dataSovereignty: string;
+    complianceGrade: string;
+    computeLocation: string;
+  };
+  topology: {
+    client: string;
+    gateway: string;
+    transport: string;
+    compute: string;
+    recovery: string;
+  };
+  features: string[];
 }
 

@@ -10,11 +10,13 @@ import {
   X,
   Layers,
   Calculator,
-  Quote,
   Flame,
   BarChart3,
   Boxes,
   ArrowRight,
+  Briefcase,
+  Code2,
+  Home,
   CheckCircle2,
   Lock,
 } from 'lucide-react';
@@ -61,39 +63,40 @@ export const MobileQuickDrawer: React.FC<MobileQuickDrawerProps> = ({
     }
   };
 
-  const getIndustryBadge = (id: IndustryScenarioId) => {
-    switch (id) {
-      case 'legal':
-        return {
-          icon: <Scale className="w-4 h-4 text-cyan-400" />,
-          title: lang === 'en' ? 'Legal & Compliance' : '法律与法务合规',
-          desc: lang === 'en' ? 'FRE 502 Privilege & NDA Protection' : 'FRE 502 律师特权保障 · 零泄密审查',
-          tag: 'FRE 502',
-          border: 'border-cyan-500/40',
-          bg: 'bg-cyan-950/40',
-        };
-      case 'healthcare':
-        return {
-          icon: <HeartPulse className="w-4 h-4 text-purple-400" />,
-          title: lang === 'en' ? 'Healthcare & Life Sciences' : '医疗与生命科学',
-          desc: lang === 'en' ? 'HIPAA / PII De-identification' : 'HIPAA 临床病历保护 · 基因数据安全',
-          tag: 'HIPAA',
-          border: 'border-purple-500/40',
-          bg: 'bg-purple-950/40',
-        };
-      case 'finance':
-        return {
-          icon: <Landmark className="w-4 h-4 text-emerald-400" />,
-          title: lang === 'en' ? 'Finance & Quant' : '金融与量化资管',
-          desc: lang === 'en' ? 'Proprietary Alpha & Audit Trail' : '量化策略私有化 · 投研数据零泄密',
-          tag: 'FIN-SEC',
-          border: 'border-emerald-500/40',
-          bg: 'bg-emerald-950/40',
-        };
-    }
-  };
-
-  const currentBadge = getIndustryBadge(selectedIndustry);
+  const personaHubs = [
+    {
+      id: 'home' as const,
+      name: lang === 'en' ? 'Overview' : '总览首页',
+      badge: lang === 'en' ? 'Main' : '总览',
+      icon: Home,
+      color: 'text-cyan-400',
+      bg: 'border-cyan-500/30 bg-cyan-950/20',
+    },
+    {
+      id: 'executive' as const,
+      name: lang === 'en' ? 'Business & ROI' : '商业与 ROI',
+      badge: 'CFO / CEO',
+      icon: Briefcase,
+      color: 'text-emerald-400',
+      bg: 'border-emerald-500/30 bg-emerald-950/20',
+    },
+    {
+      id: 'security' as const,
+      name: lang === 'en' ? 'Security & Trust' : '安全与合规',
+      badge: 'CISO / DPO',
+      icon: ShieldCheck,
+      color: 'text-rose-400',
+      bg: 'border-rose-500/30 bg-rose-950/20',
+    },
+    {
+      id: 'developer' as const,
+      name: lang === 'en' ? 'Developers' : '架构与开发',
+      badge: 'Architect',
+      icon: Code2,
+      color: 'text-sky-400',
+      bg: 'border-sky-500/30 bg-sky-950/20',
+    },
+  ];
 
   return (
     <>
@@ -110,63 +113,42 @@ export const MobileQuickDrawer: React.FC<MobileQuickDrawerProps> = ({
             }`}
           >
             <Compass className="w-3.5 h-3.5 text-cyan-400" />
-            <span className="truncate">{lang === 'en' ? 'Explore' : '探索抽屉'}</span>
+            <span className="truncate">{lang === 'en' ? 'Roles' : '角色切换'}</span>
           </button>
 
-          {/* Button B: Current Industry / Scenario Quick Switch */}
-          {activeView === 'home' ? (
-            <button
-              onClick={() => {
-                const next: IndustryScenarioId =
-                  selectedIndustry === 'legal'
-                    ? 'healthcare'
-                    : selectedIndustry === 'healthcare'
-                    ? 'finance'
-                    : 'legal';
-                onSelectIndustry(next);
-                const el = document.getElementById('solutions');
-                el?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="flex-1 py-2 px-2 rounded-xl text-xs font-semibold bg-white/5 hover:bg-white/10 text-gray-200 border border-white/10 flex items-center justify-center gap-1.5 transition-all truncate cursor-pointer"
-              title={lang === 'en' ? 'Click to toggle industry' : '点击快速切换行业'}
-            >
-              {currentBadge.icon}
-              <span className="truncate">{currentBadge.tag}</span>
-            </button>
-          ) : (
-            <button
-              onClick={() => handleNavigate(() => onViewChange('home'), 'solutions')}
-              className="flex-1 py-2 px-2 rounded-xl text-xs font-semibold bg-white/5 hover:bg-white/10 text-cyan-300 border border-cyan-500/30 flex items-center justify-center gap-1.5 transition-all truncate cursor-pointer"
-            >
-              <Layers className="w-3.5 h-3.5" />
-              <span className="truncate">{lang === 'en' ? 'Solutions' : '行业方案'}</span>
-            </button>
-          )}
-
-          {/* Button C: View Mode Switcher */}
+          {/* Quick Hub Jump (Executive) */}
           <button
-            onClick={() => {
-              const target = activeView === 'home' ? 'products' : 'home';
-              onViewChange(target);
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
-            className="flex-1 py-2 px-2 rounded-xl text-xs font-semibold bg-white/5 hover:bg-white/10 text-gray-300 border border-white/10 flex items-center justify-center gap-1.5 transition-all truncate cursor-pointer"
+            onClick={() => handleNavigate(() => onViewChange('executive'))}
+            className={`flex-1 py-2 px-2 rounded-xl text-xs font-semibold border flex items-center justify-center gap-1.5 transition-all truncate cursor-pointer ${
+              activeView === 'executive'
+                ? 'bg-emerald-500 text-black font-bold'
+                : 'bg-white/5 text-emerald-300 border-white/10'
+            }`}
           >
-            <Cpu className="w-3.5 h-3.5 text-purple-400" />
-            <span className="truncate">
-              {activeView === 'home'
-                ? (lang === 'en' ? 'Tech View' : '技术架构')
-                : (lang === 'en' ? 'Home' : '方案首页')}
-            </span>
+            <Briefcase className="w-3.5 h-3.5" />
+            <span className="truncate">{lang === 'en' ? 'CFO ROI' : 'ROI 测算'}</span>
+          </button>
+
+          {/* Quick Hub Jump (Security) */}
+          <button
+            onClick={() => handleNavigate(() => onViewChange('security'))}
+            className={`flex-1 py-2 px-2 rounded-xl text-xs font-semibold border flex items-center justify-center gap-1.5 transition-all truncate cursor-pointer ${
+              activeView === 'security'
+                ? 'bg-rose-600 text-white font-bold'
+                : 'bg-white/5 text-rose-300 border-white/10'
+            }`}
+          >
+            <ShieldCheck className="w-3.5 h-3.5" />
+            <span className="truncate">{lang === 'en' ? 'CISO' : '攻防安全'}</span>
           </button>
 
           {/* Button D: Quick Request Demo CTA */}
           <button
             onClick={() => onRequestDemo()}
-            className="py-2 px-3 rounded-xl text-xs font-bold bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-400 hover:to-purple-500 text-white flex items-center justify-center gap-1 shadow-lg shadow-cyan-500/20 active:scale-95 transition-all cursor-pointer whitespace-nowrap"
+            className="py-2 px-3 rounded-xl text-xs font-bold bg-cyan-500 hover:bg-cyan-400 text-black flex items-center justify-center gap-1 shadow-lg active:scale-95 transition-all cursor-pointer whitespace-nowrap"
           >
             <Sparkles className="w-3.5 h-3.5" />
-            <span>{lang === 'en' ? 'Demo' : '演示'}</span>
+            <span>{lang === 'en' ? 'POC' : '预约'}</span>
           </button>
         </div>
       </div>
@@ -185,17 +167,17 @@ export const MobileQuickDrawer: React.FC<MobileQuickDrawerProps> = ({
             {/* Top Handle & Close Header */}
             <div className="flex items-center justify-between pb-3 border-b border-white/10">
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-cyan-500 to-purple-600 p-[1px]">
+                <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-cyan-500 to-indigo-600 p-[1px]">
                   <div className="w-full h-full bg-black rounded-[11px] flex items-center justify-center">
                     <Compass className="w-4 h-4 text-cyan-400" />
                   </div>
                 </div>
                 <div>
                   <h3 className="text-sm font-bold text-white tracking-tight">
-                    {lang === 'en' ? 'CovarAI Exploration Hub' : 'CovarAI 移动探索中心'}
+                    {lang === 'en' ? 'Decision Portals by Role' : '按角色获取精准内容'}
                   </h3>
                   <p className="text-[11px] text-gray-400 font-mono">
-                    {lang === 'en' ? 'Quick Access to Scenarios & Architecture' : '快速切换行业方案与底层技术架构'}
+                    {lang === 'en' ? 'Choose your persona for targeted technical & financial data' : '选择您的业务角色，获取定制的 ROI、安全或架构数据'}
                   </p>
                 </div>
               </div>
@@ -209,194 +191,81 @@ export const MobileQuickDrawer: React.FC<MobileQuickDrawerProps> = ({
               </button>
             </div>
 
-            {/* Page Mode Switcher Segmented Control */}
-            <div>
-              <div className="text-xs font-mono text-gray-400 mb-2 uppercase tracking-wider">
-                {lang === 'en' ? 'Current Active View' : '当前浏览视图'}
+            {/* Persona Portals Grid */}
+            <div className="space-y-2">
+              <div className="text-xs font-mono text-gray-400 uppercase tracking-wider">
+                {lang === 'en' ? 'Role Portals' : '角色专区'}
               </div>
-              <div className="grid grid-cols-2 gap-2 p-1.5 rounded-2xl bg-white/5 border border-white/10">
-                <button
-                  onClick={() => handleNavigate(() => onViewChange('home'))}
-                  className={`py-2.5 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${
-                    activeView === 'home'
-                      ? 'bg-cyan-500 text-black shadow-md glow-cyan'
-                      : 'text-gray-400 hover:text-white hover:bg-white/5'
-                  }`}
-                >
-                  <Layers className="w-4 h-4" />
-                  <span>{lang === 'en' ? 'Solutions Home' : '业务方案首页'}</span>
-                </button>
-
-                <button
-                  onClick={() => handleNavigate(() => onViewChange('products'))}
-                  className={`py-2.5 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${
-                    activeView === 'products'
-                      ? 'bg-purple-600 text-white shadow-md glow-purple'
-                      : 'text-gray-400 hover:text-white hover:bg-white/5'
-                  }`}
-                >
-                  <Cpu className="w-4 h-4" />
-                  <span>{lang === 'en' ? 'Products & Tech' : '产品与技术架构'}</span>
-                </button>
-              </div>
-            </div>
-
-            {/* Section A: 3 Vertical Industry Scenarios */}
-            <div>
-              <div className="flex items-center justify-between text-xs font-mono text-gray-400 mb-2 uppercase tracking-wider">
-                <span>{lang === 'en' ? 'Industry Vertical Solutions' : '三大垂直行业落地方案'}</span>
-                <span className="text-[10px] text-cyan-400">Tap to Switch</span>
-              </div>
-
-              <div className="grid grid-cols-1 gap-2.5">
-                {(['legal', 'healthcare', 'finance'] as IndustryScenarioId[]).map((id) => {
-                  const badge = getIndustryBadge(id);
-                  const isSelected = activeView === 'home' && selectedIndustry === id;
+              <div className="grid grid-cols-2 gap-2.5">
+                {personaHubs.map((hub) => {
+                  const Icon = hub.icon;
+                  const isSelected = activeView === hub.id;
                   return (
                     <button
-                      key={id}
-                      onClick={() =>
-                        handleNavigate(() => {
-                          onViewChange('home');
-                          onSelectIndustry(id);
-                        }, 'solutions')
-                      }
-                      className={`w-full p-3.5 rounded-2xl border text-left transition-all flex items-center justify-between gap-3 cursor-pointer ${
+                      key={hub.id}
+                      onClick={() => handleNavigate(() => onViewChange(hub.id))}
+                      className={`p-3 rounded-2xl border text-left flex flex-col justify-between transition-all cursor-pointer ${
                         isSelected
-                          ? `${badge.border} ${badge.bg} ring-1 ring-cyan-400`
-                          : 'border-white/10 bg-white/5 hover:border-white/20'
+                          ? 'bg-white/15 border-cyan-400 ring-1 ring-cyan-400'
+                          : `${hub.bg} hover:border-white/20`
                       }`}
                     >
-                      <div className="flex items-center gap-3">
-                        <div className="p-2.5 rounded-xl bg-white/5 border border-white/10">
-                          {badge.icon}
-                        </div>
-                        <div>
-                          <div className="flex items-center gap-2">
-                            <span className="text-xs font-bold text-white">
-                              {badge.title}
-                            </span>
-                            <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-white/10 text-gray-300">
-                              {badge.tag}
-                            </span>
-                          </div>
-                          <p className="text-[11px] text-gray-400 mt-0.5">
-                            {badge.desc}
-                          </p>
-                        </div>
-                      </div>
-
-                      {isSelected ? (
-                        <span className="text-[10px] font-mono font-bold text-cyan-300 bg-cyan-950 px-2 py-0.5 rounded border border-cyan-800 shrink-0">
-                          ACTIVE
+                      <div className="flex items-center justify-between mb-2">
+                        <Icon className={`w-4 h-4 ${hub.color}`} />
+                        <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-black/50 text-gray-300">
+                          {hub.badge}
                         </span>
-                      ) : (
-                        <ArrowRight className="w-4 h-4 text-gray-500 shrink-0" />
-                      )}
+                      </div>
+                      <div className="text-xs font-bold text-white">{hub.name}</div>
                     </button>
                   );
                 })}
               </div>
             </div>
 
-            {/* Section B: Enterprise Decisions & ROI */}
+            {/* Industry Verticals */}
             <div>
               <div className="text-xs font-mono text-gray-400 mb-2 uppercase tracking-wider">
-                {lang === 'en' ? 'Value, ROI & Decision Modules' : '企业商业价值与投资测算'}
+                {lang === 'en' ? 'Industry Vertical Solutions' : '三大垂直行业落地方案'}
               </div>
-
-              <div className="grid grid-cols-2 gap-2.5">
-                <button
-                  onClick={() =>
-                    handleNavigate(() => {
-                      if (activeView !== 'home') onViewChange('home');
-                    }, 'values')
-                  }
-                  className="p-3 rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-500/30 text-left transition-all flex flex-col justify-between cursor-pointer"
-                >
-                  <ShieldCheck className="w-4 h-4 text-cyan-400 mb-1.5" />
-                  <div>
-                    <div className="text-xs font-bold text-white">
-                      {lang === 'en' ? '4 Core Pillars' : '四大核心价值'}
-                    </div>
-                    <div className="text-[10px] text-gray-400 font-mono mt-0.5">
-                      {lang === 'en' ? 'Privilege · Speed · TCO' : '特权 · 极速 · 低成本'}
-                    </div>
-                  </div>
-                </button>
-
-                <button
-                  onClick={() =>
-                    handleNavigate(() => {
-                      if (activeView !== 'home') onViewChange('home');
-                    }, 'values')
-                  }
-                  className="p-3 rounded-2xl bg-white/5 border border-white/10 hover:border-purple-500/30 text-left transition-all flex flex-col justify-between cursor-pointer"
-                >
-                  <Calculator className="w-4 h-4 text-purple-400 mb-1.5" />
-                  <div>
-                    <div className="text-xs font-bold text-white">
-                      {lang === 'en' ? 'TCO Calculator' : 'ROI 投资测算器'}
-                    </div>
-                    <div className="text-[10px] text-gray-400 font-mono mt-0.5">
-                      {lang === 'en' ? 'Compute ROI Model' : '算力成本节约估算'}
-                    </div>
-                  </div>
-                </button>
-              </div>
-            </div>
-
-            {/* Section C: Deep-Tech Modules */}
-            <div>
-              <div className="text-xs font-mono text-gray-400 mb-2 uppercase tracking-wider">
-                {lang === 'en' ? 'Deep-Tech & Cryptography' : '底层技术架构模块'}
-              </div>
-
-              <div className="grid grid-cols-3 gap-2">
-                <button
-                  onClick={() =>
-                    handleNavigate(() => {
-                      if (activeView !== 'products') onViewChange('products');
-                    }, 'onion')
-                  }
-                  className="p-2.5 rounded-xl bg-white/5 border border-white/10 hover:border-cyan-500/30 text-center transition-all cursor-pointer"
-                >
-                  <Layers className="w-4 h-4 text-cyan-400 mx-auto mb-1" />
-                  <div className="text-[11px] font-bold text-white">
-                    {lang === 'en' ? 'Onion Defense' : '洋葱防御'}
-                  </div>
-                  <div className="text-[9px] text-gray-400 font-mono">3 Layers</div>
-                </button>
-
-                <button
-                  onClick={() =>
-                    handleNavigate(() => {
-                      if (activeView !== 'products') onViewChange('products');
-                    }, 'performance')
-                  }
-                  className="p-2.5 rounded-xl bg-white/5 border border-white/10 hover:border-purple-500/30 text-center transition-all cursor-pointer"
-                >
-                  <BarChart3 className="w-4 h-4 text-purple-400 mx-auto mb-1" />
-                  <div className="text-[11px] font-bold text-white">
-                    {lang === 'en' ? '671B Benchmark' : '实测基准'}
-                  </div>
-                  <div className="text-[9px] text-gray-400 font-mono">&lt;3.5% Delta</div>
-                </button>
-
-                <button
-                  onClick={() =>
-                    handleNavigate(() => {
-                      if (activeView !== 'products') onViewChange('products');
-                    }, 'deployment')
-                  }
-                  className="p-2.5 rounded-xl bg-white/5 border border-white/10 hover:border-emerald-500/30 text-center transition-all cursor-pointer"
-                >
-                  <Boxes className="w-4 h-4 text-emerald-400 mx-auto mb-1" />
-                  <div className="text-[11px] font-bold text-white">
-                    {lang === 'en' ? 'Delivery' : '交付矩阵'}
-                  </div>
-                  <div className="text-[9px] text-gray-400 font-mono">SaaS / App</div>
-                </button>
+              <div className="space-y-2">
+                {[
+                  {
+                    id: 'legal' as const,
+                    name: lang === 'en' ? 'Legal & Compliance (FRE 502)' : '法律与涉密法务 (FRE 502 律师特权)',
+                    icon: Scale,
+                  },
+                  {
+                    id: 'healthcare' as const,
+                    name: lang === 'en' ? 'Healthcare & Life Sciences (HIPAA)' : '医疗与生命科学 (HIPAA 病历安全)',
+                    icon: HeartPulse,
+                  },
+                  {
+                    id: 'finance' as const,
+                    name: lang === 'en' ? 'Finance & Quant Assets' : '金融与量化资管 (核心因子保护)',
+                    icon: Landmark,
+                  },
+                ].map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <button
+                      key={item.id}
+                      onClick={() =>
+                        handleNavigate(() => {
+                          if (activeView !== 'home') onViewChange('home');
+                          onSelectIndustry(item.id);
+                        }, 'solutions')
+                      }
+                      className="w-full p-2.5 rounded-xl bg-white/5 border border-white/10 hover:border-cyan-500/30 flex items-center justify-between text-left cursor-pointer"
+                    >
+                      <div className="flex items-center gap-2.5">
+                        <Icon className="w-4 h-4 text-cyan-400" />
+                        <span className="text-xs font-medium text-gray-200">{item.name}</span>
+                      </div>
+                      <ArrowRight className="w-3.5 h-3.5 text-gray-500" />
+                    </button>
+                  );
+                })}
               </div>
             </div>
 
@@ -407,19 +276,21 @@ export const MobileQuickDrawer: React.FC<MobileQuickDrawerProps> = ({
                   onClose();
                   onRequestDemo();
                 }}
-                className="w-full py-3 rounded-xl bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600 hover:from-cyan-400 hover:to-purple-500 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/25 active:scale-95 transition-all cursor-pointer"
+                className="w-full py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-sky-400 text-black font-bold text-xs flex items-center justify-center gap-2 shadow-lg active:scale-95 transition-all cursor-pointer"
               >
-                <Sparkles className="w-4 h-4" />
-                <span>{t.nav.requestDemo}</span>
-                <ArrowRight className="w-4 h-4" />
+                <Sparkles className="w-4 h-4 text-black" />
+                <span>{lang === 'en' ? 'Book 7-Day Enterprise POC' : '预约 7 天企业级 POC 方案'}</span>
               </button>
 
-              <div className="flex items-center justify-center gap-2 text-[11px] text-gray-500 font-mono py-1">
-                <span>{t.nav.whitepaper} (v3.2 Spec)</span>
-                <span className="px-1.5 py-0.2 rounded bg-zinc-800 text-gray-400 border border-zinc-700">
-                  {lang === 'en' ? 'UPDATING' : '更新中'}
-                </span>
-              </div>
+              <button
+                onClick={() => {
+                  onClose();
+                  onOpenWhitepaper();
+                }}
+                className="w-full py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 border border-white/10 font-mono text-xs flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <span>{lang === 'en' ? 'Download Whitepaper & Audit Specs' : '获取完整技术白皮书'}</span>
+              </button>
             </div>
           </div>
         </div>
