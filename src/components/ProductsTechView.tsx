@@ -45,12 +45,12 @@ export const ProductsTechView: React.FC<ProductsTechViewProps> = ({
 
           <div className="flex items-center gap-2 sm:gap-3">
             <div
-              onClick={onOpenWhitepaper}
-              className="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white border border-white/10 text-xs font-mono flex items-center gap-1.5 transition-colors cursor-pointer"
+              className="px-3 py-1.5 rounded-xl bg-zinc-900/80 text-zinc-400 border border-zinc-800 text-xs font-mono flex items-center gap-1.5 cursor-not-allowed select-none"
+              title={lang === 'en' ? 'Technical Whitepaper is currently being updated for official release' : '技术白皮书正在完善中，后续正式放出'}
             >
               <span>{translations[lang].nav.whitepaper}</span>
               <span className="text-[9px] px-1 py-0.2 rounded bg-zinc-800 text-zinc-400 border border-zinc-700">
-                {lang === 'en' ? 'Updating' : '更新中'}
+                {lang === 'en' ? 'Updating' : '完善中'}
               </span>
             </div>
             <button

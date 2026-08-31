@@ -282,15 +282,15 @@ export const MobileQuickDrawer: React.FC<MobileQuickDrawerProps> = ({
                 <span>{lang === 'en' ? 'Book 7-Day Enterprise POC' : '预约 7 天企业级 POC 方案'}</span>
               </button>
 
-              <button
-                onClick={() => {
-                  onClose();
-                  onOpenWhitepaper();
-                }}
-                className="w-full py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 border border-white/10 font-mono text-xs flex items-center justify-center gap-2 cursor-pointer"
+              <div
+                className="w-full py-2.5 rounded-xl bg-zinc-900/60 text-zinc-400 border border-zinc-800 font-mono text-xs flex items-center justify-center gap-2 cursor-not-allowed select-none"
+                title={lang === 'en' ? 'Technical Whitepaper is currently being updated for official release' : '技术白皮书正在完善中，后续正式放出'}
               >
                 <span>{lang === 'en' ? 'Download Whitepaper & Audit Specs' : '获取完整技术白皮书'}</span>
-              </button>
+                <span className="text-[9px] px-1.5 py-0.2 rounded bg-zinc-800 text-zinc-400 border border-zinc-700 font-mono">
+                  {lang === 'en' ? 'Updating' : '完善中'}
+                </span>
+              </div>
             </div>
           </div>
         </div>

@@ -256,14 +256,17 @@ export const Navbar: React.FC<NavbarProps> = ({
             )}
           </div>
 
-          {/* Whitepaper Button */}
-          <button
-            onClick={onOpenWhitepaper}
-            className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono text-gray-300 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-all cursor-pointer"
+          {/* Whitepaper Button - Disabled / Updating State */}
+          <div
+            className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono text-zinc-400 bg-zinc-900/80 border border-zinc-800 cursor-not-allowed select-none"
+            title={lang === 'en' ? 'Technical Whitepaper is currently being updated for official release' : '技术白皮书正在完善中，后续正式放出'}
           >
-            <FileText className="w-3.5 h-3.5 text-cyan-400" />
+            <FileText className="w-3.5 h-3.5 text-zinc-500" />
             <span>{lang === 'en' ? 'Whitepaper' : '白皮书'}</span>
-          </button>
+            <span className="text-[9px] px-1.5 py-0.2 rounded bg-zinc-800 text-zinc-400 border border-zinc-700 font-mono">
+              {lang === 'en' ? 'Updating' : '完善中'}
+            </span>
+          </div>
 
           {/* Request Demo / POC Action Button */}
           <button
@@ -332,16 +335,18 @@ export const Navbar: React.FC<NavbarProps> = ({
               <span>{t.solutions}</span>
               <span className="text-[10px] text-gray-500 font-mono">Legal / Med / Quant</span>
             </button>
-            <button
-              onClick={() => {
-                onOpenWhitepaper();
-                setMobileMenuOpen(false);
-              }}
-              className="w-full text-left py-2 px-2 text-xs font-medium text-gray-300 hover:text-cyan-300 flex items-center justify-between"
+            <div
+              className="w-full text-left py-2 px-2 text-xs font-medium text-zinc-500 flex items-center justify-between cursor-not-allowed select-none"
+              title={lang === 'en' ? 'Technical Whitepaper is currently being updated for official release' : '技术白皮书正在完善中，后续正式放出'}
             >
-              <span>{lang === 'en' ? 'Security & TCO Whitepaper' : '技术与 TCO 白皮书'}</span>
-              <FileText className="w-3.5 h-3.5 text-cyan-400" />
-            </button>
+              <div className="flex items-center gap-1.5">
+                <span>{lang === 'en' ? 'Security & TCO Whitepaper' : '技术与 TCO 白皮书'}</span>
+                <span className="text-[9px] px-1 py-0.2 rounded bg-zinc-800 text-zinc-400 border border-zinc-700 font-mono">
+                  {lang === 'en' ? 'Updating' : '完善中'}
+                </span>
+              </div>
+              <FileText className="w-3.5 h-3.5 text-zinc-600" />
+            </div>
           </div>
         </div>
       )}

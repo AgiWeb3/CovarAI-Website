@@ -52,13 +52,16 @@ export const SecurityHub: React.FC<SecurityHubProps> = ({
           </div>
 
           <div className="flex items-center gap-2 sm:gap-3">
-            <button
-              onClick={onOpenWhitepaper}
-              className="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-rose-200 border border-rose-500/20 text-xs font-mono flex items-center gap-1.5 transition-colors cursor-pointer"
+            <div
+              className="px-3 py-1.5 rounded-xl bg-zinc-900/60 text-zinc-400 border border-zinc-800 text-xs font-mono flex items-center gap-1.5 cursor-not-allowed select-none"
+              title={lang === 'en' ? 'Security Audit Whitepaper is currently being updated for official release' : '安全审计白皮书正在完善中，后续正式放出'}
             >
-              <Download className="w-3.5 h-3.5 text-rose-400" />
+              <Download className="w-3.5 h-3.5 text-zinc-500" />
               <span>{lang === 'en' ? 'Security Audit Whitepaper' : lang === 'zh-TW' ? '安全審計白皮書' : '安全审计白皮书'}</span>
-            </button>
+              <span className="text-[9px] px-1 py-0.2 rounded bg-zinc-800 text-zinc-400 border border-zinc-700">
+                {lang === 'en' ? 'Updating' : '完善中'}
+              </span>
+            </div>
             <button
               onClick={() => onRequestDemo('CISO Security Threat Evaluation')}
               className="px-3.5 py-1.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs flex items-center gap-1.5 shadow-lg transition-all cursor-pointer"

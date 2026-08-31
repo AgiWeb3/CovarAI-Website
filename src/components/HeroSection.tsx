@@ -100,13 +100,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
             {/* Whitepaper Button - Disabled / Updating State */}
             <div
-              className="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-zinc-900/60 border border-zinc-800 text-zinc-500 font-medium text-sm sm:text-base flex items-center justify-center gap-2.5 cursor-not-allowed opacity-60 select-none"
-              title={lang === 'en' ? 'Whitepaper is currently being updated for official release' : '技术白皮书正在更新中，正式版发布后开放下载'}
+              className="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-zinc-900/60 border border-zinc-800 text-zinc-400 font-medium text-sm sm:text-base flex items-center justify-center gap-2.5 cursor-not-allowed select-none"
+              title={lang === 'en' ? 'Whitepaper is currently being updated for official release' : '技术白皮书正在完善中，后续正式放出'}
             >
-              <BookOpen className="w-4 h-4 text-zinc-600" />
+              <BookOpen className="w-4 h-4 text-zinc-500" />
               <span>{t.readWhitepaper}</span>
               <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-800 text-zinc-400 border border-zinc-700">
-                {lang === 'en' ? 'Updating' : '更新中'}
+                {lang === 'en' ? 'Updating' : '完善中'}
               </span>
             </div>
           </div>

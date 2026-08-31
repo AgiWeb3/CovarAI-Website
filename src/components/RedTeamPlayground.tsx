@@ -461,14 +461,15 @@ export const RedTeamPlayground: React.FC<RedTeamPlaygroundProps> = ({
               </span>
             </div>
 
-            {onRequestWhitepaper && (
-              <button
-                onClick={onRequestWhitepaper}
-                className="px-3.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-cyan-300 border border-white/10 text-[11px] whitespace-nowrap transition-colors cursor-pointer flex-shrink-0"
-              >
-                {lang === 'en' ? 'View Adversarial Proofs' : '查阅攻防审计白皮书'}
-              </button>
-            )}
+            <div
+              className="px-3.5 py-1.5 rounded-lg bg-zinc-900/60 text-zinc-400 border border-zinc-800 text-[11px] font-mono whitespace-nowrap flex items-center gap-1.5 cursor-not-allowed select-none flex-shrink-0"
+              title={lang === 'en' ? 'Adversarial Audit Whitepaper is currently being updated for official release' : '攻防审计白皮书正在完善中，后续正式放出'}
+            >
+              <span>{lang === 'en' ? 'Adversarial Proofs' : '攻防审计白皮书'}</span>
+              <span className="text-[9px] px-1 py-0.2 rounded bg-zinc-800 text-zinc-400 border border-zinc-700">
+                {lang === 'en' ? 'Updating' : '完善中'}
+              </span>
+            </div>
           </div>
         </div>
       </div>

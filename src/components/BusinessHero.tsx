@@ -124,12 +124,12 @@ export const BusinessHero: React.FC<BusinessHeroProps> = ({
           </button>
 
           <div
-            className="w-full sm:w-auto text-xs text-gray-500 flex items-center justify-center gap-1.5 font-mono py-2 cursor-not-allowed opacity-60 select-none"
-            title={lang === 'en' ? 'Whitepaper is currently being updated for official release' : '技术白皮书正在更新中，正式版发布后开放下载'}
+            className="w-full sm:w-auto text-xs text-zinc-400 flex items-center justify-center gap-1.5 font-mono py-2 cursor-not-allowed select-none"
+            title={lang === 'en' ? 'Whitepaper is currently being updated for official release' : '技术白皮书正在完善中，后续正式放出'}
           >
             <span>{translations[lang].nav.whitepaper}</span>
-            <span className="text-[10px] px-1.5 py-0.5 rounded bg-zinc-800 text-gray-400 border border-zinc-700 font-mono">
-              {lang === 'en' ? 'Updating' : '更新中'}
+            <span className="text-[10px] px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-400 border border-zinc-700 font-mono">
+              {lang === 'en' ? 'Updating' : '完善中'}
             </span>
           </div>
         </div>
