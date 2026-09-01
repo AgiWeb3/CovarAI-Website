@@ -78,37 +78,37 @@ export const Navbar: React.FC<NavbarProps> = ({
   ];
 
   return (
-    <header className="sticky top-0 z-40 w-full backdrop-blur-xl bg-black/85 border-b border-white/10 transition-all">
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-2 sm:gap-4 flex-nowrap w-full">
+    <header className="sticky top-0 z-40 w-full backdrop-blur-xl bg-black/90 border-b border-white/10 transition-all">
+      <div className="max-w-7xl mx-auto px-2.5 sm:px-4 lg:px-6 xl:px-8 h-16 sm:h-20 flex items-center justify-between gap-1.5 sm:gap-3 lg:gap-4 flex-nowrap w-full">
         {/* Left: Brand Logo & Title */}
-        <div className="shrink-0 flex items-center">
+        <div className="shrink-0 flex items-center min-w-0">
           <button
             onClick={() => {
               onViewChange('home');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className="flex items-center space-x-2.5 sm:space-x-3 group cursor-pointer text-left"
+            className="flex items-center space-x-2 sm:space-x-2.5 lg:space-x-3 group cursor-pointer text-left"
           >
             {/* High-tech Geometric Logo */}
-            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-purple-600 via-indigo-600 to-cyan-400 p-[1px] shadow-lg shadow-cyan-500/20 group-hover:shadow-cyan-500/40 transition-all duration-300 shrink-0">
+            <div className="w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 rounded-xl bg-gradient-to-br from-purple-600 via-indigo-600 to-cyan-400 p-[1px] shadow-lg shadow-cyan-500/20 group-hover:shadow-cyan-500/40 transition-all duration-300 shrink-0">
               <div className="w-full h-full bg-black rounded-[11px] flex items-center justify-center relative overflow-hidden">
-                <div className="w-4 h-4 sm:w-5 sm:h-5 bg-gradient-to-tr from-purple-500 to-cyan-400 rounded-sm rotate-45 flex items-center justify-center">
+                <div className="w-3.5 h-3.5 sm:w-4 sm:h-4 lg:w-5 lg:h-5 bg-gradient-to-tr from-purple-500 to-cyan-400 rounded-sm rotate-45 flex items-center justify-center">
                   <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-black rounded-xs"></div>
                 </div>
                 <div className="absolute inset-0 bg-cyan-400/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
               </div>
             </div>
 
-            <div>
-              <div className="flex items-center gap-1.5 sm:gap-2">
-                <span className="text-lg sm:text-xl font-bold tracking-tight text-white group-hover:text-cyan-300 transition-colors">
+            <div className="min-w-0">
+              <div className="flex items-center gap-1 sm:gap-1.5 lg:gap-2">
+                <span className="text-base sm:text-lg lg:text-xl font-bold tracking-tight text-white group-hover:text-cyan-300 transition-colors truncate">
                   Covar<span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-sky-300">AI</span>
                 </span>
-                <span className="text-[9px] sm:text-[10px] font-mono px-1.5 sm:px-2 py-0.5 rounded-full bg-cyan-950/80 text-cyan-300 border border-cyan-500/30">
+                <span className="hidden xs:inline-block text-[8px] sm:text-[9px] font-mono px-1 sm:px-1.5 py-0.2 rounded-full bg-cyan-950/80 text-cyan-300 border border-cyan-500/30 shrink-0">
                   v3.2
                 </span>
               </div>
-              <span className="text-[8px] sm:text-[9px] text-gray-400 font-mono tracking-wider block uppercase whitespace-nowrap">
+              <span className="hidden md:block text-[8px] lg:text-[9px] text-gray-400 font-mono tracking-wider uppercase whitespace-nowrap">
                 {lang === 'en' ? 'Confidential Agent Infra' : '大模型零信任密态基建'}
               </span>
             </div>
@@ -116,7 +116,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
 
         {/* Center: Desktop Persona Hub Nav Buttons */}
-        <div className="hidden lg:flex items-center space-x-1 xl:space-x-2 shrink-0 bg-zinc-950/70 p-1.5 rounded-2xl border border-white/10">
+        <div className="hidden lg:flex items-center gap-0.5 xl:gap-1.5 shrink-0 bg-zinc-950/70 p-1 rounded-2xl border border-white/10">
           {navHubs.map((hub) => {
             const Icon = hub.icon;
             const isActive = activeView === hub.id;
@@ -136,16 +136,16 @@ export const Navbar: React.FC<NavbarProps> = ({
                   onViewChange(hub.id);
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className={`px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer whitespace-nowrap ${
+                className={`px-2 xl:px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1 xl:gap-1.5 transition-all cursor-pointer whitespace-nowrap ${
                   isActive
                     ? activeClass
                     : 'text-gray-400 hover:text-gray-200 hover:bg-white/5'
                 }`}
               >
-                <Icon className="w-3.5 h-3.5" />
+                <Icon className="w-3.5 h-3.5 shrink-0" />
                 <span>{hub.label}</span>
                 {hub.badge && (
-                  <span className={`text-[9px] px-1 py-0.2 rounded font-mono hidden xl:inline-block ${
+                  <span className={`text-[8px] xl:text-[9px] px-1 py-0.2 rounded font-mono hidden 2xl:inline-block ${
                     isActive ? 'bg-white/10 text-white' : 'bg-zinc-800 text-gray-400'
                   }`}>
                     {hub.badge}
@@ -165,10 +165,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                   el?.scrollIntoView({ behavior: 'smooth' });
                 }, 100);
               }}
-              className="px-3 py-1.5 rounded-xl text-xs font-semibold text-gray-400 hover:text-gray-200 hover:bg-white/5 flex items-center gap-1 transition-all cursor-pointer whitespace-nowrap"
+              className="px-2 xl:px-3 py-1.5 rounded-xl text-xs font-semibold text-gray-400 hover:text-gray-200 hover:bg-white/5 flex items-center gap-1 transition-all cursor-pointer whitespace-nowrap"
             >
               <span>{t.solutions}</span>
-              <ChevronDown className="w-3 h-3 text-gray-400 group-hover:rotate-180 transition-transform" />
+              <ChevronDown className="w-3 h-3 text-gray-400 group-hover:rotate-180 transition-transform shrink-0" />
             </button>
 
             <div className="absolute top-full left-0 mt-2 w-44 rounded-xl bg-zinc-950/95 border border-white/10 shadow-2xl backdrop-blur-xl py-2 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all z-50">
@@ -218,19 +218,22 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
         </div>
 
-        {/* Right: Language Selector & Request Demo CTA */}
-        <div className="shrink-0 flex items-center space-x-2 sm:space-x-3">
+        {/* Right: Language Selector, Whitepaper & Request Demo CTA */}
+        <div className="shrink-0 flex items-center gap-1 sm:gap-2 lg:gap-2.5">
           {/* Language Switcher */}
           <div className="relative">
             <button
               id="lang-switch-btn"
               onClick={() => setLangMenuOpen(!langMenuOpen)}
-              className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full text-xs font-medium text-gray-300 hover:text-white bg-white/5 border border-white/10 hover:border-cyan-500/40 transition-all cursor-pointer whitespace-nowrap"
+              className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-1.5 rounded-full text-xs font-medium text-gray-300 hover:text-white bg-white/5 border border-white/10 hover:border-cyan-500/40 transition-all cursor-pointer whitespace-nowrap"
               aria-label="Language Selector"
             >
-              <Globe className="w-3.5 h-3.5 text-cyan-400" />
-              <span className="hidden sm:inline">{languageLabels[lang]}</span>
-              <ChevronDown className="w-3 h-3 text-gray-400" />
+              <Globe className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+              <span className="hidden sm:inline text-xs">{languageLabels[lang]}</span>
+              <span className="sm:hidden text-[10px] font-mono">
+                {lang === 'en' ? 'EN' : lang === 'zh-TW' ? '繁' : '简'}
+              </span>
+              <ChevronDown className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-gray-400 shrink-0" />
             </button>
 
             {langMenuOpen && (
@@ -256,12 +259,12 @@ export const Navbar: React.FC<NavbarProps> = ({
             )}
           </div>
 
-          {/* Whitepaper Button - Disabled / Updating State */}
+          {/* Whitepaper Button - Disabled / Updating State (Visible on 2XL / Ultrawide to avoid mid-screen squeeze) */}
           <div
-            className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono text-zinc-400 bg-zinc-900/80 border border-zinc-800 cursor-not-allowed select-none"
+            className="hidden 2xl:flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-xs font-mono text-zinc-400 bg-zinc-900/80 border border-zinc-800 cursor-not-allowed select-none whitespace-nowrap"
             title={lang === 'en' ? 'Technical Whitepaper is currently being updated for official release' : '技术白皮书正在完善中，后续正式放出'}
           >
-            <FileText className="w-3.5 h-3.5 text-zinc-500" />
+            <FileText className="w-3.5 h-3.5 text-zinc-500 shrink-0" />
             <span>{lang === 'en' ? 'Whitepaper' : '白皮书'}</span>
             <span className="text-[9px] px-1.5 py-0.2 rounded bg-zinc-800 text-zinc-400 border border-zinc-700 font-mono">
               {lang === 'en' ? 'Updating' : '完善中'}
@@ -271,19 +274,20 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Request Demo / POC Action Button */}
           <button
             onClick={() => onRequestDemo()}
-            className="px-3.5 sm:px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-sky-400 hover:from-cyan-400 hover:to-sky-300 text-black font-bold text-xs flex items-center gap-1.5 shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 transition-all cursor-pointer whitespace-nowrap active:scale-95"
+            className="px-2.5 sm:px-3.5 lg:px-4 py-1.5 sm:py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-sky-400 hover:from-cyan-400 hover:to-sky-300 text-black font-bold text-xs flex items-center gap-1 sm:gap-1.5 shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 transition-all cursor-pointer whitespace-nowrap active:scale-95 shrink-0"
           >
-            <Sparkles className="w-3.5 h-3.5 text-black" />
-            <span>{lang === 'en' ? 'Book POC Demo' : '预约方案 POC'}</span>
+            <Sparkles className="w-3.5 h-3.5 text-black shrink-0" />
+            <span className="hidden xs:inline">{lang === 'en' ? 'Book POC Demo' : '预约方案 POC'}</span>
+            <span className="xs:hidden">{lang === 'en' ? 'Book POC' : '预约 POC'}</span>
           </button>
 
           {/* Mobile Menu Trigger */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white border border-white/10 transition-colors"
+            className="lg:hidden p-1.5 sm:p-2 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white border border-white/10 transition-colors shrink-0 cursor-pointer"
             aria-label="Toggle Menu"
           >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {mobileMenuOpen ? <X className="w-4 h-4 sm:w-5 sm:h-5" /> : <Menu className="w-4 h-4 sm:w-5 sm:h-5" />}
           </button>
         </div>
       </div>
