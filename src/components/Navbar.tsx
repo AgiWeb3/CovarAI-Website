@@ -78,8 +78,8 @@ export const Navbar: React.FC<NavbarProps> = ({
   ];
 
   return (
-    <header className="sticky top-0 z-40 w-full backdrop-blur-xl bg-black/90 border-b border-white/10 transition-all">
-      <div className="max-w-7xl mx-auto px-2.5 sm:px-4 lg:px-6 xl:px-8 h-16 sm:h-20 flex items-center justify-between gap-1.5 sm:gap-3 lg:gap-4 flex-nowrap w-full">
+    <header className="sticky top-0 z-40 w-full backdrop-blur-xl bg-[#05160b]/90 border-b border-[#1f794d]/30 transition-all">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2 sm:gap-4 w-full">
         {/* Left: Brand Logo & Title */}
         <div className="shrink-0 flex items-center min-w-0">
           <button
@@ -90,33 +90,33 @@ export const Navbar: React.FC<NavbarProps> = ({
             className="flex items-center space-x-2 sm:space-x-2.5 lg:space-x-3 group cursor-pointer text-left"
           >
             {/* High-tech Geometric Logo */}
-            <div className="w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 rounded-xl bg-gradient-to-br from-purple-600 via-indigo-600 to-cyan-400 p-[1px] shadow-lg shadow-cyan-500/20 group-hover:shadow-cyan-500/40 transition-all duration-300 shrink-0">
-              <div className="w-full h-full bg-black rounded-[11px] flex items-center justify-center relative overflow-hidden">
-                <div className="w-3.5 h-3.5 sm:w-4 sm:h-4 lg:w-5 lg:h-5 bg-gradient-to-tr from-purple-500 to-cyan-400 rounded-sm rotate-45 flex items-center justify-center">
-                  <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-black rounded-xs"></div>
+            <div className="w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 rounded-xl bg-gradient-to-br from-[#1f794d] via-[#092915] to-[#4ee48b] p-[1px] shadow-lg shadow-[#4ee48b]/20 group-hover:shadow-[#4ee48b]/40 transition-all duration-300 shrink-0">
+              <div className="w-full h-full bg-[#05160b] rounded-[11px] flex items-center justify-center relative overflow-hidden">
+                <div className="w-3.5 h-3.5 sm:w-4 sm:h-4 lg:w-5 lg:h-5 bg-gradient-to-tr from-[#1f794d] to-[#4ee48b] rounded-sm rotate-45 flex items-center justify-center">
+                  <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-[#05160b] rounded-xs"></div>
                 </div>
-                <div className="absolute inset-0 bg-cyan-400/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div className="absolute inset-0 bg-[#4ee48b]/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
               </div>
             </div>
 
             <div className="min-w-0">
-              <div className="flex items-center gap-1 sm:gap-1.5 lg:gap-2">
-                <span className="text-base sm:text-lg lg:text-xl font-bold tracking-tight text-white group-hover:text-cyan-300 transition-colors truncate">
-                  Covar<span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-sky-300">AI</span>
+              <div className="flex items-center gap-1 sm:gap-1.5">
+                <span className="text-base sm:text-lg lg:text-xl font-bold tracking-tight text-white group-hover:text-[#4ee48b] transition-colors truncate">
+                  Covar<span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4ee48b] to-[#80f2b0]">AI</span>
                 </span>
-                <span className="hidden xs:inline-block text-[8px] sm:text-[9px] font-mono px-1 sm:px-1.5 py-0.2 rounded-full bg-cyan-950/80 text-cyan-300 border border-cyan-500/30 shrink-0">
+                <span className="hidden xs:inline-block text-[8px] sm:text-[9px] font-mono px-1 sm:px-1.5 py-0.2 rounded-full bg-[#092915] text-[#4ee48b] border border-[#1f794d]/60 shrink-0">
                   v3.2
                 </span>
               </div>
-              <span className="hidden md:block text-[8px] lg:text-[9px] text-gray-400 font-mono tracking-wider uppercase whitespace-nowrap">
+              <span className="hidden 2xl:block text-[8px] lg:text-[9px] text-[#80f2b0]/70 font-mono tracking-wider uppercase whitespace-nowrap">
                 {lang === 'en' ? 'Confidential Agent Infra' : '大模型零信任密态基建'}
               </span>
             </div>
           </button>
         </div>
 
-        {/* Center: Desktop Persona Hub Nav Buttons */}
-        <div className="hidden lg:flex items-center gap-0.5 xl:gap-1.5 shrink-0 bg-zinc-950/70 p-1 rounded-2xl border border-white/10">
+        {/* Center: Desktop Persona Hub Nav Buttons (Shows on XL+ screens to prevent squeezing on tablets/small laptops) */}
+        <div className="hidden xl:flex items-center gap-1 xl:gap-1.5 shrink-0 bg-[#061c0e]/90 p-1 rounded-2xl border border-[#1f794d]/40 backdrop-blur-xl">
           {navHubs.map((hub) => {
             const Icon = hub.icon;
             const isActive = activeView === hub.id;
@@ -124,10 +124,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             const isRose = hub.accent === 'rose';
             const isCyan = hub.accent === 'cyan';
 
-            let activeClass = 'bg-white/15 text-white shadow-sm border border-white/20';
-            if (isActive && isEmerald) activeClass = 'bg-emerald-950/80 text-emerald-300 border border-emerald-500/40 shadow-[0_0_12px_rgba(16,185,129,0.2)]';
-            if (isActive && isRose) activeClass = 'bg-rose-950/80 text-rose-300 border border-rose-500/40 shadow-[0_0_12px_rgba(244,63,94,0.2)]';
-            if (isActive && isCyan) activeClass = 'bg-cyan-950/80 text-cyan-300 border border-cyan-500/40 shadow-[0_0_12px_rgba(6,182,212,0.2)]';
+            let activeClass = 'bg-gradient-to-r from-[#4ee48b] to-[#38d677] text-[#05160b] font-bold shadow-md shadow-[#4ee48b]/20';
+            if (isActive && isEmerald) activeClass = 'bg-gradient-to-r from-[#80f2b0] to-[#4ee48b] text-[#05160b] font-bold shadow-md shadow-[#4ee48b]/20';
+            if (isActive && isRose) activeClass = 'bg-gradient-to-r from-rose-600 to-rose-500 text-white font-bold shadow-md shadow-rose-500/20';
+            if (isActive && isCyan) activeClass = 'bg-gradient-to-r from-[#0099ff] to-[#00d2ff] text-white font-bold shadow-md shadow-[#0099ff]/20';
 
             return (
               <button
@@ -136,17 +136,17 @@ export const Navbar: React.FC<NavbarProps> = ({
                   onViewChange(hub.id);
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className={`px-2 xl:px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1 xl:gap-1.5 transition-all cursor-pointer whitespace-nowrap ${
+                className={`px-2.5 xl:px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer whitespace-nowrap ${
                   isActive
                     ? activeClass
-                    : 'text-gray-400 hover:text-gray-200 hover:bg-white/5'
+                    : 'text-gray-400 hover:text-gray-200 hover:bg-[#092915]'
                 }`}
               >
                 <Icon className="w-3.5 h-3.5 shrink-0" />
                 <span>{hub.label}</span>
                 {hub.badge && (
                   <span className={`text-[8px] xl:text-[9px] px-1 py-0.2 rounded font-mono hidden 2xl:inline-block ${
-                    isActive ? 'bg-white/10 text-white' : 'bg-zinc-800 text-gray-400'
+                    isActive ? 'bg-black/20 text-current' : 'bg-[#092915] text-gray-400'
                   }`}>
                     {hub.badge}
                   </span>
@@ -165,13 +165,13 @@ export const Navbar: React.FC<NavbarProps> = ({
                   el?.scrollIntoView({ behavior: 'smooth' });
                 }, 100);
               }}
-              className="px-2 xl:px-3 py-1.5 rounded-xl text-xs font-semibold text-gray-400 hover:text-gray-200 hover:bg-white/5 flex items-center gap-1 transition-all cursor-pointer whitespace-nowrap"
+              className="px-2.5 xl:px-3 py-1.5 rounded-xl text-xs font-semibold text-gray-400 hover:text-gray-200 hover:bg-[#092915] flex items-center gap-1 transition-all cursor-pointer whitespace-nowrap"
             >
               <span>{t.solutions}</span>
               <ChevronDown className="w-3 h-3 text-gray-400 group-hover:rotate-180 transition-transform shrink-0" />
             </button>
 
-            <div className="absolute top-full left-0 mt-2 w-44 rounded-xl bg-zinc-950/95 border border-white/10 shadow-2xl backdrop-blur-xl py-2 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all z-50">
+            <div className="absolute top-full left-0 mt-2 w-44 rounded-xl bg-[#061c0e]/95 border border-[#1f794d]/40 shadow-2xl backdrop-blur-xl py-2 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all z-50">
               <button
                 onClick={() => {
                   if (activeView !== 'home') onViewChange('home');
@@ -181,10 +181,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                     el?.scrollIntoView({ behavior: 'smooth' });
                   }, 100);
                 }}
-                className="w-full text-left px-4 py-2 text-xs text-gray-300 hover:bg-white/5 hover:text-cyan-300 transition-colors flex items-center justify-between cursor-pointer"
+                className="w-full text-left px-4 py-2 text-xs text-gray-300 hover:bg-[#092915] hover:text-[#4ee48b] transition-colors flex items-center justify-between cursor-pointer"
               >
                 <span>{t.legal}</span>
-                <span className="text-[10px] font-mono text-cyan-400/80">FRE 502</span>
+                <span className="text-[10px] font-mono text-[#4ee48b]/80">FRE 502</span>
               </button>
               <button
                 onClick={() => {
@@ -195,10 +195,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                     el?.scrollIntoView({ behavior: 'smooth' });
                   }, 100);
                 }}
-                className="w-full text-left px-4 py-2 text-xs text-gray-300 hover:bg-white/5 hover:text-purple-300 transition-colors flex items-center justify-between cursor-pointer"
+                className="w-full text-left px-4 py-2 text-xs text-gray-300 hover:bg-[#092915] hover:text-[#4ee48b] transition-colors flex items-center justify-between cursor-pointer"
               >
                 <span>{t.healthcare}</span>
-                <span className="text-[10px] font-mono text-purple-400/80">HIPAA</span>
+                <span className="text-[10px] font-mono text-[#0099ff]/80">HIPAA</span>
               </button>
               <button
                 onClick={() => {
@@ -209,26 +209,26 @@ export const Navbar: React.FC<NavbarProps> = ({
                     el?.scrollIntoView({ behavior: 'smooth' });
                   }, 100);
                 }}
-                className="w-full text-left px-4 py-2 text-xs text-gray-300 hover:bg-white/5 hover:text-emerald-300 transition-colors flex items-center justify-between cursor-pointer"
+                className="w-full text-left px-4 py-2 text-xs text-gray-300 hover:bg-[#092915] hover:text-[#4ee48b] transition-colors flex items-center justify-between cursor-pointer"
               >
                 <span>{t.finance}</span>
-                <span className="text-[10px] font-mono text-emerald-400/80">Quant</span>
+                <span className="text-[10px] font-mono text-[#4ee48b]/80">Quant</span>
               </button>
             </div>
           </div>
         </div>
 
-        {/* Right: Language Selector, Whitepaper & Request Demo CTA */}
-        <div className="shrink-0 flex items-center gap-1 sm:gap-2 lg:gap-2.5">
+        {/* Right: Language Selector, Whitepaper & Request Demo CTA (Always fully visible, no overflow) */}
+        <div className="shrink-0 flex items-center gap-1.5 sm:gap-2.5">
           {/* Language Switcher */}
           <div className="relative">
             <button
               id="lang-switch-btn"
               onClick={() => setLangMenuOpen(!langMenuOpen)}
-              className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-1.5 rounded-full text-xs font-medium text-gray-300 hover:text-white bg-white/5 border border-white/10 hover:border-cyan-500/40 transition-all cursor-pointer whitespace-nowrap"
+              className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-1.5 rounded-full text-xs font-medium text-gray-300 hover:text-white bg-white/5 border border-white/10 hover:border-[#1f794d] transition-all cursor-pointer whitespace-nowrap"
               aria-label="Language Selector"
             >
-              <Globe className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+              <Globe className="w-3.5 h-3.5 text-[#4ee48b] shrink-0" />
               <span className="hidden sm:inline text-xs">{languageLabels[lang]}</span>
               <span className="sm:hidden text-[10px] font-mono">
                 {lang === 'en' ? 'EN' : lang === 'zh-TW' ? '繁' : '简'}
@@ -237,7 +237,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
 
             {langMenuOpen && (
-              <div className="absolute right-0 mt-2 w-32 rounded-xl bg-zinc-950/95 border border-white/10 shadow-2xl backdrop-blur-xl py-1 z-50">
+              <div className="absolute right-0 mt-2 w-32 rounded-xl bg-[#061c0e]/95 border border-[#1f794d]/40 shadow-2xl backdrop-blur-xl py-1 z-50">
                 {(['zh-CN', 'zh-TW', 'en'] as Language[]).map((item) => (
                   <button
                     key={item}
@@ -247,19 +247,19 @@ export const Navbar: React.FC<NavbarProps> = ({
                     }}
                     className={`w-full text-left px-4 py-2 text-xs transition-colors flex items-center justify-between ${
                       lang === item
-                        ? 'text-cyan-400 font-semibold bg-white/5'
-                        : 'text-gray-300 hover:bg-white/5 hover:text-white'
+                        ? 'text-[#4ee48b] font-semibold bg-[#092915]'
+                        : 'text-gray-300 hover:bg-[#092915] hover:text-white'
                     }`}
                   >
                     <span>{languageLabels[item]}</span>
-                    {lang === item && <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>}
+                    {lang === item && <span className="w-1.5 h-1.5 rounded-full bg-[#4ee48b]"></span>}
                   </button>
                 ))}
               </div>
             )}
           </div>
 
-          {/* Whitepaper Button - Disabled / Updating State (Visible on 2XL / Ultrawide to avoid mid-screen squeeze) */}
+          {/* Whitepaper Button - Disabled / Updating State (Visible on 2XL only to avoid squeeze) */}
           <div
             className="hidden 2xl:flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-xs font-mono text-zinc-400 bg-zinc-900/80 border border-zinc-800 cursor-not-allowed select-none whitespace-nowrap"
             title={lang === 'en' ? 'Technical Whitepaper is currently being updated for official release' : '技术白皮书正在完善中，后续正式放出'}
@@ -271,20 +271,20 @@ export const Navbar: React.FC<NavbarProps> = ({
             </span>
           </div>
 
-          {/* Request Demo / POC Action Button */}
+          {/* Request Demo / POC Action Button - Multi-Hue Flow Gradient */}
           <button
             onClick={() => onRequestDemo()}
-            className="px-2.5 sm:px-3.5 lg:px-4 py-1.5 sm:py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-sky-400 hover:from-cyan-400 hover:to-sky-300 text-black font-bold text-xs flex items-center gap-1 sm:gap-1.5 shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 transition-all cursor-pointer whitespace-nowrap active:scale-95 shrink-0"
+            className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-gradient-to-r from-[#4ee48b] via-[#38d677] to-[#00d2ff] hover:brightness-110 text-[#05160b] font-bold text-xs flex items-center gap-1 sm:gap-1.5 shadow-lg shadow-[#4ee48b]/20 hover:shadow-[#4ee48b]/35 transition-all cursor-pointer whitespace-nowrap active:scale-95 shrink-0"
           >
-            <Sparkles className="w-3.5 h-3.5 text-black shrink-0" />
+            <Sparkles className="w-3.5 h-3.5 text-[#05160b] shrink-0" />
             <span className="hidden xs:inline">{lang === 'en' ? 'Book POC Demo' : '预约方案 POC'}</span>
             <span className="xs:hidden">{lang === 'en' ? 'Book POC' : '预约 POC'}</span>
           </button>
 
-          {/* Mobile Menu Trigger */}
+          {/* Mobile/Tablet Menu Trigger - Visible up to XL screens */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-1.5 sm:p-2 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white border border-white/10 transition-colors shrink-0 cursor-pointer"
+            className="xl:hidden p-1.5 sm:p-2 rounded-xl bg-[#061c0e] hover:bg-[#092915] text-gray-300 hover:text-white border border-[#1f794d]/40 transition-colors shrink-0 cursor-pointer"
             aria-label="Toggle Menu"
           >
             {mobileMenuOpen ? <X className="w-4 h-4 sm:w-5 sm:h-5" /> : <Menu className="w-4 h-4 sm:w-5 sm:h-5" />}
@@ -292,10 +292,10 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
       </div>
 
-      {/* Mobile Drawer Menu */}
+      {/* Mobile/Tablet Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden px-4 pt-3 pb-6 bg-zinc-950/98 border-b border-white/10 space-y-3">
-          <div className="text-[11px] font-mono text-gray-500 uppercase tracking-wider px-2">
+        <div className="xl:hidden px-4 pt-3 pb-6 bg-[#061c0e]/98 border-b border-[#1f794d]/40 space-y-3">
+          <div className="text-[11px] font-mono text-[#4ee48b] uppercase tracking-wider px-2">
             {lang === 'en' ? 'Decision Portals' : '角色专属决策通道'}
           </div>
 
@@ -311,13 +311,13 @@ export const Navbar: React.FC<NavbarProps> = ({
                     setMobileMenuOpen(false);
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
-                  className={`p-2.5 rounded-xl border text-left flex flex-col justify-between transition-all ${
+                  className={`p-2.5 rounded-xl border text-left flex flex-col justify-between transition-all cursor-pointer ${
                     isActive
-                      ? 'bg-white/10 border-cyan-500/50 text-white'
-                      : 'bg-white/5 border-white/10 text-gray-300 hover:text-white'
+                      ? 'bg-[#092915] border-[#4ee48b] text-[#4ee48b]'
+                      : 'bg-[#05160b] border-[#1f794d]/30 text-gray-300 hover:text-white'
                   }`}
                 >
-                  <Icon className="w-4 h-4 text-cyan-400 mb-1" />
+                  <Icon className="w-4 h-4 text-[#4ee48b] mb-1" />
                   <div className="text-xs font-bold">{hub.label}</div>
                   {hub.badge && <div className="text-[10px] text-gray-400 font-mono">{hub.badge}</div>}
                 </button>
@@ -325,7 +325,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             })}
           </div>
 
-          <div className="pt-2 border-t border-white/10 space-y-1">
+          <div className="pt-2 border-t border-[#1f794d]/20 space-y-1">
             <button
               onClick={() => {
                 if (activeView !== 'home') onViewChange('home');
@@ -334,10 +334,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                   document.getElementById('solutions')?.scrollIntoView({ behavior: 'smooth' });
                 }, 100);
               }}
-              className="w-full text-left py-2 px-2 text-xs font-medium text-gray-300 hover:text-cyan-300 flex items-center justify-between"
+              className="w-full text-left py-2 px-2 text-xs font-medium text-gray-300 hover:text-[#4ee48b] flex items-center justify-between cursor-pointer"
             >
               <span>{t.solutions}</span>
-              <span className="text-[10px] text-gray-500 font-mono">Legal / Med / Quant</span>
+              <span className="text-[10px] text-gray-400 font-mono">Legal / Med / Quant</span>
             </button>
             <div
               className="w-full text-left py-2 px-2 text-xs font-medium text-zinc-500 flex items-center justify-between cursor-not-allowed select-none"

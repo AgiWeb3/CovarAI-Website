@@ -35,18 +35,18 @@ export const DeveloperHub: React.FC<DeveloperHubProps> = ({
     <div className="animate-fade-in">
       {/* Top Header Navigation Strip */}
       <div className="pt-6 pb-2 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="p-3 sm:p-4 rounded-2xl bg-zinc-950/80 border border-cyan-500/30 flex flex-row items-center justify-between gap-4 backdrop-blur-xl shadow-[0_0_20px_rgba(6,182,212,0.1)]">
+        <div className="p-3 sm:p-4 rounded-2xl bg-[#061c0e]/90 border border-[#1f794d]/40 flex flex-row items-center justify-between gap-4 backdrop-blur-xl shadow-[0_0_20px_rgba(78,228,139,0.1)]">
           <div className="flex items-center gap-3">
             <button
               onClick={onBackToHome}
-              className="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-cyan-300 hover:text-white border border-cyan-500/20 transition-colors flex items-center gap-1.5 text-xs font-semibold cursor-pointer"
+              className="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-[#092915] text-[#80f2b0] hover:text-white border border-[#1f794d]/40 transition-colors flex items-center gap-1.5 text-xs font-semibold cursor-pointer"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>{lang === 'en' ? 'Main Portal' : lang === 'zh-TW' ? '返回首頁' : '返回首页'}</span>
             </button>
             <div className="h-4 w-[1px] bg-white/20 hidden sm:block" />
-            <div className="hidden sm:flex items-center gap-2 text-xs font-mono text-cyan-300">
-              <Code2 className="w-3.5 h-3.5 text-cyan-400" />
+            <div className="hidden sm:flex items-center gap-2 text-xs font-mono text-[#80f2b0]">
+              <Code2 className="w-3.5 h-3.5 text-[#4ee48b]" />
               <span>{lang === 'en' ? 'Chief Architect & Developer Hub' : lang === 'zh-TW' ? '首席架構師與開發者專區' : '首席架构师与开发者专区'}</span>
             </div>
           </div>
@@ -54,7 +54,7 @@ export const DeveloperHub: React.FC<DeveloperHubProps> = ({
           <div className="flex items-center gap-2 sm:gap-3">
             <button
               onClick={() => onRequestDemo('Developer SDK & Architecture Review')}
-              className="px-3.5 py-1.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-black font-bold text-xs flex items-center gap-1.5 shadow-lg transition-all cursor-pointer"
+              className="px-3.5 py-1.5 rounded-xl bg-[#4ee48b] hover:bg-[#38d677] text-[#05160b] font-bold text-xs flex items-center gap-1.5 shadow-lg shadow-[#4ee48b]/20 transition-all cursor-pointer"
             >
               <Sparkles className="w-3.5 h-3.5" />
               <span>{lang === 'en' ? 'Request Dev Sandbox Key' : lang === 'zh-TW' ? '獲取沙盒 API Key' : '获取沙盒 API Key'}</span>
@@ -66,13 +66,13 @@ export const DeveloperHub: React.FC<DeveloperHubProps> = ({
       {/* Hero Header for Developers */}
       <section className="pt-12 pb-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-10" data-aos="fade-up">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-950/70 border border-cyan-500/40 text-cyan-300 text-xs font-mono mb-4">
-            <Zap className="w-3.5 h-3.5 text-cyan-400" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#061c0e] border border-[#1f794d]/50 text-[#80f2b0] text-xs font-mono mb-4">
+            <Zap className="w-3.5 h-3.5 text-[#4ee48b]" />
             <span>{lang === 'en' ? '3-LINE TRANSPARENT PROXY · <3.5% LATENCY DELTA · NATIVE 671B MoE' : lang === 'zh-TW' ? '3 行代碼透明代理 · 延遲損耗 <3.5% · 原生相容 671B MoE' : '3 行代码透明代理 · 延迟损耗 <3.5% · 原生兼容 671B MoE'}</span>
           </div>
 
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight mb-4">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-sky-200 to-indigo-300">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#4ee48b] via-[#80f2b0] to-white">
               {lang === 'en'
                 ? 'Drop-in Privacy for Modern AI Workflows'
                 : lang === 'zh-TW'
@@ -97,28 +97,28 @@ export const DeveloperHub: React.FC<DeveloperHubProps> = ({
               label: lang === 'en' ? 'Refactoring Lines Required' : '应用层业务改造代码量',
               val: '0 Lines',
               sub: lang === 'en' ? 'Just change base_url proxy' : '仅需配置代理 base_url',
-              color: 'text-cyan-400',
+              color: 'text-[#4ee48b]',
             },
             {
               label: lang === 'en' ? 'End-to-End Latency Delta' : '端到端推理额外延迟损耗',
               val: '< 3.5%',
               sub: lang === 'en' ? 'DeepSeek 671B @ 42.8 t/s' : 'DeepSeek 671B 实测 42.8 t/s',
-              color: 'text-sky-300',
+              color: 'text-[#80f2b0]',
             },
             {
               label: lang === 'en' ? 'Max Context Window' : '超长上下文原生支持',
               val: '200K ~ 2M',
               sub: lang === 'en' ? 'Zero Memory Explosion' : '零显存指数级爆炸',
-              color: 'text-indigo-400',
+              color: 'text-[#4ee48b]',
             },
             {
               label: lang === 'en' ? 'Heterogeneous GPU Support' : '异构算力无缝迁移兼容性',
               val: '100% Port',
               sub: lang === 'en' ? 'NVIDIA / Ascend / Hygon' : 'NVIDIA / 华为昇腾 / 海光',
-              color: 'text-emerald-400',
+              color: 'text-[#80f2b0]',
             },
           ].map((m, idx) => (
-            <div key={idx} className="p-4 sm:p-5 rounded-2xl bg-zinc-950/80 border border-cyan-500/20 text-center">
+            <div key={idx} className="p-4 sm:p-5 rounded-2xl bg-[#061c0e]/90 border border-[#1f794d]/40 text-center shadow-lg">
               <div className={`text-2xl sm:text-3xl font-black font-mono ${m.color} mb-1`}>{m.val}</div>
               <div className="text-xs font-bold text-white mb-0.5">{m.label}</div>
               <div className="text-[10px] font-mono text-gray-400">{m.sub}</div>

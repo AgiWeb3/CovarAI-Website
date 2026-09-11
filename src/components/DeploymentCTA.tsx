@@ -55,16 +55,16 @@ export const DeploymentCTA: React.FC<DeploymentCTAProps> = ({ lang }) => {
   const activeMode = (t.modes[activeModeIndex] || t.modes[0]) as DeploymentModeDetail;
 
   return (
-    <section id="deployment" className="py-24 bg-black relative overflow-hidden border-t border-slate-900">
+    <section id="deployment" className="py-24 bg-transparent relative overflow-hidden border-t border-[#1f794d]/30">
       {/* Background Subtle Gradient Glow */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[950px] h-[650px] bg-radial-gradient blur-3xl pointer-events-none opacity-30" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[950px] h-[650px] bg-[#4ee48b]/5 blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div
             data-aos="fade-up"
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-950/60 border border-cyan-500/40 text-cyan-400 text-xs font-mono uppercase tracking-widest mb-4"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#061c0e] border border-[#1f794d]/40 text-[#4ee48b] text-xs font-mono uppercase tracking-widest mb-4"
           >
             <Server className="w-3.5 h-3.5" />
             <span>{t.tag}</span>
@@ -75,7 +75,7 @@ export const DeploymentCTA: React.FC<DeploymentCTAProps> = ({ lang }) => {
             data-aos-delay="100"
             className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-4"
           >
-            <span className="text-gradient-cyan">{t.title}</span>
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-white/60">{t.title}</span>
           </h2>
 
           <p
@@ -105,11 +105,11 @@ export const DeploymentCTA: React.FC<DeploymentCTAProps> = ({ lang }) => {
                 className={`rounded-2xl p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 relative border cursor-pointer ${
                   isSelected
                     ? isGateway
-                      ? 'bg-zinc-900/90 border-cyan-400 shadow-[0_0_30px_rgba(6,182,212,0.25)] ring-1 ring-cyan-400'
+                      ? 'bg-[#061c0e]/95 border-[#4ee48b] shadow-[0_0_30px_rgba(78,228,139,0.25)] ring-1 ring-[#4ee48b]'
                       : isVPC
-                      ? 'bg-zinc-900/90 border-purple-400 shadow-[0_0_30px_rgba(168,85,247,0.25)] ring-1 ring-purple-400'
-                      : 'bg-zinc-900/90 border-emerald-400 shadow-[0_0_30px_rgba(16,185,129,0.25)] ring-1 ring-emerald-400'
-                    : 'bg-white/[0.03] border-white/10 hover:border-white/25 hover:bg-white/[0.06]'
+                      ? 'bg-[#061c0e]/95 border-[#0099ff] shadow-[0_0_30px_rgba(0,153,255,0.25)] ring-1 ring-[#0099ff]'
+                      : 'bg-[#061c0e]/95 border-[#80f2b0] shadow-[0_0_30px_rgba(128,242,176,0.25)] ring-1 ring-[#80f2b0]'
+                    : 'bg-[#061c0e]/60 border-[#1f794d]/30 hover:border-[#1f794d]/60 hover:bg-[#061c0e]/80'
                 }`}
               >
                 {/* Recommended Badge */}
@@ -117,10 +117,10 @@ export const DeploymentCTA: React.FC<DeploymentCTAProps> = ({ lang }) => {
                   <div
                     className={`absolute -top-3 right-5 px-3 py-1 rounded-full text-[11px] font-bold tracking-wide uppercase border ${
                       isGateway
-                        ? 'bg-cyan-950 text-cyan-300 border-cyan-600/80 shadow-md'
+                        ? 'bg-[#092915] text-[#4ee48b] border-[#1f794d] shadow-md'
                         : isVPC
-                        ? 'bg-purple-950 text-purple-300 border-purple-600/80 shadow-md'
-                        : 'bg-emerald-950 text-emerald-300 border-emerald-600/80 shadow-md'
+                        ? 'bg-[#001f3f] text-[#0099ff] border-[#0099ff]/50 shadow-md'
+                        : 'bg-[#092915] text-[#80f2b0] border-[#1f794d] shadow-md'
                     }`}
                   >
                     {modeDetail.recommendedBadge}
@@ -531,14 +531,14 @@ export const DeploymentCTA: React.FC<DeploymentCTAProps> = ({ lang }) => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder={cta.emailPlaceholder}
-                      className="w-full pl-10 pr-4 py-3 rounded-lg bg-white/5 border border-white/20 text-white text-xs sm:text-sm focus:border-cyan-400 focus:outline-none"
+                      className="w-full pl-10 pr-4 py-3 rounded-lg bg-white/5 border border-white/20 text-white text-xs sm:text-sm focus:border-[#4ee48b] focus:outline-none"
                       required
                     />
                   </div>
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="px-8 py-3 rounded-lg bg-cyan-500 text-black hover:bg-cyan-400 font-bold text-xs sm:text-sm transition-all whitespace-nowrap active:scale-95 disabled:opacity-50 cursor-pointer"
+                    className="px-8 py-3 rounded-lg bg-[#4ee48b] text-[#05160b] hover:bg-[#38d677] font-bold text-xs sm:text-sm transition-all whitespace-nowrap active:scale-95 disabled:opacity-50 cursor-pointer shadow-lg shadow-[#4ee48b]/20"
                   >
                     {isSubmitting ? cta.submitting : cta.submitBtn}
                   </button>
@@ -553,13 +553,13 @@ export const DeploymentCTA: React.FC<DeploymentCTAProps> = ({ lang }) => {
         </div>
 
         {/* Minimalist Footer */}
-        <footer className="pt-10 pb-6 border-t border-white/5 text-gray-400 text-xs">
+        <footer className="pt-10 pb-6 border-t border-[#1f794d]/20 text-gray-400 text-xs">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-6">
             <div className="flex items-center gap-3">
-              <div className="w-6 h-6 bg-gradient-to-br from-purple-500 to-cyan-400 rounded-xs rotate-45 flex items-center justify-center">
-                <div className="w-2.5 h-2.5 bg-black rounded-xs"></div>
+              <div className="w-6 h-6 bg-gradient-to-br from-[#1f794d] to-[#4ee48b] rounded-xs rotate-45 flex items-center justify-center">
+                <div className="w-2.5 h-2.5 bg-[#05160b] rounded-xs"></div>
               </div>
-              <span className="font-bold text-white text-sm">Covar<span className="text-cyan-400">AI</span></span>
+              <span className="font-bold text-white text-sm">Covar<span className="text-[#4ee48b]">AI</span></span>
               <span className="text-gray-600">|</span>
               <span className="font-mono text-gray-400 text-[11px]">
                 {footer?.rights || '© 2026 CovarAI Technologies Inc.'}

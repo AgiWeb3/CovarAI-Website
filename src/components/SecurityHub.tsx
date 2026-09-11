@@ -35,18 +35,18 @@ export const SecurityHub: React.FC<SecurityHubProps> = ({
     <div className="animate-fade-in">
       {/* Top Header Navigation Strip */}
       <div className="pt-6 pb-2 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="p-3 sm:p-4 rounded-2xl bg-zinc-950/80 border border-rose-500/30 flex flex-row items-center justify-between gap-4 backdrop-blur-xl shadow-[0_0_20px_rgba(244,63,94,0.1)]">
+        <div className="p-3 sm:p-4 rounded-2xl bg-[#061c0e]/90 border border-[#1f794d]/40 flex flex-row items-center justify-between gap-4 backdrop-blur-xl shadow-[0_0_20px_rgba(78,228,139,0.1)]">
           <div className="flex items-center gap-3">
             <button
               onClick={onBackToHome}
-              className="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-rose-300 hover:text-white border border-rose-500/20 transition-colors flex items-center gap-1.5 text-xs font-semibold cursor-pointer"
+              className="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-[#092915] text-[#80f2b0] hover:text-white border border-[#1f794d]/40 transition-colors flex items-center gap-1.5 text-xs font-semibold cursor-pointer"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>{lang === 'en' ? 'Main Portal' : lang === 'zh-TW' ? '返回首頁' : '返回首页'}</span>
             </button>
             <div className="h-4 w-[1px] bg-white/20 hidden sm:block" />
-            <div className="hidden sm:flex items-center gap-2 text-xs font-mono text-rose-300">
-              <ShieldCheck className="w-3.5 h-3.5 text-rose-400" />
+            <div className="hidden sm:flex items-center gap-2 text-xs font-mono text-[#80f2b0]">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#4ee48b]" />
               <span>{lang === 'en' ? 'CISO, Security & Compliance Trust Center' : lang === 'zh-TW' ? 'CISO、安全防禦與法務合規中心' : 'CISO、安全防御与法务合规中心'}</span>
             </div>
           </div>
@@ -64,7 +64,7 @@ export const SecurityHub: React.FC<SecurityHubProps> = ({
             </div>
             <button
               onClick={() => onRequestDemo('CISO Security Threat Evaluation')}
-              className="px-3.5 py-1.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs flex items-center gap-1.5 shadow-lg transition-all cursor-pointer"
+              className="px-3.5 py-1.5 rounded-xl bg-[#4ee48b] hover:bg-[#38d677] text-[#05160b] font-bold text-xs flex items-center gap-1.5 shadow-lg shadow-[#4ee48b]/20 transition-all cursor-pointer"
             >
               <Flame className="w-3.5 h-3.5" />
               <span>{lang === 'en' ? 'Schedule CISO Audit' : lang === 'zh-TW' ? '預約安全威脅評估' : '预约安全威胁评估'}</span>
@@ -76,13 +76,13 @@ export const SecurityHub: React.FC<SecurityHubProps> = ({
       {/* Hero Header for Security Officers */}
       <section className="pt-12 pb-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-10" data-aos="fade-up">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-rose-950/70 border border-rose-500/40 text-rose-300 text-xs font-mono mb-4">
-            <Lock className="w-3.5 h-3.5 text-rose-400" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#061c0e] border border-[#1f794d]/50 text-[#80f2b0] text-xs font-mono mb-4">
+            <Lock className="w-3.5 h-3.5 text-[#4ee48b]" />
             <span>{lang === 'en' ? 'ZERO-PLAINTEXT IN VRAM · NP-HARD HARDNESS · FULL PRIVILEGE EXEMPTION' : lang === 'zh-TW' ? '顯存 0 明文 · 數學不可逆 · 司法特權 100% 存續' : '显存 0 明文 · 数学不可逆 · 司法特权 100% 存续'}</span>
           </div>
 
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight mb-4">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-rose-400 via-amber-200 to-cyan-300">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#4ee48b] via-[#80f2b0] to-white">
               {lang === 'en'
                 ? 'Zero Plaintext Exposure. Provable Cryptographic Invariance.'
                 : lang === 'zh-TW'
@@ -107,28 +107,28 @@ export const SecurityHub: React.FC<SecurityHubProps> = ({
               label: lang === 'en' ? 'GPU VRAM Plaintext State' : 'GPU 显存驻留明文量',
               val: '0 Bytes',
               sub: lang === 'en' ? '100% Unstructured Gaussian Noise' : '100% 高斯白噪声乱码态',
-              color: 'text-rose-400',
+              color: 'text-[#4ee48b]',
             },
             {
               label: lang === 'en' ? 'Ciphertext Information Entropy' : '密态张量信息熵 (Entropy)',
               val: '7.9998 bits',
               sub: lang === 'en' ? 'Theoretical Max: 8.0000 bits' : '理论最大真随机上限 8.0 bits',
-              color: 'text-amber-400',
+              color: 'text-[#80f2b0]',
             },
             {
               label: lang === 'en' ? 'Model Inversion GAN Loss' : '逆向反演神经网络 Loss',
               val: 'Loss ≡ 1.0',
               sub: lang === 'en' ? 'Total Mode Collapse (NP-Hard)' : '无法收敛 · 彻底模式坍塌',
-              color: 'text-cyan-400',
+              color: 'text-[#4ee48b]',
             },
             {
               label: lang === 'en' ? 'Legal Privilege Exemption' : '证据与特权豁免存续率',
               val: '100.0%',
               sub: lang === 'en' ? 'FRE 502 / HIPAA Safe Harbor' : '符合 ABA 477R / HIPAA 标准',
-              color: 'text-emerald-400',
+              color: 'text-[#80f2b0]',
             },
           ].map((m, idx) => (
-            <div key={idx} className="p-4 sm:p-5 rounded-2xl bg-zinc-950/80 border border-rose-500/20 text-center">
+            <div key={idx} className="p-4 sm:p-5 rounded-2xl bg-[#061c0e]/90 border border-[#1f794d]/40 text-center shadow-lg">
               <div className={`text-2xl sm:text-3xl font-black font-mono ${m.color} mb-1`}>{m.val}</div>
               <div className="text-xs font-bold text-white mb-0.5">{m.label}</div>
               <div className="text-[10px] font-mono text-gray-400">{m.sub}</div>
@@ -150,14 +150,14 @@ export const SecurityHub: React.FC<SecurityHubProps> = ({
         </div>
 
         {/* Regulatory Compliance Matrix & Legal Exemption */}
-        <div className="p-8 rounded-3xl bg-zinc-950 border border-slate-800 mb-14">
-          <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-800">
-            <Scale className="w-6 h-6 text-rose-400" />
+        <div className="p-8 rounded-3xl bg-[#061c0e]/90 border border-[#1f794d]/40 mb-14 shadow-xl">
+          <div className="flex items-center gap-3 mb-6 pb-4 border-b border-[#1f794d]/30">
+            <Scale className="w-6 h-6 text-[#4ee48b]" />
             <div>
               <h3 className="text-xl font-bold text-white">
                 {lang === 'en' ? 'Global Regulatory Compliance & Legal Privilege Certifications' : '全球合规监管矩阵与特权豁免法律背书'}
               </h3>
-              <p className="text-xs text-gray-400 font-mono mt-0.5">
+              <p className="text-xs text-[#80f2b0]/70 font-mono mt-0.5">
                 {lang === 'en' ? 'Legal Opinions & Independent Third-Party Whitebox Audit Attestations' : '经权威律所合规意见书与国家级网络安全测评中心白盒审计认证'}
               </p>
             </div>
@@ -190,15 +190,15 @@ export const SecurityHub: React.FC<SecurityHubProps> = ({
                 desc: lang === 'en' ? 'Client retains full cryptographic key sovereignty; cloud provider has zero decryption capability.' : '客户独占 KMS 密钥控制权，云厂商与算力中心完全无解密能力。',
               },
             ].map((item, idx) => (
-              <div key={idx} className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 flex flex-col justify-between">
+              <div key={idx} className="p-4 rounded-2xl bg-[#05160b]/80 border border-[#1f794d]/30 flex flex-col justify-between">
                 <div>
-                  <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-rose-950/80 text-rose-300 border border-rose-800/80 block w-fit mb-2">
+                  <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-[#092915] text-[#80f2b0] border border-[#1f794d]/60 block w-fit mb-2">
                     {item.standard}
                   </span>
                   <h4 className="text-sm font-bold text-white mb-1">{item.domain}</h4>
                   <p className="text-xs text-gray-400 leading-relaxed mb-3">{item.desc}</p>
                 </div>
-                <div className="pt-2 border-t border-white/5 flex items-center gap-1.5 text-[11px] font-mono text-emerald-400 font-bold">
+                <div className="pt-2 border-t border-[#1f794d]/20 flex items-center gap-1.5 text-[11px] font-mono text-[#4ee48b] font-bold">
                   <CheckCircle2 className="w-3.5 h-3.5 flex-shrink-0" />
                   <span>{item.status}</span>
                 </div>

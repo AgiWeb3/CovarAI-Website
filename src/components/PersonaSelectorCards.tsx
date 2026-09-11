@@ -103,12 +103,12 @@ export const PersonaSelectorCards: React.FC<PersonaSelectorCardsProps> = ({
   ];
 
   return (
-    <section className="py-16 bg-gradient-to-b from-black via-zinc-950/80 to-black relative">
+    <section className="py-16 bg-gradient-to-b from-transparent via-[#061c0e]/50 to-transparent relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Title */}
         <div className="text-center max-w-3xl mx-auto mb-12" data-aos="fade-up">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-cyan-300 text-xs font-mono mb-3">
-            <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#061c0e] border border-[#1f794d]/40 text-[#4ee48b] text-xs font-mono mb-3">
+            <Sparkles className="w-3.5 h-3.5 text-[#4ee48b]" />
             <span>{lang === 'en' ? 'TAILORED PERSONA PORTALS' : lang === 'zh-TW' ? '角色專屬決策通道' : '角色专属决策通道'}</span>
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight">
@@ -127,7 +127,7 @@ export const PersonaSelectorCards: React.FC<PersonaSelectorCardsProps> = ({
           </p>
         </div>
 
-        {/* 3 Persona Cards Grid */}
+        {/* 3 Persona Cards Grid with Distinct Multi-Hue Gradients */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {personas.map((p) => {
             const Icon = p.icon;
@@ -135,45 +135,67 @@ export const PersonaSelectorCards: React.FC<PersonaSelectorCardsProps> = ({
             const isRose = p.accent === 'rose';
             const isCyan = p.accent === 'cyan';
 
-            const borderClass = isEmerald
-              ? 'border-emerald-500/30 hover:border-emerald-400 hover:shadow-[0_0_25px_rgba(16,185,129,0.15)]'
+            // Distinct card background gradients per persona
+            const cardBg = isEmerald
+              ? 'bg-gradient-to-b from-[#112d1b]/90 via-[#071a0f]/95 to-[#041008]/98'
               : isRose
-              ? 'border-rose-500/30 hover:border-rose-400 hover:shadow-[0_0_25px_rgba(244,63,94,0.15)]'
-              : 'border-cyan-500/30 hover:border-cyan-400 hover:shadow-[0_0_25px_rgba(6,182,212,0.15)]';
+              ? 'bg-gradient-to-b from-[#250d17]/85 via-[#0d1612]/95 to-[#050f0a]/98'
+              : 'bg-gradient-to-b from-[#052238]/85 via-[#06171a]/95 to-[#040f0a]/98';
+
+            const borderClass = isEmerald
+              ? 'border-[#1f794d]/60 hover:border-[#4ee48b] hover:shadow-[0_12px_40px_rgba(78,228,139,0.2)]'
+              : isRose
+              ? 'border-rose-500/40 hover:border-rose-400 hover:shadow-[0_12px_40px_rgba(244,63,94,0.2)]'
+              : 'border-[#0099ff]/40 hover:border-[#38bdf8] hover:shadow-[0_12px_40px_rgba(0,153,255,0.2)]';
 
             const iconBg = isEmerald
-              ? 'bg-emerald-950/80 text-emerald-400 border-emerald-700/60'
+              ? 'bg-gradient-to-br from-[#173e24] to-[#092915] text-[#4ee48b] border-[#1f794d]'
               : isRose
-              ? 'bg-rose-950/80 text-rose-400 border-rose-700/60'
-              : 'bg-cyan-950/80 text-cyan-400 border-cyan-700/60';
+              ? 'bg-gradient-to-br from-rose-950 to-[#220710] text-rose-400 border-rose-700/60'
+              : 'bg-gradient-to-br from-[#00315a] to-[#00172e] text-[#38bdf8] border-[#0099ff]/50';
 
             const btnBg = isEmerald
-              ? 'bg-emerald-600 hover:bg-emerald-500 text-white'
+              ? 'bg-gradient-to-r from-[#4ee48b] to-[#38d677] hover:from-[#38d677] hover:to-[#22c55e] text-[#05160b] shadow-lg shadow-[#4ee48b]/20'
               : isRose
-              ? 'bg-rose-600 hover:bg-rose-500 text-white'
-              : 'bg-cyan-500 hover:bg-cyan-400 text-black';
+              ? 'bg-gradient-to-r from-rose-600 to-rose-500 hover:from-rose-500 hover:to-rose-400 text-white shadow-lg shadow-rose-600/20'
+              : 'bg-gradient-to-r from-[#0099ff] to-[#0077cc] hover:from-[#38bdf8] hover:to-[#0099ff] text-white shadow-lg shadow-[#0099ff]/20';
 
             const badgeColor = isEmerald
-              ? 'text-emerald-300 bg-emerald-950/60 border-emerald-700/50'
+              ? 'text-[#4ee48b] bg-[#092915]/90 border-[#1f794d]'
               : isRose
-              ? 'text-rose-300 bg-rose-950/60 border-rose-700/50'
-              : 'text-cyan-300 bg-cyan-950/60 border-cyan-700/50';
+              ? 'text-rose-300 bg-rose-950/70 border-rose-700/60'
+              : 'text-[#38bdf8] bg-[#001f3f]/70 border-[#0099ff]/50';
+
+            const checkColor = isEmerald
+              ? 'text-[#4ee48b]'
+              : isRose
+              ? 'text-rose-400'
+              : 'text-[#38bdf8]';
+
+            const hoverTitleColor = isEmerald
+              ? 'group-hover:text-[#4ee48b]'
+              : isRose
+              ? 'group-hover:text-rose-300'
+              : 'group-hover:text-[#38bdf8]';
 
             return (
               <div
                 key={p.id}
                 data-aos="fade-up"
-                className={`p-6 rounded-3xl bg-zinc-950/90 border ${borderClass} flex flex-col justify-between transition-all duration-300 group`}
+                className={`p-6 sm:p-7 rounded-3xl ${cardBg} border ${borderClass} flex flex-col justify-between transition-all duration-300 group hover:-translate-y-1 backdrop-blur-xl relative overflow-hidden`}
               >
+                {/* Subtle top edge specular highlight */}
+                <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/15 to-transparent pointer-events-none" />
+
                 <div>
                   {/* Top Badge & Role */}
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-3">
-                      <div className={`p-2.5 rounded-xl border ${iconBg}`}>
+                      <div className={`p-2.5 rounded-xl border ${iconBg} shadow-sm`}>
                         <Icon className="w-5 h-5" />
                       </div>
                       <div>
-                        <div className="text-xs font-mono text-gray-400">{p.role}</div>
+                        <div className="text-xs font-mono text-gray-300/80">{p.role}</div>
                         <span className={`px-2 py-0.5 rounded text-[10px] font-mono border ${badgeColor}`}>
                           {p.badge}
                         </span>
@@ -182,20 +204,20 @@ export const PersonaSelectorCards: React.FC<PersonaSelectorCardsProps> = ({
                   </div>
 
                   {/* Headline */}
-                  <h3 className="text-lg font-bold text-white mb-2 group-hover:text-cyan-200 transition-colors leading-snug">
+                  <h3 className={`text-lg font-bold text-white mb-2 ${hoverTitleColor} transition-colors leading-snug`}>
                     {p.headline}
                   </h3>
 
                   {/* Core Value Desc */}
-                  <p className="text-xs text-gray-400 leading-relaxed mb-5">
+                  <p className="text-xs text-gray-300/80 leading-relaxed mb-5">
                     {p.coreValue}
                   </p>
 
                   {/* Highlight bullets */}
-                  <div className="space-y-2 mb-6 pt-4 border-t border-white/5">
+                  <div className="space-y-2 mb-6 pt-4 border-t border-white/10">
                     {p.highlights.map((h, i) => (
-                      <div key={i} className="flex items-center gap-2 text-xs font-mono text-gray-300">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 flex-shrink-0" />
+                      <div key={i} className="flex items-center gap-2 text-xs font-mono text-gray-200">
+                        <CheckCircle2 className={`w-3.5 h-3.5 ${checkColor} flex-shrink-0`} />
                         <span>{h}</span>
                       </div>
                     ))}
@@ -205,7 +227,7 @@ export const PersonaSelectorCards: React.FC<PersonaSelectorCardsProps> = ({
                 {/* Direct Entry Button */}
                 <button
                   onClick={() => onSelectView(p.id)}
-                  className={`w-full py-3 px-4 rounded-xl ${btnBg} font-bold text-xs font-mono flex items-center justify-center gap-2 transition-all shadow-md active:scale-95 cursor-pointer`}
+                  className={`w-full py-3 px-4 rounded-xl ${btnBg} font-bold text-xs font-mono flex items-center justify-center gap-2 transition-all active:scale-95 cursor-pointer`}
                 >
                   <span>{p.actionText}</span>
                   <ArrowRight className="w-3.5 h-3.5" />

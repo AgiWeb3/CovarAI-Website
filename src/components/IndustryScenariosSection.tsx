@@ -65,27 +65,27 @@ export const IndustryScenariosSection: React.FC<IndustryScenariosSectionProps> =
     switch (id) {
       case 'legal':
         return {
-          border: 'border-cyan-500/40',
-          glow: 'glow-cyan',
-          accent: 'text-cyan-400',
-          bgBadge: 'bg-cyan-950/80 text-cyan-300 border-cyan-800/80',
-          tabActive: 'bg-cyan-500 text-black font-bold shadow-lg glow-cyan',
+          border: 'border-[#1f794d]/50',
+          glow: 'glow-mint',
+          accent: 'text-[#4ee48b]',
+          bgBadge: 'bg-[#092915] text-[#4ee48b] border-[#1f794d]/80',
+          tabActive: 'bg-[#4ee48b] text-[#05160b] font-bold shadow-lg shadow-[#4ee48b]/20',
         };
       case 'healthcare':
         return {
-          border: 'border-purple-500/40',
-          glow: 'glow-purple',
-          accent: 'text-purple-400',
-          bgBadge: 'bg-purple-950/80 text-purple-300 border-purple-800/80',
-          tabActive: 'bg-purple-500 text-white font-bold shadow-lg glow-purple',
+          border: 'border-[#0099ff]/50',
+          glow: 'glow-mint',
+          accent: 'text-[#0099ff]',
+          bgBadge: 'bg-[#001f3f] text-[#0099ff] border-[#0099ff]/40',
+          tabActive: 'bg-[#0099ff] text-white font-bold shadow-lg shadow-[#0099ff]/20',
         };
       case 'finance':
         return {
-          border: 'border-emerald-500/40',
-          glow: 'glow-cyan',
-          accent: 'text-emerald-400',
-          bgBadge: 'bg-emerald-950/80 text-emerald-300 border-emerald-800/80',
-          tabActive: 'bg-emerald-500 text-black font-bold shadow-lg',
+          border: 'border-[#1f794d]/50',
+          glow: 'glow-mint',
+          accent: 'text-[#80f2b0]',
+          bgBadge: 'bg-[#092915] text-[#80f2b0] border-[#1f794d]/80',
+          tabActive: 'bg-[#80f2b0] text-[#05160b] font-bold shadow-lg shadow-[#80f2b0]/20',
         };
     }
   };
@@ -96,12 +96,12 @@ export const IndustryScenariosSection: React.FC<IndustryScenariosSectionProps> =
     <section id="solutions" className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative">
       {/* Section Header */}
       <div className="text-center mb-12" data-aos="fade-up">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-cyan-300 text-xs font-mono mb-4 glow-cyan">
-          <Fingerprint className="w-3.5 h-3.5 text-cyan-400" />
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#061c0e] border border-[#1f794d]/40 text-[#4ee48b] text-xs font-mono mb-4">
+          <Fingerprint className="w-3.5 h-3.5 text-[#4ee48b]" />
           <span>{t.tag}</span>
         </div>
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight mb-4">
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-white/40">
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-white/60">
             {t.title}
           </span>
         </h2>
@@ -112,7 +112,7 @@ export const IndustryScenariosSection: React.FC<IndustryScenariosSectionProps> =
 
       {/* 3 Industry Tabs Switcher */}
       <div
-        className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-12 max-w-3xl mx-auto p-1.5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md"
+        className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-12 max-w-3xl mx-auto p-1.5 rounded-2xl bg-[#061c0e]/80 border border-[#1f794d]/30 backdrop-blur-md"
         data-aos="fade-up"
         data-aos-delay="100"
       >
@@ -129,7 +129,7 @@ export const IndustryScenariosSection: React.FC<IndustryScenariosSectionProps> =
               className={`flex-1 min-w-[140px] sm:min-w-[180px] py-3 px-4 rounded-xl text-xs sm:text-sm font-semibold flex items-center justify-center gap-2.5 transition-all duration-300 cursor-pointer ${
                 isActive
                   ? tabTheme.tabActive
-                  : 'text-gray-400 hover:text-white hover:bg-white/5'
+                  : 'text-gray-400 hover:text-white hover:bg-[#092915]'
               }`}
             >
               {getIndustryIcon(id)}
@@ -142,13 +142,13 @@ export const IndustryScenariosSection: React.FC<IndustryScenariosSectionProps> =
       {/* Main Scenario Container */}
       <div
         key={currentScenario.id}
-        className={`rounded-3xl bg-white/5 border ${theme.border} p-6 sm:p-10 ${theme.glow} transition-all duration-500 mb-14 relative overflow-hidden backdrop-blur-xl`}
+        className={`rounded-3xl bg-[#061c0e]/80 border ${theme.border} p-6 sm:p-10 transition-all duration-500 mb-14 relative overflow-hidden backdrop-blur-xl shadow-xl`}
         data-aos="fade-up"
       >
         {/* Scenario Header Bar */}
-        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 pb-8 mb-8 border-b border-white/10">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 pb-8 mb-8 border-b border-[#1f794d]/20">
           <div className="flex items-center gap-4">
-            <div className={`p-4 rounded-2xl bg-white/5 border ${theme.border} ${theme.accent}`}>
+            <div className={`p-4 rounded-2xl bg-[#092915] border ${theme.border} ${theme.accent}`}>
               {getIndustryIcon(currentScenario.id)}
             </div>
             <div>
@@ -169,11 +169,11 @@ export const IndustryScenariosSection: React.FC<IndustryScenariosSectionProps> =
 
           <button
             onClick={() => onRequestDemo(currentScenario.name)}
-            className="px-6 py-2.5 rounded-full bg-white text-black hover:bg-cyan-400 font-bold text-xs sm:text-sm flex items-center gap-2 shadow-lg transition-all whitespace-nowrap self-start lg:self-center"
+            className="px-6 py-2.5 rounded-full bg-[#4ee48b] hover:bg-[#38d677] text-[#05160b] font-bold text-xs sm:text-sm flex items-center gap-2 shadow-lg shadow-[#4ee48b]/20 transition-all whitespace-nowrap self-start lg:self-center cursor-pointer"
           >
-            <Sparkles className="w-3.5 h-3.5" />
+            <Sparkles className="w-3.5 h-3.5 text-[#05160b]" />
             <span>{translations[lang].nav.requestDemo}</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+            <ArrowRight className="w-3.5 h-3.5 text-[#05160b]" />
           </button>
         </div>
 
