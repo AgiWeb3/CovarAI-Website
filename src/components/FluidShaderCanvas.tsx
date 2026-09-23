@@ -272,59 +272,83 @@ export const FluidShaderCanvas: React.FC<FluidShaderCanvasProps> = ({
     const c2 = parseColor(color2, [28 / 255, 43 / 255, 255 / 255, 1.0]);
     const c3 = parseColor(color3, [1.0, 1.0, 1.0, 1.0]);
 
+    // Pre-bind static uniforms once to eliminate repetitive per-frame driver overhead
+    gl.uniform1f(uScale, scale);
+    gl.uniform1f(uRotation, 0.0);
+    gl.uniform4f(uColor1, c1[0], c1[1], c1[2], c1[3]);
+    gl.uniform4f(uColor2, c2[0], c2[1], c2[2], c2[3]);
+    gl.uniform4f(uColor3, c3[0], c3[1], c3[2], c3[3]);
+    gl.uniform1f(uProportion, proportion);
+    gl.uniform1f(uSoftness, softness);
+    gl.uniform1f(uShape, 0.0);
+    gl.uniform1f(uShapeScale, shapeScale);
+    gl.uniform1f(uDistortion, distortion);
+    gl.uniform1f(uSwirl, swirl);
+    gl.uniform1f(uSwirlIterations, swirlIterations);
+    gl.uniform1f(uGrain, grainOpacity);
+
     let animationFrameId: number;
-    let startTime = performance.now();
     let currentDpr = 1;
+    let isVisible = true;
 
     const handleResize = () => {
       if (!canvas) return;
-      // Cap DPR to 1.5 to guarantee buttery smooth 60 FPS on Retina screens without visual downgrade
+      // Full crystal-clear native sharpness without blurriness
       currentDpr = Math.min(window.devicePixelRatio || 1, 1.5);
       const width = Math.floor(canvas.clientWidth * currentDpr);
       const height = Math.floor(canvas.clientHeight * currentDpr);
+
       if (canvas.width !== width || canvas.height !== height) {
         canvas.width = width;
         canvas.height = height;
         gl.viewport(0, 0, width, height);
+        gl.uniform1f(uPixelRatio, currentDpr);
+        gl.uniform2f(uResolution, width, height);
       }
     };
 
     handleResize();
     window.addEventListener('resize', handleResize, { passive: true });
 
-    let lastTime = 0;
-    const targetFpsInterval = 1000 / 60; // 60 FPS capped loop
+    // IntersectionObserver: pauses rendering when scrolled out of view to save battery and keep scrolling silky smooth
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        isVisible = entry.isIntersecting;
+      },
+      { threshold: 0.02 }
+    );
+    observer.observe(canvas);
+
+    const handleVisibility = () => {
+      if (document.hidden) {
+        isVisible = false;
+      } else {
+        const rect = canvas.getBoundingClientRect();
+        isVisible = rect.bottom > 0 && rect.top < window.innerHeight;
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibility, { passive: true });
+
+    let lastNow = performance.now();
+    let totalTime = 0;
 
     const render = (now: number) => {
-      const delta = now - lastTime;
-      if (delta >= targetFpsInterval) {
-        lastTime = now - (delta % targetFpsInterval);
-        const elapsed = (now - startTime) * 0.001 * (speed * 0.5);
-
-        gl.useProgram(program);
-        gl.bindVertexArray(vao);
-
-        gl.uniform1f(uTime, elapsed);
-        gl.uniform1f(uPixelRatio, currentDpr);
-        gl.uniform2f(uResolution, canvas.width, canvas.height);
-
-        gl.uniform1f(uScale, scale);
-        gl.uniform1f(uRotation, 0.0);
-        gl.uniform4f(uColor1, c1[0], c1[1], c1[2], c1[3]);
-        gl.uniform4f(uColor2, c2[0], c2[1], c2[2], c2[3]);
-        gl.uniform4f(uColor3, c3[0], c3[1], c3[2], c3[3]);
-        gl.uniform1f(uProportion, proportion);
-        gl.uniform1f(uSoftness, softness);
-        gl.uniform1f(uShape, 0.0);
-        gl.uniform1f(uShapeScale, shapeScale);
-        gl.uniform1f(uDistortion, distortion);
-        gl.uniform1f(uSwirl, swirl);
-        gl.uniform1f(uSwirlIterations, swirlIterations);
-        gl.uniform1f(uGrain, grainOpacity);
-
-        gl.drawArrays(gl.TRIANGLES, 0, 3);
-      }
       animationFrameId = requestAnimationFrame(render);
+      if (!isVisible) {
+        lastNow = now;
+        return;
+      }
+
+      // Smooth delta time accumulation for buttery smooth V-Sync playback without micro-stutters
+      const dt = Math.min((now - lastNow) * 0.001, 0.05);
+      lastNow = now;
+      totalTime += dt * (speed * 0.5);
+
+      gl.useProgram(program);
+      gl.bindVertexArray(vao);
+      gl.uniform1f(uTime, totalTime);
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
     };
 
     animationFrameId = requestAnimationFrame(render);
@@ -332,6 +356,8 @@ export const FluidShaderCanvas: React.FC<FluidShaderCanvasProps> = ({
     return () => {
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', handleResize);
+      document.removeEventListener('visibilitychange', handleVisibility);
+      observer.disconnect();
       if (gl) {
         gl.deleteProgram(program);
         gl.deleteShader(vs);

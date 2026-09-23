@@ -106,30 +106,33 @@ export const MobileQuickDrawer: React.FC<MobileQuickDrawerProps> = ({
 
   return (
     <>
-      {/* 1. Universal Floating Bottom Dock (Always visible on mobile & desktop) */}
+      {/* 1. Universal Floating Bottom Dock (Apple OS Liquid Frosted Glass Dock) */}
       <div className="fixed bottom-4 inset-x-3 sm:inset-x-6 z-40 pointer-events-none flex justify-center">
-        <div className="w-full max-w-2xl pointer-events-auto bg-gradient-to-r from-[#061c0e]/95 via-[#082414]/95 to-[#061c0e]/95 border border-[#1f794d]/60 backdrop-blur-2xl rounded-2xl p-1.5 sm:p-2 shadow-[0_12px_40px_rgba(0,0,0,0.85),0_0_30px_rgba(78,228,139,0.18)] flex items-center justify-between gap-1 sm:gap-2 transition-all">
+        <div className="relative w-full max-w-2xl pointer-events-auto bg-black/45 backdrop-blur-3xl saturate-150 border border-white/20 rounded-2xl sm:rounded-full p-1.5 sm:p-2 shadow-[inset_0_1px_1px_rgba(255,255,255,0.32),inset_0_-1px_1px_rgba(0,0,0,0.5),0_20px_50px_rgba(0,0,0,0.85),0_0_24px_rgba(78,228,139,0.14)] flex items-center justify-between gap-1 sm:gap-2 transition-all">
+          {/* Apple Specular Top Rim Reflection */}
+          <div className="absolute top-0 inset-x-6 h-[1px] bg-gradient-to-r from-transparent via-white/50 to-transparent pointer-events-none" />
+
           {/* Button: Open Role Navigation Drawer */}
           <button
             onClick={onToggleOpen}
-            className={`py-2 px-2.5 sm:px-3 rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 transition-all cursor-pointer shrink-0 ${
+            className={`py-2 px-2.5 sm:px-3.5 rounded-xl sm:rounded-full text-xs font-semibold flex items-center justify-center gap-1.5 transition-all duration-200 cursor-pointer shrink-0 active:scale-95 ${
               isOpen
-                ? 'bg-gradient-to-r from-[#4ee48b] to-[#38d677] text-[#05160b] font-bold shadow-md shadow-[#4ee48b]/30'
-                : 'bg-white/5 hover:bg-[#092915] text-[#80f2b0] border border-[#1f794d]/40'
+                ? 'bg-gradient-to-r from-[#4ee48b] to-[#38d677] text-[#041008] font-bold shadow-[0_0_18px_rgba(78,228,139,0.45),inset_0_1px_1px_rgba(255,255,255,0.5)]'
+                : 'bg-white/10 hover:bg-white/20 text-[#80f2b0] border border-white/15 hover:border-white/30 backdrop-blur-md shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]'
             }`}
             title={lang === 'en' ? 'Open All Portals & Solutions' : '展开全景导航'}
           >
-            <Compass className={`w-3.5 h-3.5 ${isOpen ? 'text-[#05160b]' : 'text-[#4ee48b]'}`} />
+            <Compass className={`w-3.5 h-3.5 ${isOpen ? 'text-[#041008]' : 'text-[#4ee48b]'}`} />
             <span className="truncate">{lang === 'en' ? 'Portals' : '快捷导航'}</span>
           </button>
 
           {/* Quick Hub Jump: Overview (Home) - Visible on tablet/desktop */}
           <button
             onClick={() => handleNavigate(() => onViewChange('home'))}
-            className={`hidden md:flex py-2 px-2.5 rounded-xl text-xs font-semibold border items-center justify-center gap-1.5 transition-all cursor-pointer whitespace-nowrap ${
+            className={`hidden md:flex py-2 px-3 rounded-xl sm:rounded-full text-xs font-semibold items-center justify-center gap-1.5 transition-all duration-200 cursor-pointer whitespace-nowrap active:scale-95 ${
               activeView === 'home'
-                ? 'bg-gradient-to-r from-[#4ee48b] to-[#38d677] text-[#05160b] font-bold shadow-sm'
-                : 'bg-white/5 hover:bg-white/10 text-gray-300 border-[#1f794d]/30'
+                ? 'bg-gradient-to-r from-[#4ee48b] to-[#38d677] text-[#041008] font-bold shadow-[0_0_16px_rgba(78,228,139,0.4),inset_0_1px_1px_rgba(255,255,255,0.4)]'
+                : 'bg-white/[0.07] hover:bg-white/[0.16] text-gray-200 hover:text-white border border-white/10 hover:border-white/20 backdrop-blur-md shadow-[inset_0_1px_0_rgba(255,255,255,0.15)]'
             }`}
           >
             <Home className="w-3.5 h-3.5" />
@@ -139,10 +142,10 @@ export const MobileQuickDrawer: React.FC<MobileQuickDrawerProps> = ({
           {/* Quick Hub Jump: Executive (CFO ROI) */}
           <button
             onClick={() => handleNavigate(() => onViewChange('executive'))}
-            className={`flex-1 sm:flex-initial py-2 px-2 sm:px-3 rounded-xl text-xs font-semibold border flex items-center justify-center gap-1.5 transition-all truncate cursor-pointer ${
+            className={`flex-1 sm:flex-initial py-2 px-2.5 sm:px-3 rounded-xl sm:rounded-full text-xs font-semibold flex items-center justify-center gap-1.5 transition-all duration-200 truncate cursor-pointer active:scale-95 ${
               activeView === 'executive'
-                ? 'bg-gradient-to-r from-[#fbbf24] to-[#f59e0b] text-black font-bold shadow-md shadow-[#f59e0b]/20'
-                : 'bg-white/5 hover:bg-[#201505] text-[#fde68a] border-[#f59e0b]/30'
+                ? 'bg-gradient-to-r from-[#fbbf24] to-[#f59e0b] text-black font-bold shadow-[0_0_18px_rgba(245,158,11,0.4),inset_0_1px_1px_rgba(255,255,255,0.5)]'
+                : 'bg-white/[0.07] hover:bg-amber-500/15 text-[#fde68a] hover:text-amber-200 border border-white/10 hover:border-amber-400/30 backdrop-blur-md shadow-[inset_0_1px_0_rgba(255,255,255,0.15)]'
             }`}
           >
             <Briefcase className="w-3.5 h-3.5" />
@@ -152,10 +155,10 @@ export const MobileQuickDrawer: React.FC<MobileQuickDrawerProps> = ({
           {/* Quick Hub Jump: Security (CISO) */}
           <button
             onClick={() => handleNavigate(() => onViewChange('security'))}
-            className={`flex-1 sm:flex-initial py-2 px-2 sm:px-3 rounded-xl text-xs font-semibold border flex items-center justify-center gap-1.5 transition-all truncate cursor-pointer ${
+            className={`flex-1 sm:flex-initial py-2 px-2.5 sm:px-3 rounded-xl sm:rounded-full text-xs font-semibold flex items-center justify-center gap-1.5 transition-all duration-200 truncate cursor-pointer active:scale-95 ${
               activeView === 'security'
-                ? 'bg-gradient-to-r from-rose-600 to-rose-500 text-white font-bold shadow-md shadow-rose-600/20'
-                : 'bg-white/5 hover:bg-rose-950/40 text-rose-300 border-rose-500/30'
+                ? 'bg-gradient-to-r from-rose-500 to-rose-600 text-white font-bold shadow-[0_0_18px_rgba(244,63,94,0.4),inset_0_1px_1px_rgba(255,255,255,0.5)]'
+                : 'bg-white/[0.07] hover:bg-rose-500/15 text-rose-300 hover:text-rose-200 border border-white/10 hover:border-rose-400/30 backdrop-blur-md shadow-[inset_0_1px_0_rgba(255,255,255,0.15)]'
             }`}
           >
             <ShieldCheck className="w-3.5 h-3.5" />
@@ -165,10 +168,10 @@ export const MobileQuickDrawer: React.FC<MobileQuickDrawerProps> = ({
           {/* Quick Hub Jump: Developer / Architecture (Architect) - Visible on sm+ */}
           <button
             onClick={() => handleNavigate(() => onViewChange('developer'))}
-            className={`hidden sm:flex py-2 px-2.5 rounded-xl text-xs font-semibold border items-center justify-center gap-1.5 transition-all cursor-pointer whitespace-nowrap ${
+            className={`hidden sm:flex py-2 px-3 rounded-xl sm:rounded-full text-xs font-semibold items-center justify-center gap-1.5 transition-all duration-200 cursor-pointer whitespace-nowrap active:scale-95 ${
               activeView === 'developer'
-                ? 'bg-gradient-to-r from-[#0099ff] to-[#00d2ff] text-white font-bold shadow-md shadow-[#0099ff]/20'
-                : 'bg-white/5 hover:bg-[#002444] text-[#38bdf8] border-[#0099ff]/30'
+                ? 'bg-gradient-to-r from-[#0099ff] to-[#00d2ff] text-white font-bold shadow-[0_0_18px_rgba(0,210,255,0.4),inset_0_1px_1px_rgba(255,255,255,0.5)]'
+                : 'bg-white/[0.07] hover:bg-[#00d2ff]/15 text-[#70e1ff] hover:text-white border border-white/10 hover:border-[#00d2ff]/30 backdrop-blur-md shadow-[inset_0_1px_0_rgba(255,255,255,0.15)]'
             }`}
           >
             <Code2 className="w-3.5 h-3.5" />
@@ -178,16 +181,16 @@ export const MobileQuickDrawer: React.FC<MobileQuickDrawerProps> = ({
           {/* CTA: Quick Request Demo POC */}
           <button
             onClick={() => onRequestDemo()}
-            className="py-2 px-3 sm:px-4 rounded-xl text-xs font-bold bg-gradient-to-r from-[#4ee48b] via-[#38d677] to-[#00d2ff] hover:brightness-110 text-[#05160b] flex items-center justify-center gap-1.5 shadow-lg shadow-[#4ee48b]/25 active:scale-95 transition-all cursor-pointer whitespace-nowrap shrink-0"
+            className="py-2 px-3 sm:px-4 rounded-xl sm:rounded-full text-xs font-bold bg-gradient-to-r from-[#4ee48b] via-[#38d677] to-[#00d2ff] hover:brightness-110 text-[#041008] flex items-center justify-center gap-1.5 shadow-[inset_0_1px_1px_rgba(255,255,255,0.5),0_6px_20px_rgba(78,228,139,0.35)] active:scale-95 transition-all duration-200 cursor-pointer whitespace-nowrap shrink-0"
           >
-            <Sparkles className="w-3.5 h-3.5 text-[#05160b]" />
+            <Sparkles className="w-3.5 h-3.5 text-[#041008]" />
             <span>{lang === 'en' ? 'POC' : '预约 POC'}</span>
           </button>
 
           {/* Quick Scroll To Top Button */}
           <button
             onClick={scrollToTop}
-            className="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white border border-[#1f794d]/30 transition-colors cursor-pointer shrink-0"
+            className="p-2 sm:p-2.5 rounded-xl sm:rounded-full bg-white/[0.08] hover:bg-white/[0.18] text-gray-300 hover:text-white border border-white/15 hover:border-white/30 backdrop-blur-md shadow-[inset_0_1px_0_rgba(255,255,255,0.15)] transition-all cursor-pointer shrink-0 active:scale-95"
             title={lang === 'en' ? 'Scroll to top' : '回到顶部'}
           >
             <ArrowUp className="w-3.5 h-3.5" />

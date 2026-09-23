@@ -22,14 +22,20 @@ export const SecretFlowAnimation: React.FC<SecretFlowAnimationProps> = ({
   }, []);
 
   return (
-    <div className="w-full max-w-[520px] mx-auto select-none">
-      <div className="rounded-3xl bg-gradient-to-b from-[#082214]/95 via-[#06180e]/95 to-[#030d07]/98 border border-[#1f794d]/50 shadow-[0_20px_50px_rgba(0,0,0,0.7),0_0_30px_rgba(78,228,139,0.12)] p-5 sm:p-6 relative overflow-hidden backdrop-blur-2xl">
+    <div className="w-full max-w-[520px] mx-auto select-none transform-gpu">
+      <div className="rounded-3xl bg-gradient-to-b from-[#082214]/96 via-[#06180e]/96 to-[#030d07]/98 border border-[#1f794d]/50 shadow-[0_20px_50px_rgba(0,0,0,0.7),0_0_30px_rgba(78,228,139,0.12)] p-5 sm:p-6 relative overflow-hidden">
         {/* Top 1px Specular Highlight Line */}
         <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#4ee48b]/30 to-transparent pointer-events-none" />
 
-        {/* Ambient Glows */}
-        <div className="absolute top-0 right-0 w-48 h-48 bg-[#4ee48b]/10 rounded-full blur-[70px] pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-48 h-48 bg-[#00d2ff]/10 rounded-full blur-[70px] pointer-events-none" />
+        {/* Ambient Glows with high-performance radial gradients */}
+        <div 
+          className="absolute top-0 right-0 w-48 h-48 pointer-events-none opacity-60" 
+          style={{ background: 'radial-gradient(circle, rgba(78,228,139,0.18) 0%, transparent 70%)' }}
+        />
+        <div 
+          className="absolute bottom-0 left-0 w-48 h-48 pointer-events-none opacity-60" 
+          style={{ background: 'radial-gradient(circle, rgba(0,210,255,0.16) 0%, transparent 70%)' }}
+        />
 
         {/* 2 Visual Nodes: Local Vault vs Cloud AI */}
         <div className="grid grid-cols-2 gap-3.5 sm:gap-4 relative py-2">

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sparkles, ArrowRight, ShieldCheck, Scale, HeartPulse, Landmark, CheckCircle2, Cpu, ArrowUpRight, Lock, Zap } from 'lucide-react';
+import { Sparkles, ArrowRight, ShieldCheck, Scale, HeartPulse, Landmark, CheckCircle2, Cpu, ArrowUpRight, Lock, Zap, Clock, Layers } from 'lucide-react';
 import { Language, IndustryScenarioId } from '../types';
 import { translations } from '../translations';
 import { FluidShaderCanvas } from './FluidShaderCanvas';
@@ -27,50 +27,38 @@ export const BusinessHero: React.FC<BusinessHeroProps> = ({
     <section className="relative min-h-[92vh] flex flex-col justify-between pt-28 pb-14 md:pt-32 md:pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden bg-[#040e08]">
       {/* 1. Authentic Capital & Code WebGL Fluid Shader Canvas Background */}
       <div 
-        className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none opacity-80"
+        className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none opacity-80 transform-gpu"
         style={{
-          WebkitMask: 'linear-gradient(to bottom, #000 0%, #000 75%, transparent 100%)',
-          mask: 'linear-gradient(to bottom, #000 0%, #000 75%, transparent 100%)'
+          WebkitMask: 'linear-gradient(to bottom, #000 0%, #000 80%, transparent 100%)',
+          mask: 'linear-gradient(to bottom, #000 0%, #000 80%, transparent 100%)'
         }}
       >
         <FluidShaderCanvas 
           className="w-full h-full"
-          color1="rgb(4, 14, 8)"        // Deep obsidian pine night
-          color2="rgb(78, 228, 139)"    // Capital & Code Electric Mint (#4ee48b)
-          color3="rgb(220, 255, 240)"   // Silk aurora mint highlight
-          speed={0.42}
-          scale={0.45}
-          swirl={0.32}
+          color1="rgb(2, 6, 4)"         // Deep obsidian void (true dark substrate)
+          color2="rgb(12, 98, 50)"      // Rich deep matrix emerald (subtle shadow transition)
+          color3="rgb(62, 218, 132)"    // Focused high-contrast electric mint ribbon
+          speed={0.40}
+          scale={0.46}
+          swirl={0.34}
           swirlIterations={10}
-          grainOpacity={0.08}
+          proportion={0.21}             // Dominant deep dark expanse for dramatic contrast
+          softness={0.88}               // Sharper, crisper contour ridges
+          grainOpacity={0.06}
         />
       </div>
 
-      {/* Decorative ambient lighting overlays */}
-      <div className="absolute top-1/4 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-[#4ee48b]/10 rounded-full blur-[140px] pointer-events-none z-0" />
-      <div className="absolute top-1/3 right-10 w-[500px] h-[350px] bg-[#0099ff]/10 rounded-full blur-[120px] pointer-events-none z-0" />
+      {/* Decorative ambient lighting overlays with zero-cost radial gradients */}
+      <div 
+        className="absolute top-1/4 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[350px] pointer-events-none z-0 transform-gpu opacity-25" 
+        style={{ background: 'radial-gradient(ellipse at center, rgba(78,228,139,0.14) 0%, transparent 70%)' }}
+      />
+      <div 
+        className="absolute top-1/3 right-10 w-[450px] h-[350px] pointer-events-none z-0 transform-gpu opacity-20" 
+        style={{ background: 'radial-gradient(ellipse at center, rgba(0,210,255,0.14) 0%, transparent 70%)' }}
+      />
 
       <div className="max-w-7xl mx-auto w-full relative z-10 my-auto">
-        {/* Hero Top Bar: Clean Meta Badge & Status */}
-        <div className="flex flex-wrap items-center justify-between gap-4 mb-6 sm:mb-8">
-          <div
-            data-aos="fade-down"
-            className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#061c0e]/90 border border-[#1f794d]/60 text-[#80f2b0] text-xs font-mono backdrop-blur-md shadow-lg shadow-[#4ee48b]/5"
-          >
-            <span className="w-2 h-2 rounded-full bg-[#4ee48b] animate-ping" />
-            <ShieldCheck className="w-3.5 h-3.5 text-[#4ee48b]" />
-            <span className="font-semibold">{t.badge}</span>
-            <span className="text-white/20">/</span>
-            <span className="text-gray-400 hidden sm:inline">ZERO-PLAINTEXT ENCLAVE</span>
-          </div>
-
-          <div className="hidden md:flex items-center gap-3 text-xs font-mono text-gray-400">
-            <span className="text-[#80f2b0] font-semibold">ENTERPRISE READY</span>
-            <span className="text-white/20">•</span>
-            <span>COVARIANT CRYPTOGRAPHIC SOVEREIGNTY</span>
-          </div>
-        </div>
-
         {/* 2-Column Hero Grid: Left Content + Right Flow Animation */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Left Column: Business Value, Typography & Action Buttons */}
@@ -242,33 +230,82 @@ export const BusinessHero: React.FC<BusinessHeroProps> = ({
           </div>
         </div>
 
-        {/* 4 Commercial Metrics Strip */}
+        {/* Apple OS Liquid Frosted Glass Metrics Strip */}
         <div
           data-aos="fade-up"
           data-aos-delay="300"
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-7xl mx-auto mt-12 sm:mt-14 pt-8 border-t border-[#1f794d]/30 text-left"
+          className="grid grid-cols-2 md:grid-cols-4 gap-3.5 sm:gap-5 max-w-7xl mx-auto mt-12 sm:mt-14 pt-8 border-t border-white/10 text-left"
         >
           {t.stats.map((stat, idx) => {
-            const colorScheme = [
-              { valColor: 'text-[#fbbf24]', borderGlow: 'hover:border-[#f59e0b]/50', topAccent: 'from-[#f59e0b]/10' },
-              { valColor: 'text-[#4ee48b]', borderGlow: 'hover:border-[#4ee48b]/50', topAccent: 'from-[#4ee48b]/10' },
-              { valColor: 'text-[#00d2ff]', borderGlow: 'hover:border-[#0099ff]/50', topAccent: 'from-[#0099ff]/10' },
-              { valColor: 'text-[#80f2b0]', borderGlow: 'hover:border-[#80f2b0]/50', topAccent: 'from-[#80f2b0]/10' },
+            const config = [
+              {
+                icon: ShieldCheck,
+                color: '#fbbf24',
+                valGradient: 'from-amber-200 via-amber-400 to-yellow-500',
+                borderHover: 'hover:border-amber-400/40 hover:shadow-[0_16px_36px_rgba(245,158,11,0.15)]',
+                ambientBg: 'from-amber-500/[0.08] via-white/[0.03] to-[#041008]/40',
+                iconBg: 'bg-amber-400/10 text-amber-300 border-amber-400/30',
+              },
+              {
+                icon: Zap,
+                color: '#4ee48b',
+                valGradient: 'from-[#80f2b0] via-[#4ee48b] to-[#38d677]',
+                borderHover: 'hover:border-[#4ee48b]/50 hover:shadow-[0_16px_36px_rgba(78,228,139,0.18)]',
+                ambientBg: 'from-[#4ee48b]/[0.08] via-white/[0.03] to-[#041008]/40',
+                iconBg: 'bg-[#4ee48b]/10 text-[#4ee48b] border-[#4ee48b]/30',
+              },
+              {
+                icon: Clock,
+                color: '#00d2ff',
+                valGradient: 'from-[#70e1ff] via-[#00d2ff] to-[#0099ff]',
+                borderHover: 'hover:border-[#00d2ff]/50 hover:shadow-[0_16px_36px_rgba(0,210,255,0.18)]',
+                ambientBg: 'from-[#00d2ff]/[0.08] via-white/[0.03] to-[#041008]/40',
+                iconBg: 'bg-[#00d2ff]/10 text-[#00d2ff] border-[#00d2ff]/30',
+              },
+              {
+                icon: Layers,
+                color: '#80f2b0',
+                valGradient: 'from-white via-[#80f2b0] to-[#4ee48b]',
+                borderHover: 'hover:border-[#80f2b0]/50 hover:shadow-[0_16px_36px_rgba(128,242,176,0.18)]',
+                ambientBg: 'from-[#80f2b0]/[0.08] via-white/[0.03] to-[#041008]/40',
+                iconBg: 'bg-[#80f2b0]/10 text-[#80f2b0] border-[#80f2b0]/30',
+              },
             ][idx % 4];
+
+            const Icon = config.icon;
 
             return (
               <div
                 key={idx}
-                className={`p-4 sm:p-5 rounded-2xl bg-gradient-to-b ${colorScheme.topAccent} via-[#061c0e]/90 to-[#041209]/95 border border-[#1f794d]/40 ${colorScheme.borderGlow} backdrop-blur-md flex flex-col justify-between transition-all duration-300 shadow-lg hover:-translate-y-0.5`}
+                className={`group relative p-4 sm:p-5 rounded-2xl sm:rounded-3xl bg-gradient-to-b ${config.ambientBg} backdrop-blur-2xl border border-white/15 ${config.borderHover} flex flex-col justify-between transition-all duration-300 shadow-[inset_0_1px_1px_rgba(255,255,255,0.22),inset_0_-1px_1px_rgba(0,0,0,0.3),0_12px_32px_rgba(0,0,0,0.45)] hover:-translate-y-1.5 overflow-hidden`}
               >
-                <div className={`text-2xl sm:text-3xl font-black font-mono ${colorScheme.valColor} mb-1 tracking-tight`}>
-                  {stat.value}
+                {/* Apple OS Specular Glass Shimmer Line */}
+                <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none" />
+
+                {/* Subsurface Organic Glow Diffusion */}
+                <div 
+                  className="absolute -top-10 -right-10 w-24 h-24 rounded-full pointer-events-none opacity-30 group-hover:opacity-70 transition-opacity"
+                  style={{ background: `radial-gradient(circle, ${config.color} 0%, transparent 70%)` }}
+                />
+
+                {/* Top Row: Metric Value + Frosted Glass Icon Badge */}
+                <div className="flex items-center justify-between gap-2 mb-2.5 sm:mb-3 relative z-10">
+                  <div className={`text-2xl sm:text-3xl font-black font-mono tracking-tight bg-clip-text text-transparent bg-gradient-to-r ${config.valGradient}`}>
+                    {stat.value}
+                  </div>
+                  <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-xl border ${config.iconBg} backdrop-blur-md flex items-center justify-center shrink-0 shadow-sm group-hover:scale-105 transition-transform`}>
+                    <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                  </div>
                 </div>
-                <div className="text-xs sm:text-sm font-bold text-white mb-0.5">
-                  {stat.label}
-                </div>
-                <div className="text-[11px] text-gray-300/80 leading-tight font-normal">
-                  {stat.sub}
+
+                {/* Bottom Row: Label & Subtitle with Crisp Typographic Refinement */}
+                <div className="relative z-10 space-y-1">
+                  <div className="text-xs sm:text-sm font-bold text-white tracking-tight flex items-center gap-1.5">
+                    <span>{stat.label}</span>
+                  </div>
+                  <div className="text-[11px] text-gray-300/85 leading-snug font-normal line-clamp-2">
+                    {stat.sub}
+                  </div>
                 </div>
               </div>
             );

@@ -111,13 +111,13 @@ export default function App() {
       <div className="fixed inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(78,228,139,0.12),rgba(5,22,11,0.6),rgba(3,10,6,0.95))] pointer-events-none -z-30" />
       <div className="fixed inset-0 bg-grid-pattern opacity-40 pointer-events-none -z-20" />
       {/* Electric Mint Aurora Glow - Top Left */}
-      <div className="fixed top-[-100px] left-[-100px] w-[650px] h-[650px] bg-[#4ee48b]/9 rounded-full blur-[160px] pointer-events-none -z-10" />
+      <div className="fixed top-[-100px] left-[-100px] w-[650px] h-[650px] bg-[#4ee48b]/9 rounded-full blur-[160px] pointer-events-none -z-10 transform-gpu" />
       {/* Deep Azure/Cobalt Aurora Glow - Top Right */}
-      <div className="fixed top-[15%] right-[-120px] w-[600px] h-[600px] bg-[#0099ff]/8 rounded-full blur-[170px] pointer-events-none -z-10" />
+      <div className="fixed top-[15%] right-[-120px] w-[600px] h-[600px] bg-[#0099ff]/8 rounded-full blur-[170px] pointer-events-none -z-10 transform-gpu" />
       {/* Warm Amber/Gold Ambient Glow - Middle Left (Breaks green fatigue) */}
-      <div className="fixed top-[50%] left-[-100px] w-[500px] h-[500px] bg-[#f59e0b]/4 rounded-full blur-[150px] pointer-events-none -z-10" />
+      <div className="fixed top-[50%] left-[-100px] w-[500px] h-[500px] bg-[#f59e0b]/4 rounded-full blur-[150px] pointer-events-none -z-10 transform-gpu" />
       {/* Cyan Aurora Glow - Bottom Center */}
-      <div className="fixed bottom-[-150px] right-[20%] w-[700px] h-[600px] bg-[#00d2ff]/6 rounded-full blur-[180px] pointer-events-none -z-10" />
+      <div className="fixed bottom-[-150px] right-[20%] w-[700px] h-[600px] bg-[#00d2ff]/6 rounded-full blur-[180px] pointer-events-none -z-10 transform-gpu" />
 
       {/* Dynamic Top Navbar */}
       <Navbar
