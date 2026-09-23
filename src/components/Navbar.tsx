@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Language, ActivePageView } from '../types';
 import { translations } from '../translations';
 import {
@@ -39,6 +39,16 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const [langMenuOpen, setLangMenuOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 40);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const t = translations[lang].nav;
 
@@ -77,9 +87,17 @@ export const Navbar: React.FC<NavbarProps> = ({
     },
   ];
 
+  const showSolidBackground = isScrolled || mobileMenuOpen || activeView !== 'home';
+
   return (
-    <header className="sticky top-0 z-40 w-full backdrop-blur-xl bg-[#05160b]/90 border-b border-[#1f794d]/30 transition-all">
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2 sm:gap-4 w-full">
+    <header
+      className={`fixed top-0 inset-x-0 z-50 w-full transition-all duration-300 ${
+        showSolidBackground
+          ? 'bg-[#040e08]/90 backdrop-blur-xl border-b border-[#1f794d]/30 shadow-[0_10px_35px_rgba(0,0,0,0.7)]'
+          : 'bg-transparent border-b border-transparent shadow-none'
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2 sm:gap-4 w-full">
         {/* Left: Brand Logo & Title */}
         <div className="shrink-0 flex items-center min-w-0">
           <button
@@ -87,7 +105,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               onViewChange('home');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className="flex items-center space-x-2 sm:space-x-2.5 lg:space-x-3 group cursor-pointer text-left"
+            className="flex items-center space-x-2 sm:space-x-2.5 lg:space-x-3 group cursor-pointer text-left focus:outline-none"
           >
             {/* High-tech Geometric Logo */}
             <div className="w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 rounded-xl bg-gradient-to-br from-[#1f794d] via-[#092915] to-[#4ee48b] p-[1px] shadow-lg shadow-[#4ee48b]/20 group-hover:shadow-[#4ee48b]/40 transition-all duration-300 shrink-0">
@@ -104,7 +122,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <span className="text-base sm:text-lg lg:text-xl font-bold tracking-tight text-white group-hover:text-[#4ee48b] transition-colors truncate">
                   Covar<span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4ee48b] to-[#80f2b0]">AI</span>
                 </span>
-                <span className="hidden xs:inline-block text-[8px] sm:text-[9px] font-mono px-1 sm:px-1.5 py-0.2 rounded-full bg-[#092915] text-[#4ee48b] border border-[#1f794d]/60 shrink-0">
+                <span className="hidden xs:inline-block text-[8px] sm:text-[9px] font-mono px-1.5 py-0.2 rounded-full bg-white/5 text-[#80f2b0] border border-white/10 shrink-0 backdrop-blur-sm">
                   v3.2
                 </span>
               </div>
@@ -115,8 +133,12 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
         </div>
 
-        {/* Center: Desktop Persona Hub Nav Buttons (Shows on XL+ screens to prevent squeezing on tablets/small laptops) */}
-        <div className="hidden xl:flex items-center gap-1 xl:gap-1.5 shrink-0 bg-[#061c0e]/90 p-1 rounded-2xl border border-[#1f794d]/40 backdrop-blur-xl">
+        {/* Center: Desktop Persona Hub Nav Buttons (Airy Translucent Glass Capsule) */}
+        <div className={`hidden xl:flex items-center gap-1 xl:gap-1.5 shrink-0 p-1 rounded-2xl border transition-all duration-300 backdrop-blur-xl ${
+          showSolidBackground
+            ? 'bg-[#061c0e]/80 border-[#1f794d]/40'
+            : 'bg-white/[0.04] border-white/10 hover:border-white/20'
+        }`}>
           {navHubs.map((hub) => {
             const Icon = hub.icon;
             const isActive = activeView === hub.id;
@@ -139,14 +161,14 @@ export const Navbar: React.FC<NavbarProps> = ({
                 className={`px-2.5 xl:px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer whitespace-nowrap ${
                   isActive
                     ? activeClass
-                    : 'text-gray-400 hover:text-gray-200 hover:bg-[#092915]'
+                    : 'text-gray-300 hover:text-white hover:bg-white/10'
                 }`}
               >
                 <Icon className="w-3.5 h-3.5 shrink-0" />
                 <span>{hub.label}</span>
                 {hub.badge && (
                   <span className={`text-[8px] xl:text-[9px] px-1 py-0.2 rounded font-mono hidden 2xl:inline-block ${
-                    isActive ? 'bg-black/20 text-current' : 'bg-[#092915] text-gray-400'
+                    isActive ? 'bg-black/20 text-current' : 'bg-black/30 text-gray-400'
                   }`}>
                     {hub.badge}
                   </span>
@@ -165,7 +187,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   el?.scrollIntoView({ behavior: 'smooth' });
                 }, 100);
               }}
-              className="px-2.5 xl:px-3 py-1.5 rounded-xl text-xs font-semibold text-gray-400 hover:text-gray-200 hover:bg-[#092915] flex items-center gap-1 transition-all cursor-pointer whitespace-nowrap"
+              className="px-2.5 xl:px-3 py-1.5 rounded-xl text-xs font-semibold text-gray-300 hover:text-white hover:bg-white/10 flex items-center gap-1 transition-all cursor-pointer whitespace-nowrap"
             >
               <span>{t.solutions}</span>
               <ChevronDown className="w-3 h-3 text-gray-400 group-hover:rotate-180 transition-transform shrink-0" />
@@ -184,7 +206,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 className="w-full text-left px-4 py-2 text-xs text-gray-300 hover:bg-[#092915] hover:text-[#4ee48b] transition-colors flex items-center justify-between cursor-pointer"
               >
                 <span>{t.legal}</span>
-                <span className="text-[10px] font-mono text-[#4ee48b]/80">FRE 502</span>
+                <span className="text-[10px] font-mono text-[#fbbf24]">FRE 502</span>
               </button>
               <button
                 onClick={() => {
@@ -198,7 +220,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 className="w-full text-left px-4 py-2 text-xs text-gray-300 hover:bg-[#092915] hover:text-[#4ee48b] transition-colors flex items-center justify-between cursor-pointer"
               >
                 <span>{t.healthcare}</span>
-                <span className="text-[10px] font-mono text-[#0099ff]/80">HIPAA</span>
+                <span className="text-[10px] font-mono text-[#00d2ff]">HIPAA</span>
               </button>
               <button
                 onClick={() => {
@@ -212,20 +234,20 @@ export const Navbar: React.FC<NavbarProps> = ({
                 className="w-full text-left px-4 py-2 text-xs text-gray-300 hover:bg-[#092915] hover:text-[#4ee48b] transition-colors flex items-center justify-between cursor-pointer"
               >
                 <span>{t.finance}</span>
-                <span className="text-[10px] font-mono text-[#4ee48b]/80">Quant</span>
+                <span className="text-[10px] font-mono text-[#4ee48b]">Quant</span>
               </button>
             </div>
           </div>
         </div>
 
-        {/* Right: Language Selector, Whitepaper & Request Demo CTA (Always fully visible, no overflow) */}
+        {/* Right: Language Selector, Whitepaper & Request Demo CTA */}
         <div className="shrink-0 flex items-center gap-1.5 sm:gap-2.5">
           {/* Language Switcher */}
           <div className="relative">
             <button
               id="lang-switch-btn"
               onClick={() => setLangMenuOpen(!langMenuOpen)}
-              className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-1.5 rounded-full text-xs font-medium text-gray-300 hover:text-white bg-white/5 border border-white/10 hover:border-[#1f794d] transition-all cursor-pointer whitespace-nowrap"
+              className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full text-xs font-medium text-gray-300 hover:text-white bg-white/[0.06] hover:bg-white/10 border border-white/10 hover:border-white/20 backdrop-blur-md transition-all cursor-pointer whitespace-nowrap"
               aria-label="Language Selector"
             >
               <Globe className="w-3.5 h-3.5 text-[#4ee48b] shrink-0" />
@@ -259,14 +281,14 @@ export const Navbar: React.FC<NavbarProps> = ({
             )}
           </div>
 
-          {/* Whitepaper Button - Disabled / Updating State (Visible on 2XL only to avoid squeeze) */}
+          {/* Whitepaper Button - Disabled / Updating State */}
           <div
-            className="hidden 2xl:flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-xs font-mono text-zinc-400 bg-zinc-900/80 border border-zinc-800 cursor-not-allowed select-none whitespace-nowrap"
+            className="hidden 2xl:flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-xs font-mono text-zinc-400 bg-white/[0.04] border border-white/10 cursor-not-allowed select-none whitespace-nowrap backdrop-blur-md"
             title={lang === 'en' ? 'Technical Whitepaper is currently being updated for official release' : '技术白皮书正在完善中，后续正式放出'}
           >
             <FileText className="w-3.5 h-3.5 text-zinc-500 shrink-0" />
             <span>{lang === 'en' ? 'Whitepaper' : '白皮书'}</span>
-            <span className="text-[9px] px-1.5 py-0.2 rounded bg-zinc-800 text-zinc-400 border border-zinc-700 font-mono">
+            <span className="text-[9px] px-1.5 py-0.2 rounded bg-white/10 text-zinc-400 border border-white/10 font-mono">
               {lang === 'en' ? 'Updating' : '完善中'}
             </span>
           </div>
@@ -274,7 +296,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Request Demo / POC Action Button - Multi-Hue Flow Gradient */}
           <button
             onClick={() => onRequestDemo()}
-            className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-gradient-to-r from-[#4ee48b] via-[#38d677] to-[#00d2ff] hover:brightness-110 text-[#05160b] font-bold text-xs flex items-center gap-1 sm:gap-1.5 shadow-lg shadow-[#4ee48b]/20 hover:shadow-[#4ee48b]/35 transition-all cursor-pointer whitespace-nowrap active:scale-95 shrink-0"
+            className="px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-gradient-to-r from-[#4ee48b] via-[#38d677] to-[#00d2ff] hover:brightness-110 text-[#05160b] font-bold text-xs flex items-center gap-1 sm:gap-1.5 shadow-lg shadow-[#4ee48b]/20 hover:shadow-[#4ee48b]/35 transition-all cursor-pointer whitespace-nowrap active:scale-95 shrink-0"
           >
             <Sparkles className="w-3.5 h-3.5 text-[#05160b] shrink-0" />
             <span className="hidden xs:inline">{lang === 'en' ? 'Book POC Demo' : '预约方案 POC'}</span>
@@ -284,7 +306,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Mobile/Tablet Menu Trigger - Visible up to XL screens */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="xl:hidden p-1.5 sm:p-2 rounded-xl bg-[#061c0e] hover:bg-[#092915] text-gray-300 hover:text-white border border-[#1f794d]/40 transition-colors shrink-0 cursor-pointer"
+            className="xl:hidden p-1.5 sm:p-2 rounded-xl bg-white/[0.06] hover:bg-white/10 text-gray-300 hover:text-white border border-white/10 transition-colors shrink-0 cursor-pointer backdrop-blur-md"
             aria-label="Toggle Menu"
           >
             {mobileMenuOpen ? <X className="w-4 h-4 sm:w-5 sm:h-5" /> : <Menu className="w-4 h-4 sm:w-5 sm:h-5" />}
@@ -294,7 +316,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Mobile/Tablet Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="xl:hidden px-4 pt-3 pb-6 bg-[#061c0e]/98 border-b border-[#1f794d]/40 space-y-3">
+        <div className="xl:hidden px-4 pt-3 pb-6 bg-[#040e08]/98 border-b border-[#1f794d]/40 space-y-3 backdrop-blur-2xl">
           <div className="text-[11px] font-mono text-[#4ee48b] uppercase tracking-wider px-2">
             {lang === 'en' ? 'Decision Portals' : '角色专属决策通道'}
           </div>

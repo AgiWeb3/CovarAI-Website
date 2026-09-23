@@ -34,7 +34,7 @@ export const DeveloperHub: React.FC<DeveloperHubProps> = ({
   return (
     <div className="animate-fade-in">
       {/* Top Header Navigation Strip */}
-      <div className="pt-6 pb-2 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <div className="pt-20 sm:pt-24 pb-2 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="p-3 sm:p-4 rounded-2xl bg-[#061c0e]/90 border border-[#1f794d]/40 flex flex-row items-center justify-between gap-4 backdrop-blur-xl shadow-[0_0_20px_rgba(78,228,139,0.1)]">
           <div className="flex items-center gap-3">
             <button

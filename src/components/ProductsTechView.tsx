@@ -26,7 +26,7 @@ export const ProductsTechView: React.FC<ProductsTechViewProps> = ({
   return (
     <div className="animate-fade-in">
       {/* Top Navigation Strip */}
-      <div className="pt-6 pb-2 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <div className="pt-20 sm:pt-24 pb-2 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="p-3 sm:p-4 rounded-2xl bg-zinc-950/80 border border-white/10 flex flex-row items-center justify-between gap-4 backdrop-blur-xl">
           <div className="flex items-center gap-3">
             <button
