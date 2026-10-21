@@ -22,7 +22,7 @@ export const translations = {
     businessHero: {
       badge: '为全球受监管企业打造的大模型机密安全基建',
       title: '释放企业 AI 潜能，绝不妥协核心隐私与合规红线',
-      subtitle: '专为法律、医疗健康与金融等高合规敏感行业打造的零信任机密计算底座。深度赋能全球最新万亿/千亿级前沿 MoE 架构 (DeepSeek-V3/R1 671B MoE / Qwen-2.5-MoE / Mixtral-8x22B)，并协同 TrustGate 安全网关无缝管控 OpenAI / Claude 等闭源模型调用，实现“零数据泄露、零越权劫持、全合规达标”。',
+      subtitle: '专为法律、医疗健康与金融等高合规敏感行业打造的零信任机密计算底座。深度赋能全球最新万亿/千亿级前沿 MoE 架构 (DeepSeek-V3/R1 671B MoE / Qwen-2.5-MoE / Mixtral-8x22B)，并协同 CovarGate 治理平台无缝管控 OpenAI / Claude 等闭源模型调用，实现“零数据泄露、零越权劫持、全合规达标”。',
       desc: '彻底打破传统“要么放弃大模型能力，要么承担云端泄密风险”的零和博弈，让法务合规官与安全团队放心批复 AI 项目全面投产。',
       ctaDemo: '预约行业方案演示',
       ctaTech: '探索底层产品与技术',
@@ -88,7 +88,7 @@ export const translations = {
               tag: '数学级不可逆',
             },
             {
-              title: 'TrustGate 法律意图防火墙',
+              title: 'CovarGate 法律治理防火墙',
               desc: '毫秒级审计 Agent 动作，严格限制外部文件导出与非授权检索，强力捍卫内部伦理墙。',
               tag: '动作级强管控',
             },
@@ -236,7 +236,7 @@ export const translations = {
               tag: '权重物理防盗',
             },
             {
-              title: 'TrustGate 毫秒级意图交易防火墙',
+              title: 'CovarGate 毫秒级治理交易防火墙',
               desc: '对 Agent 的每一个 Tool-Calling 指令进行语义意图鉴权与资金风控阈值拦截，杜绝越权动作。',
               tag: '动作零越权',
             },
@@ -276,7 +276,7 @@ export const translations = {
             afterDesc: 'SaaS 密态网关 10 分钟快速集成，或选用机密一体机物理私有化部署，性能等同明文且绝对合规。',
           },
           samplePrompt: '【量化策略 2026-ALPHA-7】基于日内高频微观订单簿特征的自适应多因子权重重平衡与交易执行方案。',
-          obfuscatedResultPreview: '微调权重常驻 TEE 飞地 · Tool Calling 意图已通过 TrustGate 审计 · 0 越权风险',
+          obfuscatedResultPreview: '微调权重常驻 TEE 飞地 · Tool Calling 意图已通过 CovarGate 审计 · 0 越权风险',
           businessOutcome: '支撑千亿资管规模日常高频策略研判，量化模型资产 100% 物理受控，顺利通过银保监会数据安全飞行检查。',
         },
       ],
@@ -313,7 +313,7 @@ export const translations = {
         {
           title: '核心资产绝对主权',
           subtitle: '模型权重与数据归属客户',
-          description: '独创代数协变混淆 (CovarPri) 与意图防火墙 (TrustGate)，核心密钥与模型权重物理隔离，彻底断绝逆向盗取与劫持风险。',
+          description: '独创代数协变混淆 (CovarPri) 与治理平台 (CovarGate)，核心密钥与模型权重物理隔离，彻底断绝逆向盗取与劫持风险。',
           icon: 'Lock',
           stat: '0%',
           statLabel: '数据外泄风险',
@@ -353,7 +353,7 @@ export const translations = {
       sloganPrimary: '信仰数学，无需信任云端',
       sloganSub: 'Trust the Math, Not the Cloud',
       title: 'Absolute Sovereignty for the Agent Era',
-      subtitle: '融合 TrustGate 与 CovarPri，为全球企业智能体构建零信任密态基建',
+      subtitle: '融合 CovarGate 与 CovarPri，为全球企业智能体构建零信任密态基建',
       desc: '彻底打破传统云端大模型与本地硬件隔离的困局，在云端公有算力中执行全流程零明文张量运算，为企业级自主智能体赋予亚秒级交互与绝对数据主权。',
       getStarted: '立即申请试用',
       readWhitepaper: '查阅技术白皮书',
@@ -448,7 +448,7 @@ export const translations = {
           solution: 'CovarAI 零信任密态基建',
           performance: '极速推理 (延迟损耗 < 3.5%)',
           performanceOk: true,
-          capability: '全权限 Agent (TrustGate 意图防火墙兜底)',
+          capability: '全权限 Agent (CovarGate 治理防火墙兜底)',
           capabilityOk: true,
           sovereignty: '绝对主权 (CovarPri 数学代数混淆 + 飞地物理隔离)',
           sovereigntyOk: true,
@@ -462,9 +462,9 @@ export const translations = {
       subtitle: '三重立体安全矩阵，从应用层、硬件层到数学内核，构筑无懈可击的企业级护城河。',
       layers: {
         trustgate: {
-          name: '外层：TrustGate',
+          name: '外层：CovarGate 治理平台',
           level: 'Outer Layer',
-          tagline: 'Agent 动作审计网关、MCP 密态管控、意图防火墙与 PII 识别过滤',
+          tagline: 'Agent 动作治理与审计、MCP 密态管控、意图防火墙与 PII 识别过滤',
           description: '毫秒级语义意图感知与 PII 敏感隐私准入拦截，深度支持 Anthropic MCP (Model Context Protocol) 协议与多智能体（Multi-Agent）环境。在提示词输入、Agent 规划与执行 Tool Calling 时进行全链路 PII 实体识别、间接提示词注入（Indirect Injection）动态拦截与意图鉴权，杜绝任何身份泄露、提权与越权数据篡改。',
           color: 'cyan',
           features: [
@@ -621,7 +621,7 @@ export const translations = {
           modeNumber: '模式 1 · SaaS 密态网关',
           title: 'CovarAI Gateway (SaaS 密态网关版)',
           targetAudience: '大中型律所 · 跨国咨询机构 · 创新药企 · AI 原生科技企业',
-          coreValue: '本地植入极轻量 TrustGate 代理，无需改造内网。直接以密态“零信任”接入公有云 Frontier 大模型算力，数据主权死死锁在本地终端。',
+          coreValue: '本地植入极轻量 CovarGate 治理代理，无需改造内网。直接以密态“零信任”接入公有云 Frontier 大模型算力，数据主权死死锁在本地终端。',
           iconType: 'cloud' as const,
           recommendedBadge: '最快 10 分钟极速接入',
           specs: {
@@ -633,7 +633,7 @@ export const translations = {
           },
           topology: {
             client: '内网业务终端 / 员工应用 (Plaintext)',
-            gateway: 'TrustGate 本地代理 + 动态代数协变矩阵扰动 P·X·P⁻¹',
+            gateway: 'CovarGate 治理代理 + 动态代数协变矩阵扰动 P·X·P⁻¹',
             transport: 'mTLS 加密公网传输 (仅流动多维高斯乱码)',
             compute: '公有云零明文算力节点 (DeepSeek-671B / Kimi-480B)',
             recovery: '本地客户端纳秒级乘积自抵消还原',
@@ -662,7 +662,7 @@ export const translations = {
           },
           topology: {
             client: '银行核心内网系统 / 交易量化终端',
-            gateway: '企业内网 KMS 硬件加密机 + TrustGate 专网网关',
+            gateway: '企业内网 KMS 硬件加密机 + CovarGate 专网治理平台',
             transport: '物理级专线 Direct Connect / IPsec 专有加密隧道',
             compute: '金融云机密隔离 VPC + NVIDIA TEE 硬件飞地',
             recovery: '金融专网网关内完成密态还原与风控审计',
@@ -691,7 +691,7 @@ export const translations = {
           },
           topology: {
             client: '医院科研内网 / 涉密科研内网终端',
-            gateway: '一体机机架内置 TrustGate 防火墙与硬件防篡改模块',
+            gateway: '一体机机架内置 CovarGate 治理防火墙与硬件防篡改模块',
             transport: '机柜内部 PCIe 5.0 / NVLink 离线物理总线 (0 网络暴露)',
             compute: '一体机预装 NVIDIA H100/H800 TEE 飞地芯片',
             recovery: '机箱内部隔离区完成推理，纯离线输出结果',
@@ -785,7 +785,7 @@ export const translations = {
     businessHero: {
       badge: '為全球受監管企業打造的大模型機密安全基建',
       title: '釋放企業 AI 潛能，絕不妥協核心隱私與合規紅線',
-      subtitle: '專為法律、醫療健康與金融等高合規敏感行業打造的零信任機密計算底座。深度賦能全球最新萬億/千億級前沿 MoE 架構 (DeepSeek-V3/R1 671B MoE / Qwen-2.5-MoE / Mixtral-8x22B)，並協同 TrustGate 安全網關無縫管控 OpenAI / Claude 等閉源模型調用，實現「零數據洩露、零越權劫持、全合規達標」。',
+      subtitle: '專為法律、醫療健康與金融等高合規敏感行業打造的零信任機密計算底座。深度賦能全球最新萬億/千億級前沿 MoE 架構 (DeepSeek-V3/R1 671B MoE / Qwen-2.5-MoE / Mixtral-8x22B)，並協同 CovarGate 治理平台無縫管控 OpenAI / Claude 等閉源模型調用，實現「零數據洩露、零越權劫持、全合規達標」。',
       desc: '徹底打破傳統「要麼放棄大模型能力，要麼承擔雲端洩密風險」的零和博弈，讓法務合規官與安全團隊放心批復 AI 項目全面投產。',
       ctaDemo: '預約行業方案演示',
       ctaTech: '探索底層產品與技術',
@@ -851,7 +851,7 @@ export const translations = {
               tag: '數學級不可逆',
             },
             {
-              title: 'TrustGate 法律意圖防火牆',
+              title: 'CovarGate 法律治理防火牆',
               desc: '毫秒級審計 Agent 動作，嚴格限制外部文件導出與非授權檢索，強力捍衛內部倫理牆。',
               tag: '動作級強管控',
             },
@@ -999,7 +999,7 @@ export const translations = {
               tag: '權重物理防盜',
             },
             {
-              title: 'TrustGate 毫秒級意圖交易防火牆',
+              title: 'CovarGate 毫秒級治理交易防火牆',
               desc: '對 Agent 的每一個 Tool-Calling 指令進行語義意圖鑒權與資金風控閾值攔截，杜絕越權動作。',
               tag: '動作零越權',
             },
@@ -1039,7 +1039,7 @@ export const translations = {
             afterDesc: 'SaaS 密態網關 10 分鐘快速集成，或選用機密一體機物理私有化部署，性能等同明文且絕對合規。',
           },
           samplePrompt: '【量化策略 2026-ALPHA-7】基於日內高頻微觀訂單簿特徵的自適應多因子權重重平衡與交易執行方案。',
-          obfuscatedResultPreview: '微調權重常駐 TEE 飛地 · Tool Calling 意圖已通過 TrustGate 審計 · 0 越權風險',
+          obfuscatedResultPreview: '微調權重常駐 TEE 飛地 · Tool Calling 意圖已通過 CovarGate 審計 · 0 越權風險',
           businessOutcome: '支撐千億資管規模日常高頻策略研判，量化模型資產 100% 物理受控，順利通過銀保監會數據安全飛行檢查。',
         },
       ],
@@ -1076,7 +1076,7 @@ export const translations = {
         {
           title: '核心資產絕對主權',
           subtitle: '模型權重與數據歸屬客戶',
-          description: '獨創代數協變混淆 (CovarPri) 與意圖防火牆 (TrustGate)，核心密鑰與模型權重物理隔離，徹底斷絕逆向盜取與劫持風險。',
+          description: '獨創代數協變混淆 (CovarPri) 與治理平台 (CovarGate)，核心密鑰與模型權重物理隔離，徹底斷絕逆向盜取與劫持風險。',
           icon: 'Lock',
           stat: '0%',
           statLabel: '數據外洩風險',
@@ -1116,7 +1116,7 @@ export const translations = {
       sloganPrimary: '信仰數學，無需信任雲端',
       sloganSub: 'Trust the Math, Not the Cloud',
       title: 'Absolute Sovereignty for the Agent Era',
-      subtitle: '融合 TrustGate 與 CovarPri，為全球企業智能體構建零信任密態基建',
+      subtitle: '融合 CovarGate 與 CovarPri，為全球企業智能體構建零信任密態基建',
       desc: '徹底打破傳統雲端大模型與本地硬件隔離的困局，在雲端公有算力中執行全流程零明文張量運算，為企業級自主智能體賦予亞秒級交互與絕對數據主權。',
       getStarted: '立即申請試用',
       readWhitepaper: '查閱技術白皮書',
@@ -1211,7 +1211,7 @@ export const translations = {
           solution: 'CovarAI 零信任密態基建',
           performance: '極速推理 (延遲損耗 < 3.5%)',
           performanceOk: true,
-          capability: '全權限 Agent (TrustGate 意圖防火牆兜底)',
+          capability: '全權限 Agent (CovarGate 治理防火牆兜底)',
           capabilityOk: true,
           sovereignty: '絕對主權 (CovarPri 數學代數混淆 + 飛地物理隔離)',
           sovereigntyOk: true,
@@ -1225,9 +1225,9 @@ export const translations = {
       subtitle: '三重立體安全矩陣，從應用層、硬件層到數學內核，構築無懈可擊的企業級護城河。',
       layers: {
         trustgate: {
-          name: '外層：TrustGate',
+          name: '外層：CovarGate 治理平台',
           level: 'Outer Layer',
-          tagline: 'Agent 動作審計網關、MCP 密態管控、意圖防火牆與 PII 識別過濾',
+          tagline: 'Agent 動作治理與審計、MCP 密態管控、意圖防火牆與 PII 識別過濾',
           description: '毫秒級語義意圖感知與 PII 敏感隱私准入攔截，深度支持 Anthropic MCP (Model Context Protocol) 協議與多智能體（Multi-Agent）環境。在提示詞輸入、Agent 規劃與執行 Tool Calling 時進行全鏈路 PII 實體識別、間接提示詞注入（Indirect Injection）動態攔截與意圖鑑權，杜絕任何身份洩漏、提權與越權數據篡改。',
           color: 'cyan',
           features: [
@@ -1384,7 +1384,7 @@ export const translations = {
           modeNumber: '模式 1 · SaaS 密態網關',
           title: 'CovarAI Gateway (SaaS 密態網關版)',
           targetAudience: '大中型律所 · 跨國諮詢機構 · 創新藥企 · AI 原生科技企業',
-          coreValue: '本地植入極輕量 TrustGate 代理，無需改造內網。直接以密態「零信任」接入公有雲 Frontier 大模型算力，數據主權死死鎖在本地終端。',
+          coreValue: '本地植入極輕量 CovarGate 治理代理，無需改造內網。直接以密態「零信任」接入公有雲 Frontier 大模型算力，數據主權死死鎖在本地終端。',
           iconType: 'cloud' as const,
           recommendedBadge: '最快 10 分鐘極速接入',
           specs: {
@@ -1396,7 +1396,7 @@ export const translations = {
           },
           topology: {
             client: '內網業務終端 / 員工應用 (Plaintext)',
-            gateway: 'TrustGate 本地代理 + 動態代數協變矩陣擾動 P·X·P⁻¹',
+            gateway: 'CovarGate 治理代理 + 動態代數協變矩陣擾動 P·X·P⁻¹',
             transport: 'mTLS 加密公網傳輸 (僅流動多維高斯亂碼)',
             compute: '公有雲零明文算力節點 (DeepSeek-671B / Kimi-480B)',
             recovery: '本地客戶端納秒級乘積自抵消還原',
@@ -1425,7 +1425,7 @@ export const translations = {
           },
           topology: {
             client: '銀行核心內網系統 / 交易量化終端',
-            gateway: '企業內網 KMS 硬件加密機 + TrustGate 專網網關',
+            gateway: '企業內網 KMS 硬件加密機 + CovarGate 專網治理平台',
             transport: '物理級專線 Direct Connect / IPsec 專有加密隧道',
             compute: '金融雲機密隔離 VPC + NVIDIA TEE 硬件飛地',
             recovery: '金融專網網關內完成密態還原與風控審計',
@@ -1454,7 +1454,7 @@ export const translations = {
           },
           topology: {
             client: '醫院科研內網 / 涉密科研內網終端',
-            gateway: '一體機機架內置 TrustGate 防火牆與硬件防篡改模塊',
+            gateway: '一體機機架內置 CovarGate 治理防火牆與硬件防篡改模塊',
             transport: '機櫃內部 PCIe 5.0 / NVLink 離線物理總線 (0 網絡暴露)',
             compute: '一體機預裝 NVIDIA H100/H800 TEE 飛地芯片',
             recovery: '機箱內部隔離區完成推理，純離線輸出結果',
@@ -1614,7 +1614,7 @@ export const translations = {
               tag: 'Mathematical Irreversibility',
             },
             {
-              title: 'TrustGate Legal Intent Firewall',
+              title: 'CovarGate Legal Governance Firewall',
               desc: 'Sub-millisecond semantic intent validation on tool calling to enforce ethical walls and block unauthorized data exfiltration.',
               tag: 'Strict Action Guardrails',
             },
@@ -1762,7 +1762,7 @@ export const translations = {
               tag: 'Hardware Weight Locking',
             },
             {
-              title: 'TrustGate Intent Execution Firewall',
+              title: 'CovarGate Intent Execution Governance Firewall',
               desc: 'Sub-millisecond semantic verification on every Tool Calling action to enforce risk thresholds and block rogue execution.',
               tag: 'Zero-Hijack Execution',
             },
@@ -1802,7 +1802,7 @@ export const translations = {
             afterDesc: 'Instant 10-min SaaS gateway integration or air-gapped Appliance with near-plaintext speed and 100% mathematical sovereignty.',
           },
           samplePrompt: '[QUANT STRATEGY 2026-ALPHA-7] Intraday order book micro-feature adaptive factor rebalancing and execution logic.',
-          obfuscatedResultPreview: 'Weights isolated in TEE enclaves · Tool Calling validated via TrustGate · 0 Hijack Risk',
+          obfuscatedResultPreview: 'Weights isolated in TEE enclaves · Tool Calling validated via CovarGate · 0 Hijack Risk',
           businessOutcome: 'Securing $15B+ AUM daily trading strategies; 100% physical asset control; passed Central Bank safety inspection.',
         },
       ],
@@ -1839,7 +1839,7 @@ export const translations = {
         {
           title: 'Absolute Asset Sovereignty',
           subtitle: 'Weights & Data Belong to You',
-          description: 'Proprietary CovarPri algebraic obfuscation and TrustGate firewall ensure keys and weights remain physically isolated.',
+          description: 'Proprietary CovarPri algebraic obfuscation and CovarGate governance platform ensure keys and weights remain physically isolated.',
           icon: 'Lock',
           stat: '0%',
           statLabel: 'Data Exposure Risk',
@@ -1879,7 +1879,7 @@ export const translations = {
       sloganPrimary: 'Trust the Math, Not the Cloud',
       sloganSub: 'Mathematical Sovereignty',
       title: 'Confidential AI Architecture for the Agent Era',
-      subtitle: 'Zero-trust infrastructure combining TrustGate semantic firewalls with CovarPri algebraic covariance.',
+      subtitle: 'Zero-trust infrastructure combining CovarGate governance firewalls with CovarPri algebraic covariance.',
       desc: 'Execute zero-plaintext tensor operations on untrusted public cloud GPUs with sub-millisecond overhead and mathematical privacy proofs.',
       getStarted: 'Request Trial',
       readWhitepaper: 'Technical Whitepaper',
@@ -1974,7 +1974,7 @@ export const translations = {
           solution: 'CovarAI Zero-Trust',
           performance: 'Blazing fast (<3.5% latency delta)',
           performanceOk: true,
-          capability: 'Full agent capabilities backed by TrustGate firewall',
+          capability: 'Full agent capabilities backed by CovarGate governance platform',
           capabilityOk: true,
           sovereignty: 'Absolute sovereignty via CovarPri algebraic obfuscation',
           sovereigntyOk: true,
@@ -1988,9 +1988,9 @@ export const translations = {
       subtitle: 'A three-tier defense matrix spanning application firewalls, hardware enclaves, and cryptographic kernels.',
       layers: {
         trustgate: {
-          name: 'Outer Layer: TrustGate',
+          name: 'Outer Layer: CovarGate Governance Platform',
           level: 'Outer Layer',
-          tagline: 'Agent Action Firewall, MCP Governance & Neural PII Sanitization',
+          tagline: 'Agent Action Governance, MCP Control, Intent Firewall & Neural PII Sanitization',
           description: 'Sub-millisecond semantic intent validation, Model Context Protocol (MCP) runtime governance, and automated PII scrubbing with cryptographic action locks.',
           color: 'cyan',
           features: [
@@ -2147,7 +2147,7 @@ export const translations = {
           modeNumber: 'Mode 1 · SaaS Gateway',
           title: 'CovarAI Gateway (SaaS Confidential Proxy)',
           targetAudience: 'Top Law Firms · Global Consultancies · Biotech & Pharma · AI Tech Enterprises',
-          coreValue: 'Lightweight on-prem TrustGate proxy with zero intranet overhaul. Access public cloud frontier models while data sovereignty is mathematically locked on premise.',
+          coreValue: 'Lightweight on-prem CovarGate proxy with zero intranet overhaul. Access public cloud frontier models while data sovereignty is mathematically locked on premise.',
           iconType: 'cloud' as const,
           recommendedBadge: '10-Minute Rapid Setup',
           specs: {
@@ -2159,7 +2159,7 @@ export const translations = {
           },
           topology: {
             client: 'Intranet Workstation / Employee Workspace (Plaintext)',
-            gateway: 'TrustGate Proxy + Dynamic Algebraic Covariance Perturbation P·X·P⁻¹',
+            gateway: 'CovarGate Governance Proxy + Dynamic Algebraic Covariance Perturbation P·X·P⁻¹',
             transport: 'mTLS Encrypted Public Transit (Pure High-Dimensional Gaussian Noise)',
             compute: 'Cloud Zero-Plaintext Compute Node (DeepSeek-671B / Kimi-480B)',
             recovery: 'Local Client Nanosecond Matrix Self-Cancellation Recovery',
@@ -2188,7 +2188,7 @@ export const translations = {
           },
           topology: {
             client: 'Bank Core Intranet / Quant Execution Terminals',
-            gateway: 'Enterprise KMS Hardware Security Module + TrustGate Intranet Gateway',
+            gateway: 'Enterprise KMS Hardware Security Module + CovarGate Intranet Governance Gateway',
             transport: 'Dedicated Leased Line / IPsec Cryptographic Tunnel',
             compute: 'Financial Cloud Isolated VPC + NVIDIA TEE Hardware Enclave',
             recovery: 'Confidential Recovery & Audit Logged within Intranet Gateway',
@@ -2217,7 +2217,7 @@ export const translations = {
           },
           topology: {
             client: 'Hospital Research Intranet / Classified Workstations',
-            gateway: 'Appliance Rack Built-in TrustGate Firewall & Anti-Tamper Module',
+            gateway: 'Appliance Rack Built-in CovarGate Governance Firewall & Anti-Tamper Module',
             transport: 'Internal PCIe 5.0 / NVLink Physical Bus (Zero External Network Exposure)',
             compute: 'Appliance Pre-installed NVIDIA H100/H800 TEE Enclave Chips',
             recovery: 'Confidential Inference Completed inside Chassis; Pure Offline Output',

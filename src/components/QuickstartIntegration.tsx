@@ -80,16 +80,16 @@ export const QuickstartIntegration: React.FC<QuickstartIntegrationProps> = ({
     python_openai: {
       label: 'Python (OpenAI SDK)',
       langTag: 'python',
-      code: `# 只需将 base_url 指向本地/内网 TrustGate 代理，业务代码 0 修改
+      code: `# 只需将 base_url 指向本地/内网 CovarGate 治理代理，业务代码 0 修改
 from openai import OpenAI
 
-# 1. 初始化客户端：连接内网 TrustGate 密态网关 (默认 localhost:8080)
+# 1. 初始化客户端：连接内网 CovarGate 治理平台 (默认 localhost:8080)
 client = OpenAI(
     base_url="http://localhost:8080/v1",       # 密态透明代理网关
     api_key="covar-local-kms-token-secure",   # 本地主密钥，终生不出域
 )
 
-# 2. 发起标准推理请求：TrustGate 自动完成动态代数混淆与解密还原
+# 2. 发起标准推理请求：CovarGate 自动完成动态代数混淆与解密还原
 response = client.chat.completions.create(
     model="deepseek-v3-confidential",         # 云端 671B MoE 零明文算力池
     messages=[
@@ -110,7 +110,7 @@ from langchain_core.prompts import ChatPromptTemplate
 
 # 兼容所有主流 Agent 框架 (LangChain, LlamaIndex, CrewAI, AutoGen)
 llm = ChatOpenAI(
-    base_url="http://localhost:8080/v1",        # TrustGate 密态网关
+    base_url="http://localhost:8080/v1",        # CovarGate 治理平台
     api_key="covar-local-kms-token-secure",
     model="deepseek-r1-confidential",
 )
@@ -139,7 +139,7 @@ public class ConfidentialAiController {
 
     @PostMapping("/api/analyze")
     public String analyzeConfidentialDoc(@RequestBody String payload) {
-        // 请求自动经过 TrustGate 硬件 KMS 矩阵扰动，云端仅见高斯乱码
+        // 请求自动经过 CovarGate 硬件 KMS 矩阵扰动，云端仅见高斯乱码
         return chatModel.call(payload);
     }
 }`,
@@ -157,7 +157,7 @@ import (
 
 func main() {
     config := openai.DefaultConfig("covar-local-kms-token-secure")
-    config.BaseURL = "http://localhost:8080/v1" // TrustGate Local Proxy
+    config.BaseURL = "http://localhost:8080/v1" // CovarGate Local Proxy
 
     client := openai.NewClientWithConfig(config)
     resp, err := client.CreateChatCompletion(
@@ -181,7 +181,7 @@ func main() {
       code: `import OpenAI from "openai";
 
 const openai = new OpenAI({
-  baseURL: "http://localhost:8080/v1", // 指向内网 TrustGate 密态代理
+  baseURL: "http://localhost:8080/v1", // 指向内网 CovarGate 治理代理
   apiKey: process.env.COVAR_LOCAL_KEY, // 本地 KMS 密钥
 });
 
@@ -253,10 +253,10 @@ main();`,
 
           <p className="text-sm sm:text-base text-gray-300 leading-relaxed max-w-2xl mx-auto">
             {lang === 'en'
-              ? 'Fully compatible with OpenAI, Anthropic, and vLLM API standards. Simply point your base_url to the local TrustGate proxy — your prompts, agent workflows, and databases remain completely unchanged.'
+              ? 'Fully compatible with OpenAI, Anthropic, and vLLM API standards. Simply point your base_url to the local CovarGate proxy — your prompts, agent workflows, and databases remain completely unchanged.'
               : lang === 'zh-TW'
-              ? '完全兼容 OpenAI、Anthropic 及 vLLM 標準 API 協議。僅需將 SDK 的 base_url 指向內網 TrustGate 密態代理，Prompt 工程、業務代碼與 Agent 工具鏈 100% 原樣運行。'
-              : '完全兼容 OpenAI、Anthropic 及 vLLM 标准 API 协议。仅需将 SDK 的 base_url 指向内网 TrustGate 密态代理，Prompt 工程、业务代码与 Agent 工具链 100% 原样运行。'}
+              ? '完全兼容 OpenAI、Anthropic 及 vLLM 標準 API 協議。僅需將 SDK 的 base_url 指向內網 CovarGate 治理代理，Prompt 工程、業務代碼與 Agent 工具鏈 100% 原樣運行。'
+              : '完全兼容 OpenAI、Anthropic 及 vLLM 标准 API 协议。仅需将 SDK 的 base_url 指向内网 CovarGate 治理代理，Prompt 工程、业务代码与 Agent 工具链 100% 原样运行。'}
           </p>
         </div>
 
@@ -331,7 +331,7 @@ main();`,
                 <div className="flex items-center gap-2">
                   <Terminal className="w-4 h-4 text-cyan-400" />
                   <h3 className="text-sm font-bold text-white">
-                    {lang === 'en' ? 'Live TrustGate Interceptor' : 'TrustGate 密态代理流转实测'}
+                    {lang === 'en' ? 'Live CovarGate Interceptor' : 'CovarGate 治理平台流转实测'}
                   </h3>
                 </div>
                 <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800">
@@ -389,7 +389,7 @@ main();`,
                 ) : (
                   <>
                     <Play className="w-3.5 h-3.5 fill-black" />
-                    <span>{lang === 'en' ? 'Simulate Request via TrustGate' : '⚡ 模拟发起 TrustGate 密态代理推理'}</span>
+                    <span>{lang === 'en' ? 'Simulate Request via CovarGate' : '⚡ 模拟发起 CovarGate 治理代理推理'}</span>
                   </>
                 )}
               </button>

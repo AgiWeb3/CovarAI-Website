@@ -211,7 +211,7 @@ export const WhitepaperModal: React.FC<WhitepaperModalProps> = ({
                 </h4>
                 <div className="p-4 rounded-xl bg-slate-900/90 border border-slate-800 text-xs space-y-2 font-mono">
                   <div className="text-cyan-300 font-bold">
-                    [Tier 1: Sovereign Edge/TrustGate] → (mTLS 1.3 + Non-reversible Tensors) → [Tier 2: Zero-Trust Channel] → [Tier 3: Untrusted GPU Cloud / TEE EnclaveX + MoE Kernel]
+                    [Tier 1: Sovereign Edge/CovarGate] → (mTLS 1.3 + Non-reversible Tensors) → [Tier 2: Zero-Trust Channel] → [Tier 3: Untrusted GPU Cloud / TEE EnclaveX + MoE Kernel]
                   </div>
                   <p className="text-slate-400 text-[11px] leading-relaxed">
                     企业密钥永不出本地内网安全域；公有云算力集群仅接收正交高斯扰动后的数学乱码张量，并在主权网关微秒级无损解密。
@@ -314,7 +314,7 @@ export const WhitepaperModal: React.FC<WhitepaperModalProps> = ({
                     </span>
                   </div>
                   <ul className="space-y-1 text-slate-400 text-[11px] list-disc list-inside">
-                    <li><strong className="text-slate-300">LLM01 (提示词注入):</strong> TrustGate 意图防火墙与间接投毒熔断</li>
+                    <li><strong className="text-slate-300">LLM01 (提示词注入):</strong> CovarGate 治理防火墙与间接投毒熔断</li>
                     <li><strong className="text-slate-300">LLM02 (敏感数据泄露):</strong> CovarPri 0.00% 泄露数学保证</li>
                     <li><strong className="text-slate-300">LLM06 (越权代理调用):</strong> MCP 动作锁与人机最终协同授权</li>
                   </ul>

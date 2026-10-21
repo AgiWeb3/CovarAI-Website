@@ -335,7 +335,7 @@ export const PromptSandboxMatrix: React.FC<PromptSandboxMatrixProps> = ({ lang }
           }`}
         >
           <UserCheck className="w-3.5 h-3.5 text-cyan-400" />
-          <span>2. {lang === 'en' ? 'TrustGate & MCP' : 'TrustGate/MCP 准入'}</span>
+          <span>2. {lang === 'en' ? 'CovarGate & MCP' : 'CovarGate/MCP 准入'}</span>
         </button>
 
         <ArrowRight className="w-3 h-3 text-slate-600 flex-shrink-0" />
@@ -435,7 +435,7 @@ export const PromptSandboxMatrix: React.FC<PromptSandboxMatrixProps> = ({ lang }
                 {currentStage === 'decrypted' && <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />}
                 <span>
                   {currentStage === 'raw' && (lang === 'en' ? 'Stage 1: Raw Plaintext Payload' : '阶段 1：端侧明文待发送载荷')}
-                  {currentStage === 'trustgate' && (lang === 'en' ? 'Stage 2: TrustGate Scrubbed & MCP Lock' : '阶段 2：TrustGate 神经脱敏与 MCP 锁定')}
+                  {currentStage === 'trustgate' && (lang === 'en' ? 'Stage 2: CovarGate Scrubbed & MCP Lock' : '阶段 2：CovarGate 神经脱敏与 MCP 锁定')}
                   {currentStage === 'covarpri' && (lang === 'en' ? 'Stage 3: CovarPri Covariant Obfuscated Tensor' : '阶段 3：CovarPri 代数协变混淆张量流')}
                   {currentStage === 'cloudGpu' && (lang === 'en' ? 'Stage 4: Untrusted Cloud 671B MoE Forward Pass' : '阶段 4：公有云 GPU 671B MoE 密态矩阵乘法')}
                   {currentStage === 'decrypted' && (lang === 'en' ? 'Stage 5: Lossless Reconstructed Output' : '阶段 5：主权端微秒级无损还原决策输出')}

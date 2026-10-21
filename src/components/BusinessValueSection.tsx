@@ -196,7 +196,7 @@ export const BusinessValueSection: React.FC<BusinessValueSectionProps> = ({
           <p className="text-xs sm:text-sm text-gray-300/90 leading-relaxed">
             {lang === 'en'
               ? 'Dive into the Algebraic Covariant Obfuscation Sandbox, the 3-Layer Onion Defense, and DeepSeek-V3 671B benchmark validation.'
-              : '体验代数协变混淆实时沙箱，查阅洋葱防御三重矩阵（TrustGate + EnclaveX + CovarPri）与 671B 参数实测基准。'}
+              : '体验代数协变混淆实时沙箱，查阅洋葱防御三重矩阵（CovarGate + EnclaveX + CovarPri）与 671B 参数实测基准。'}
           </p>
         </div>
 

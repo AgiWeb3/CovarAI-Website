@@ -286,7 +286,7 @@ export const DeploymentCTA: React.FC<DeploymentCTAProps> = ({ lang }) => {
                   <Lock className="w-3.5 h-3.5 text-cyan-400" />
                 </div>
                 <h4 className="text-xs font-bold text-cyan-200 mb-1">
-                  {lang === 'en' ? 'TrustGate KMS Gateway' : 'TrustGate 网关 / KMS'}
+                  {lang === 'en' ? 'CovarGate Governance / KMS' : 'CovarGate 治理平台 / KMS'}
                 </h4>
                 <p className="text-[11px] text-cyan-100/80 leading-relaxed font-mono">
                   {activeMode.topology.gateway}

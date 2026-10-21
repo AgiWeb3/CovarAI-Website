@@ -390,7 +390,7 @@ export const OnionArchitecture: React.FC<OnionArchitectureProps> = ({ lang }) =>
                   {lang === 'en' ? 'Layer 1 · Outer' : lang === 'zh-TW' ? 'Layer 1 · 外層' : 'Layer 1 · 外层'}
                 </div>
                 <div className="text-xs sm:text-sm font-bold text-white truncate">
-                  {lang === 'en' ? 'TrustGate Gateway' : lang === 'zh-TW' ? 'TrustGate 網關' : 'TrustGate 网关'}
+                  {lang === 'en' ? 'CovarGate Governance' : lang === 'zh-TW' ? 'CovarGate 治理平台' : 'CovarGate 治理平台'}
                 </div>
               </button>
 
@@ -961,17 +961,17 @@ export const OnionArchitecture: React.FC<OnionArchitectureProps> = ({ lang }) =>
                       {lang === 'en' ? (
                         <>
                           • <strong>CovarPri Algebraic Obfuscation</strong>: Tailored for <strong>open-weight & controllable MoE models</strong> (e.g., DeepSeek-V3/R1 671B MoE, Qwen-2.5-MoE, Mixtral 8x22B enterprise private/hosted instances), performing covariant transformations on underlying operators and tensors.<br />
-                          • <strong>Closed-Source Black-Box APIs (OpenAI / Claude)</strong>: Because third-party proprietary weights and kernels are completely opaque, <strong>CovarPri tensor obfuscation does not apply</strong>. The platform utilizes <strong>TrustGate Intent Firewall</strong> on the client-side for millisecond-level PII/PHI neural redaction, format-preserving tokenization, and Tool Calling action locks.
+                          • <strong>Closed-Source Black-Box APIs (OpenAI / Claude)</strong>: Because third-party proprietary weights and kernels are completely opaque, <strong>CovarPri tensor obfuscation does not apply</strong>. The platform utilizes <strong>CovarGate Governance Firewall</strong> on the client-side for millisecond-level PII/PHI neural redaction, format-preserving tokenization, and Tool Calling action locks.
                         </>
                       ) : lang === 'zh-TW' ? (
                         <>
                           • <strong>CovarPri 代數混淆</strong>：專用於<strong>最新開源與可控權重 MoE 架構</strong>（如 DeepSeek-V3/R1 671B MoE, Qwen-2.5-MoE, Mixtral 8x22B 等企業私有化或託管實例），因需對模型底層算子與權重張量進行協變變換。<br />
-                          • <strong>閉源黑盒 API (OpenAI / Claude)</strong>：因第三方商業模型權重與底層計算過程完全封閉，<strong>CovarPri 張量混淆對其無效</strong>。系統統籌由 <strong>TrustGate 意圖防火牆</strong>在客戶端實施毫秒級 PII/PHI 實體動態脫敏、格式保留加密與 Tool Calling 動作鎖兜底。
+                          • <strong>閉源黑盒 API (OpenAI / Claude)</strong>：因第三方商業模型權重與底層計算過程完全封閉，<strong>CovarPri 張量混淆對其無效</strong>。系統統籌由 <strong>CovarGate 治理防火牆</strong>在客戶端實施毫秒級 PII/PHI 實體動態脫敏、格式保留加密與 Tool Calling 動作鎖兜底。
                         </>
                       ) : (
                         <>
                           • <strong>CovarPri 代数混淆</strong>：专用于<strong>最新开源与可控权重 MoE 架构</strong>（如 DeepSeek-V3/R1 671B MoE, Qwen-2.5-MoE, Mixtral 8x22B 等企业私有化或托管实例），因需对模型底层算子与权重张量进行协变变换。<br />
-                          • <strong>闭源黑盒 API (OpenAI / Claude)</strong>：因第三方商业模型权重与底层计算过程完全封闭，<strong>CovarPri 张量混淆对其无效</strong>。系统统一由 <strong>TrustGate 意图防火墙</strong>在客户端实施毫秒级 PII/PHI 实体动态脱敏、格式保留加密与 Tool Calling 动作锁兜底。
+                          • <strong>闭源黑盒 API (OpenAI / Claude)</strong>：因第三方商业模型权重与底层计算过程完全封闭，<strong>CovarPri 张量混淆对其无效</strong>。系统统一由 <strong>CovarGate 治理防火墙</strong>在客户端实施毫秒级 PII/PHI 实体动态脱敏、格式保留加密与 Tool Calling 动作锁兜底。
                         </>
                       )}
                     </span>
@@ -1028,11 +1028,11 @@ export const OnionArchitecture: React.FC<OnionArchitectureProps> = ({ lang }) =>
                         <UserCheck className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
                         <span>
                           {lang === 'en' ? (
-                            <><strong>TrustGate Intent/PII Ingress: </strong>Real-time Neural NER masks PII/PHI and blocks prompt injection & unauthorized instructions.</>
+                            <><strong>CovarGate Governance/PII Ingress: </strong>Real-time Neural NER masks PII/PHI and blocks prompt injection & unauthorized instructions.</>
                           ) : lang === 'zh-TW' ? (
-                            <><strong>TrustGate 意圖/PII 准入：</strong>神經 NER 實時遮蔽敏感實體，攔截越權指令。</>
+                            <><strong>CovarGate 治理/PII 准入：</strong>神經 NER 實時遮蔽敏感實體，攔截越權指令。</>
                           ) : (
-                            <><strong>TrustGate 意图/PII 准入：</strong>神经 NER 实时遮蔽敏感实体，拦截越权指令。</>
+                            <><strong>CovarGate 治理/PII 准入：</strong>神经 NER 实时遮蔽敏感实体，拦截越权指令。</>
                           )}
                         </span>
                       </li>
