@@ -748,6 +748,7 @@ export const translations = {
       },
       footer: {
         rights: '© 2026 CovarAI Technologies Inc. All Rights Reserved.',
+        icp: '沪ICP备17051813号-6',
         complianceNotice: 'CovarAI 遵循零知识证明、代数协变密码学与国际机密计算联盟 (CCC) 严格标准。',
         links: {
           solutions: '行业方案',
@@ -1510,6 +1511,7 @@ export const translations = {
       },
       footer: {
         rights: '© 2026 CovarAI Technologies Inc. All Rights Reserved.',
+        icp: '沪ICP备17051813号-6',
         complianceNotice: 'CovarAI 遵循零知識證明、代數協變密碼學與國際機密計算聯盟 (CCC) 嚴格標準。',
         links: {
           solutions: '行業方案',
@@ -2272,6 +2274,7 @@ export const translations = {
       },
       footer: {
         rights: '© 2026 CovarAI Technologies Inc. All Rights Reserved.',
+        icp: '沪ICP备17051813号-6',
         complianceNotice: 'CovarAI complies with Zero-Knowledge Proofs, Algebraic Covariance Cryptography, and Confidential Computing Consortium (CCC) standards.',
         links: {
           solutions: 'Solutions',

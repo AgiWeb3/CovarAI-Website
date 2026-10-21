@@ -555,8 +555,8 @@ export const DeploymentCTA: React.FC<DeploymentCTAProps> = ({ lang }) => {
         {/* Minimalist Footer */}
         <footer className="pt-10 pb-6 border-t border-[#1f794d]/20 text-gray-400 text-xs">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-6">
-            <div className="flex items-center gap-3">
-              <div className="w-6 h-6 bg-gradient-to-br from-[#1f794d] to-[#4ee48b] rounded-xs rotate-45 flex items-center justify-center">
+            <div className="flex flex-wrap items-center justify-center md:justify-start gap-3">
+              <div className="w-6 h-6 bg-gradient-to-br from-[#1f794d] to-[#4ee48b] rounded-xs rotate-45 flex items-center justify-center shrink-0">
                 <div className="w-2.5 h-2.5 bg-[#05160b] rounded-xs"></div>
               </div>
               <span className="font-bold text-white text-sm">Covar<span className="text-[#4ee48b]">AI</span></span>
@@ -564,6 +564,21 @@ export const DeploymentCTA: React.FC<DeploymentCTAProps> = ({ lang }) => {
               <span className="font-mono text-gray-400 text-[11px]">
                 {footer?.rights || '© 2026 CovarAI Technologies Inc.'}
               </span>
+              <span className="text-gray-600 hidden sm:inline">|</span>
+              <a
+                href="https://beian.miit.gov.cn/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono text-[11px] text-gray-400 hover:text-[#4ee48b] transition-colors inline-flex items-center gap-1.5 group"
+                title="中华人民共和国工业和信息化部全国网络交易监管平台 / ICP备案查询"
+              >
+                <svg className="w-3.5 h-3.5 text-[#4ee48b]/70 group-hover:text-[#4ee48b] transition-colors shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+                <span className="underline decoration-zinc-700 underline-offset-4 group-hover:decoration-[#4ee48b]">
+                  {footer?.icp || '沪ICP备17051813号-6'}
+                </span>
+              </a>
             </div>
 
             <div className="flex flex-wrap items-center gap-6 text-gray-400">
@@ -591,9 +606,9 @@ export const DeploymentCTA: React.FC<DeploymentCTAProps> = ({ lang }) => {
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row justify-between items-center text-gray-500 font-mono text-[10px] gap-2">
+          <div className="flex flex-col sm:flex-row justify-between items-center text-gray-500 font-mono text-[10px] gap-2 pt-4 border-t border-white/[0.04]">
             <span>{footer?.complianceNotice}</span>
-            <span className="uppercase tracking-widest text-gray-400">Silicon Valley · Singapore · Hong Kong</span>
+            <span className="uppercase tracking-widest text-gray-400 text-center sm:text-right">Silicon Valley · Singapore · Hong Kong · Shanghai</span>
           </div>
         </footer>
       </div>

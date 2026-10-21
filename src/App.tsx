@@ -107,17 +107,21 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#040e08] text-[#f2f5f3] font-sans selection:bg-[#4ee48b]/30 selection:text-[#4ee48b] antialiased relative overflow-x-hidden">
-      {/* Background Ambient Multi-Spectrum Aurora Elements */}
+      {/* Background Ambient Multi-Spectrum Aurora Elements (Ultra-lightweight GPU-native radial gradients, 0 filter overhead) */}
       <div className="fixed inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(78,228,139,0.12),rgba(5,22,11,0.6),rgba(3,10,6,0.95))] pointer-events-none -z-30" />
       <div className="fixed inset-0 bg-grid-pattern opacity-40 pointer-events-none -z-20" />
-      {/* Electric Mint Aurora Glow - Top Left */}
-      <div className="fixed top-[-100px] left-[-100px] w-[650px] h-[650px] bg-[#4ee48b]/9 rounded-full blur-[160px] pointer-events-none -z-10 transform-gpu" />
-      {/* Deep Azure/Cobalt Aurora Glow - Top Right */}
-      <div className="fixed top-[15%] right-[-120px] w-[600px] h-[600px] bg-[#0099ff]/8 rounded-full blur-[170px] pointer-events-none -z-10 transform-gpu" />
-      {/* Warm Amber/Gold Ambient Glow - Middle Left (Breaks green fatigue) */}
-      <div className="fixed top-[50%] left-[-100px] w-[500px] h-[500px] bg-[#f59e0b]/4 rounded-full blur-[150px] pointer-events-none -z-10 transform-gpu" />
-      {/* Cyan Aurora Glow - Bottom Center */}
-      <div className="fixed bottom-[-150px] right-[20%] w-[700px] h-[600px] bg-[#00d2ff]/6 rounded-full blur-[180px] pointer-events-none -z-10 transform-gpu" />
+      {/* Combined Hardware Radial Aurora Layer - zero blur filter overhead for old devices */}
+      <div 
+        className="fixed inset-0 pointer-events-none -z-10" 
+        style={{
+          backgroundImage: `
+            radial-gradient(circle 420px at 0% 0%, rgba(78,228,139,0.085) 0%, transparent 70%),
+            radial-gradient(circle 380px at 100% 20%, rgba(0,153,255,0.075) 0%, transparent 70%),
+            radial-gradient(circle 320px at 0% 55%, rgba(245,158,11,0.035) 0%, transparent 70%),
+            radial-gradient(circle 460px at 80% 100%, rgba(0,210,255,0.06) 0%, transparent 70%)
+          `
+        }}
+      />
 
       {/* Dynamic Top Navbar */}
       <Navbar

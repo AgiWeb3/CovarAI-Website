@@ -26,26 +26,22 @@ export const BusinessHero: React.FC<BusinessHeroProps> = ({
   return (
     <section className="relative min-h-[92vh] flex flex-col justify-between pt-28 pb-14 md:pt-32 md:pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden bg-[#040e08]">
       {/* 1. Authentic Capital & Code WebGL Fluid Shader Canvas Background */}
-      <div 
-        className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none opacity-80 transform-gpu"
-        style={{
-          WebkitMask: 'linear-gradient(to bottom, #000 0%, #000 80%, transparent 100%)',
-          mask: 'linear-gradient(to bottom, #000 0%, #000 80%, transparent 100%)'
-        }}
-      >
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none opacity-80 contain-strict will-change-transform">
         <FluidShaderCanvas 
           className="w-full h-full"
           color1="rgb(2, 6, 4)"         // Deep obsidian void (true dark substrate)
           color2="rgb(12, 98, 50)"      // Rich deep matrix emerald (subtle shadow transition)
           color3="rgb(62, 218, 132)"    // Focused high-contrast electric mint ribbon
-          speed={0.40}
+          speed={0.38}
           scale={0.46}
           swirl={0.34}
-          swirlIterations={10}
+          swirlIterations={5}
           proportion={0.21}             // Dominant deep dark expanse for dramatic contrast
           softness={0.88}               // Sharper, crisper contour ridges
-          grainOpacity={0.06}
+          grainOpacity={0.05}
         />
+        {/* Hardware-accelerated smooth bottom fade (Zero-cost gradient overlay replacing heavy CSS mask) */}
+        <div className="absolute bottom-0 inset-x-0 h-48 bg-gradient-to-b from-transparent via-[#040e08]/70 to-[#040e08] pointer-events-none" />
       </div>
 
       {/* Decorative ambient lighting overlays with zero-cost radial gradients */}
