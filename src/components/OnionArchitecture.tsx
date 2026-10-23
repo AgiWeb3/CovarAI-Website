@@ -178,7 +178,7 @@ export const OnionArchitecture: React.FC<OnionArchitectureProps> = ({ lang }) =>
                     </filter>
                   </defs>
 
-                  {/* LAYER 1: OUTER LAYER (TrustGate) - Radius ~170px */}
+                  {/* LAYER 1: OUTER LAYER (CovarGate) - Radius ~170px */}
                   <g
                     className="cursor-pointer transition-all duration-500"
                     onClick={() => setSelectedLayer('trustgate')}
@@ -377,7 +377,7 @@ export const OnionArchitecture: React.FC<OnionArchitectureProps> = ({ lang }) =>
 
             {/* Onion Layer Interactive Quick Selector Ribbon */}
             <div className="grid grid-cols-3 gap-2 sm:gap-3 w-full max-w-[480px] mt-5">
-              {/* Button 1: TrustGate */}
+              {/* Button 1: CovarGate */}
               <button
                 onClick={() => setSelectedLayer('trustgate')}
                 className={`py-2.5 px-2 rounded-xl text-center border transition-all duration-300 cursor-pointer ${
@@ -783,7 +783,7 @@ export const OnionArchitecture: React.FC<OnionArchitectureProps> = ({ lang }) =>
                     <div className="h-4 w-full bg-slate-900 rounded-full overflow-hidden p-0.5 border border-slate-800 flex items-center">
                       <div className="h-full bg-gradient-to-r from-red-600 via-red-500 to-rose-400 rounded-l-full w-[85%] relative flex items-center justify-end pr-2">
                         <span className="text-[9px] font-mono font-black text-black bg-white/90 px-1.5 py-0.2 rounded">
-                          {lang === 'en' ? '// ⚡ 1000x Axis Break (Truncated)' : '// ⚡ 1000x 越界截斷 (Axis Break)'}
+                          {lang === 'en' ? '// ⚡ 1000x Axis Break (Truncated)' : lang === 'zh-TW' ? '// ⚡ 1000x 越界截斷 (Axis Break)' : '// ⚡ 1000x 越界截断 (Axis Break)'}
                         </span>
                       </div>
                       <div className="w-[15%] h-full bg-stripes-red animate-pulse flex items-center justify-center">

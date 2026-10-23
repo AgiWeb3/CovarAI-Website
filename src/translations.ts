@@ -1228,7 +1228,7 @@ export const translations = {
           name: '外層：CovarGate 治理平台',
           level: 'Outer Layer',
           tagline: 'Agent 動作治理與審計、MCP 密態管控、意圖防火牆與 PII 識別過濾',
-          description: '毫秒級語義意圖感知與 PII 敏感隱私准入攔截，深度支持 Anthropic MCP (Model Context Protocol) 協議與多智能體（Multi-Agent）環境。在提示詞輸入、Agent 規劃與執行 Tool Calling 時進行全鏈路 PII 實體識別、間接提示詞注入（Indirect Injection）動態攔截與意圖鑑權，杜絕任何身份洩漏、提權與越權數據篡改。',
+          description: '毫秒級語義意圖感知與 PII 敏感隱私準入攔截，深度支持 Anthropic MCP (Model Context Protocol) 協議與多智能體（Multi-Agent）環境。在提示詞輸入、Agent 規劃與執行 Tool Calling 時進行全鏈路 PII 實體識別、間接提示詞注入（Indirect Injection）動態攔截與意圖鑑權，杜絕任何身份洩漏、提權與越權數據篡改。',
           color: 'cyan',
           features: [
             {
@@ -1368,7 +1368,7 @@ export const translations = {
         {
           day: 'Day 7',
           phase: '董事會級 TCO 與合規白盒審計交付',
-          duration: '耗时: 1 個工作日',
+          duration: '耗時: 1 個工作日',
           tasks: [
             '出具量身定制的 CapEx 轉 OpEx 經濟賬（對比自建 GPU 機房節省 70%+）',
             '輸出滿足法律特權 (FRE 502)、HIPAA、GDPR 的白盒密碼學鑒證書',

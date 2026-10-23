@@ -584,11 +584,11 @@ export const DeploymentCTA: React.FC<DeploymentCTAProps> = ({ lang }) => {
             <div className="flex flex-wrap items-center gap-6 text-gray-400">
               <span
                 className="text-zinc-500 hover:text-zinc-400 transition-colors cursor-not-allowed flex items-center gap-1 select-none"
-                title={lang === 'en' ? 'Whitepaper is currently being updated for official release' : '技术白皮书正在完善中，后续正式放出'}
+                title={lang === 'en' ? 'Whitepaper is currently being updated for official release' : lang === 'zh-TW' ? '技術白皮書正在完善中，後續正式發布' : '技术白皮书正在完善中，后续正式放出'}
               >
-                <span>{footer?.links?.whitepaper || 'Whitepaper'}</span>
+                <span>{footer?.links?.whitepaper || (lang === 'en' ? 'Whitepaper' : lang === 'zh-TW' ? '技術白皮書' : '技术白皮书')}</span>
                 <span className="text-[9px] px-1 py-0.2 rounded bg-zinc-800 text-zinc-400 border border-zinc-700 font-mono">
-                  {lang === 'en' ? 'Updating' : '完善中'}
+                  {lang === 'en' ? 'Updating' : lang === 'zh-TW' ? '完善中' : '完善中'}
                 </span>
               </span>
               <a href="#solutions" className="hover:text-cyan-400 transition-colors">

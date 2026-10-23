@@ -36,7 +36,7 @@ export default function App() {
   const [preselectedScenario, setPreselectedScenario] = useState<string | undefined>();
 
   useEffect(() => {
-    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang === 'zh-TW' ? 'zh-TW' : 'en';
+    document.documentElement.lang = lang === 'zh-CN' ? 'zh-CN' : lang === 'zh-TW' ? 'zh-TW' : 'en';
     document.documentElement.setAttribute('data-lang', lang);
 
     // Dynamic SEO Titles & Meta Description Updates for Search Engines & Social Sharing

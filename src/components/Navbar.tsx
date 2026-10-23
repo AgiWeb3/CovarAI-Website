@@ -127,7 +127,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </span>
               </div>
               <span className="hidden 2xl:block text-[8px] lg:text-[9px] text-[#80f2b0]/70 font-mono tracking-wider uppercase whitespace-nowrap">
-                {lang === 'en' ? 'Confidential Agent Infra' : '大模型零信任密态基建'}
+                {lang === 'en' ? 'Confidential Agent Infra' : lang === 'zh-TW' ? '大模型零信任密態基建' : '大模型零信任密态基建'}
               </span>
             </div>
           </button>
@@ -284,12 +284,12 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Whitepaper Button - Disabled / Updating State */}
           <div
             className="hidden 2xl:flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-xs font-mono text-zinc-400 bg-white/[0.04] border border-white/10 cursor-not-allowed select-none whitespace-nowrap backdrop-blur-md"
-            title={lang === 'en' ? 'Technical Whitepaper is currently being updated for official release' : '技术白皮书正在完善中，后续正式放出'}
+            title={lang === 'en' ? 'Technical Whitepaper is currently being updated for official release' : lang === 'zh-TW' ? '技術白皮書正在完善中，後續正式發布' : '技术白皮书正在完善中，后续正式放出'}
           >
             <FileText className="w-3.5 h-3.5 text-zinc-500 shrink-0" />
-            <span>{lang === 'en' ? 'Whitepaper' : '白皮书'}</span>
+            <span>{lang === 'en' ? 'Whitepaper' : lang === 'zh-TW' ? '白皮書' : '白皮书'}</span>
             <span className="text-[9px] px-1.5 py-0.2 rounded bg-white/10 text-zinc-400 border border-white/10 font-mono">
-              {lang === 'en' ? 'Updating' : '完善中'}
+              {lang === 'en' ? 'Updating' : lang === 'zh-TW' ? '完善中' : '完善中'}
             </span>
           </div>
 
@@ -299,8 +299,8 @@ export const Navbar: React.FC<NavbarProps> = ({
             className="px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-gradient-to-r from-[#4ee48b] via-[#38d677] to-[#00d2ff] hover:brightness-110 text-[#05160b] font-bold text-xs flex items-center gap-1 sm:gap-1.5 shadow-lg shadow-[#4ee48b]/20 hover:shadow-[#4ee48b]/35 transition-all cursor-pointer whitespace-nowrap active:scale-95 shrink-0"
           >
             <Sparkles className="w-3.5 h-3.5 text-[#05160b] shrink-0" />
-            <span className="hidden xs:inline">{lang === 'en' ? 'Book POC Demo' : '预约方案 POC'}</span>
-            <span className="xs:hidden">{lang === 'en' ? 'Book POC' : '预约 POC'}</span>
+            <span className="hidden xs:inline">{lang === 'en' ? 'Book POC Demo' : lang === 'zh-TW' ? '預約方案 POC' : '预约方案 POC'}</span>
+            <span className="xs:hidden">{lang === 'en' ? 'Book POC' : lang === 'zh-TW' ? '預約 POC' : '预约 POC'}</span>
           </button>
 
           {/* Mobile/Tablet Menu Trigger - Visible up to XL screens */}
@@ -318,7 +318,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       {mobileMenuOpen && (
         <div className="xl:hidden px-4 pt-3 pb-6 bg-[#040e08]/98 border-b border-[#1f794d]/40 space-y-3 backdrop-blur-2xl">
           <div className="text-[11px] font-mono text-[#4ee48b] uppercase tracking-wider px-2">
-            {lang === 'en' ? 'Decision Portals' : '角色专属决策通道'}
+            {lang === 'en' ? 'Decision Portals' : lang === 'zh-TW' ? '角色專屬決策通道' : '角色专属决策通道'}
           </div>
 
           <div className="grid grid-cols-2 gap-2">
@@ -363,12 +363,12 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
             <div
               className="w-full text-left py-2 px-2 text-xs font-medium text-zinc-500 flex items-center justify-between cursor-not-allowed select-none"
-              title={lang === 'en' ? 'Technical Whitepaper is currently being updated for official release' : '技术白皮书正在完善中，后续正式放出'}
+              title={lang === 'en' ? 'Technical Whitepaper is currently being updated for official release' : lang === 'zh-TW' ? '技術白皮書正在完善中，後續正式發布' : '技术白皮书正在完善中，后续正式放出'}
             >
               <div className="flex items-center gap-1.5">
-                <span>{lang === 'en' ? 'Security & TCO Whitepaper' : '技术与 TCO 白皮书'}</span>
+                <span>{lang === 'en' ? 'Security & TCO Whitepaper' : lang === 'zh-TW' ? '技術與 TCO 白皮書' : '技术与 TCO 白皮书'}</span>
                 <span className="text-[9px] px-1 py-0.2 rounded bg-zinc-800 text-zinc-400 border border-zinc-700 font-mono">
-                  {lang === 'en' ? 'Updating' : '完善中'}
+                  {lang === 'en' ? 'Updating' : lang === 'zh-TW' ? '完善中' : '完善中'}
                 </span>
               </div>
               <FileText className="w-3.5 h-3.5 text-zinc-600" />

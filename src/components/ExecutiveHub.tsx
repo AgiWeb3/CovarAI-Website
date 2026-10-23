@@ -95,27 +95,27 @@ export const ExecutiveHub: React.FC<ExecutiveHubProps> = ({
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
           {[
             {
-              label: lang === 'en' ? 'Hardware CapEx Upfront' : '初始硬件采购资产 (CapEx)',
+              label: lang === 'en' ? 'Hardware CapEx Upfront' : lang === 'zh-TW' ? '初始硬件採購資產 (CapEx)' : '初始硬件采购资产 (CapEx)',
               val: '$0.00',
-              sub: lang === 'en' ? 'Pure OpEx elasticity' : '纯 OpEx 按需弹性',
+              sub: lang === 'en' ? 'Pure OpEx elasticity' : lang === 'zh-TW' ? '純 OpEx 按需彈性' : '纯 OpEx 按需弹性',
               color: 'text-[#4ee48b]',
             },
             {
-              label: lang === 'en' ? 'Average Net TCO Reduction' : '平均综合成本节约率 (TCO)',
+              label: lang === 'en' ? 'Average Net TCO Reduction' : lang === 'zh-TW' ? '平均綜合成本節約率 (TCO)' : '平均综合成本节约率 (TCO)',
               val: '70% ~ 78%',
-              sub: lang === 'en' ? 'Verified on 64-GPU scale' : '基于 64 卡 H800 集群验证',
+              sub: lang === 'en' ? 'Verified on 64-GPU scale' : lang === 'zh-TW' ? '基於 64 卡 H800 集群驗證' : '基于 64 卡 H800 集群验证',
               color: 'text-[#80f2b0]',
             },
             {
-              label: lang === 'en' ? 'Deployment Lead Time' : '业务上线与交付周期',
+              label: lang === 'en' ? 'Deployment Lead Time' : lang === 'zh-TW' ? '業務上線與交付週期' : '业务上线与交付周期',
               val: '1 Day',
-              sub: lang === 'en' ? 'vs 180-day hardware lead' : '对比自建机房 180 天采购',
+              sub: lang === 'en' ? 'vs 180-day hardware lead' : lang === 'zh-TW' ? '對比自建機房 180 天採購' : '对比自建机房 180 天采购',
               color: 'text-[#4ee48b]',
             },
             {
-              label: lang === 'en' ? 'Privilege Exemption Guarantee' : '法律特权失效赔偿风险',
+              label: lang === 'en' ? 'Privilege Exemption Guarantee' : lang === 'zh-TW' ? '法律特權失效賠償風險' : '法律特权失效赔偿风险',
               val: '$0.00',
-              sub: lang === 'en' ? 'FRE 502 / HIPAA Safe Harbor' : 'FRE 502 特权全流程存续',
+              sub: lang === 'en' ? 'FRE 502 / HIPAA Safe Harbor' : lang === 'zh-TW' ? 'FRE 502 特權全流程存續' : 'FRE 502 特权全流程存续',
               color: 'text-[#80f2b0]',
             },
           ].map((m, idx) => (

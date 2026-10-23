@@ -94,27 +94,27 @@ export const DeveloperHub: React.FC<DeveloperHubProps> = ({
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
           {[
             {
-              label: lang === 'en' ? 'Refactoring Lines Required' : '应用层业务改造代码量',
+              label: lang === 'en' ? 'Refactoring Lines Required' : lang === 'zh-TW' ? '應用層業務改造代碼量' : '应用层业务改造代码量',
               val: '0 Lines',
-              sub: lang === 'en' ? 'Just change base_url proxy' : '仅需配置代理 base_url',
+              sub: lang === 'en' ? 'Just change base_url proxy' : lang === 'zh-TW' ? '僅需配置代理 base_url' : '仅需配置代理 base_url',
               color: 'text-[#4ee48b]',
             },
             {
-              label: lang === 'en' ? 'End-to-End Latency Delta' : '端到端推理额外延迟损耗',
+              label: lang === 'en' ? 'End-to-End Latency Delta' : lang === 'zh-TW' ? '端到端推理額外延遲損耗' : '端到端推理额外延迟损耗',
               val: '< 3.5%',
-              sub: lang === 'en' ? 'DeepSeek 671B @ 42.8 t/s' : 'DeepSeek 671B 实测 42.8 t/s',
+              sub: lang === 'en' ? 'DeepSeek 671B @ 42.8 t/s' : lang === 'zh-TW' ? 'DeepSeek 671B 實測 42.8 t/s' : 'DeepSeek 671B 实测 42.8 t/s',
               color: 'text-[#80f2b0]',
             },
             {
-              label: lang === 'en' ? 'Max Context Window' : '超长上下文原生支持',
+              label: lang === 'en' ? 'Max Context Window' : lang === 'zh-TW' ? '超長上下文原生支援' : '超长上下文原生支持',
               val: '200K ~ 2M',
-              sub: lang === 'en' ? 'Zero Memory Explosion' : '零显存指数级爆炸',
+              sub: lang === 'en' ? 'Zero Memory Explosion' : lang === 'zh-TW' ? '零顯存指數級爆炸' : '零显存指数级爆炸',
               color: 'text-[#4ee48b]',
             },
             {
-              label: lang === 'en' ? 'Heterogeneous GPU Support' : '异构算力无缝迁移兼容性',
+              label: lang === 'en' ? 'Heterogeneous GPU Support' : lang === 'zh-TW' ? '異構算力無縫遷移相容性' : '异构算力无缝迁移兼容性',
               val: '100% Port',
-              sub: lang === 'en' ? 'NVIDIA / Ascend / Hygon' : 'NVIDIA / 华为昇腾 / 海光',
+              sub: lang === 'en' ? 'NVIDIA / Ascend / Hygon' : lang === 'zh-TW' ? 'NVIDIA / 華為昇騰 / 海光' : 'NVIDIA / 华为昇腾 / 海光',
               color: 'text-[#80f2b0]',
             },
           ].map((m, idx) => (

@@ -104,27 +104,27 @@ export const SecurityHub: React.FC<SecurityHubProps> = ({
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
           {[
             {
-              label: lang === 'en' ? 'GPU VRAM Plaintext State' : 'GPU 显存驻留明文量',
+              label: lang === 'en' ? 'GPU VRAM Plaintext State' : lang === 'zh-TW' ? 'GPU 顯存駐留明文量' : 'GPU 显存驻留明文量',
               val: '0 Bytes',
-              sub: lang === 'en' ? '100% Unstructured Gaussian Noise' : '100% 高斯白噪声乱码态',
+              sub: lang === 'en' ? '100% Unstructured Gaussian Noise' : lang === 'zh-TW' ? '100% 高斯白噪聲亂碼態' : '100% 高斯白噪声乱码态',
               color: 'text-[#4ee48b]',
             },
             {
-              label: lang === 'en' ? 'Ciphertext Information Entropy' : '密态张量信息熵 (Entropy)',
+              label: lang === 'en' ? 'Ciphertext Information Entropy' : lang === 'zh-TW' ? '密態張量資訊熵 (Entropy)' : '密态张量信息熵 (Entropy)',
               val: '7.9998 bits',
-              sub: lang === 'en' ? 'Theoretical Max: 8.0000 bits' : '理论最大真随机上限 8.0 bits',
+              sub: lang === 'en' ? 'Theoretical Max: 8.0000 bits' : lang === 'zh-TW' ? '理論最大真隨機上限 8.0 bits' : '理论最大真随机上限 8.0 bits',
               color: 'text-[#80f2b0]',
             },
             {
-              label: lang === 'en' ? 'Model Inversion GAN Loss' : '逆向反演神经网络 Loss',
+              label: lang === 'en' ? 'Model Inversion GAN Loss' : lang === 'zh-TW' ? '逆向反演神經網路 Loss' : '逆向反演神经网络 Loss',
               val: 'Loss ≡ 1.0',
-              sub: lang === 'en' ? 'Total Mode Collapse (NP-Hard)' : '无法收敛 · 彻底模式坍塌',
+              sub: lang === 'en' ? 'Total Mode Collapse (NP-Hard)' : lang === 'zh-TW' ? '無法收斂 · 徹底模式坍塌' : '无法收敛 · 彻底模式坍塌',
               color: 'text-[#4ee48b]',
             },
             {
-              label: lang === 'en' ? 'Legal Privilege Exemption' : '证据与特权豁免存续率',
+              label: lang === 'en' ? 'Legal Privilege Exemption' : lang === 'zh-TW' ? '證據與特權豁免存續率' : '证据与特权豁免存续率',
               val: '100.0%',
-              sub: lang === 'en' ? 'FRE 502 / HIPAA Safe Harbor' : '符合 ABA 477R / HIPAA 标准',
+              sub: lang === 'en' ? 'FRE 502 / HIPAA Safe Harbor' : lang === 'zh-TW' ? '符合 ABA 477R / HIPAA 標準' : '符合 ABA 477R / HIPAA 标准',
               color: 'text-[#80f2b0]',
             },
           ].map((m, idx) => (

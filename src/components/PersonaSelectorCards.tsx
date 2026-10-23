@@ -45,9 +45,21 @@ export const PersonaSelectorCards: React.FC<PersonaSelectorCardsProps> = ({
       accent: 'emerald',
       actionText: lang === 'en' ? 'Explore ROI & TCO Hub' : lang === 'zh-TW' ? '進入商業與 ROI 專區' : '进入商业与 ROI 专区',
       highlights: [
-        lang === 'en' ? 'CapEx: $0 Upfront' : '零硬體資產墊資 ($0 CapEx)',
-        lang === 'en' ? '1-Day vs 180-Day Lead Time' : '1 天上線 vs 180 天採購週期',
-        lang === 'en' ? '70%+ Net Cost Reduction' : '綜合成本節省 70%+',
+        lang === 'en'
+          ? 'CapEx: $0 Upfront'
+          : lang === 'zh-TW'
+          ? '零硬體資產墊資 ($0 CapEx)'
+          : '零硬件资产垫资 ($0 CapEx)',
+        lang === 'en'
+          ? '1-Day vs 180-Day Lead Time'
+          : lang === 'zh-TW'
+          ? '1 天上線 vs 180 天採購週期'
+          : '1 天上线 vs 180 天采购周期',
+        lang === 'en'
+          ? '70%+ Net Cost Reduction'
+          : lang === 'zh-TW'
+          ? '綜合成本節省 70%+'
+          : '综合成本节省 70%+',
       ],
     },
     {
@@ -70,9 +82,21 @@ export const PersonaSelectorCards: React.FC<PersonaSelectorCardsProps> = ({
       accent: 'rose',
       actionText: lang === 'en' ? 'Enter CISO Trust Center' : lang === 'zh-TW' ? '進入 CISO 安全中心' : '进入 CISO 安全中心',
       highlights: [
-        lang === 'en' ? 'Adversarial Red-Team Arena' : 'SOTA 攻防對抗實測靶場',
-        lang === 'en' ? '7.9998 bits Max Entropy' : '最大白噪聲信息熵 7.9998 bits',
-        lang === 'en' ? 'FRE 502 & HIPAA Exemption' : 'FRE 502 律師特權與 HIPAA 豁免',
+        lang === 'en'
+          ? 'Adversarial Red-Team Arena'
+          : lang === 'zh-TW'
+          ? 'SOTA 攻防對抗實測靶場'
+          : 'SOTA 攻防对抗实测靶场',
+        lang === 'en'
+          ? '7.9998 bits Max Entropy'
+          : lang === 'zh-TW'
+          ? '最大白噪聲信息熵 7.9998 bits'
+          : '最大白噪声信息熵 7.9998 bits',
+        lang === 'en'
+          ? 'FRE 502 & HIPAA Exemption'
+          : lang === 'zh-TW'
+          ? 'FRE 502 律師特權與 HIPAA 豁免'
+          : 'FRE 502 律师特权与 HIPAA 豁免',
       ],
     },
     {
@@ -95,9 +119,21 @@ export const PersonaSelectorCards: React.FC<PersonaSelectorCardsProps> = ({
       accent: 'cyan',
       actionText: lang === 'en' ? 'Open Developer Hub' : lang === 'zh-TW' ? '進入架構與開發者專區' : '进入架构与开发者专区',
       highlights: [
-        lang === 'en' ? '0-Refactor OpenAI / LangChain' : '0 改造相容 OpenAI SDK',
-        lang === 'en' ? 'DeepSeek 671B <3.5% Delta' : '671B MoE 延遲損耗 < 3.5%',
-        lang === 'en' ? 'FHE vs TEE vs CovarAI Matrix' : '隱私計算路線全維對比矩陣',
+        lang === 'en'
+          ? '0-Refactor OpenAI / LangChain'
+          : lang === 'zh-TW'
+          ? '0 改造相容 OpenAI SDK'
+          : '0 改造兼容 OpenAI SDK',
+        lang === 'en'
+          ? 'DeepSeek 671B <3.5% Delta'
+          : lang === 'zh-TW'
+          ? '671B MoE 延遲損耗 < 3.5%'
+          : '671B MoE 延迟损耗 < 3.5%',
+        lang === 'en'
+          ? 'FHE vs TEE vs CovarAI Matrix'
+          : lang === 'zh-TW'
+          ? '隱私計算路線全維對比矩陣'
+          : '隐私计算路线全维对比矩阵',
       ],
     },
   ];

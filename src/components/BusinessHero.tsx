@@ -21,7 +21,6 @@ export const BusinessHero: React.FC<BusinessHeroProps> = ({
   onOpenWhitepaper,
 }) => {
   const t = translations[lang].businessHero;
-  const isZh = lang === 'zh' || lang === 'zh-TW';
 
   return (
     <section className="relative min-h-[92vh] flex flex-col justify-between pt-28 pb-14 md:pt-32 md:pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden bg-[#040e08]">
@@ -165,19 +164,19 @@ export const BusinessHero: React.FC<BusinessHeroProps> = ({
             >
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-[#4ee48b] shrink-0" />
-                <span>{isZh ? '云端零明文驻留 · 物理机显存隔离' : 'Zero plaintext in cloud memory'}</span>
+                <span>{lang === 'en' ? 'Zero plaintext in cloud memory' : lang === 'zh-TW' ? '雲端零明文駐留 · 物理機顯存隔離' : '云端零明文驻留 · 物理机显存隔离'}</span>
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-[#4ee48b] shrink-0" />
-                <span>{isZh ? '完整保留司法特权 (FRE 502)' : 'Preserves Attorney-Client Privilege'}</span>
+                <span>{lang === 'en' ? 'Preserves Attorney-Client Privilege' : lang === 'zh-TW' ? '完整保留司法特權 (FRE 502)' : '完整保留司法特权 (FRE 502)'}</span>
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-[#4ee48b] shrink-0" />
-                <span>{isZh ? '端到端延迟低至 < 100ms 无损体验' : 'Sub-100ms latency overhead'}</span>
+                <span>{lang === 'en' ? 'Sub-100ms latency overhead' : lang === 'zh-TW' ? '端到端延遲低至 < 100ms 無損體驗' : '端到端延迟低至 < 100ms 无损体验'}</span>
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-[#4ee48b] shrink-0" />
-                <span>{isZh ? '支持 671B 任意模型与多模态扩展' : 'Universal 671B+ & multimodal scale'}</span>
+                <span>{lang === 'en' ? 'Universal 671B+ & multimodal scale' : lang === 'zh-TW' ? '支持 671B 任意模型與多模態擴展' : '支持 671B 任意模型与多模态扩展'}</span>
               </div>
             </div>
           </div>
@@ -200,7 +199,7 @@ export const BusinessHero: React.FC<BusinessHeroProps> = ({
                 <button
                   onClick={onSwitchToProducts}
                   className="group relative w-24 h-24 rounded-full border border-[#1f794d]/60 bg-[#061c0e]/95 backdrop-blur-xl flex items-center justify-center cursor-pointer hover:border-[#4ee48b]/80 transition-colors shadow-[0_8px_24px_rgba(0,0,0,0.7)]"
-                  title={isZh ? '探索底层技术架构' : 'Explore Tech Architecture'}
+                  title={lang === 'en' ? 'Explore Tech Architecture' : lang === 'zh-TW' ? '探索底層技術架構' : '探索底层技术架构'}
                 >
                   <svg 
                     className="absolute inset-0 w-full h-full animate-[spin_16s_linear_infinite] group-hover:animate-[spin_8s_linear_infinite] transition-all"
@@ -213,7 +212,7 @@ export const BusinessHero: React.FC<BusinessHeroProps> = ({
                     />
                     <text className="text-[7.5px] font-mono tracking-[0.2em] uppercase fill-[#80f2b0] group-hover:fill-white transition-colors">
                       <textPath href="#textCircleHero">
-                        {isZh ? '• 代数混淆 • 零明文 • 机密计算 ' : '• ZERO-PLAINTEXT • SAFE COMPUTE '}
+                        {lang === 'en' ? '• ZERO-PLAINTEXT • SAFE COMPUTE ' : lang === 'zh-TW' ? '• 代數混淆 • 零明文 • 機密計算 ' : '• 代数混淆 • 零明文 • 机密计算 '}
                       </textPath>
                     </text>
                   </svg>

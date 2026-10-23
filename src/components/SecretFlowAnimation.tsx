@@ -8,11 +8,24 @@ interface SecretFlowAnimationProps {
 }
 
 export const SecretFlowAnimation: React.FC<SecretFlowAnimationProps> = ({ 
-  lang = 'zh', 
+  lang = 'zh-CN', 
   onExploreTechnology 
 }) => {
   const [stage, setStage] = useState<number>(0);
-  const isZh = lang === 'zh' || lang === 'zh-TW';
+
+  const t = {
+    localVault: lang === 'en' ? 'Local Vault' : lang === 'zh-TW' ? '企業本地安全域' : '企业本地安全域',
+    rawData: lang === 'en' ? 'Raw Data' : lang === 'zh-TW' ? '真實核心數據' : '真实核心数据',
+    zeroEgress: lang === 'en' ? 'Zero egress guarantee' : lang === 'zh-TW' ? '永不出本地物理邊界' : '永不出本地物理边界',
+    covariant: lang === 'en' ? 'Covariant' : lang === 'zh-TW' ? '單向擾動' : '单向扰动',
+    cloudAi: lang === 'en' ? 'Cloud Frontier AI' : lang === 'zh-TW' ? '雲端大模型' : '云端大模型',
+    fullReasoning: lang === 'en' ? 'Full Reasoning' : lang === 'zh-TW' ? '100% 滿血推理' : '100% 满血推理',
+    surrendered: lang === 'en' ? 'surrendered' : lang === 'zh-TW' ? '明文洩漏' : '明文泄露',
+    stage0: lang === 'en' ? '① Data remains local; raw inputs never transmitted' : lang === 'zh-TW' ? '① 敏感資產留在本地金庫，明文絕不離開物理邊界' : '① 敏感资产留在本地金库，明文绝不离开物理边界',
+    stage1: lang === 'en' ? '② Scrambled into mathematical noise for blind cloud inference' : lang === 'zh-TW' ? '② 經代數協變算子瞬時擾動，密態在雲端盲算' : '② 经代数协变算子瞬时扰动，密态在云端盲算',
+    stage2: lang === 'en' ? '③ Full model reasoning completed with 0 bytes surrendered' : lang === 'zh-TW' ? '③ AI 滿血輸出，雲端無法探知任何單字節真實語義' : '③ AI 满血输出，云端无法探知任何单字节真实语义',
+    tech: lang === 'en' ? 'Tech' : lang === 'zh-TW' ? '技術架構' : '技术架构',
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -44,7 +57,7 @@ export const SecretFlowAnimation: React.FC<SecretFlowAnimationProps> = ({
             <div className="w-full flex items-center justify-between text-xs text-[#80f2b0] font-mono">
               <span className="font-bold flex items-center gap-1">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#4ee48b] animate-ping" />
-                {isZh ? '企业本地安全域' : 'Local Vault'}
+                {t.localVault}
               </span>
               <ShieldCheck className="w-4 h-4 text-[#4ee48b]" />
             </div>
@@ -57,11 +70,11 @@ export const SecretFlowAnimation: React.FC<SecretFlowAnimationProps> = ({
                 <div className="w-6 h-1 bg-gray-400/40 rounded" />
                 <Lock className="w-3.5 h-3.5 text-[#4ee48b] mt-2.5" />
               </div>
-              <span className="text-xs font-bold text-white mt-3">{isZh ? '真实核心数据' : 'Raw Data'}</span>
+              <span className="text-xs font-bold text-white mt-3">{t.rawData}</span>
             </div>
 
             <div className="text-[11px] font-mono text-[#80f2b0] text-center bg-[#061c0e] px-2 py-0.5 rounded border border-[#1f794d]/40">
-              {isZh ? '永不出本地物理边界' : 'Zero egress guarantee'}
+              {t.zeroEgress}
             </div>
           </div>
 
@@ -71,7 +84,7 @@ export const SecretFlowAnimation: React.FC<SecretFlowAnimationProps> = ({
               P·X
             </div>
             <span className="text-[9px] font-mono text-gray-400 mt-1 uppercase tracking-tighter">
-              {isZh ? '单向扰动' : 'Covariant'}
+              {t.covariant}
             </span>
           </div>
 
@@ -80,7 +93,7 @@ export const SecretFlowAnimation: React.FC<SecretFlowAnimationProps> = ({
             <div className="w-full flex items-center justify-between text-xs text-[#38bdf8] font-mono">
               <span className="font-bold flex items-center gap-1">
                 <Cpu className="w-3.5 h-3.5 text-[#00d2ff]" />
-                {isZh ? '云端大模型' : 'Cloud Frontier AI'}
+                {t.cloudAi}
               </span>
               <span className="w-2 h-2 rounded-full bg-[#00d2ff] animate-pulse" />
             </div>
@@ -99,13 +112,13 @@ export const SecretFlowAnimation: React.FC<SecretFlowAnimationProps> = ({
                   ))}
                 </div>
               </div>
-              <span className="text-xs font-bold text-white mt-3">{isZh ? '100% 满血推理' : 'Full Reasoning'}</span>
+              <span className="text-xs font-bold text-white mt-3">{t.fullReasoning}</span>
             </div>
 
             <div className="flex items-center gap-1 text-[11px] font-mono text-[#38bdf8] text-center bg-[#021c2e] px-2 py-0.5 rounded border border-[#0099ff]/40">
               <EyeOff className="w-3 h-3 text-[#00d2ff]" />
               <span className="font-bold">0 BYTES</span>
-              <span>{isZh ? '明文泄露' : 'surrendered'}</span>
+              <span>{t.surrendered}</span>
             </div>
           </div>
         </div>
@@ -115,9 +128,9 @@ export const SecretFlowAnimation: React.FC<SecretFlowAnimationProps> = ({
           <div className="flex items-center gap-2 text-gray-200">
             <span className="w-2 h-2 rounded-full bg-[#4ee48b] animate-ping shrink-0" />
             <span className="font-medium text-xs sm:text-[13px] leading-snug">
-              {stage === 0 && (isZh ? '① 敏感资产留在本地金库，明文绝不离开物理边界' : '① Data remains local; raw inputs never transmitted')}
-              {stage === 1 && (isZh ? '② 经代数协变算子瞬时扰动，密态在云端盲算' : '② Scrambled into mathematical noise for blind cloud inference')}
-              {stage === 2 && (isZh ? '③ AI 满血输出，云端无法探知任何单字节真实语义' : '③ Full model reasoning completed with 0 bytes surrendered')}
+              {stage === 0 && t.stage0}
+              {stage === 1 && t.stage1}
+              {stage === 2 && t.stage2}
             </span>
           </div>
 
@@ -126,7 +139,7 @@ export const SecretFlowAnimation: React.FC<SecretFlowAnimationProps> = ({
               onClick={onExploreTechnology}
               className="text-[#4ee48b] hover:text-[#80f2b0] text-xs font-mono font-bold flex items-center gap-1 cursor-pointer shrink-0 ml-3 hover:translate-x-0.5 transition-transform"
             >
-              <span>{isZh ? '技术架构' : 'Tech'}</span>
+              <span>{t.tech}</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </button>
           )}
