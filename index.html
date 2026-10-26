@@ -201,42 +201,42 @@
     <div id="root">
       <main style="max-width: 960px; margin: 0 auto; padding: 48px 24px; font-family: system-ui, -apple-system, sans-serif; color: #f1f5f9; background: #040e08;">
         <header>
-          <h1>CovarAI — 释放企业 AI 潜能，绝不妥协核心隐私与合规红线 | Deploy Frontier AI. Zero Cloud Leaks. 100% Compliant.</h1>
+          <h1>CovarAI — 敏感数据在内网化为数学密态，云端与厂商均无法窥见一字明文 | Turn Sensitive Data into Math Ciphertext Locally. Zero Plaintext in the Cloud.</h1>
           <p>
-            CovarAI 为律所、医疗生命科学与金融机构提供新一代零信任密态计算与智能体安全基础设施。支持企业安全调用
-            <strong>DeepSeek-V4.1 Flash</strong>、<strong>Kimi K3.1 Pro (2.8T MoE)</strong>、<strong>Qwen 3.8</strong> 与 <strong>Llama 4 Maverick</strong>
-            等最新万亿参数开源与商业大模型，实现<strong>云端零明文驻留 (0% Plaintext in Cloud VRAM)</strong>、<strong>&lt; 3.5% 极低推理延迟损耗 (5.1 ms TPOT / 78.5 tokens/s)</strong> 与 <strong>100% 监管合规 (FRE 502 / HIPAA / GDPR / SOC2)</strong>。
+            CovarAI 是面向金融、律所与医疗健康的零知识大模型安全网关。免除数千万自建 GPU 机房投入，企业敏感数据在内网先完成“本地敏感实体剥离与不可逆代数加密”后再发往云端推理，回传内网毫秒级无损还原——无论租用云端算力运行
+            <strong>DeepSeek-V4.1 Flash</strong>、<strong>Kimi K3.1 Pro (2.8T MoE)</strong>、<strong>Qwen 3.8</strong>、<strong>Llama 4 Maverick</strong>，还是安全代理 <strong>OpenAI / Claude</strong>
+            商业接口，<strong>公有云厂商与 CovarAI 官方均无权、无法解密客户的任何数据（零知识厂商承诺）</strong>。
           </p>
         </header>
 
         <section>
-          <h2>核心指标 (Key Performance &amp; Security Metrics)</h2>
+          <h2>给 CIO 与 CSO 的四大确定性指标 (Executive Value Pillars)</h2>
           <ul>
-            <li><strong>0% 云端明文暴露 (Zero Plaintext Exposure)</strong>：算力云厂商物理显存零明文驻留，杜绝模型蒸馏与数据越权训练。</li>
-            <li><strong>&lt; 3.5% 推理性能损耗 (Sub-3.5% Latency Overhead)</strong>：实测单 Token 生成延迟 (TPOT) 仅 5.1 ms，吞吐量高达 78.5 tokens/s，比传统全同态加密 (FHE) 快 1000 倍以上。</li>
-            <li><strong>99.94% 精度无损保持 (Lossless Reasoning Accuracy)</strong>：基于正交协方差代数不变性，确保复杂法律推理、医疗诊断与量化因子挖掘零精度坍塌。</li>
-            <li><strong>671B–2.8T 全模型兼容 (Universal Frontier Scale)</strong>：原生适配 DeepSeek-V4.1 Flash、Kimi K3.1 Pro (2.8T MoE)、Qwen 3.8、Llama 4 Maverick 及 OpenAI / Claude / Gemini API。</li>
+            <li><strong>0 字符云端与厂商明文暴露 (Zero-Knowledge Vendor Guarantee)</strong>：加解密主密钥 100% 由客户本地内网 KMS/HSM 独占，云厂商与 CovarAI 官方均无法解密；全面支持客户安全红队盲测逆向挑战 (BYO-RedTeam)。</li>
+            <li><strong>-70%+ 算力总成本直降 (70%+ Lower Compute TCO)</strong>：免除千万级 GPU 硬件采购与重资产机房建设，按需安全租用云端弹性算力。</li>
+            <li><strong>3 行代码、10 分钟无感接入 (3-Line Code Drop-In Proxy)</strong>：100% 兼容 OpenAI SDK 接口标准，现有业务系统 0 重构。</li>
+            <li><strong>&lt; 3.5% 无感延迟与原生精度 (Native Model Accuracy)</strong>：实测单字生成延迟 (TPOT) 仅 5.1 ms，比传统全同态加密 (FHE) 快 1000 倍，完整保留千亿参数旗舰大模型 99.94% 原生推理精度。</li>
           </ul>
         </section>
 
         <section>
-          <h2>核心产品矩阵 (Core Product Suite)</h2>
+          <h2>一个核心密态安全网关，三种企业级交付形态 (1 Core Gateway · 3 Delivery Modes)</h2>
           <article>
-            <h3>1. CovarPri — 代数协方差密态推理引擎 (Algebraic Covariance Confidential Inference)</h3>
+            <h3>1. SaaS 云网关版 (10 分钟 / 3 行代码极速接入)</h3>
             <p>
-              在企业本地边界内对输入 Embedding 与中间激活张量施加高维正交与协方差矩阵扰动。扰动因子在云端 GPU 执行注意力机制 (MLA / GQA) 与 MoE 专家路由内积运算时自然代数抵消，使公有云显卡在不接触任何明文 Token 的前提下完成高速推理。
+              在企业内网部署极轻量客户端代理，数据在本地加密成不可逆数学乱码后直接调用公有云旗舰大模型，密钥死死锁在企业本地。
             </p>
           </article>
           <article>
-            <h3>2. CovarGate — 零信任大模型与 MCP 智能体安全网关 (Zero-Trust AI &amp; MCP Security Gateway)</h3>
+            <h3>2. 私有 VPC 专网软件授权版 (金融专线独立部署)</h3>
             <p>
-              亚毫秒级本地双向拦截网关，提供实时 PII/PHI 敏感实体语义脱敏、局部伪名化映射回填、Prompt 注入防御以及 MCP (Model Context Protocol) 智能体工具调用沙箱鉴权与不可篡改审计日志。
+              以纯软件 License 形态部署于客户自有 VPC 或金融云专线隔离区，结合硬件安全飞地 (TEE) 与企业本地加密机 (HSM)，满足严苛金融监管。
             </p>
           </article>
           <article>
-            <h3>3. CovarBox — 企业级密态智算一体机 (Turnkey Confidential AI Appliance)</h3>
+            <h3>3. 软硬一体机交付版 (100% 纯离线物理不出机房)</h3>
             <p>
-              面向内网隔离与混合云架构的软硬一体机柜，深度集成 NVIDIA H100/B200 机密计算、AMD SEV-SNP 与 Intel TDX 硬件可信执行环境 (TEE)，开箱即用部署企业私有密态大模型底座。
+              开箱即用的 4U/8U 软硬一体机柜，出厂预装密态推理引擎与防篡改硬件飞地，支持 100% 拔掉外网线纯离线运行，数据与模型权重永不出机房。
             </p>
           </article>
         </section>

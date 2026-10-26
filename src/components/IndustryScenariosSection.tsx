@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Scale,
   HeartPulse,
@@ -6,10 +6,6 @@ import {
   AlertTriangle,
   ShieldCheck,
   CheckCircle2,
-  Lock,
-  Zap,
-  FileText,
-  Play,
   Sparkles,
   ArrowRight,
   Fingerprint,
@@ -33,22 +29,6 @@ export const IndustryScenariosSection: React.FC<IndustryScenariosSectionProps> =
   const t = translations[lang].industrySection;
   const scenarios = t.scenarios;
   const currentScenario = scenarios.find((s) => s.id === selectedIndustry) || scenarios[0];
-
-  // Interactive live simulator state
-  const [isSimulating, setIsSimulating] = useState(false);
-  const [simulatedComplete, setSimulatedComplete] = useState(false);
-
-  // Mobile segmented sub-tab state ('solution' | 'cases' | 'simulator' | 'all')
-  const [mobileSubTab, setMobileSubTab] = useState<'solution' | 'cases' | 'simulator' | 'all'>('solution');
-
-  const handleRunSimulation = () => {
-    setIsSimulating(true);
-    setSimulatedComplete(false);
-    setTimeout(() => {
-      setIsSimulating(false);
-      setSimulatedComplete(true);
-    }, 900);
-  };
 
   const getIndustryIcon = (id: IndustryScenarioId) => {
     switch (id) {
@@ -124,7 +104,6 @@ export const IndustryScenariosSection: React.FC<IndustryScenariosSectionProps> =
               key={id}
               onClick={() => {
                 onSelectIndustry(id);
-                setSimulatedComplete(false);
               }}
               className={`flex-1 min-w-[140px] sm:min-w-[180px] py-3 px-4 rounded-xl text-xs sm:text-sm font-semibold flex items-center justify-center gap-2.5 transition-all duration-300 cursor-pointer ${
                 isActive
@@ -177,101 +156,56 @@ export const IndustryScenariosSection: React.FC<IndustryScenariosSectionProps> =
           </button>
         </div>
 
-        {/* Mobile Progressive Disclosure Segmented Switcher (Visible on < lg screens) */}
-        <div className="lg:hidden mb-8 p-1 rounded-2xl bg-black/60 border border-white/10 flex items-center justify-between gap-1 overflow-x-auto">
-          <button
-            onClick={() => setMobileSubTab('solution')}
-            className={`flex-1 py-2 px-2.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
-              mobileSubTab === 'solution'
-                ? 'bg-cyan-500 text-black font-bold shadow-md'
-                : 'text-gray-400 hover:text-white'
-            }`}
-          >
-            {lang === 'en' ? 'Pain & Solution' : '痛点与解法'}
-          </button>
-          <button
-            onClick={() => setMobileSubTab('cases')}
-            className={`flex-1 py-2 px-2.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
-              mobileSubTab === 'cases'
-                ? 'bg-purple-600 text-white font-bold shadow-md'
-                : 'text-gray-400 hover:text-white'
-            }`}
-          >
-            {lang === 'en' ? 'Use Cases' : '落地案例'}
-          </button>
-          <button
-            onClick={() => setMobileSubTab('simulator')}
-            className={`flex-1 py-2 px-2.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
-              mobileSubTab === 'simulator'
-                ? 'bg-emerald-500 text-black font-bold shadow-md'
-                : 'text-gray-400 hover:text-white'
-            }`}
-          >
-            {lang === 'en' ? 'Live Simulator' : '密态仿真'}
-          </button>
-          <button
-            onClick={() => setMobileSubTab('all')}
-            className={`py-2 px-2.5 rounded-xl text-[11px] font-mono whitespace-nowrap transition-all cursor-pointer ${
-              mobileSubTab === 'all'
-                ? 'bg-white/20 text-white font-bold'
-                : 'text-gray-500 hover:text-gray-300'
-            }`}
-            title={lang === 'en' ? 'Show all sections at once' : '展开全部内容'}
-          >
-            {lang === 'en' ? 'All' : '全部'}
-          </button>
-        </div>
-
-        {/* 2-Column: Pain Points vs CovarAI Solutions (Shown on desktop OR when mobileSubTab is 'solution' / 'all') */}
-        <div className={`grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10 ${mobileSubTab !== 'solution' && mobileSubTab !== 'all' ? 'hidden lg:grid' : ''}`}>
-          {/* Column A: Pain Points & Risks */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-2 text-rose-400 font-bold text-sm sm:text-base mb-2">
+        {/* Streamlined 2-Column Executive View: Redlines vs CovarAI Confidential Solution */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+          {/* Column A: Industry Compliance Redlines */}
+          <div className="space-y-3.5">
+            <div className="flex items-center gap-2 text-rose-400 font-bold text-sm sm:text-base mb-1">
               <AlertTriangle className="w-4 h-4" />
-              <span>{lang === 'en' ? 'Existential Industry Pain Points' : '核心业务痛点与合规红线'}</span>
+              <span>{lang === 'en' ? 'Industry Compliance Redlines (Why Public AI Is Blocked)' : '行业合规红线（为什么不敢直接用公有云 AI？）'}</span>
             </div>
 
             {currentScenario.painPoints.map((pain, pIdx) => (
               <div
                 key={pIdx}
-                className="p-5 rounded-2xl bg-rose-950/20 border border-rose-500/20 hover:border-rose-500/40 transition-colors"
+                className="p-4 sm:p-5 rounded-2xl bg-rose-950/20 border border-rose-500/20 hover:border-rose-500/40 transition-colors"
               >
-                <div className="flex items-center justify-between gap-2 mb-2">
-                  <h4 className="text-sm sm:text-base font-bold text-white">
+                <div className="flex items-center justify-between gap-2 mb-1.5">
+                  <h4 className="text-sm font-bold text-white">
                     {pain.title}
                   </h4>
-                  <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-rose-950/80 text-rose-300 border border-rose-800/80 flex-shrink-0">
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-rose-950/80 text-rose-300 border border-rose-800/80 flex-shrink-0">
                     {pain.risk}
                   </span>
                 </div>
-                <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
+                <p className="text-xs text-gray-300 leading-relaxed">
                   {pain.desc}
                 </p>
               </div>
             ))}
           </div>
 
-          {/* Column B: CovarAI Business Solutions */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-2 text-cyan-400 font-bold text-sm sm:text-base mb-2">
+          {/* Column B: CovarAI Plain-Language Solution */}
+          <div className="space-y-3.5">
+            <div className="flex items-center gap-2 text-[#4ee48b] font-bold text-sm sm:text-base mb-1">
               <ShieldCheck className="w-4 h-4" />
-              <span>{lang === 'en' ? 'CovarAI Confidential Solutions' : 'CovarAI 专属密态商业解法'}</span>
+              <span>{lang === 'en' ? 'CovarAI Zero-Knowledge Solution (100% Compliant)' : 'CovarAI 零知识密态解法（合规官直接签批）'}</span>
             </div>
 
             {currentScenario.solutionHighlights.map((sol, sIdx) => (
               <div
                 key={sIdx}
-                className="p-5 rounded-2xl bg-cyan-950/20 border border-cyan-500/20 hover:border-cyan-500/40 transition-colors"
+                className="p-4 sm:p-5 rounded-2xl bg-[#092915]/50 border border-[#1f794d]/50 hover:border-[#4ee48b]/60 transition-colors"
               >
-                <div className="flex items-center justify-between gap-2 mb-2">
-                  <h4 className="text-sm sm:text-base font-bold text-white">
+                <div className="flex items-center justify-between gap-2 mb-1.5">
+                  <h4 className="text-sm font-bold text-white">
                     {sol.title}
                   </h4>
-                  <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-cyan-950/80 text-cyan-300 border border-cyan-800/80 flex-shrink-0">
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#061c0e] text-[#4ee48b] border border-[#1f794d] flex-shrink-0">
                     {sol.tag}
                   </span>
                 </div>
-                <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
+                <p className="text-xs text-gray-300 leading-relaxed">
                   {sol.desc}
                 </p>
               </div>
@@ -279,37 +213,26 @@ export const IndustryScenariosSection: React.FC<IndustryScenariosSectionProps> =
           </div>
         </div>
 
-        {/* Section C: Real-World Use Cases & Enterprise ROI (Shown on desktop OR when mobileSubTab is 'cases' / 'all') */}
-        <div className={`pt-8 border-t border-white/10 mb-10 ${mobileSubTab !== 'cases' && mobileSubTab !== 'all' ? 'hidden lg:block' : ''}`}>
-          <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center gap-2 text-white font-bold text-base sm:text-lg">
-              <Zap className="w-4 h-4 text-cyan-400" />
-              <span>{lang === 'en' ? 'Validated Production Use Cases' : '生产级落地场景与实测成效'}</span>
-            </div>
-            <span className="text-xs font-mono text-gray-400">
-              {lang === 'en' ? 'Zero Compromise on Capability' : '全功能大模型 · 零能力妥协'}
-            </span>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        {/* 3 Scannable Production Use Cases & ROI */}
+        <div className="pt-6 border-t border-white/10 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {currentScenario.useCases.map((useCase, uIdx) => (
               <div
                 key={uIdx}
-                className="p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 transition-all flex flex-col justify-between"
+                className="p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-[#4ee48b]/40 transition-all flex flex-col justify-between"
               >
                 <div>
-                  <div className="text-xs font-mono text-gray-400 mb-1">
-                    Scenario 0{uIdx + 1}
+                  <div className="flex items-center justify-between gap-2 mb-1.5">
+                    <h5 className="text-sm font-bold text-white">
+                      {useCase.title}
+                    </h5>
                   </div>
-                  <h5 className="text-sm sm:text-base font-bold text-white mb-2">
-                    {useCase.title}
-                  </h5>
-                  <p className="text-xs text-gray-300 leading-relaxed mb-4">
+                  <p className="text-xs text-gray-300 leading-relaxed mb-3">
                     {useCase.desc}
                   </p>
                 </div>
-                <div className="pt-3 border-t border-white/10">
-                  <span className="text-xs font-mono font-bold text-cyan-300 bg-cyan-950/60 px-2.5 py-1 rounded border border-cyan-800/50 inline-block">
+                <div className="pt-2.5 border-t border-white/10">
+                  <span className="text-[11px] font-mono font-bold text-[#4ee48b] bg-[#092915] px-2.5 py-0.5 rounded border border-[#1f794d] inline-block">
                     ✓ {useCase.metrics}
                   </span>
                 </div>
@@ -318,90 +241,29 @@ export const IndustryScenariosSection: React.FC<IndustryScenariosSectionProps> =
           </div>
         </div>
 
-        {/* Section D: Interactive Live Pipeline Simulator (Shown on desktop OR when mobileSubTab is 'simulator' / 'all') */}
-        <div className={`p-6 sm:p-8 rounded-2xl bg-black/60 border border-white/10 ${mobileSubTab !== 'simulator' && mobileSubTab !== 'all' ? 'hidden lg:block' : ''}`}>
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+        {/* Verified Outcome & Regulatory Badges Bar */}
+        <div className="p-4 rounded-2xl bg-[#092915]/60 border border-[#4ee48b]/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <CheckCircle2 className="w-5 h-5 text-[#4ee48b] flex-shrink-0" />
             <div>
-              <div className="flex items-center gap-2 text-xs font-mono text-cyan-400 uppercase tracking-wider mb-1">
-                <Play className="w-3 h-3 fill-cyan-400" />
-                <span>{t.interactiveDemoTitle}</span>
+              <div className="text-xs font-mono font-bold text-[#80f2b0]">
+                {lang === 'en' ? 'Verified Production Outcome & Audit Guarantee' : '标杆客户实测成效与合规审计背书'}
               </div>
-              <h4 className="text-base sm:text-lg font-bold text-white">
-                {currentScenario.name} · {lang === 'en' ? 'Confidential Execution Flow' : '密态推理全生命周期体验'}
-              </h4>
-            </div>
-
-            <button
-              onClick={handleRunSimulation}
-              disabled={isSimulating}
-              className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-400 hover:to-purple-500 text-white font-bold text-xs flex items-center gap-2 shadow-lg transition-all active:scale-95 disabled:opacity-50 cursor-pointer"
-            >
-              <Play className="w-3.5 h-3.5" />
-              <span>{isSimulating ? (lang === 'en' ? 'Obfuscating Tensors...' : '正在执行代数协变加密...') : (lang === 'en' ? 'Run Live Simulation' : '运行密态推理仿真')}</span>
-            </button>
-          </div>
-
-          {/* Before vs After Pipeline Display */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-            {/* Raw Input vs Cloud Execution */}
-            <div className="p-4 rounded-xl bg-white/5 border border-white/10">
-              <div className="flex items-center justify-between text-xs font-mono text-gray-400 mb-2">
-                <span className="flex items-center gap-1.5 text-rose-300">
-                  <FileText className="w-3.5 h-3.5" />
-                  {t.statusLabels.rawInput}
-                </span>
-                <span className="text-[10px] text-gray-500">Client Side</span>
-              </div>
-              <div className="text-xs text-gray-200 font-mono bg-black/60 p-3 rounded-lg border border-white/5 leading-relaxed">
-                {currentScenario.samplePrompt}
-              </div>
-            </div>
-
-            {/* Cloud Execution State */}
-            <div className="p-4 rounded-xl bg-white/5 border border-cyan-500/20">
-              <div className="flex items-center justify-between text-xs font-mono text-gray-400 mb-2">
-                <span className="flex items-center gap-1.5 text-cyan-300">
-                  <Lock className="w-3.5 h-3.5" />
-                  {t.statusLabels.cloudState}
-                </span>
-                <span className="text-[10px] text-emerald-400 font-mono">0% Plaintext Exposed</span>
-              </div>
-              <div className="text-xs text-cyan-300 font-mono bg-black/60 p-3 rounded-lg border border-cyan-900/50 leading-relaxed overflow-x-auto">
-                {isSimulating ? (
-                  <span className="animate-pulse text-purple-400">
-                    [Computing CovarPri Permutation Tensor: P·(A⊗B)·P⁻¹ ... 7.2ms]
-                  </span>
-                ) : (
-                  currentScenario.obfuscatedResultPreview
-                )}
+              <div className="text-xs text-gray-200 mt-0.5">
+                {currentScenario.businessOutcome}
               </div>
             </div>
           </div>
 
-          {/* Outcome & Proof */}
-          <div className="p-4 rounded-xl bg-emerald-950/30 border border-emerald-500/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <CheckCircle2 className="w-5 h-5 text-emerald-400 flex-shrink-0" />
-              <div>
-                <div className="text-xs font-mono font-bold text-emerald-300">
-                  {lang === 'en' ? 'Verified Business Outcome & Audit Proof' : '实测业务成效与合规证明'}
-                </div>
-                <div className="text-xs text-gray-300 mt-0.5">
-                  {currentScenario.businessOutcome}
-                </div>
-              </div>
-            </div>
-
-            <div className="flex flex-wrap gap-2">
-              {currentScenario.complianceBadges.map((badge, bIdx) => (
-                <span
-                  key={bIdx}
-                  className="px-2.5 py-1 rounded bg-white/5 border border-white/10 text-[10px] font-mono text-gray-300"
-                >
-                  ✓ {badge}
-                </span>
-              ))}
-            </div>
+          <div className="flex flex-wrap gap-1.5">
+            {currentScenario.complianceBadges.map((badge, bIdx) => (
+              <span
+                key={bIdx}
+                className="px-2.5 py-1 rounded bg-black/40 border border-white/10 text-[10px] font-mono text-gray-300"
+              >
+                ✓ {badge}
+              </span>
+            ))}
           </div>
         </div>
       </div>

@@ -240,49 +240,53 @@ export const PromptSandboxMatrix: React.FC<PromptSandboxMatrixProps> = ({ lang }
   };
 
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 sm:p-8 glow-cyan relative">
-      {/* Sandbox Toolbar Header */}
+    <div className="rounded-2xl border border-[#1f794d]/40 bg-[#061c0e]/70 backdrop-blur-xl p-6 sm:p-8 shadow-2xl relative">
+      {/* Sandbox Executive Header */}
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-white/10">
-        <div className="flex items-center gap-3">
-          <div className="w-3 h-3 rounded-full bg-red-500/80 animate-pulse"></div>
-          <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-          <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
-          <span className="font-mono text-xs text-gray-300 pl-2">
-            COVARPRI-MULTI-SCENARIO-EMULATOR // v3.2
-          </span>
-          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800 hidden sm:inline-block">
-            {currentScenarioData.complianceTag}
-          </span>
+        <div>
+          <div className="flex flex-wrap items-center gap-2 mb-1.5">
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#092915] border border-[#1f794d] text-[#4ee48b] text-[11px] font-mono font-bold">
+              <Shield className="w-3 h-3" />
+              {lang === 'en' ? 'INTERACTIVE ZERO-KNOWLEDGE SANDBOX' : lang === 'zh-TW' ? '在線密態驗證沙箱 · 眼見為憑' : '在线密态验证沙箱 · 眼见为凭'}
+            </span>
+            <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-cyan-950/80 text-cyan-300 border border-cyan-800/80">
+              {lang === 'en' ? 'Zero-Knowledge Vendor: Keys Never Leave Your Intranet' : lang === 'zh-TW' ? '零知識承諾：密鑰不出內網，雲廠商與 CovarAI 均無法解密' : '零知识承诺：密钥不出内网，云厂商与 CovarAI 均无法解密'}
+            </span>
+          </div>
+          <h3 className="text-lg sm:text-xl font-bold text-white">
+            {lang === 'en'
+              ? 'See What the Public Cloud Sees vs. What Your Intranet Receives'
+              : lang === 'zh-TW'
+              ? '直觀對比：企業內網輸入 vs. 公有雲端可見狀態 vs. 內網還原結果'
+              : '直观对比：企业内网输入 vs. 公有云端可见状态 vs. 内网还原结果'}
+          </h3>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 self-start lg:self-center">
           <button
             onClick={handleReset}
-            className="px-3 py-1.5 rounded-md text-xs font-mono text-gray-400 hover:text-white hover:bg-white/5 border border-white/10 flex items-center gap-1.5 transition-colors cursor-pointer"
+            className="px-3 py-2 rounded-xl text-xs font-mono text-gray-300 hover:text-white hover:bg-white/5 border border-white/10 flex items-center gap-1.5 transition-colors cursor-pointer"
           >
-            <RotateCcw className="w-3 h-3" />
-            <span>{lang === 'en' ? 'RESET' : '重置状态'}</span>
+            <RotateCcw className="w-3.5 h-3.5" />
+            <span>{lang === 'en' ? 'Reset' : '重置'}</span>
           </button>
           <button
             onClick={handleSimulate}
             disabled={isSimulating}
-            className="px-4 py-1.5 rounded-md text-xs font-mono font-bold bg-cyan-500 hover:bg-cyan-400 text-black flex items-center gap-1.5 transition-all shadow-md active:scale-95 disabled:opacity-50 cursor-pointer"
+            className="px-5 py-2 rounded-xl text-xs font-mono font-bold bg-[#4ee48b] hover:bg-[#38d677] text-[#05160b] flex items-center gap-1.5 transition-all shadow-lg shadow-[#4ee48b]/20 active:scale-95 disabled:opacity-50 cursor-pointer"
           >
             {isSimulating ? (
-              <div className="w-3.5 h-3.5 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
+              <div className="w-3.5 h-3.5 border-2 border-[#05160b] border-t-transparent rounded-full animate-spin"></div>
             ) : (
-              <Play className="w-3 h-3 fill-current" />
+              <Play className="w-3.5 h-3.5 fill-current" />
             )}
-            <span>{isSimulating ? (lang === 'en' ? 'STREAMING...' : '密态流式计算中...') : (lang === 'en' ? 'RUN PROVABLE PIPELINE' : '运行全链路密态仿真')}</span>
+            <span>{isSimulating ? (lang === 'en' ? 'Simulating...' : '密态盲算演示中...') : (lang === 'en' ? 'Run 3-Step Live Trace' : '一键演示全链路密态盲算')}</span>
           </button>
         </div>
       </div>
 
       {/* Scenario Presets Selector */}
-      <div className="my-6">
-        <label className="text-[11px] font-mono text-slate-400 uppercase tracking-wider block mb-2 font-bold">
-          {lang === 'en' ? 'Select Production Prompt Scenario:' : '选择真实生产环境业务场景：'}
-        </label>
+      <div className="my-5">
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
           {(Object.keys(scenarios) as ScenarioId[]).map((key) => {
             const sc = scenarios[key];
@@ -298,11 +302,11 @@ export const PromptSandboxMatrix: React.FC<PromptSandboxMatrixProps> = ({ lang }
                 }}
                 className={`p-3 rounded-xl border text-left transition-all cursor-pointer flex items-center gap-2.5 ${
                   isSelected
-                    ? 'bg-cyan-950/60 border-cyan-500 text-white glow-cyan'
+                    ? 'bg-[#092915] border-[#4ee48b] text-white shadow-md'
                     : 'bg-black/40 border-white/10 text-slate-400 hover:text-slate-200 hover:border-white/20'
                 }`}
               >
-                <div className={`p-1.5 rounded-lg ${isSelected ? 'bg-cyan-500/20 text-cyan-400' : 'bg-white/5 text-slate-400'}`}>
+                <div className={`p-1.5 rounded-lg ${isSelected ? 'bg-[#4ee48b]/20 text-[#4ee48b]' : 'bg-white/5 text-slate-400'}`}>
                   <Icon className="w-4 h-4" />
                 </div>
                 <div className="min-w-0">
@@ -314,64 +318,42 @@ export const PromptSandboxMatrix: React.FC<PromptSandboxMatrixProps> = ({ lang }
         </div>
       </div>
 
-      {/* 5-Step Pipeline Flow Selector */}
-      <div className="mb-6 p-2 rounded-xl bg-black/60 border border-white/10 flex items-center justify-between overflow-x-auto gap-2 text-xs font-mono">
-        <button
-          onClick={() => setCurrentStage('raw')}
-          className={`px-3 py-1.5 rounded-lg whitespace-nowrap transition-colors cursor-pointer flex items-center gap-1.5 ${
-            currentStage === 'raw' ? 'bg-white/10 text-white font-bold' : 'text-slate-400 hover:text-slate-200'
-          }`}
-        >
-          <Lock className="w-3.5 h-3.5 text-cyan-400" />
-          <span>1. {lang === 'en' ? 'Plaintext Raw' : '端侧原始输入'}</span>
-        </button>
-
-        <ArrowRight className="w-3 h-3 text-slate-600 flex-shrink-0" />
-
+      {/* Streamlined 3-Step Executive Pipeline Flow Selector (with optional Deep-Dive steps) */}
+      <div className="mb-6 p-1.5 rounded-xl bg-black/60 border border-white/10 grid grid-cols-3 gap-2 text-xs font-mono">
         <button
           onClick={() => setCurrentStage('trustgate')}
-          className={`px-3 py-1.5 rounded-lg whitespace-nowrap transition-colors cursor-pointer flex items-center gap-1.5 ${
-            currentStage === 'trustgate' ? 'bg-cyan-950 text-cyan-300 border border-cyan-800 font-bold' : 'text-slate-400 hover:text-slate-200'
+          className={`py-2.5 px-3 rounded-lg transition-all cursor-pointer flex items-center justify-center gap-2 ${
+            currentStage === 'raw' || currentStage === 'trustgate'
+              ? 'bg-cyan-950 text-cyan-300 border border-cyan-700 font-bold shadow-sm'
+              : 'text-slate-400 hover:text-slate-200'
           }`}
         >
-          <UserCheck className="w-3.5 h-3.5 text-cyan-400" />
-          <span>2. {lang === 'en' ? 'CovarGate & MCP' : 'CovarGate/MCP 准入'}</span>
+          <Lock className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+          <span className="truncate">{lang === 'en' ? '① Intranet Local Lock (PII & Key Guard)' : '① 企业内网加锁 (敏感剥离与乱码化)'}</span>
         </button>
-
-        <ArrowRight className="w-3 h-3 text-slate-600 flex-shrink-0" />
 
         <button
           onClick={() => setCurrentStage('covarpri')}
-          className={`px-3 py-1.5 rounded-lg whitespace-nowrap transition-colors cursor-pointer flex items-center gap-1.5 ${
-            currentStage === 'covarpri' ? 'bg-purple-950 text-purple-200 border border-purple-800 font-bold' : 'text-slate-400 hover:text-slate-200'
+          className={`py-2.5 px-3 rounded-lg transition-all cursor-pointer flex items-center justify-center gap-2 ${
+            currentStage === 'covarpri' || currentStage === 'cloudGpu'
+              ? 'bg-purple-950 text-purple-200 border border-purple-700 font-bold shadow-sm'
+              : 'text-slate-400 hover:text-slate-200'
           }`}
         >
-          <Binary className="w-3.5 h-3.5 text-purple-400" />
-          <span>3. {lang === 'en' ? 'CovarPri Tensor' : 'CovarPri 代数扰动'}</span>
+          <Binary className="w-3.5 h-3.5 text-purple-400 shrink-0" />
+          <span className="truncate">{lang === 'en' ? '② What Public Cloud Sees (100% Noise)' : '② 公有云端可见状态 (100% 数学乱码)'}</span>
         </button>
-
-        <ArrowRight className="w-3 h-3 text-slate-600 flex-shrink-0" />
-
-        <button
-          onClick={() => setCurrentStage('cloudGpu')}
-          className={`px-3 py-1.5 rounded-lg whitespace-nowrap transition-colors cursor-pointer flex items-center gap-1.5 ${
-            currentStage === 'cloudGpu' ? 'bg-blue-950 text-blue-200 border border-blue-800 font-bold' : 'text-slate-400 hover:text-slate-200'
-          }`}
-        >
-          <Server className="w-3.5 h-3.5 text-blue-400" />
-          <span>4. {lang === 'en' ? 'Cloud MoE GPU' : '不可信云端 671B 算力'}</span>
-        </button>
-
-        <ArrowRight className="w-3 h-3 text-slate-600 flex-shrink-0" />
 
         <button
           onClick={() => setCurrentStage('decrypted')}
-          className={`px-3 py-1.5 rounded-lg whitespace-nowrap transition-colors cursor-pointer flex items-center gap-1.5 ${
-            currentStage === 'decrypted' ? 'bg-emerald-950 text-emerald-300 border border-emerald-800 font-bold' : 'text-slate-400 hover:text-slate-200'
+          className={`py-2.5 px-3 rounded-lg transition-all cursor-pointer flex items-center justify-center gap-2 ${
+            currentStage === 'decrypted'
+              ? 'bg-emerald-950 text-emerald-300 border border-emerald-700 font-bold shadow-sm'
+              : 'text-slate-400 hover:text-slate-200'
           }`}
         >
-          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-          <span>5. {lang === 'en' ? 'Lossless Output' : '主权端无损还原'}</span>
+          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+          <span className="truncate">{lang === 'en' ? '③ Intranet Restored Output (Full IQ)' : '③ 企业内网解锁还原 (100% 满血输出)'}</span>
         </button>
       </div>
 

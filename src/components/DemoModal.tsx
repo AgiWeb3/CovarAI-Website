@@ -52,14 +52,14 @@ export const DemoModal: React.FC<DemoModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xl animate-fade-in">
       <div className="relative w-full max-w-lg bg-[#061c0e] border border-[#1f794d]/60 rounded-3xl shadow-[0_0_50px_rgba(78,228,139,0.2)] overflow-hidden">
-        {/* Header */}
+        {/*Header */}
         <div className="px-6 py-4 border-b border-[#1f794d]/30 flex items-center justify-between bg-[#05160b]">
           <div className="flex items-center gap-2">
             <div className="p-1.5 rounded-lg bg-[#092915] text-[#4ee48b] border border-[#1f794d]">
               <Sparkles className="w-4 h-4" />
             </div>
             <h3 className="text-base font-bold text-white">
-              {lang === 'en' ? 'Request Enterprise POC & Evaluation' : '预约行业方案评估与 POC 验证'}
+              {lang === 'en' ? 'Get Sandbox API Key / Executive Brief / POC' : lang === 'zh-TW' ? '申領測試 API Key / 高管簡報 / 預約盲測' : '申领测试 API Key / 高管简报 / 预约盲测'}
             </h3>
           </div>
           <button
@@ -79,14 +79,41 @@ export const DemoModal: React.FC<DemoModalProps> = ({
                 {cta.successMsg}
               </h4>
               <p className="text-xs text-gray-400 font-mono">
-                {lang === 'en' ? 'Secured Channel: SEC-COVAR-LIVE-ESTABLISHED' : '加密信道：SEC-COVAR-LIVE-ESTABLISHED'}
+                {lang === 'en' ? 'Zero-Knowledge Encrypted Channel: SEC-COVAR-NDA-ACTIVE' : '零知识加密信道：SEC-COVAR-NDA-ACTIVE'}
               </p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
-              <p className="text-xs text-gray-300 leading-relaxed mb-3">
+              <p className="text-xs text-gray-300 leading-relaxed mb-2">
                 {cta.finalSubtitle}
               </p>
+
+              {/* Quick Low-Friction Mode Switcher */}
+              <div className="grid grid-cols-3 gap-2 pb-1">
+                {(cta?.tierOptions || []).slice(0, 3).map((opt, idx) => {
+                  const shortLabels =
+                    lang === 'en'
+                      ? ['🔑 Sandbox Key', '📄 5-Min Brief', '🛡️ 7-Day POC']
+                      : lang === 'zh-TW'
+                      ? ['🔑 測試 API Key', '📄 5分鐘高管簡報', '🛡️ 7天紅隊POC']
+                      : ['🔑 测试 API Key', '📄 5分钟高管简报', '🛡️ 7天红队POC'];
+                  const isActive = tier === opt;
+                  return (
+                    <button
+                      key={idx}
+                      type="button"
+                      onClick={() => setTier(opt)}
+                      className={`py-2 px-2 rounded-xl text-[11px] font-mono font-bold border transition-all cursor-pointer ${
+                        isActive
+                          ? 'bg-[#4ee48b] text-[#05160b] border-[#4ee48b] shadow-md'
+                          : 'bg-[#05160b] text-gray-300 border-[#1f794d]/40 hover:border-[#4ee48b]/50'
+                      }`}
+                    >
+                      {shortLabels[idx]}
+                    </button>
+                  );
+                })}
+              </div>
 
               <div>
                 <label className="block text-xs font-mono text-gray-400 mb-1">

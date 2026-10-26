@@ -58,15 +58,24 @@ export const BusinessHero: React.FC<BusinessHeroProps> = ({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Left Column: Business Value, Typography & Action Buttons */}
           <div className="lg:col-span-7 flex flex-col items-start text-left space-y-6">
+            {/* Executive Zero-Knowledge Pill */}
+            <div
+              data-aos="fade-up"
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#061c0e]/90 border border-[#4ee48b]/40 text-[#80f2b0] text-xs font-mono shadow-sm backdrop-blur-md"
+            >
+              <Lock className="w-3.5 h-3.5 text-[#4ee48b]" />
+              <span>{t.badge}</span>
+            </div>
+
             <h1
               data-aos="fade-up"
-              className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.12] text-balance drop-shadow-[0_2px_15px_rgba(0,0,0,0.8)]"
+              className="text-3xl sm:text-5xl lg:text-[54px] font-black tracking-tight text-white leading-[1.14] text-balance drop-shadow-[0_2px_15px_rgba(0,0,0,0.8)]"
             >
               {lang === 'en' ? (
                 <>
-                  <span>Deploy Frontier AI. </span>
-                  <span className="block mt-1 bg-clip-text text-transparent bg-gradient-to-r from-white via-[#80f2b0] via-[#4ee48b] to-[#00d2ff] drop-shadow-[0_0_35px_rgba(78,228,139,0.3)]">
-                    Zero Cloud Leaks. 100% Compliant.
+                  <span>Turn Sensitive Data into Math Ciphertext Locally. </span>
+                  <span className="block mt-1.5 bg-clip-text text-transparent bg-gradient-to-r from-white via-[#80f2b0] via-[#4ee48b] to-[#00d2ff] drop-shadow-[0_0_35px_rgba(78,228,139,0.3)]">
+                    Zero Plaintext Seen by Cloud or Vendor.
                   </span>
                 </>
               ) : (
@@ -82,7 +91,7 @@ export const BusinessHero: React.FC<BusinessHeroProps> = ({
             <p
               data-aos="fade-up"
               data-aos-delay="100"
-              className="text-sm sm:text-base lg:text-lg text-[#f1f5f9] max-w-2xl leading-relaxed font-light drop-shadow-[0_1px_8px_rgba(0,0,0,0.85)]"
+              className="text-sm sm:text-base lg:text-lg text-[#f1f5f9] max-w-2xl leading-relaxed font-normal drop-shadow-[0_1px_8px_rgba(0,0,0,0.85)]"
             >
               {t.subtitle}
             </p>
@@ -94,7 +103,7 @@ export const BusinessHero: React.FC<BusinessHeroProps> = ({
               className="flex flex-wrap items-center gap-2.5 pt-1"
             >
               <span className="text-xs font-mono text-[#80f2b0]/70 uppercase tracking-wider mr-1">
-                {lang === 'en' ? 'Target Verticals:' : '垂直行业专区:'}
+                {lang === 'en' ? 'Industry Focus:' : lang === 'zh-TW' ? '重點服務行業:' : '重点服务行业:'}
               </span>
               <button
                 onClick={() => onSelectIndustry('legal')}
@@ -144,39 +153,29 @@ export const BusinessHero: React.FC<BusinessHeroProps> = ({
                 <span>{t.ctaTech}</span>
                 <ArrowUpRight className="w-4 h-4 text-gray-400 group-hover:text-white" />
               </button>
-
-              <div
-                className="w-full sm:w-auto text-xs text-zinc-400 flex items-center justify-center gap-1.5 font-mono py-2 cursor-not-allowed select-none"
-                title={lang === 'en' ? 'Whitepaper is currently being updated for official release' : '技术白皮书正在完善中，后续正式放出'}
-              >
-                <span>{translations[lang].nav.whitepaper}</span>
-                <span className="text-[10px] px-1.5 py-0.5 rounded bg-zinc-800/80 text-zinc-400 border border-zinc-700/80 font-mono">
-                  {lang === 'en' ? 'Updating' : '完善中'}
-                </span>
-              </div>
             </div>
 
-            {/* Trust checkmarks in plain business language */}
+            {/* Trust checkmarks in plain CIO/CSO language */}
             <div
               data-aos="fade-up"
               data-aos-delay="250"
-              className="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs text-gray-300 font-medium"
+              className="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs text-gray-200 font-medium"
             >
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-[#4ee48b] shrink-0" />
-                <span>{lang === 'en' ? 'Zero plaintext in cloud memory' : lang === 'zh-TW' ? '雲端零明文駐留 · 物理機顯存隔離' : '云端零明文驻留 · 物理机显存隔离'}</span>
+                <span>{lang === 'en' ? 'Zero-Knowledge Vendor: Even CovarAI cannot decrypt' : lang === 'zh-TW' ? '零知識承諾：連 CovarAI 官方也無權解密' : '零知识承诺：连 CovarAI 官方也无权解密'}</span>
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-[#4ee48b] shrink-0" />
-                <span>{lang === 'en' ? 'Preserves Attorney-Client Privilege' : lang === 'zh-TW' ? '完整保留司法特權 (FRE 502)' : '完整保留司法特权 (FRE 502)'}</span>
+                <span>{lang === 'en' ? '100% Customer-Owned Keys in Local Intranet KMS' : lang === 'zh-TW' ? '密鑰 100% 由客戶本地內網 KMS 獨佔' : '密钥 100% 由客户本地内网 KMS 独占'}</span>
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-[#4ee48b] shrink-0" />
-                <span>{lang === 'en' ? 'Sub-100ms latency overhead' : lang === 'zh-TW' ? '端到端延遲低至 < 100ms 無損體驗' : '端到端延迟低至 < 100ms 无损体验'}</span>
+                <span>{lang === 'en' ? '1/10th the Cost of Private On-Prem GPU Clusters' : lang === 'zh-TW' ? '僅需自建顯卡機房 1/10 成本 (TCO 省 70%+)' : '仅需自建显卡机房 1/10 成本 (TCO 省 70%+)'}</span>
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-[#4ee48b] shrink-0" />
-                <span>{lang === 'en' ? 'Universal 671B+ & multimodal scale' : lang === 'zh-TW' ? '支持 671B 任意模型與多模態擴展' : '支持 671B 任意模型与多模态扩展'}</span>
+                <span>{lang === 'en' ? 'Open to Customer Red-Team Blind Audits' : lang === 'zh-TW' ? '支持客戶安全紅隊盲測逆向挑戰 (BYO-RedTeam)' : '支持客户安全红队盲测逆向挑战 (BYO-RedTeam)'}</span>
               </div>
             </div>
           </div>

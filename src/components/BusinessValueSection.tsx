@@ -11,7 +11,6 @@ import {
 } from 'lucide-react';
 import { Language } from '../types';
 import { translations } from '../translations';
-import { TcoRoiCalculator } from './TcoRoiCalculator';
 
 interface BusinessValueSectionProps {
   lang: Language;
@@ -174,39 +173,57 @@ export const BusinessValueSection: React.FC<BusinessValueSectionProps> = ({
         })}
       </div>
 
-      {/* Interactive Enterprise TCO & Compute ROI Calculator */}
-      <div className="mb-20" data-aos="fade-up">
-        <TcoRoiCalculator lang={lang} onRequestDemo={onRequestDemo} />
-      </div>
-
-      {/* Deep-Tech Bridge Banner with Rich Aurora Spectrum */}
+      {/* CSO Zero-Knowledge Vendor & BYO-RedTeam Executive Pledge Banner */}
       <div
         data-aos="fade-up"
-        className="p-8 sm:p-10 rounded-3xl bg-gradient-to-br from-[#0e2f1c]/90 via-[#071c10]/95 to-[#052233]/90 border border-[#1f794d]/50 hover:border-[#4ee48b]/60 mb-20 flex flex-col lg:flex-row items-center justify-between gap-8 shadow-2xl relative overflow-hidden transition-all duration-300 backdrop-blur-xl"
+        className="p-7 sm:p-10 rounded-3xl bg-gradient-to-br from-[#0e2f1c]/90 via-[#071c10]/95 to-[#052233]/90 border border-[#1f794d]/60 hover:border-[#4ee48b]/70 mb-20 shadow-2xl relative overflow-hidden transition-all duration-300 backdrop-blur-xl"
       >
-        <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/15 to-transparent pointer-events-none" />
-        <div className="max-w-2xl relative z-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gradient-to-r from-[#092915] to-[#041e2e] border border-[#1f794d]/50 text-[#80f2b0] text-xs font-mono mb-3 shadow-sm">
-            <Cpu className="w-3.5 h-3.5 text-[#4ee48b]" />
-            <span>{lang === 'en' ? 'Core Cryptographic & Hardware Engine' : '底层代数密码学与 TEE 物理飞地'}</span>
+        <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+          <div className="lg:col-span-8 space-y-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#092915] border border-[#4ee48b]/40 text-[#4ee48b] text-xs font-mono shadow-sm">
+              <Lock className="w-3.5 h-3.5 text-[#4ee48b]" />
+              <span>
+                {lang === 'en'
+                  ? 'CSO ZERO-KNOWLEDGE PLEDGE & BYO-REDTEAM CHALLENGE'
+                  : lang === 'zh-TW'
+                  ? 'CSO 零知識安全鐵律 · 隨時接受紅隊盲測'
+                  : 'CSO 零知识安全铁律 · 随时接受红队盲测'}
+              </span>
+            </div>
+            <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+              {lang === 'en'
+                ? 'Why Trust CovarAI? Because You Don’t Have To—Even We Can’t Decrypt Your Data.'
+                : lang === 'zh-TW'
+                ? '為什麼可以絕對信任？因為連 CovarAI 官方也無權、無法解密您的數據'
+                : '为什么可以绝对信任？因为连 CovarAI 官方也无权、无法解密您的数据'}
+            </h3>
+            <p className="text-xs sm:text-sm text-gray-200 leading-relaxed">
+              {lang === 'en'
+                ? 'Unlike traditional cloud gateways that hold your keys, CovarAI runs a strict Zero-Knowledge architecture: master keys are generated and locked inside your own intranet KMS/HSM. We invite your security Red Team to capture cloud traffic and GPU memory dumps in a blind audit—if a single character is recovered, the POC fails.'
+                : lang === 'zh-TW'
+                ? '不同於傳統雲端代理掌握客戶密鑰，CovarAI 實行嚴格的「零知識廠商 (Zero-Knowledge Vendor)」架構：主密鑰 100% 在客戶內網本地生成並鎖死。我們支持貴司安全紅隊直接抓取雲端流量包與顯存切片進行盲測挑戰——若能逆向還原任意一字明文，無條件終止合作。'
+                : '不同于传统云端代理掌握客户密钥，CovarAI 实行严格的“零知识厂商 (Zero-Knowledge Vendor)”架构：主密钥 100% 在客户内网本地生成并锁死。我们支持贵司安全红队直接抓取云端流量包与显存切片进行盲测挑战——若能逆向还原任意一字明文，无条件终止合作。'}
+            </p>
           </div>
-          <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight mb-2">
-            {lang === 'en' ? 'Explore the Products & Deep-Tech Architecture' : '深入探索 CovarAI 专属产品与底层技术架构'}
-          </h3>
-          <p className="text-xs sm:text-sm text-gray-300/90 leading-relaxed">
-            {lang === 'en'
-              ? 'Dive into the Algebraic Covariant Obfuscation Sandbox, the 3-Layer Onion Defense, and DeepSeek-V3 671B benchmark validation.'
-              : '体验代数协变混淆实时沙箱，查阅洋葱防御三重矩阵（CovarGate + EnclaveX + CovarPri）与 671B 参数实测基准。'}
-          </p>
-        </div>
 
-        <button
-          onClick={onSwitchToProducts}
-          className="px-8 py-3.5 rounded-full bg-gradient-to-r from-[#4ee48b] via-[#38d677] to-[#00d2ff] hover:brightness-110 text-[#05160b] font-bold text-sm flex items-center gap-2 shadow-xl shadow-[#4ee48b]/25 transition-all whitespace-nowrap active:scale-95 cursor-pointer self-start lg:self-center shrink-0 relative z-10"
-        >
-          <span>{translations[lang].nav.switchToProducts}</span>
-          <ArrowRight className="w-4 h-4 text-[#05160b]" />
-        </button>
+          <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-3 justify-end">
+            <button
+              onClick={() => onRequestDemo(lang === 'en' ? 'Free Self-Service: Request Sandbox API Key (Test in 10 mins with 3 lines of code)' : '免费申领：自助沙箱测试 API Key (10 分钟体验 3 行代码密态调用)')}
+              className="px-6 py-3.5 rounded-full bg-gradient-to-r from-[#4ee48b] via-[#38d677] to-[#00d2ff] hover:brightness-110 text-[#05160b] font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-xl shadow-[#4ee48b]/25 transition-all cursor-pointer"
+            >
+              <span>{lang === 'en' ? 'Request Red-Team Sandbox Key' : '申领红队盲测沙箱 API Key'}</span>
+              <ArrowRight className="w-4 h-4 text-[#05160b]" />
+            </button>
+            <button
+              onClick={onSwitchToProducts}
+              className="px-6 py-3 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer"
+            >
+              <Cpu className="w-4 h-4 text-[#4ee48b]" />
+              <span>{lang === 'en' ? 'Inspect 3-Line SDK & Architecture' : '查看 3 行代码接入与底层架构'}</span>
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* Client Testimonials Section with Multi-Industry Distinctive Hues */}
