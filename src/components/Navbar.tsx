@@ -50,6 +50,19 @@ export const Navbar: React.FC<NavbarProps> = ({
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest('#lang-switch-container')) {
+        setLangMenuOpen(false);
+      }
+    };
+    if (langMenuOpen) {
+      document.addEventListener('click', handleClickOutside);
+    }
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [langMenuOpen]);
+
   const t = translations[lang].nav;
 
   const languageLabels: Record<Language, string> = {
@@ -58,29 +71,35 @@ export const Navbar: React.FC<NavbarProps> = ({
     en: 'English',
   };
 
-  const navHubs = [
+  const navHubs: Array<{
+    id: ActivePageView;
+    label: string;
+    icon: React.ComponentType<{ className?: string }>;
+    badge?: string;
+    accent?: string;
+  }> = [
     {
-      id: 'home' as const,
-      label: lang === 'en' ? 'Overview' : lang === 'zh-TW' ? '總覽首頁' : '总览首页',
+      id: 'home',
+      label: lang === 'en' ? 'Overview' : lang === 'zh-TW' ? '總覽' : '总览',
       icon: Home,
     },
     {
-      id: 'executive' as const,
-      label: lang === 'en' ? 'Business & ROI' : lang === 'zh-TW' ? '商業與 ROI' : '商业与 ROI',
+      id: 'executive',
+      label: lang === 'en' ? 'Business' : lang === 'zh-TW' ? '商業決策' : '商业决策',
       badge: 'CFO / CEO',
       icon: Briefcase,
       accent: 'emerald',
     },
     {
-      id: 'security' as const,
-      label: lang === 'en' ? 'Security & Trust' : lang === 'zh-TW' ? '安全與合規' : '安全与合规',
+      id: 'security',
+      label: lang === 'en' ? 'Security' : lang === 'zh-TW' ? '安全合規' : '安全合规',
       badge: 'CISO / DPO',
       icon: ShieldCheck,
       accent: 'rose',
     },
     {
-      id: 'developer' as const,
-      label: lang === 'en' ? 'Developers' : lang === 'zh-TW' ? '架構與開發' : '架构与开发',
+      id: 'developer',
+      label: lang === 'en' ? 'Developers' : lang === 'zh-TW' ? '架構開發' : '架构开发',
       badge: 'Architect',
       icon: Code2,
       accent: 'cyan',
@@ -97,9 +116,9 @@ export const Navbar: React.FC<NavbarProps> = ({
           : 'bg-transparent border-b border-transparent shadow-none'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2 sm:gap-4 w-full">
-        {/* Left: Brand Logo & Title */}
-        <div className="shrink-0 flex items-center min-w-0">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between relative w-full">
+        {/* Left: Brand Logo & Title (Fixed position strictly aligned with hero below) */}
+        <div className="shrink-0 flex items-center z-20">
           <button
             onClick={() => {
               onViewChange('home');
@@ -117,7 +136,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               </div>
             </div>
 
-            <div className="min-w-0">
+            <div>
               <div className="flex items-center gap-1 sm:gap-1.5">
                 <span className="text-base sm:text-lg lg:text-xl font-bold tracking-tight text-white group-hover:text-[#4ee48b] transition-colors truncate">
                   Covar<span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4ee48b] to-[#80f2b0]">AI</span>
@@ -126,135 +145,155 @@ export const Navbar: React.FC<NavbarProps> = ({
                   v3.2
                 </span>
               </div>
-              <span className="hidden 2xl:block text-[8px] lg:text-[9px] text-[#80f2b0]/70 font-mono tracking-wider uppercase whitespace-nowrap">
-                {lang === 'en' ? 'Confidential Agent Infra' : lang === 'zh-TW' ? '大模型零信任密態基建' : '大模型零信任密态基建'}
-              </span>
+              <div className="hidden 2xl:block w-[130px] overflow-hidden">
+                <span className="text-[8px] lg:text-[9px] text-[#80f2b0]/70 font-mono tracking-wider uppercase whitespace-nowrap block truncate">
+                  {lang === 'en' ? 'Confidential Agent Infra' : lang === 'zh-TW' ? '大模型零信任密態基建' : '大模型零信任密态基建'}
+                </span>
+              </div>
             </div>
           </button>
         </div>
 
-        {/* Center: Desktop Persona Hub Nav Buttons (Airy Translucent Glass Capsule) */}
-        <div className={`hidden xl:flex items-center gap-1 xl:gap-1.5 shrink-0 p-1 rounded-2xl border transition-all duration-300 backdrop-blur-xl ${
-          showSolidBackground
-            ? 'bg-[#061c0e]/80 border-[#1f794d]/40'
-            : 'bg-white/[0.04] border-white/10 hover:border-white/20'
-        }`}>
-          {navHubs.map((hub) => {
-            const Icon = hub.icon;
-            const isActive = activeView === hub.id;
-            const isEmerald = hub.accent === 'emerald';
-            const isRose = hub.accent === 'rose';
-            const isCyan = hub.accent === 'cyan';
+        {/* Center: Truly Absolute Centered Desktop Persona Hub Nav Buttons */}
+        <div className="hidden xl:flex items-center absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-20 pointer-events-none">
+          <nav className={`flex items-center gap-0.5 xl:gap-1 p-1 rounded-2xl border transition-all duration-300 backdrop-blur-xl pointer-events-auto shadow-sm ${
+            showSolidBackground
+              ? 'bg-[#061c0e]/90 border-[#1f794d]/40 shadow-lg shadow-black/50'
+              : 'bg-white/[0.04] border-white/10 hover:border-white/20'
+          }`}>
+            {navHubs.map((hub) => {
+              const Icon = hub.icon;
+              const isActive = activeView === hub.id;
+              const isEmerald = hub.accent === 'emerald';
+              const isRose = hub.accent === 'rose';
+              const isCyan = hub.accent === 'cyan';
 
-            let activeClass = 'bg-gradient-to-r from-[#4ee48b] to-[#38d677] text-[#05160b] font-bold shadow-md shadow-[#4ee48b]/20';
-            if (isActive && isEmerald) activeClass = 'bg-gradient-to-r from-[#80f2b0] to-[#4ee48b] text-[#05160b] font-bold shadow-md shadow-[#4ee48b]/20';
-            if (isActive && isRose) activeClass = 'bg-gradient-to-r from-rose-600 to-rose-500 text-white font-bold shadow-md shadow-rose-500/20';
-            if (isActive && isCyan) activeClass = 'bg-gradient-to-r from-[#0099ff] to-[#00d2ff] text-white font-bold shadow-md shadow-[#0099ff]/20';
+              let activeClass = 'bg-gradient-to-r from-[#4ee48b] to-[#38d677] text-[#05160b] font-bold shadow-md shadow-[#4ee48b]/20';
+              if (isActive && isEmerald) activeClass = 'bg-gradient-to-r from-[#80f2b0] to-[#4ee48b] text-[#05160b] font-bold shadow-md shadow-[#4ee48b]/20';
+              if (isActive && isRose) activeClass = 'bg-gradient-to-r from-rose-600 to-rose-500 text-white font-bold shadow-md shadow-rose-500/20';
+              if (isActive && isCyan) activeClass = 'bg-gradient-to-r from-[#0099ff] to-[#00d2ff] text-white font-bold shadow-md shadow-[#0099ff]/20';
 
-            return (
-              <button
-                key={hub.id}
-                onClick={() => {
-                  onViewChange(hub.id);
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }}
-                className={`px-2.5 xl:px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer whitespace-nowrap ${
-                  isActive
-                    ? activeClass
-                    : 'text-gray-300 hover:text-white hover:bg-white/10'
-                }`}
-              >
-                <Icon className="w-3.5 h-3.5 shrink-0" />
-                <span>{hub.label}</span>
-                {hub.badge && (
-                  <span className={`text-[8px] xl:text-[9px] px-1 py-0.2 rounded font-mono hidden 2xl:inline-block ${
-                    isActive ? 'bg-black/20 text-current' : 'bg-black/30 text-gray-400'
-                  }`}>
-                    {hub.badge}
-                  </span>
-                )}
-              </button>
-            );
-          })}
+              return (
+                <button
+                  key={hub.id}
+                  onClick={() => {
+                    onViewChange(hub.id);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                  className={`px-2 xl:px-2.5 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer whitespace-nowrap ${
+                    isActive
+                      ? activeClass
+                      : 'text-gray-300 hover:text-white hover:bg-white/10'
+                  }`}
+                >
+                  <Icon className="w-3.5 h-3.5 shrink-0" />
+                  <span>{hub.label}</span>
+                </button>
+              );
+            })}
 
-          {/* Solutions Dropdown */}
-          <div className="relative group py-1">
-            <button
-              onClick={() => {
-                if (activeView !== 'home') onViewChange('home');
-                setTimeout(() => {
-                  const el = document.getElementById('solutions');
-                  el?.scrollIntoView({ behavior: 'smooth' });
-                }, 100);
-              }}
-              className="px-2.5 xl:px-3 py-1.5 rounded-xl text-xs font-semibold text-gray-300 hover:text-white hover:bg-white/10 flex items-center gap-1 transition-all cursor-pointer whitespace-nowrap"
-            >
-              <span>{t.solutions}</span>
-              <ChevronDown className="w-3 h-3 text-gray-400 group-hover:rotate-180 transition-transform shrink-0" />
-            </button>
-
-            <div className="absolute top-full left-0 mt-2 w-44 rounded-xl bg-[#061c0e]/95 border border-[#1f794d]/40 shadow-2xl backdrop-blur-xl py-2 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all z-50">
+            {/* Solutions Dropdown */}
+            <div className="relative group py-1">
               <button
                 onClick={() => {
                   if (activeView !== 'home') onViewChange('home');
-                  onSelectIndustry('legal');
                   setTimeout(() => {
                     const el = document.getElementById('solutions');
                     el?.scrollIntoView({ behavior: 'smooth' });
                   }, 100);
                 }}
-                className="w-full text-left px-4 py-2 text-xs text-gray-300 hover:bg-[#092915] hover:text-[#4ee48b] transition-colors flex items-center justify-between cursor-pointer"
+                className="px-2 xl:px-2.5 py-1.5 rounded-xl text-xs font-semibold text-gray-300 hover:text-white hover:bg-white/10 flex items-center gap-1 transition-all cursor-pointer whitespace-nowrap"
               >
-                <span>{t.legal}</span>
-                <span className="text-[10px] font-mono text-[#fbbf24]">FRE 502</span>
+                <span>{t.solutions}</span>
+                <ChevronDown className="w-3 h-3 text-gray-400 group-hover:rotate-180 transition-transform shrink-0" />
               </button>
-              <button
-                onClick={() => {
-                  if (activeView !== 'home') onViewChange('home');
-                  onSelectIndustry('healthcare');
-                  setTimeout(() => {
-                    const el = document.getElementById('solutions');
-                    el?.scrollIntoView({ behavior: 'smooth' });
-                  }, 100);
-                }}
-                className="w-full text-left px-4 py-2 text-xs text-gray-300 hover:bg-[#092915] hover:text-[#4ee48b] transition-colors flex items-center justify-between cursor-pointer"
-              >
-                <span>{t.healthcare}</span>
-                <span className="text-[10px] font-mono text-[#00d2ff]">HIPAA</span>
-              </button>
-              <button
-                onClick={() => {
-                  if (activeView !== 'home') onViewChange('home');
-                  onSelectIndustry('finance');
-                  setTimeout(() => {
-                    const el = document.getElementById('solutions');
-                    el?.scrollIntoView({ behavior: 'smooth' });
-                  }, 100);
-                }}
-                className="w-full text-left px-4 py-2 text-xs text-gray-300 hover:bg-[#092915] hover:text-[#4ee48b] transition-colors flex items-center justify-between cursor-pointer"
-              >
-                <span>{t.finance}</span>
-                <span className="text-[10px] font-mono text-[#4ee48b]">Quant</span>
-              </button>
+
+              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-44 rounded-xl bg-[#061c0e]/95 border border-[#1f794d]/40 shadow-2xl backdrop-blur-xl py-2 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all z-50">
+                <button
+                  onClick={() => {
+                    if (activeView !== 'home') onViewChange('home');
+                    onSelectIndustry('legal');
+                    setTimeout(() => {
+                      const el = document.getElementById('solutions');
+                      el?.scrollIntoView({ behavior: 'smooth' });
+                    }, 100);
+                  }}
+                  className="w-full text-left px-4 py-2 text-xs text-gray-300 hover:bg-[#092915] hover:text-[#4ee48b] transition-colors flex items-center justify-between cursor-pointer"
+                >
+                  <span>{t.legal}</span>
+                  <span className="text-[10px] font-mono text-[#fbbf24]">FRE 502</span>
+                </button>
+                <button
+                  onClick={() => {
+                    if (activeView !== 'home') onViewChange('home');
+                    onSelectIndustry('healthcare');
+                    setTimeout(() => {
+                      const el = document.getElementById('solutions');
+                      el?.scrollIntoView({ behavior: 'smooth' });
+                    }, 100);
+                  }}
+                  className="w-full text-left px-4 py-2 text-xs text-gray-300 hover:bg-[#092915] hover:text-[#4ee48b] transition-colors flex items-center justify-between cursor-pointer"
+                >
+                  <span>{t.healthcare}</span>
+                  <span className="text-[10px] font-mono text-[#00d2ff]">HIPAA</span>
+                </button>
+                <button
+                  onClick={() => {
+                    if (activeView !== 'home') onViewChange('home');
+                    onSelectIndustry('finance');
+                    setTimeout(() => {
+                      const el = document.getElementById('solutions');
+                      el?.scrollIntoView({ behavior: 'smooth' });
+                    }, 100);
+                  }}
+                  className="w-full text-left px-4 py-2 text-xs text-gray-300 hover:bg-[#092915] hover:text-[#4ee48b] transition-colors flex items-center justify-between cursor-pointer"
+                >
+                  <span>{t.finance}</span>
+                  <span className="text-[10px] font-mono text-[#4ee48b]">Quant</span>
+                </button>
+              </div>
             </div>
-          </div>
+          </nav>
         </div>
 
-        {/* Right: Language Selector, Whitepaper & Request Demo CTA */}
-        <div className="shrink-0 flex items-center gap-1.5 sm:gap-2.5">
-          {/* Language Switcher */}
-          <div className="relative">
+        {/* Right: Whitepaper, Request Demo CTA & Language Selector */}
+        <div className="shrink-0 flex items-center gap-1.5 sm:gap-2 z-20 ml-auto">
+          {/* Whitepaper Button - Disabled / Unreleased State */}
+          <div
+            className="hidden 2xl:flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-mono text-zinc-400 bg-white/[0.03] border border-white/10 cursor-not-allowed select-none whitespace-nowrap"
+            title={lang === 'en' ? 'Technical Whitepaper (Coming Soon)' : lang === 'zh-TW' ? '技術白皮書（即將發布）' : '技术白皮书（待发布）'}
+          >
+            <FileText className="w-3.5 h-3.5 text-zinc-500 shrink-0" />
+            <span className="text-zinc-400">{lang === 'en' ? 'Whitepaper' : lang === 'zh-TW' ? '白皮書' : '白皮书'}</span>
+            <span className="text-[9px] font-mono px-1 py-0.2 rounded bg-white/5 text-zinc-500 border border-white/10">
+              {lang === 'en' ? 'Soon' : lang === 'zh-TW' ? '待發布' : '待发布'}
+            </span>
+          </div>
+
+          {/* Request Demo / POC Action Button - Multi-Hue Flow Gradient */}
+          <button
+            onClick={() => onRequestDemo()}
+            className="px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-xl bg-gradient-to-r from-[#4ee48b] via-[#38d677] to-[#00d2ff] hover:brightness-110 text-[#05160b] font-bold text-xs flex items-center gap-1 sm:gap-1.5 shadow-lg shadow-[#4ee48b]/20 hover:shadow-[#4ee48b]/35 transition-all cursor-pointer whitespace-nowrap active:scale-95 shrink-0"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-[#05160b] shrink-0" />
+            <span>{lang === 'en' ? 'Book POC' : lang === 'zh-TW' ? '預約方案 POC' : '预约方案 POC'}</span>
+          </button>
+
+          {/* Language Switcher - Anchored at the far right to prevent any center overlap */}
+          <div id="lang-switch-container" className="relative">
             <button
               id="lang-switch-btn"
               onClick={() => setLangMenuOpen(!langMenuOpen)}
-              className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full text-xs font-medium text-gray-300 hover:text-white bg-white/[0.06] hover:bg-white/10 border border-white/10 hover:border-white/20 backdrop-blur-md transition-all cursor-pointer whitespace-nowrap"
+              className="flex items-center justify-between gap-1 sm:gap-1.5 min-w-[72px] sm:min-w-[94px] px-2.5 sm:px-3 py-1.5 rounded-full text-xs font-medium text-gray-300 hover:text-white bg-white/[0.06] hover:bg-white/10 border border-white/10 hover:border-white/20 backdrop-blur-md transition-all cursor-pointer whitespace-nowrap"
               aria-label="Language Selector"
             >
-              <Globe className="w-3.5 h-3.5 text-[#4ee48b] shrink-0" />
-              <span className="hidden sm:inline text-xs">{languageLabels[lang]}</span>
-              <span className="sm:hidden text-[10px] font-mono">
-                {lang === 'en' ? 'EN' : lang === 'zh-TW' ? '繁' : '简'}
-              </span>
+              <div className="flex items-center gap-1 sm:gap-1.5">
+                <Globe className="w-3.5 h-3.5 text-[#4ee48b] shrink-0" />
+                <span className="hidden sm:inline text-xs">{languageLabels[lang]}</span>
+                <span className="sm:hidden text-[10px] font-mono">
+                  {lang === 'en' ? 'EN' : lang === 'zh-TW' ? '繁' : '简'}
+                </span>
+              </div>
               <ChevronDown className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-gray-400 shrink-0" />
             </button>
 
@@ -280,28 +319,6 @@ export const Navbar: React.FC<NavbarProps> = ({
               </div>
             )}
           </div>
-
-          {/* Whitepaper Button - Disabled / Updating State */}
-          <div
-            className="hidden 2xl:flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-xs font-mono text-zinc-400 bg-white/[0.04] border border-white/10 cursor-not-allowed select-none whitespace-nowrap backdrop-blur-md"
-            title={lang === 'en' ? 'Technical Whitepaper is currently being updated for official release' : lang === 'zh-TW' ? '技術白皮書正在完善中，後續正式發布' : '技术白皮书正在完善中，后续正式放出'}
-          >
-            <FileText className="w-3.5 h-3.5 text-zinc-500 shrink-0" />
-            <span>{lang === 'en' ? 'Whitepaper' : lang === 'zh-TW' ? '白皮書' : '白皮书'}</span>
-            <span className="text-[9px] px-1.5 py-0.2 rounded bg-white/10 text-zinc-400 border border-white/10 font-mono">
-              {lang === 'en' ? 'Updating' : lang === 'zh-TW' ? '完善中' : '完善中'}
-            </span>
-          </div>
-
-          {/* Request Demo / POC Action Button - Multi-Hue Flow Gradient */}
-          <button
-            onClick={() => onRequestDemo()}
-            className="px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-gradient-to-r from-[#4ee48b] via-[#38d677] to-[#00d2ff] hover:brightness-110 text-[#05160b] font-bold text-xs flex items-center gap-1 sm:gap-1.5 shadow-lg shadow-[#4ee48b]/20 hover:shadow-[#4ee48b]/35 transition-all cursor-pointer whitespace-nowrap active:scale-95 shrink-0"
-          >
-            <Sparkles className="w-3.5 h-3.5 text-[#05160b] shrink-0" />
-            <span className="hidden xs:inline">{lang === 'en' ? 'Book POC Demo' : lang === 'zh-TW' ? '預約方案 POC' : '预约方案 POC'}</span>
-            <span className="xs:hidden">{lang === 'en' ? 'Book POC' : lang === 'zh-TW' ? '預約 POC' : '预约 POC'}</span>
-          </button>
 
           {/* Mobile/Tablet Menu Trigger - Visible up to XL screens */}
           <button

@@ -141,8 +141,8 @@ export const FluidShaderCanvas: React.FC<FluidShaderCanvasProps> = ({
       vec3 col2 = c2.rgb * c2.a;
       vec3 col3 = c3.rgb * c3.a;
 
-      float r1 = smoothstep(0.0 + 0.35 * edgesWidth, 0.7 - 0.35 * edgesWidth + 0.5 * edge_blur, mixer);
-      float r2 = smoothstep(0.3 + 0.35 * edgesWidth, 1.0 - 0.35 * edgesWidth + edge_blur, mixer);
+      float r1 = smoothstep(0.0 + 0.22 * edgesWidth, 0.62 - 0.22 * edgesWidth + 0.25 * edge_blur, mixer);
+      float r2 = smoothstep(0.35 + 0.22 * edgesWidth, 0.92 - 0.22 * edgesWidth + 0.45 * edge_blur, mixer);
 
       vec3 blended_color_2 = mix(col1, col2, r1);
       float blended_opacity_2 = mix(c1.a, c2.a, r1);
@@ -170,10 +170,11 @@ export const FluidShaderCanvas: React.FC<FluidShaderCanvasProps> = ({
       uv.x += 4.0 * u_distortion * n2 * cos(angle);
       uv.y += 4.0 * u_distortion * n2 * sin(angle);
 
-      // Optimized swirl loop: max 5 tuned iterations yields identical fluid aesthetic with 60% less GPU workload
-      float iterations_number = clamp(u_swirlIterations, 1.0, 5.0);
+      // High-precision swirl loop: up to 10 iterations for sharp, intricate hydrodynamic caustic ribbons
+      float iterations_number = clamp(u_swirlIterations, 1.0, 10.0);
       float s = clamp(u_swirl, 0.0, 2.0);
-      for (float i = 1.0; i <= iterations_number; i += 1.0) {
+      for (float i = 1.0; i <= 10.0; i += 1.0) {
+        if (i > iterations_number) break;
         float invI = 1.0 / i;
         uv.x += s * invI * cos(t + i * 1.5 * uv.y);
         uv.y += s * invI * cos(t + i * 1.0 * uv.x);
@@ -300,15 +301,18 @@ export const FluidShaderCanvas: React.FC<FluidShaderCanvasProps> = ({
     let isVisible = true;
     let isScrolling = false;
     let scrollDebounceTimer: any = null;
-    let renderScale = 0.55; // 0.55x sub-pixel internal buffer: cuts 70% fill-rate GPU load while retaining fluid silkiness via hardware bilinear filtering
+    
+    // Crisp high-definition resolution: 1.0x on standard displays, 1.35x on Retina displays for razor-sharp clarity
+    const dpr = typeof window !== 'undefined' ? (window.devicePixelRatio || 1) : 1;
+    let renderScale = dpr > 1 ? Math.min(dpr, 1.35) : 1.0;
 
     const handleResize = () => {
       if (!canvas) return;
       const clientW = canvas.clientWidth || window.innerWidth;
       const clientH = canvas.clientHeight || window.innerHeight;
       
-      const width = Math.max(1, Math.floor(clientW * renderScale));
-      const height = Math.max(1, Math.floor(clientH * renderScale));
+      const width = Math.max(1, Math.round(clientW * renderScale));
+      const height = Math.max(1, Math.round(clientH * renderScale));
 
       if (canvas.width !== width || canvas.height !== height) {
         canvas.width = width;
@@ -371,13 +375,13 @@ export const FluidShaderCanvas: React.FC<FluidShaderCanvasProps> = ({
       }
       frameCount++;
 
-      // Adaptive performance detection: if average frame time is strained on very old hardware, dynamically scale to 0.45x
+      // Adaptive performance detection: only scale down if sustained frame drops occur
       if (frameCount % 60 === 0) {
         const elapsed = now - lastFpsCheck;
         const avgFrameMs = elapsed / 60;
         lastFpsCheck = now;
-        if (avgFrameMs > 24 && renderScale > 0.45) {
-          renderScale = 0.45;
+        if (avgFrameMs > 32 && renderScale > 0.85) {
+          renderScale = 0.85;
           handleResize();
         }
       }

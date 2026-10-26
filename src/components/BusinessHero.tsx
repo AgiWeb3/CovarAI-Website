@@ -23,21 +23,22 @@ export const BusinessHero: React.FC<BusinessHeroProps> = ({
   const t = translations[lang].businessHero;
 
   return (
-    <section className="relative min-h-[92vh] flex flex-col justify-between pt-28 pb-14 md:pt-32 md:pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden bg-[#040e08]">
+    <section className="relative min-h-[92vh] flex flex-col justify-between pt-28 pb-14 md:pt-32 md:pb-16 overflow-hidden bg-[#040e08]">
       {/* 1. Authentic Capital & Code WebGL Fluid Shader Canvas Background */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none opacity-80 contain-strict will-change-transform">
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none opacity-90 contain-strict will-change-transform">
         <FluidShaderCanvas 
           className="w-full h-full"
           color1="rgb(2, 6, 4)"         // Deep obsidian void (true dark substrate)
-          color2="rgb(12, 98, 50)"      // Rich deep matrix emerald (subtle shadow transition)
-          color3="rgb(62, 218, 132)"    // Focused high-contrast electric mint ribbon
-          speed={0.38}
-          scale={0.46}
-          swirl={0.34}
-          swirlIterations={5}
-          proportion={0.21}             // Dominant deep dark expanse for dramatic contrast
-          softness={0.88}               // Sharper, crisper contour ridges
-          grainOpacity={0.05}
+          color2="rgb(12, 105, 54)"     // Rich matrix emerald
+          color3="rgb(78, 238, 144)"    // High-contrast luminous electric mint ribbon
+          speed={0.35}
+          scale={0.48}
+          swirl={0.40}
+          swirlIterations={8}
+          distortion={0.06}
+          proportion={0.26}
+          softness={0.36}               // Crisp, razor-sharp contour ridges (eliminates foggy blur)
+          grainOpacity={0.025}          // Ultra-fine microscopic texture
         />
         {/* Hardware-accelerated smooth bottom fade (Zero-cost gradient overlay replacing heavy CSS mask) */}
         <div className="absolute bottom-0 inset-x-0 h-48 bg-gradient-to-b from-transparent via-[#040e08]/70 to-[#040e08] pointer-events-none" />
@@ -53,7 +54,7 @@ export const BusinessHero: React.FC<BusinessHeroProps> = ({
         style={{ background: 'radial-gradient(ellipse at center, rgba(0,210,255,0.14) 0%, transparent 70%)' }}
       />
 
-      <div className="max-w-7xl mx-auto w-full relative z-10 my-auto">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 my-auto">
         {/* 2-Column Hero Grid: Left Content + Right Flow Animation */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Left Column: Business Value, Typography & Action Buttons */}
