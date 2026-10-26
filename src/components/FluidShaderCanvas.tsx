@@ -42,13 +42,14 @@ function parseColor(str: string, fallback: [number, number, number, number] = [0
   return fallback;
 }
 
-// Cached 1:1 physical-pixel procedural frosted acrylic micro-crystal tile (generated once in <1ms, 0% ongoing CPU cost)
-let cachedFrostedTileUrl: string | null = null;
-function getFrostedNoiseDataUrl(): string {
-  if (cachedFrostedTileUrl) return cachedFrostedTileUrl;
+// Cached Retina-native (0.5 CSS px = 1 physical Retina pixel) optical lens micro-matte tile
+// Uses narrow Gaussian variance around neutral 128 so it NEVER introduces dark/dirty soot speckles
+let cachedOpticalMatteTileUrl: string | null = null;
+function getOpticalMatteDataUrl(): string {
+  if (cachedOpticalMatteTileUrl) return cachedOpticalMatteTileUrl;
   if (typeof document === 'undefined') return '';
   try {
-    const size = 160;
+    const size = 240; // Rendered at 120px x 120px CSS size => exact 1:1 physical Retina sub-pixel pitch
     const offscreen = document.createElement('canvas');
     offscreen.width = size;
     offscreen.height = size;
@@ -58,28 +59,28 @@ function getFrostedNoiseDataUrl(): string {
     const imgData = ctx.createImageData(size, size);
     const data = imgData.data;
 
-    // Deterministic PRNG for uniform, ultra-fine Gaussian frosted glass micro-crystals (no coarse clumps)
-    let seed = 133742;
+    // Deterministic PRNG for narrow-band Gaussian optical lens grain
+    let seed = 928371;
     const nextRand = () => {
       seed = (seed * 1664525 + 1013904223) >>> 0;
       return seed / 4294967296;
     };
 
     for (let i = 0; i < data.length; i += 4) {
-      // Triangular/Gaussian distribution centered at 128 for organic sandblasted quartz feel
-      const g = (nextRand() + nextRand() + nextRand()) / 3.0;
-      const val = Math.floor(g * 255);
-      // Slight emerald-tinted specular bias on bright micro-facets
-      data[i] = val;
-      data[i + 1] = Math.min(255, Math.floor(val * 1.04));
-      data[i + 2] = val;
-      // High-contrast micro-alpha so overlay blend creates crisp 1-pixel frosted facets
-      data[i + 3] = Math.floor(42 + Math.abs(g - 0.5) * 95);
+      // 4-sample Gaussian centered at 0.0 (-0.5 to +0.5), tightly concentrated near 0
+      const g = (nextRand() + nextRand() + nextRand() + nextRand()) * 0.25 - 0.5;
+      // Narrow luminance band (128 ± 28): eliminates black/dirty specks while giving a silky optical lens feel
+      const lum = Math.max(96, Math.min(168, Math.round(128 + g * 68)));
+      data[i] = lum;
+      data[i + 1] = Math.min(172, Math.round(lum * 1.015));
+      data[i + 2] = lum;
+      // Subtle uniform alpha for soft-light optical blending
+      data[i + 3] = 28;
     }
 
     ctx.putImageData(imgData, 0, 0);
-    cachedFrostedTileUrl = offscreen.toDataURL('image/png');
-    return cachedFrostedTileUrl;
+    cachedOpticalMatteTileUrl = offscreen.toDataURL('image/png');
+    return cachedOpticalMatteTileUrl;
   } catch {
     return '';
   }
@@ -98,10 +99,10 @@ export const FluidShaderCanvas: React.FC<FluidShaderCanvasProps> = ({
   shapeScale = 0.10,
   softness = 1.0,
   proportion = 0.28,
-  grainOpacity = 0.055,
+  grainOpacity = 0.018,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const [frostedTile] = React.useState<string>(() => getFrostedNoiseDataUrl());
+  const [opticalMatteTile] = React.useState<string>(() => getOpticalMatteDataUrl());
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -124,7 +125,7 @@ export const FluidShaderCanvas: React.FC<FluidShaderCanvasProps> = ({
       gl_Position = vec4(a_position, 0.0, 1.0);
     }`;
 
-    // Authentic High-Performance GLSL Fluid Wave Shader with Optical Frosted Glass Refraction & 3D Satin Ridges
+    // Clean, Velvety Optical Matte Fluid Shader (No coarse UV tearing or dirty dark speckles)
     const fsSource = `#version 300 es
     #ifdef GL_FRAGMENT_PRECISION_HIGH
     precision highp float;
@@ -161,17 +162,10 @@ export const FluidShaderCanvas: React.FC<FluidShaderCanvasProps> = ({
       return mat2(c, s, -s, c) * uv;
     }
 
-    // Artifacts-free hash (Dave Hoskins) for fine crystalline frosted dispersion
     float hash12(vec2 p) {
       vec3 p3  = fract(vec3(p.xyx) * 0.1031);
       p3 += dot(p3, p3.yzx + 33.33);
       return fract((p3.x + p3.y) * p3.z);
-    }
-
-    vec2 hash22(vec2 p) {
-      vec3 p3 = fract(vec3(p.xyx) * vec3(0.1031, 0.1030, 0.0973));
-      p3 += dot(p3, p3.yzx + 33.33);
-      return fract((p3.xx + p3.yz) * p3.zy);
     }
 
     float noise(vec2 st) {
@@ -194,8 +188,9 @@ export const FluidShaderCanvas: React.FC<FluidShaderCanvasProps> = ({
       vec3 col2 = c2.rgb * c2.a;
       vec3 col3 = c3.rgb * c3.a;
 
-      float r1 = smoothstep(0.0 + 0.35 * edgesWidth, 0.7 - 0.35 * edgesWidth + 0.5 * edge_blur, mixer);
-      float r2 = smoothstep(0.3 + 0.35 * edgesWidth, 1.0 - 0.35 * edgesWidth + edge_blur, mixer);
+      // Hermite-smoothed subsurface diffusion curve so gradients feel like optical matte glass, not flat plastic
+      float r1 = smoothstep(0.0 + 0.35 * edgesWidth, 0.72 - 0.35 * edgesWidth + 0.5 * edge_blur, mixer);
+      float r2 = smoothstep(0.32 + 0.35 * edgesWidth, 1.0 - 0.35 * edgesWidth + edge_blur, mixer);
       r1_out = r1;
       r2_out = r2;
 
@@ -225,7 +220,7 @@ export const FluidShaderCanvas: React.FC<FluidShaderCanvasProps> = ({
       uv.x += 4.0 * u_distortion * n2 * cos(angle);
       uv.y += 4.0 * u_distortion * n2 * sin(angle);
 
-      // 6 integer swirl iterations: preserves rich, multi-layered 3D silk folds with minimal GPU cost at 30 FPS
+      // 6 integer swirl iterations: rich, clean multi-layered 3D silk folds
       int maxIter = int(clamp(u_swirlIterations, 1.0, 6.0));
       float s = clamp(u_swirl, 0.0, 2.0);
       for (int i = 1; i <= 6; i++) {
@@ -236,29 +231,21 @@ export const FluidShaderCanvas: React.FC<FluidShaderCanvasProps> = ({
         uv.y += s * invI * cos(t + fi * 1.0 * uv.x);
       }
 
-      // High-frequency optical frosted glass micro-refraction (scatters silk boundaries like etched matte quartz)
-      vec2 physicalFrag = gl_FragCoord.xy / max(u_pixelRatio, 0.35);
-      vec2 jitter2D = hash22(floor(physicalFrag * 1.15)) - 0.5;
-      float microCrystal = (hash12(physicalFrag * 0.95) + hash12(physicalFrag.yx * 1.73) - 1.0) * 0.5;
-
       float proportion = clamp(u_proportion, 0.0, 1.0);
       float shape = 0.0;
       float mixer = 0.0;
 
-      // Apply subtle frosted coordinate refraction so silk edges diffuse through micro-facets
-      vec2 frosted_uv = uv + jitter2D * (0.11 * clamp(u_grain * 18.0, 0.0, 1.5));
-
       if (u_shape < 0.5) {
-        vec2 checks_shape_uv = frosted_uv * (0.5 + 3.5 * u_shapeScale);
+        vec2 checks_shape_uv = uv * (0.5 + 3.5 * u_shapeScale);
         shape = 0.5 + 0.5 * sin(checks_shape_uv.x) * cos(checks_shape_uv.y);
         mixer = shape + 0.48 * sign(proportion - 0.5) * pow(abs(proportion - 0.5), 0.5);
       } else if (u_shape < 1.5) {
-        vec2 stripes_shape_uv = frosted_uv * (0.25 + 3.0 * u_shapeScale);
+        vec2 stripes_shape_uv = uv * (0.25 + 3.0 * u_shapeScale);
         float f = fract(stripes_shape_uv.y);
         shape = smoothstep(0.0, 0.55, f) * smoothstep(1.0, 0.45, f);
         mixer = shape + 0.48 * sign(proportion - 0.5) * pow(abs(proportion - 0.5), 0.5);
       } else {
-        float sh = 1.0 - frosted_uv.y;
+        float sh = 1.0 - uv.y;
         sh -= 0.5;
         sh /= (noise_scale * u_resolution.y);
         sh += 0.5;
@@ -267,29 +254,29 @@ export const FluidShaderCanvas: React.FC<FluidShaderCanvasProps> = ({
         mixer = shape;
       }
 
-      // Frosted subsurface scatter along the gradient transition zone
-      float frostScatter = microCrystal * (u_grain * 1.35);
+      // Ultra-subtle triangular micro-dither (eliminates 8-bit banding & plastic flatness without any visible grain dots)
+      float dither = (hash12(gl_FragCoord.xy) + hash12(gl_FragCoord.yx * 1.37) - 1.0) * 0.5;
+
       float r1 = 0.0;
       float r2 = 0.0;
       vec4 color_mix = blend_colors(
         u_color1,
         u_color2,
         u_color3,
-        mixer + frostScatter,
+        mixer + dither * (u_grain * 0.35),
         1.0 - clamp(u_softness, 0.0, 1.0),
-        0.01 + 0.01 * u_scale,
+        0.012 + 0.015 * u_scale,
         r1,
         r2
       );
 
-      // 3D Satin Ridge Specular Highlight: gives the ribbon folds tactile depth & anodized metallic sheen
-      float ridgeCrest = pow(clamp(1.0 - abs(shape - 0.56) * 3.0, 0.0, 1.0), 2.4) * r1;
-      color_mix.rgb += u_color3.rgb * (ridgeCrest * 0.14);
+      // Soft optical satin sheen along wave crests (adds lens depth & prevents flat plastic look)
+      float satinSheen = pow(clamp(1.0 - abs(shape - 0.55) * 2.6, 0.0, 1.0), 2.2) * r1;
+      color_mix.rgb += u_color3.rgb * (satinSheen * 0.09);
 
-      // Luminance-weighted frosted matte stippling (stronger on glowing silk ribbons, clean in dark obsidian void)
+      // Imperceptible anti-banding optical micro-dither on lit silk only (never darkens or dirties the surface)
       if (u_grain > 0.001) {
-        float surfaceWeight = 0.22 + 0.95 * r1 + 0.45 * r2;
-        color_mix.rgb += microCrystal * u_grain * surfaceWeight;
+        color_mix.rgb += dither * u_grain * (0.15 + 0.65 * r1);
       }
 
       fragColor = vec4(clamp(color_mix.rgb, 0.0, 1.0), color_mix.a);
@@ -401,8 +388,7 @@ export const FluidShaderCanvas: React.FC<FluidShaderCanvasProps> = ({
       const aspect = clientH / (clientW || 1);
       const height = Math.max(1, Math.round(width * aspect));
 
-      // CRITICAL FIX: pass actualScale = width / clientW to u_pixelRatio so (u_resolution / u_pixelRatio)
-      // always equals the full viewport width! This prevents the shader from zooming in and losing silk folds.
+      // Preserve exact full-viewport coordinate scale so silk folds are never zoomed in
       const actualScale = width / (clientW || 1);
 
       if (canvas.width !== width || canvas.height !== height) {
@@ -505,14 +491,14 @@ export const FluidShaderCanvas: React.FC<FluidShaderCanvasProps> = ({
         ref={canvasRef} 
         className="w-full h-full block" 
       />
-      {/* 1:1 Physical-Pixel Frosted Quartz Micro-Crystal Texture (Immune to SVG Mipmap Washout, 0% CPU) */}
-      {frostedTile && (
+      {/* Sub-Pixel Retina Optical Lens Matte Glaze (0.5px pitch, soft-light blend: never dirty, never plastic) */}
+      {opticalMatteTile && (
         <div
-          className="absolute inset-0 pointer-events-none select-none mix-blend-overlay opacity-35"
+          className="absolute inset-0 pointer-events-none select-none mix-blend-soft-light opacity-55"
           style={{
-            backgroundImage: `url("${frostedTile}")`,
+            backgroundImage: `url("${opticalMatteTile}")`,
             backgroundRepeat: 'repeat',
-            backgroundSize: '128px 128px',
+            backgroundSize: '120px 120px',
           }}
         />
       )}

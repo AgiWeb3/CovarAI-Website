@@ -24,7 +24,7 @@ export const BusinessHero: React.FC<BusinessHeroProps> = ({
 
   return (
     <section className="relative min-h-[92vh] flex flex-col justify-between pt-28 pb-14 md:pt-32 md:pb-16 overflow-hidden bg-[#040e08]">
-      {/* 1. Authentic Capital & Code WebGL Fluid Shader Canvas Background with Optical Frosted Glass Texture */}
+      {/* 1. Authentic Capital & Code WebGL Fluid Shader Canvas Background with Optical Lens Matte Finish */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none opacity-90 contain-strict will-change-transform">
         <FluidShaderCanvas 
           className="w-full h-full"
@@ -35,10 +35,10 @@ export const BusinessHero: React.FC<BusinessHeroProps> = ({
           scale={0.48}                  // Full-viewport multi-layered silk ribbon scale
           swirl={0.42}                  // Graceful 3D aerodynamic wave curvature
           swirlIterations={6}           // 6 hydrodynamic folds: rich 3D silk structure at 30 FPS
-          distortion={0.045}            // Organic fluid ripple
-          proportion={0.43}             // 50/50 balanced presence: prominent frosted silk ribbons across deep void
-          softness={0.52}               // Crisp yet diffused frosted glass contour transition
-          grainOpacity={0.055}          // Optical frosted micro-refraction + satin stipple
+          distortion={0.04}             // Smooth organic fluid ripple
+          proportion={0.43}             // 50/50 balanced presence: prominent silk ribbons across deep void
+          softness={0.66}               // Velvety optical lens diffusion (eliminates plastic harshness)
+          grainOpacity={0.018}          // Ultra-fine optical micro-dither (clean, never dirty)
         />
         {/* Hardware-accelerated smooth bottom fade */}
         <div className="absolute bottom-0 inset-x-0 h-48 bg-gradient-to-b from-transparent via-[#040e08]/80 to-[#040e08] pointer-events-none" />
