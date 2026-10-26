@@ -25,24 +25,33 @@ export const BusinessHero: React.FC<BusinessHeroProps> = ({
   return (
     <section className="relative min-h-[92vh] flex flex-col justify-between pt-28 pb-14 md:pt-32 md:pb-16 overflow-hidden bg-[#040e08]">
       {/* 1. Authentic Capital & Code WebGL Fluid Shader Canvas Background */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none opacity-80 contain-strict will-change-transform">
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none opacity-85 contain-strict will-change-transform">
         <FluidShaderCanvas 
           className="w-full h-full"
-          color1="rgb(2, 8, 4)"         // Deep obsidian void (~50% dark expanse)
-          color2="rgb(12, 100, 50)"     // Rich matrix emerald silk body
-          color3="rgb(72, 238, 144)"    // High-contrast luminous electric mint silk highlight
+          color1="rgb(2, 7, 4)"         // Deep obsidian void (~50% dark expanse)
+          color2="rgb(12, 105, 52)"     // Rich matrix emerald silk body
+          color3="rgb(76, 240, 146)"    // High-contrast luminous electric mint silk highlight
           speed={0.36}                  // Elegant waving silk cadence
           scale={0.48}                  // Balanced fluid ribbon scale
           swirl={0.40}                  // Graceful aerodynamic wave curvature
           swirlIterations={3}           // 3 tuned hydrodynamic iterations: ultra-low CPU load
           distortion={0.04}             // Subtle natural ripple
           proportion={0.42}             // 50/50 balanced presence: prominent waving silk ribbons across deep void
-          softness={0.58}               // Silky smooth contour definition
-          grainOpacity={0.015}          // Microscopic film texture
+          softness={0.56}               // Silky smooth contour definition
+          grainOpacity={0.038}          // Microscopic ultra-fine frosted satin stippling
         />
         {/* Hardware-accelerated smooth bottom fade */}
         <div className="absolute bottom-0 inset-x-0 h-48 bg-gradient-to-b from-transparent via-[#040e08]/80 to-[#040e08] pointer-events-none" />
       </div>
+
+      {/* 2. Microscopic Frosted Velvet Satin Noise (Zero-cost GPU static noise mesh) */}
+      <div 
+        className="absolute inset-0 pointer-events-none z-0 opacity-22 mix-blend-overlay select-none"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 320 320' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.2' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.7'/%3E%3C/svg%3E")`,
+          backgroundSize: '160px 160px',
+        }}
+      />
 
       {/* Gentle readability wash that preserves 100% visible silk ribbon ripples */}
       <div className="absolute inset-0 z-0 pointer-events-none bg-gradient-to-r from-[#040e08]/50 via-[#040e08]/20 to-transparent" />

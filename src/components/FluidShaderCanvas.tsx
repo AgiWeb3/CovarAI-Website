@@ -206,10 +206,13 @@ export const FluidShaderCanvas: React.FC<FluidShaderCanvasProps> = ({
 
       vec4 color_mix = blend_colors(u_color1, u_color2, u_color3, mixer, 1.0 - clamp(u_softness, 0.0, 1.0), 0.01 + 0.01 * u_scale);
 
-      // Subtle, velvety organic micro-texture that preserves razor-sharp text clarity
+      // Ultra-fine microscopic velvet grain & silk matte finish (no coarse speckles)
       if (u_grain > 0.001) {
-        float g = (random(gl_FragCoord.xy) - 0.5) * u_grain;
-        color_mix.rgb += g;
+        vec2 microCoord = gl_FragCoord.xy * 2.8;
+        float g1 = fract(sin(dot(microCoord, vec2(127.1, 311.7))) * 43758.5453);
+        float g2 = fract(sin(dot(microCoord.yx, vec2(269.5, 183.3))) * 23421.631);
+        float fineMatte = (g1 * 0.7 + g2 * 0.3 - 0.5) * u_grain;
+        color_mix.rgb += fineMatte;
       }
 
       fragColor = vec4(color_mix.rgb, color_mix.a);
