@@ -34,11 +34,11 @@ export const BusinessHero: React.FC<BusinessHeroProps> = ({
           speed={0.36}                  // Elegant waving silk cadence
           scale={0.48}                  // Balanced fluid ribbon scale
           swirl={0.40}                  // Graceful aerodynamic wave curvature
-          swirlIterations={6}           // Intricate multi-layer silk folds
-          distortion={0.05}             // Subtle natural ripple
+          swirlIterations={3}           // 3 tuned hydrodynamic iterations: ultra-low CPU load
+          distortion={0.04}             // Subtle natural ripple
           proportion={0.42}             // 50/50 balanced presence: prominent waving silk ribbons across deep void
           softness={0.58}               // Silky smooth contour definition
-          grainOpacity={0.02}           // Microscopic film texture
+          grainOpacity={0.015}          // Microscopic film texture
         />
         {/* Hardware-accelerated smooth bottom fade */}
         <div className="absolute bottom-0 inset-x-0 h-48 bg-gradient-to-b from-transparent via-[#040e08]/80 to-[#040e08] pointer-events-none" />
