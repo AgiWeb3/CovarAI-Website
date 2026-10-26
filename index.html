@@ -11,6 +11,8 @@
     <meta name="author" content="CovarAI Inc." />
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <meta name="googlebot" content="index, follow" />
+    <meta name="google-extended" content="index, follow" />
+    <link rel="alternate" type="text/markdown" href="/llms.txt" title="CovarAI LLM Knowledge Base" />
     <meta name="theme-color" content="#09090b" />
     <meta name="color-scheme" content="dark" />
 
@@ -32,7 +34,7 @@
     <meta property="og:url" content="https://covarai.com/" />
     <meta property="og:site_name" content="CovarAI" />
     <meta property="og:title" content="CovarAI — Confidential AI Infrastructure for Regulated Enterprises" />
-    <meta property="og:description" content="Deploy frontier trillion-parameter AI with zero cloud leaks. Mathematical privacy guarantees, <3.5% latency delta, and 100% HIPAA/GDPR/Legal privilege compliance." />
+    <meta property="og:description" content="Deploy frontier trillion-parameter AI (DeepSeek-V4.1 Flash, Kimi K3.1 Pro 2.8T MoE, Qwen 3.8, Llama 4 Maverick) with zero cloud leaks, 5.1ms TPOT (<3.5% latency delta), and 100% HIPAA/GDPR/FRE 502 compliance." />
     <meta property="og:image" content="https://covarai.com/og-cover.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -45,7 +47,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://covarai.com/" />
     <meta name="twitter:title" content="CovarAI — Deploy Frontier AI with Zero Cloud Leaks" />
-    <meta name="twitter:description" content="Zero-Trust Confidential Computing Layer for Regulated Enterprises. Securely run DeepSeek-671B MoE & OpenAI with mathematical privacy." />
+    <meta name="twitter:description" content="Zero-Trust Confidential Computing Layer for Regulated Enterprises. Securely run DeepSeek-V4.1 Flash & Kimi K3.1 Pro 2.8T MoE with mathematical privacy." />
     <meta name="twitter:image" content="https://covarai.com/og-cover.png" />
     <meta name="twitter:creator" content="@CovarAI" />
 
@@ -64,7 +66,7 @@
     <!-- AOS.js CSS -->
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
 
-    <!-- Schema.org JSON-LD Structured Data for Search Engines -->
+    <!-- Schema.org JSON-LD Structured Data for Search Engines & Gemini -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -75,14 +77,14 @@
           "name": "CovarAI",
           "url": "https://covarai.com/",
           "logo": "https://covarai.com/logo.svg",
-          "description": "Zero-trust confidential computing infrastructure for regulated enterprises deploying frontier AI models and autonomous agents.",
+          "description": "Zero-trust confidential computing infrastructure for regulated enterprises deploying frontier AI models (DeepSeek-V4.1 Flash, Kimi K3.1 Pro 2.8T MoE, Qwen 3.8, Llama 4 Maverick) and autonomous MCP agents.",
           "knowsAbout": [
             "Confidential Computing",
             "Zero-Trust Architecture",
-            "DeepSeek MoE Optimization",
-            "Homomorphic & Covariance Encryption",
-            "Model Context Protocol (MCP) Governance",
-            "Attorney-Client Privilege Compliance",
+            "DeepSeek-V4.1 Flash & Kimi K3.1 Pro 2.8T MoE Optimization",
+            "Algebraic Covariance Obfuscation (CovarPri)",
+            "Model Context Protocol (MCP) Governance (CovarGate)",
+            "Attorney-Client Privilege Compliance (FRE 502)",
             "HIPAA Healthcare AI Compliance"
           ],
           "contactPoint": {
@@ -95,10 +97,10 @@
         {
           "@type": "SoftwareApplication",
           "@id": "https://covarai.com/#software",
-          "name": "CovarAI Confidential AI Platform",
-          "operatingSystem": "Linux, Cloud GPUs, TEE Enclaves (AMD SEV-SNP, Intel TDX, NVIDIA H100)",
+          "name": "CovarAI Confidential AI Platform (CovarPri, CovarGate, CovarBox)",
+          "operatingSystem": "Linux, Cloud GPUs, TEE Enclaves (AMD SEV-SNP, Intel TDX, NVIDIA H100/B200)",
           "applicationCategory": "SecurityApplication",
-          "description": "Enterprise zero-trust confidential computing platform securing LLMs, MoE inference, and agent tool executions with algebraic covariance obfuscation.",
+          "description": "Enterprise zero-trust confidential computing platform securing LLMs, MoE inference, and agent tool executions with algebraic covariance obfuscation (5.1ms TPOT, 78.5 tokens/s, <3.5% latency overhead).",
           "offers": {
             "@type": "Offer",
             "price": "0",
@@ -115,7 +117,7 @@
               "name": "How does CovarAI protect confidential data in cloud AI without FHE performance penalties?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "CovarAI uses CovarPri algebraic covariance obfuscation tailored for transformer and MoE architectures. Obfuscation matrices natively cancel out during dot-product attention calculation, ensuring public cloud GPUs never see plaintext while achieving <3.5% latency delta versus FHE's 1000x slowdown."
+                "text": "CovarAI uses CovarPri algebraic covariance obfuscation tailored for Transformer and MoE architectures. Obfuscation matrices natively cancel out during dot-product attention calculation, ensuring public cloud GPUs never see plaintext while achieving 5.1ms TPOT (78.5 tokens/s, <3.5% latency delta) versus FHE's 1000x slowdown."
               }
             },
             {
@@ -123,15 +125,15 @@
               "name": "How does CovarAI maintain Attorney-Client Privilege under FRE 502 for law firms?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "By applying token perturbation and cryptographic key isolation locally before data ever leaves the firm's perimeter, the cloud vendor never receives decipherable plaintext or train on client inputs, preserving legal privilege under US Federal Rule of Evidence 502."
+                "text": "By applying token perturbation and cryptographic key isolation locally before data ever leaves the firm's perimeter, the cloud vendor never receives decipherable plaintext or trains on client inputs, preserving legal privilege under US Federal Rule of Evidence 502."
               }
             },
             {
               "@type": "Question",
-              "name": "Is CovarAI compatible with frontier models like DeepSeek-671B MoE and OpenAI?",
+              "name": "Is CovarAI compatible with frontier models like DeepSeek-V4.1 Flash, Kimi K3.1 Pro (2.8T MoE), Qwen 3.8, and Llama 4 Maverick?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes, CovarAI provides both a SaaS Confidential Gateway proxy and hardware Appliance. It seamlessly secures DeepSeek-V3/R1 671B MoE MLA kernels as well as closed-source API calls via CovarGate governance platform."
+                "text": "Yes, CovarAI provides both a SaaS Confidential Gateway proxy (CovarGate), an algebraic confidential inference engine (CovarPri), and a turnkey hardware Appliance (CovarBox). It seamlessly secures DeepSeek-V4.1 Flash, Kimi K3.1 Pro (2.8T MoE), Qwen 3.8, Llama 4 Maverick, and closed-source commercial APIs."
               }
             }
           ]
@@ -141,7 +143,64 @@
     </script>
   </head>
   <body class="bg-black text-slate-100 selection:bg-cyan-500/30 selection:text-cyan-300 antialiased overflow-x-hidden">
-    <div id="root"></div>
+    <!-- Pre-rendered Semantic Content inside #root for Gemini, Google-Extended, and non-JS AI Web Fetchers. React automatically mounts over this node on client boot. -->
+    <div id="root">
+      <main style="max-width: 960px; margin: 0 auto; padding: 48px 24px; font-family: system-ui, -apple-system, sans-serif; color: #f1f5f9; background: #040e08;">
+        <header>
+          <h1>CovarAI — 释放企业 AI 潜能，绝不妥协核心隐私与合规红线 | Deploy Frontier AI. Zero Cloud Leaks. 100% Compliant.</h1>
+          <p>
+            CovarAI 为律所、医疗生命科学与金融机构提供新一代零信任密态计算与智能体安全基础设施。支持企业安全调用
+            <strong>DeepSeek-V4.1 Flash</strong>、<strong>Kimi K3.1 Pro (2.8T MoE)</strong>、<strong>Qwen 3.8</strong> 与 <strong>Llama 4 Maverick</strong>
+            等最新万亿参数开源与商业大模型，实现<strong>云端零明文驻留 (0% Plaintext in Cloud VRAM)</strong>、<strong>&lt; 3.5% 极低推理延迟损耗 (5.1 ms TPOT / 78.5 tokens/s)</strong> 与 <strong>100% 监管合规 (FRE 502 / HIPAA / GDPR / SOC2)</strong>。
+          </p>
+        </header>
+
+        <section>
+          <h2>核心指标 (Key Performance &amp; Security Metrics)</h2>
+          <ul>
+            <li><strong>0% 云端明文暴露 (Zero Plaintext Exposure)</strong>：算力云厂商物理显存零明文驻留，杜绝模型蒸馏与数据越权训练。</li>
+            <li><strong>&lt; 3.5% 推理性能损耗 (Sub-3.5% Latency Overhead)</strong>：实测单 Token 生成延迟 (TPOT) 仅 5.1 ms，吞吐量高达 78.5 tokens/s，比传统全同态加密 (FHE) 快 1000 倍以上。</li>
+            <li><strong>99.94% 精度无损保持 (Lossless Reasoning Accuracy)</strong>：基于正交协方差代数不变性，确保复杂法律推理、医疗诊断与量化因子挖掘零精度坍塌。</li>
+            <li><strong>671B–2.8T 全模型兼容 (Universal Frontier Scale)</strong>：原生适配 DeepSeek-V4.1 Flash、Kimi K3.1 Pro (2.8T MoE)、Qwen 3.8、Llama 4 Maverick 及 OpenAI / Claude / Gemini API。</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>核心产品矩阵 (Core Product Suite)</h2>
+          <article>
+            <h3>1. CovarPri — 代数协方差密态推理引擎 (Algebraic Covariance Confidential Inference)</h3>
+            <p>
+              在企业本地边界内对输入 Embedding 与中间激活张量施加高维正交与协方差矩阵扰动。扰动因子在云端 GPU 执行注意力机制 (MLA / GQA) 与 MoE 专家路由内积运算时自然代数抵消，使公有云显卡在不接触任何明文 Token 的前提下完成高速推理。
+            </p>
+          </article>
+          <article>
+            <h3>2. CovarGate — 零信任大模型与 MCP 智能体安全网关 (Zero-Trust AI &amp; MCP Security Gateway)</h3>
+            <p>
+              亚毫秒级本地双向拦截网关，提供实时 PII/PHI 敏感实体语义脱敏、局部伪名化映射回填、Prompt 注入防御以及 MCP (Model Context Protocol) 智能体工具调用沙箱鉴权与不可篡改审计日志。
+            </p>
+          </article>
+          <article>
+            <h3>3. CovarBox — 企业级密态智算一体机 (Turnkey Confidential AI Appliance)</h3>
+            <p>
+              面向内网隔离与混合云架构的软硬一体机柜，深度集成 NVIDIA H100/B200 机密计算、AMD SEV-SNP 与 Intel TDX 硬件可信执行环境 (TEE)，开箱即用部署企业私有密态大模型底座。
+            </p>
+          </article>
+        </section>
+
+        <section>
+          <h2>垂直行业解决方案 (Regulated Industry Verticals)</h2>
+          <ul>
+            <li><strong>法律与跨境并购 (Legal &amp; M&amp;A — FRE 502 Privilege Protection)</strong>：在尽职调查、合同审阅与跨境仲裁中防止客户机密流入第三方云端，严格保全美国联邦证据规则 FRE 502 律师-客户特权。</li>
+            <li><strong>医疗健康与生物医药 (Healthcare &amp; Life Sciences — HIPAA Compliance)</strong>：本地实时剥离电子病历 (EHR)、基因组学数据与三期临床试验中的 18 类 PHI 个人健康标识，100% 符合 HIPAA 与 GDPR 规范。</li>
+            <li><strong>金融资管与量化私募 (Quantitative Finance &amp; Hedge Funds — Alpha Protection)</strong>：全方位加密保护专有 Alpha 因子、另类数据、投委会纪要与高频交易策略，防止公有云侧信道窥探与策略抢跑。</li>
+          </ul>
+        </section>
+
+        <footer>
+          <p>Contact CovarAI Enterprise Architecture Team: <a href="mailto:contact@covarai.com">contact@covarai.com</a> | <a href="/llms.txt">LLMs Context (/llms.txt)</a></p>
+        </footer>
+      </main>
+    </div>
     <!-- AOS.js Library -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>

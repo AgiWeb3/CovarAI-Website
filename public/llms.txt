@@ -1,0 +1,37 @@
+# CovarAI — Confidential AI Infrastructure for Regulated Enterprises (密态计算与智能体安全基础设施)
+
+> CovarAI builds zero-trust confidential computing infrastructure (`CovarPri`, `CovarGate`, and `CovarBox`) for regulated enterprises in Legal, Healthcare, and Quantitative Finance. It enables organizations to deploy frontier open-weights and commercial AI models—including **DeepSeek-V4.1 Flash**, **Kimi K3.1 Pro (2.8T MoE)**, **Qwen 3.8**, and **Llama 4 Maverick**—with **zero plaintext exposure in cloud GPU memory**, **< 3.5% latency overhead (5.1 ms TPOT / 78.5 tokens/s)**, and **100% regulatory compliance (FRE 502, HIPAA, GDPR, SOC2 Type II)**.
+
+## Core Value Proposition
+- **Zero-Plaintext Cloud Inference (云端零明文驻留)**: Sensitive enterprise data, legal M&A contracts, electronic health records (EHR), and proprietary alpha factors are algebraically obfuscated locally before leaving the enterprise perimeter. Public cloud GPUs never hold decipherable plaintext in VRAM.
+- **Break the FHE Performance Bottleneck (突破同态加密性能瓶颈)**: Traditional Fully Homomorphic Encryption (FHE) causes a 1,000x latency penalty. CovarAI's **CovarPri** algebraic covariance obfuscation cancels out natively inside Transformer attention and MoE routing kernels, delivering **5.1 ms/token TPOT** and **78.5 tokens/s** throughput (<3.5% overhead vs native FP8/BF16).
+- **2026 Frontier Model Support (全量适配前沿大模型)**: Native support for 671B–2.8T MoE architectures including **DeepSeek-V4.1 Flash**, **Kimi K3.1 Pro (2.8T MoE)**, **Qwen 3.8**, **Llama 4 Maverick**, and commercial APIs (OpenAI, Claude, Gemini) via **CovarGate**.
+
+## Product Matrix (核心产品矩阵)
+
+### 1. CovarPri — Algebraic Covariance Confidential Inference Engine (代数协方差密态推理引擎)
+- **Mechanism**: Applies client-side orthogonal/covariance matrix transformations $Q' = Q R, K' = K R^{-T}$ so inner products $Q' (K')^T = Q K^T$ remain mathematically invariant during Multi-Head Latent Attention (MLA) and MoE expert routing while tokens remain cryptographically unrecoverable in cloud GPU VRAM.
+- **Performance Benchmark (2026 Frontier MoE)**:
+  - **Time Per Output Token (TPOT)**: `5.1 ms` (vs `4.9 ms` native baseline; `< 3.5%` delta)
+  - **Sustained Throughput**: `78.5 tokens/s`
+  - **Reasoning Accuracy Retention (MMLU-Pro / Math500)**: `99.94%` lossless accuracy
+
+### 2. CovarGate — Zero-Trust MCP & AI Agent Security Gateway (零信任智能体与大模型安全网关)
+- **Mechanism**: Sub-10ms local interceptor that performs real-time semantic PII/PHI entity anonymization, deterministic token replacement, and Model Context Protocol (MCP) tool-call permission sandboxing before requests reach cloud LLMs, then re-hydrates entities locally upon response.
+- **Capabilities**: RBAC policy enforcement, immutable cryptographic audit logs, prompt injection defense, and multi-provider routing.
+
+### 3. CovarBox — Turnkey Confidential AI Appliance (企业级软硬一体密态智算机柜)
+- **Mechanism**: Plug-and-play on-premise confidential edge gateway and TEE hardware enclave appliance (supporting NVIDIA H100/B200 Confidential Computing, AMD SEV-SNP, and Intel TDX) for air-gapped or hybrid-cloud deployments.
+
+## Industry Solutions (垂直行业解决方案)
+
+1. **Legal & M&A Advisory (顶级律所与跨境并购 — FRE 502 特权保护)**:
+   - Preserves US Federal Rule of Evidence 502 (Attorney-Client Privilege) and work-product protection when analyzing M&A due diligence documents, cross-border arbitration filings, and patent portfolios using cloud LLMs.
+2. **Healthcare & Life Sciences (医疗健康与生物医药 — HIPAA & 临床脱敏)**:
+   - De-identifies 18 classes of HIPAA PHI identifiers locally in real time across EHR clinical notes, genomic sequences, and Phase III drug trial data prior to cloud AI synthesis.
+3. **Finance & Quantitative Hedge Funds (金融资管与量化私募 — 投研 Alpha 与策略防泄漏)**:
+   - Protects proprietary quantitative signals, earnings call transcripts, and limit-order-book strategies from cloud provider telemetry or model distillation leakage.
+
+## Contact & Architecture Evaluation
+- **Website**: https://covarai.com/
+- **Enterprise Demo & POC**: contact@covarai.com
