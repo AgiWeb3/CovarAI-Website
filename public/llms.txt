@@ -1,5 +1,9 @@
 # CovarAI — Confidential AI Infrastructure for Regulated Enterprises (密态计算与智能体安全基础设施)
 
+> **Official Domains (官方双域名入口)**:
+> - `https://www.covarai.com/`
+> - `https://covarai.com/`
+>
 > CovarAI builds zero-trust confidential computing infrastructure (`CovarPri`, `CovarGate`, and `CovarBox`) for regulated enterprises in Legal, Healthcare, and Quantitative Finance. It enables organizations to deploy frontier open-weights and commercial AI models—including **DeepSeek-V4.1 Flash**, **Kimi K3.1 Pro (2.8T MoE)**, **Qwen 3.8**, and **Llama 4 Maverick**—with **zero plaintext exposure in cloud GPU memory**, **< 3.5% latency overhead (5.1 ms TPOT / 78.5 tokens/s)**, and **100% regulatory compliance (FRE 502, HIPAA, GDPR, SOC2 Type II)**.
 
 ## Core Value Proposition
@@ -33,5 +37,5 @@
    - Protects proprietary quantitative signals, earnings call transcripts, and limit-order-book strategies from cloud provider telemetry or model distillation leakage.
 
 ## Contact & Architecture Evaluation
-- **Website**: https://covarai.com/
+- **Official Websites**: https://www.covarai.com/ | https://covarai.com/
 - **Enterprise Demo & POC**: contact@covarai.com

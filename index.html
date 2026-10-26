@@ -22,8 +22,12 @@
     <link rel="apple-touch-icon" href="/favicon.svg" />
     <link rel="mask-icon" href="/favicon.svg" color="#06b6d4" />
 
-    <!-- Canonical & Alternate Multi-language URLs -->
-    <link rel="canonical" href="https://covarai.com/" />
+    <!-- Canonical & Alternate Multi-language URLs (Dual-Domain Compatible: covarai.com & www.covarai.com) -->
+    <link rel="canonical" id="canonical-link" href="https://www.covarai.com/" />
+    <link rel="alternate" id="hreflang-default" hreflang="x-default" href="https://www.covarai.com/" />
+    <link rel="alternate" id="hreflang-en" hreflang="en" href="https://www.covarai.com/?lang=en" />
+    <link rel="alternate" id="hreflang-zh" hreflang="zh-Hans" href="https://www.covarai.com/?lang=zh" />
+    <link rel="alternate" id="hreflang-zhtw" hreflang="zh-Hant" href="https://www.covarai.com/?lang=zh-TW" />
     <link rel="alternate" hreflang="x-default" href="https://covarai.com/" />
     <link rel="alternate" hreflang="en" href="https://covarai.com/?lang=en" />
     <link rel="alternate" hreflang="zh-Hans" href="https://covarai.com/?lang=zh" />
@@ -31,11 +35,11 @@
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://covarai.com/" />
+    <meta property="og:url" id="og-url" content="https://www.covarai.com/" />
     <meta property="og:site_name" content="CovarAI" />
-    <meta property="og:title" content="CovarAI — Confidential AI Infrastructure for Regulated Enterprises" />
+    <meta property="og:title" content="CovarAI — Confidential AI Infrastructure for Regulated Enterprises | 密态计算与智能体安全基础设施" />
     <meta property="og:description" content="Deploy frontier trillion-parameter AI (DeepSeek-V4.1 Flash, Kimi K3.1 Pro 2.8T MoE, Qwen 3.8, Llama 4 Maverick) with zero cloud leaks, 5.1ms TPOT (<3.5% latency delta), and 100% HIPAA/GDPR/FRE 502 compliance." />
-    <meta property="og:image" content="https://covarai.com/og-cover.png" />
+    <meta property="og:image" id="og-image" content="https://www.covarai.com/og-cover.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CovarAI Confidential AI Infrastructure" />
@@ -45,11 +49,41 @@
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://covarai.com/" />
+    <meta name="twitter:url" id="twitter-url" content="https://www.covarai.com/" />
     <meta name="twitter:title" content="CovarAI — Deploy Frontier AI with Zero Cloud Leaks" />
     <meta name="twitter:description" content="Zero-Trust Confidential Computing Layer for Regulated Enterprises. Securely run DeepSeek-V4.1 Flash & Kimi K3.1 Pro 2.8T MoE with mathematical privacy." />
-    <meta name="twitter:image" content="https://covarai.com/og-cover.png" />
+    <meta name="twitter:image" id="twitter-image" content="https://www.covarai.com/og-cover.png" />
     <meta name="twitter:creator" content="@CovarAI" />
+
+    <!-- Dual-Domain Origin Sync (Automatically adapts Canonical & OG URLs whether accessed via covarai.com or www.covarai.com) -->
+    <script>
+      (function () {
+        try {
+          var host = window.location.hostname;
+          if (host === 'covarai.com' || host === 'www.covarai.com') {
+            var origin = 'https://' + host;
+            var canonical = document.getElementById('canonical-link');
+            if (canonical) canonical.setAttribute('href', origin + '/');
+            var hDef = document.getElementById('hreflang-default');
+            if (hDef) hDef.setAttribute('href', origin + '/');
+            var hEn = document.getElementById('hreflang-en');
+            if (hEn) hEn.setAttribute('href', origin + '/?lang=en');
+            var hZh = document.getElementById('hreflang-zh');
+            if (hZh) hZh.setAttribute('href', origin + '/?lang=zh');
+            var hZhTw = document.getElementById('hreflang-zhtw');
+            if (hZhTw) hZhTw.setAttribute('href', origin + '/?lang=zh-TW');
+            var ogUrl = document.getElementById('og-url');
+            if (ogUrl) ogUrl.setAttribute('content', origin + '/');
+            var ogImg = document.getElementById('og-image');
+            if (ogImg) ogImg.setAttribute('content', origin + '/og-cover.png');
+            var twUrl = document.getElementById('twitter-url');
+            if (twUrl) twUrl.setAttribute('content', origin + '/');
+            var twImg = document.getElementById('twitter-image');
+            if (twImg) twImg.setAttribute('content', origin + '/og-cover.png');
+          }
+        } catch (e) {}
+      })();
+    </script>
 
     <!-- Mobile & PWA optimization -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -66,17 +100,36 @@
     <!-- AOS.js CSS -->
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
 
-    <!-- Schema.org JSON-LD Structured Data for Search Engines & Gemini -->
+    <!-- Schema.org JSON-LD Structured Data for Search Engines & Gemini (Dual-Domain: covarai.com & www.covarai.com) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@graph": [
         {
+          "@type": "WebSite",
+          "@id": "https://www.covarai.com/#website",
+          "url": "https://www.covarai.com/",
+          "sameAs": [
+            "https://covarai.com/",
+            "https://www.covarai.com/"
+          ],
+          "name": "CovarAI — 密态计算与智能体安全基础设施 | Confidential AI Infrastructure",
+          "alternateName": ["CovarAI", "www.covarai.com", "covarai.com", "CovarAI Confidential Computing"],
+          "inLanguage": ["zh-CN", "en-US", "zh-TW"],
+          "publisher": {
+            "@id": "https://www.covarai.com/#organization"
+          }
+        },
+        {
           "@type": "Organization",
-          "@id": "https://covarai.com/#organization",
+          "@id": "https://www.covarai.com/#organization",
           "name": "CovarAI",
-          "url": "https://covarai.com/",
-          "logo": "https://covarai.com/logo.svg",
+          "url": "https://www.covarai.com/",
+          "sameAs": [
+            "https://covarai.com/",
+            "https://www.covarai.com/"
+          ],
+          "logo": "https://www.covarai.com/logo.svg",
           "description": "Zero-trust confidential computing infrastructure for regulated enterprises deploying frontier AI models (DeepSeek-V4.1 Flash, Kimi K3.1 Pro 2.8T MoE, Qwen 3.8, Llama 4 Maverick) and autonomous MCP agents.",
           "knowsAbout": [
             "Confidential Computing",
@@ -96,8 +149,9 @@
         },
         {
           "@type": "SoftwareApplication",
-          "@id": "https://covarai.com/#software",
+          "@id": "https://www.covarai.com/#software",
           "name": "CovarAI Confidential AI Platform (CovarPri, CovarGate, CovarBox)",
+          "url": "https://www.covarai.com/",
           "operatingSystem": "Linux, Cloud GPUs, TEE Enclaves (AMD SEV-SNP, Intel TDX, NVIDIA H100/B200)",
           "applicationCategory": "SecurityApplication",
           "description": "Enterprise zero-trust confidential computing platform securing LLMs, MoE inference, and agent tool executions with algebraic covariance obfuscation (5.1ms TPOT, 78.5 tokens/s, <3.5% latency overhead).",
@@ -110,7 +164,7 @@
         },
         {
           "@type": "FAQPage",
-          "@id": "https://covarai.com/#faq",
+          "@id": "https://www.covarai.com/#faq",
           "mainEntity": [
             {
               "@type": "Question",

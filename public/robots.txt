@@ -1,5 +1,8 @@
-# Robots.txt for CovarAI Confidential Computing Platform
-# Explicitly allow Google Gemini (Google-Extended, GoogleOther, Googlebot) and all AI Agents
+# Robots.txt for CovarAI Official Website (https://www.covarai.com)
+# Explicitly allow Google Search, Google Gemini (Google-Extended, GoogleOther), Bing, and all AI crawlers
+
+User-agent: Googlebot
+Allow: /
 
 User-agent: Google-Extended
 Allow: /
@@ -10,7 +13,13 @@ Allow: /
 User-agent: GoogleOther-Image
 Allow: /
 
-User-agent: Googlebot
+User-agent: Bingbot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: Sogou web spider
 Allow: /
 
 User-agent: GPTBot
@@ -31,11 +40,17 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
 User-agent: *
 Allow: /
 Disallow: /api/
 
-# Sitemaps & AI Knowledge Base
+# Sitemaps & AI Knowledge Base (Supporting both www.covarai.com and covarai.com)
+Sitemap: https://www.covarai.com/sitemap.xml
 Sitemap: https://covarai.com/sitemap.xml
-# LLMs Context: https://covarai.com/llms.txt
-
+# LLMs Context: https://www.covarai.com/llms.txt
