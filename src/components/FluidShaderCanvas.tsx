@@ -141,8 +141,8 @@ export const FluidShaderCanvas: React.FC<FluidShaderCanvasProps> = ({
       vec3 col2 = c2.rgb * c2.a;
       vec3 col3 = c3.rgb * c3.a;
 
-      float r1 = smoothstep(0.0 + 0.22 * edgesWidth, 0.62 - 0.22 * edgesWidth + 0.25 * edge_blur, mixer);
-      float r2 = smoothstep(0.35 + 0.22 * edgesWidth, 0.92 - 0.22 * edgesWidth + 0.45 * edge_blur, mixer);
+      float r1 = smoothstep(0.0 + 0.35 * edgesWidth, 0.7 - 0.35 * edgesWidth + 0.5 * edge_blur, mixer);
+      float r2 = smoothstep(0.3 + 0.35 * edgesWidth, 1.0 - 0.35 * edgesWidth + edge_blur, mixer);
 
       vec3 blended_color_2 = mix(col1, col2, r1);
       float blended_opacity_2 = mix(c1.a, c2.a, r1);
@@ -170,14 +170,15 @@ export const FluidShaderCanvas: React.FC<FluidShaderCanvasProps> = ({
       uv.x += 4.0 * u_distortion * n2 * cos(angle);
       uv.y += 4.0 * u_distortion * n2 * sin(angle);
 
-      // High-precision swirl loop: up to 10 iterations for sharp, intricate hydrodynamic caustic ribbons
-      float iterations_number = clamp(u_swirlIterations, 1.0, 10.0);
+      // Strict GLSL ES 3.00 compliant integer loop index for 100% GPU driver compatibility
+      int maxIter = int(clamp(u_swirlIterations, 1.0, 8.0));
       float s = clamp(u_swirl, 0.0, 2.0);
-      for (float i = 1.0; i <= 10.0; i += 1.0) {
-        if (i > iterations_number) break;
-        float invI = 1.0 / i;
-        uv.x += s * invI * cos(t + i * 1.5 * uv.y);
-        uv.y += s * invI * cos(t + i * 1.0 * uv.x);
+      for (int i = 1; i <= 8; i++) {
+        if (i > maxIter) break;
+        float fi = float(i);
+        float invI = 1.0 / fi;
+        uv.x += s * invI * cos(t + fi * 1.5 * uv.y);
+        uv.y += s * invI * cos(t + fi * 1.0 * uv.x);
       }
 
       float proportion = clamp(u_proportion, 0.0, 1.0);
@@ -417,7 +418,7 @@ export const FluidShaderCanvas: React.FC<FluidShaderCanvasProps> = ({
   }, [color1, color2, color3, speed, scale, swirl, swirlIterations, distortion, shapeScale, softness, proportion, grainOpacity]);
 
   return (
-    <div className={`relative overflow-hidden pointer-events-none ${className}`}>
+    <div className={`relative overflow-hidden pointer-events-none bg-[#030805] ${className}`}>
       <canvas 
         ref={canvasRef} 
         className="w-full h-full block" 

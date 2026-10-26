@@ -25,33 +25,32 @@ export const BusinessHero: React.FC<BusinessHeroProps> = ({
   return (
     <section className="relative min-h-[92vh] flex flex-col justify-between pt-28 pb-14 md:pt-32 md:pb-16 overflow-hidden bg-[#040e08]">
       {/* 1. Authentic Capital & Code WebGL Fluid Shader Canvas Background */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none opacity-90 contain-strict will-change-transform">
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none opacity-80 contain-strict will-change-transform">
         <FluidShaderCanvas 
           className="w-full h-full"
-          color1="rgb(2, 6, 4)"         // Deep obsidian void (true dark substrate)
-          color2="rgb(12, 105, 54)"     // Rich matrix emerald
-          color3="rgb(78, 238, 144)"    // High-contrast luminous electric mint ribbon
-          speed={0.35}
-          scale={0.48}
-          swirl={0.40}
-          swirlIterations={8}
-          distortion={0.06}
-          proportion={0.26}
-          softness={0.36}               // Crisp, razor-sharp contour ridges (eliminates foggy blur)
-          grainOpacity={0.025}          // Ultra-fine microscopic texture
+          color1="rgb(2, 8, 4)"         // Deep obsidian void (~50% dark expanse)
+          color2="rgb(12, 100, 50)"     // Rich matrix emerald silk body
+          color3="rgb(72, 238, 144)"    // High-contrast luminous electric mint silk highlight
+          speed={0.36}                  // Elegant waving silk cadence
+          scale={0.48}                  // Balanced fluid ribbon scale
+          swirl={0.40}                  // Graceful aerodynamic wave curvature
+          swirlIterations={6}           // Intricate multi-layer silk folds
+          distortion={0.05}             // Subtle natural ripple
+          proportion={0.42}             // 50/50 balanced presence: prominent waving silk ribbons across deep void
+          softness={0.58}               // Silky smooth contour definition
+          grainOpacity={0.02}           // Microscopic film texture
         />
-        {/* Hardware-accelerated smooth bottom fade (Zero-cost gradient overlay replacing heavy CSS mask) */}
-        <div className="absolute bottom-0 inset-x-0 h-48 bg-gradient-to-b from-transparent via-[#040e08]/70 to-[#040e08] pointer-events-none" />
+        {/* Hardware-accelerated smooth bottom fade */}
+        <div className="absolute bottom-0 inset-x-0 h-48 bg-gradient-to-b from-transparent via-[#040e08]/80 to-[#040e08] pointer-events-none" />
       </div>
 
-      {/* Decorative ambient lighting overlays with zero-cost radial gradients */}
+      {/* Gentle readability wash that preserves 100% visible silk ribbon ripples */}
+      <div className="absolute inset-0 z-0 pointer-events-none bg-gradient-to-r from-[#040e08]/50 via-[#040e08]/20 to-transparent" />
+
+      {/* Decorative subtle ambient glow focused on the right side only */}
       <div 
-        className="absolute top-1/4 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[350px] pointer-events-none z-0 transform-gpu opacity-25" 
-        style={{ background: 'radial-gradient(ellipse at center, rgba(78,228,139,0.14) 0%, transparent 70%)' }}
-      />
-      <div 
-        className="absolute top-1/3 right-10 w-[450px] h-[350px] pointer-events-none z-0 transform-gpu opacity-20" 
-        style={{ background: 'radial-gradient(ellipse at center, rgba(0,210,255,0.14) 0%, transparent 70%)' }}
+        className="absolute top-1/3 right-10 w-[500px] h-[350px] pointer-events-none z-0 transform-gpu opacity-15" 
+        style={{ background: 'radial-gradient(ellipse at center, rgba(78,228,139,0.18) 0%, transparent 70%)' }}
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 my-auto">
@@ -61,7 +60,7 @@ export const BusinessHero: React.FC<BusinessHeroProps> = ({
           <div className="lg:col-span-7 flex flex-col items-start text-left space-y-6">
             <h1
               data-aos="fade-up"
-              className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.12] text-balance"
+              className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.12] text-balance drop-shadow-[0_2px_15px_rgba(0,0,0,0.8)]"
             >
               {lang === 'en' ? (
                 <>
@@ -83,7 +82,7 @@ export const BusinessHero: React.FC<BusinessHeroProps> = ({
             <p
               data-aos="fade-up"
               data-aos-delay="100"
-              className="text-sm sm:text-base lg:text-lg text-[#e2e8f0]/85 max-w-2xl leading-relaxed font-light"
+              className="text-sm sm:text-base lg:text-lg text-[#f1f5f9] max-w-2xl leading-relaxed font-light drop-shadow-[0_1px_8px_rgba(0,0,0,0.85)]"
             >
               {t.subtitle}
             </p>
