@@ -162,7 +162,7 @@ export const WhitepaperModal: React.FC<WhitepaperModalProps> = ({
                   当前大模型在大型律所、跨国金融及政府核心场景落地的最大阻碍在于“数据主权、推理隐私与 Agent 越权悖论”：直接调用公有云大模型面临严重的商业机密泄露与特权失效；推理模型（Reasoning Models 如 DeepSeek-R1）的长思维链（&lt;think&gt; CoT）极易暴露企业核心决策推演路径；Agent 跨工具调用（Anthropic MCP 协议）则存在间接提示词注入与上下文投毒风险。
                 </p>
                 <p className="text-slate-300 leading-relaxed">
-                  CovarAI 提出全新 AloePri 代数架构与三级主权拓扑，深度适配 DeepSeek-671B MoE 的 MLA 潜变量与动态门控机制，实现“信仰数学，无需信任云端”的全栈零信任安全基建。
+                  CovarAI 提出全新 AloePri 代数架构与三级主权拓扑，深度适配 DeepSeek-V4.1 Flash 等最新前沿 MoE 的 MLA 潜变量与动态门控机制，实现“信仰数学，无需信任云端”的全栈零信任安全基建。
                 </p>
               </div>
 
@@ -197,7 +197,7 @@ export const WhitepaperModal: React.FC<WhitepaperModalProps> = ({
                       <span>MLA 潜变量与 MoE 路由混淆</span>
                     </div>
                     <p className="text-slate-400">
-                      适配 DeepSeek MLA 压缩 KV Cache 与 MoE 稀疏专家动态路由门控（Router Gate）的零明文张量点积，保留 98.6% 原生推理吞吐。
+                      适配 DeepSeek-V4.1 Flash MLA v2 压缩 KV Cache 与 MoE 稀疏专家动态路由门控（Router Gate）的零明文张量点积，保留 98.6% 原生推理吞吐。
                     </p>
                   </div>
                 </div>

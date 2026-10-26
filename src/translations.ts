@@ -22,7 +22,7 @@ export const translations = {
     businessHero: {
       badge: '为全球受监管企业打造的大模型机密安全基建',
       title: '释放企业 AI 潜能，绝不妥协核心隐私与合规红线',
-      subtitle: '专为法律、医疗健康与金融等高合规敏感行业打造的零信任机密计算底座。深度赋能全球最新万亿/千亿级前沿 MoE 架构 (DeepSeek-V3/R1 671B MoE / Qwen-2.5-MoE / Mixtral-8x22B)，并协同 CovarGate 治理平台无缝管控 OpenAI / Claude 等闭源模型调用，实现“零数据泄露、零越权劫持、全合规达标”。',
+      subtitle: '专为法律、医疗健康与金融等高合规敏感行业打造的零信任机密计算底座。深度赋能全球最新前沿开源大模型 (DeepSeek-V4.1 Flash、Kimi K3.1 Pro、Qwen 3.8、Llama 4 Maverick)，并协同 CovarGate 治理平台无缝管控 OpenAI / Claude 等闭源模型调用，实现“零数据泄露、零越权劫持、全合规达标”。',
       desc: '彻底打破传统“要么放弃大模型能力，要么承担云端泄密风险”的零和博弈，让法务合规官与安全团队放心批复 AI 项目全面投产。',
       ctaDemo: '预约行业方案演示',
       ctaTech: '探索底层产品与技术',
@@ -297,7 +297,7 @@ export const translations = {
         {
           title: '算力与效能零妥协',
           subtitle: '保持千亿大模型完整智能',
-          description: '摒弃同态加密千倍延迟与私有化小模型能力降级的缺陷。实测千亿模型（DeepSeek-V3 671B）精度损耗 < 3.5%，TPOT 仅 7.2ms。',
+          description: '摒弃同态加密千倍延迟与私有化小模型能力降级的缺陷。实测最新前沿大模型（DeepSeek-V4.1 Flash / Kimi K3.1 Pro）精度损耗 < 3.5%，TPOT 仅 5.1ms。',
           icon: 'Zap',
           stat: '< 3.5%',
           statLabel: '极微精度损耗',
@@ -531,7 +531,7 @@ export const translations = {
             },
             {
               title: 'MLA 潜变量与 MoE 动态门控密态乘法',
-              desc: '支持 DeepSeek MLA 压缩 KV Cache 与 MoE 动态路由门控（Router Gate）的联合密态混淆，在云端公有 GPU 上执行纯数学乱码的高阶张量计算。',
+              desc: '支持 DeepSeek-V4.1 Flash MLA v2 压缩 KV Cache 与 MoE 动态路由门控（Router Gate）的联合密态混淆，在云端公有 GPU 上执行纯数学乱码的高阶张量计算。',
               tag: '零明文计算',
               icon: 'Activity',
             },
@@ -542,17 +542,17 @@ export const translations = {
               icon: 'Zap',
             },
           ],
-          techSpec: 'AloePri 代数架构 · 适配 DeepSeek 671B MoE (MLA 算子) / Qwen-2.5-MoE / Mixtral 8x22B 等混合专家基座 · 逆变换点积抵消 · 零明文 Attention 机制',
+          techSpec: 'AloePri 代数架构 · 适配 DeepSeek-V4.1 Flash (MLA v2 极速算子)、Kimi K3.1 Pro (KDA 算子)、Qwen 3.8 与 Llama 4 MoE 等前沿开源大模型基座 · 逆变换点积抵消 · 零明文 Attention 机制',
         },
       },
       metricsTitle: '碾压级的实测性能：用事实说话',
-      metricsSubtitle: 'Backed by AloePri Architecture — 在千亿级参数 DeepSeek-V3.1 (671B) 实测验证',
+      metricsSubtitle: 'Backed by AloePri Architecture — 在最新 DeepSeek-V4.1 Flash 与 Kimi K3.1 Pro 实测验证',
       metrics: [
         {
           value: '< 3.5%',
           label: '极速微小精度损耗',
           subtext: '完美支撑千亿参数级推理，输出逻辑与明文完全一致',
-          verifiedOn: '基于 DeepSeek-V3.1 671B 严苛评测',
+          verifiedOn: '基于 DeepSeek-V4.1 Flash / Kimi K3.1 严苛评测',
         },
         {
           value: '0%',
@@ -635,7 +635,7 @@ export const translations = {
             client: '内网业务终端 / 员工应用 (Plaintext)',
             gateway: 'CovarGate 治理代理 + 动态代数协变矩阵扰动 P·X·P⁻¹',
             transport: 'mTLS 加密公网传输 (仅流动多维高斯乱码)',
-            compute: '公有云零明文算力节点 (DeepSeek-671B / Kimi-480B)',
+            compute: '公有云零明文算力节点 (DeepSeek-V4.1 Flash / Kimi K3.1 Pro / Qwen 3.8 / Llama 4)',
             recovery: '本地客户端纳秒级乘积自抵消还原',
           },
           features: [
@@ -785,7 +785,7 @@ export const translations = {
     businessHero: {
       badge: '為全球受監管企業打造的大模型機密安全基建',
       title: '釋放企業 AI 潛能，絕不妥協核心隱私與合規紅線',
-      subtitle: '專為法律、醫療健康與金融等高合規敏感行業打造的零信任機密計算底座。深度賦能全球最新萬億/千億級前沿 MoE 架構 (DeepSeek-V3/R1 671B MoE / Qwen-2.5-MoE / Mixtral-8x22B)，並協同 CovarGate 治理平台無縫管控 OpenAI / Claude 等閉源模型調用，實現「零數據洩露、零越權劫持、全合規達標」。',
+      subtitle: '專為法律、醫療健康與金融等高合規敏感行業打造的零信任機密計算底座。深度賦能全球最新前沿開源大模型 (DeepSeek-V4.1 Flash、Kimi K3.1 Pro、Qwen 3.8、Llama 4 Maverick)，並協同 CovarGate 治理平台無縫管控 OpenAI / Claude 等閉源模型調用，實現「零數據洩露、零越權劫持、全合規達標」。',
       desc: '徹底打破傳統「要麼放棄大模型能力，要麼承擔雲端洩密風險」的零和博弈，讓法務合規官與安全團隊放心批復 AI 項目全面投產。',
       ctaDemo: '預約行業方案演示',
       ctaTech: '探索底層產品與技術',
@@ -1060,7 +1060,7 @@ export const translations = {
         {
           title: '算力與效能零妥協',
           subtitle: '保持千億大模型完整智能',
-          description: '摒棄同態加密千倍延遲與私有化小模型能力降級的缺陷。實測千億模型（DeepSeek-V3 671B）精度損耗 < 3.5%，TPOT 僅 7.2ms。',
+          description: '摒棄同態加密千倍延遲與私有化小模型能力降級的缺陷。實測最新前沿大模型（DeepSeek-V4.1 Flash / Kimi K3.1 Pro）精度損耗 < 3.5%，TPOT 僅 5.1ms。',
           icon: 'Zap',
           stat: '< 3.5%',
           statLabel: '極微精度損耗',
@@ -1294,7 +1294,7 @@ export const translations = {
             },
             {
               title: 'MLA 潛變量與 MoE 動態門控密態乘法',
-              desc: '支持 DeepSeek MLA 壓縮 KV Cache 與 MoE 動態路由門控（Router Gate）的聯合密態混淆，在雲端公有 GPU 上執行純數學亂碼的高階張量計算。',
+              desc: '支持 DeepSeek-V4.1 Flash MLA v2 壓縮 KV Cache 與 MoE 動態路由門控（Router Gate）的聯合密態混淆，在雲端公有 GPU 上執行純數學亂碼的高階張量計算。',
               tag: '零明文計算',
               icon: 'Activity',
             },
@@ -1305,17 +1305,17 @@ export const translations = {
               icon: 'Zap',
             },
           ],
-          techSpec: 'AloePri 代數架構 · 適配 DeepSeek 671B MoE (MLA 算子) / Qwen-2.5-MoE / Mixtral 8x22B 等混合專家基座 · 逆變換點積抵消 · 零明文 Attention 機制',
+          techSpec: 'AloePri 代數架構 · 適配 DeepSeek-V4.1 Flash (MLA v2 極速算子)、Kimi K3.1 Pro (KDA 算子)、Qwen 3.8 與 Llama 4 MoE 等前沿開源大模型基座 · 逆變換點積抵消 · 零明文 Attention 機制',
         },
       },
       metricsTitle: '碾壓級的實測性能：用事實說話',
-      metricsSubtitle: 'Backed by AloePri Architecture — 在千億級參數 DeepSeek-V3.1 (671B) 實測驗證',
+      metricsSubtitle: 'Backed by AloePri Architecture — 在最新 DeepSeek-V4.1 Flash 與 Kimi K3.1 Pro 實測驗證',
       metrics: [
         {
           value: '< 3.5%',
           label: '極速微小精度損耗',
           subtext: '完美支撐千億參數級推理，輸出邏輯與明文完全一致',
-          verifiedOn: '基於 DeepSeek-V3.1 671B 嚴苛評測',
+          verifiedOn: '基於 DeepSeek-V4.1 Flash / Kimi K3.1 嚴苛評測',
         },
         {
           value: '0%',
@@ -1398,7 +1398,7 @@ export const translations = {
             client: '內網業務終端 / 員工應用 (Plaintext)',
             gateway: 'CovarGate 治理代理 + 動態代數協變矩陣擾動 P·X·P⁻¹',
             transport: 'mTLS 加密公網傳輸 (僅流動多維高斯亂碼)',
-            compute: '公有雲零明文算力節點 (DeepSeek-671B / Kimi-480B)',
+            compute: '公有雲零明文算力節點 (DeepSeek-V4.1 Flash / Kimi K3.1 Pro / Qwen 3.8 / Llama 4)',
             recovery: '本地客戶端納秒級乘積自抵消還原',
           },
           features: [
@@ -1548,7 +1548,7 @@ export const translations = {
     businessHero: {
       badge: 'Confidential AI Infrastructure for Regulated Enterprises',
       title: 'Deploy Frontier AI. Zero Cloud Leaks. 100% Compliant.',
-      subtitle: 'The zero-trust confidential computing layer for regulated enterprises. Securely run DeepSeek-671B MoE, OpenAI & custom agents on public clouds with mathematical privacy guarantees.',
+      subtitle: 'The zero-trust confidential computing layer for regulated enterprises. Securely empower frontier open-weight models (DeepSeek-V4.1 Flash, Kimi K3.1 Pro, Qwen 3.8, Llama 4 Maverick) and govern OpenAI / Claude endpoints on public clouds with mathematical privacy guarantees.',
       desc: 'Break the zero-sum trade-off between AI capability and cloud data sovereignty. Empower General Counsel and CISOs to approve production AI rollouts.',
       ctaDemo: 'Request Live Demo',
       ctaTech: 'Explore Technology',
@@ -1823,7 +1823,7 @@ export const translations = {
         {
           title: 'Zero Capability Downgrade',
           subtitle: 'Full Power of Frontier 671B MoE',
-          description: 'Transcend the thousand-fold slowdown of FHE or degraded small models. Measured accuracy delta <3.5% with 7.2ms TPOT on DeepSeek-V3.',
+          description: 'Transcend the thousand-fold slowdown of FHE or degraded small models. Measured accuracy delta <3.5% with 5.1ms TPOT on DeepSeek-V4.1 Flash & Kimi K3.1 Pro.',
           icon: 'Zap',
           stat: '< 3.5%',
           statLabel: 'Minimal Accuracy Delta',
@@ -2046,7 +2046,7 @@ export const translations = {
           name: 'Core Kernel: CovarPri',
           level: 'Core Inner',
           tagline: 'Algebraic Covariance Obfuscation for Frontier MoE',
-          description: 'Pure algebraic covariance obfuscation engineered for frontier MoE architectures (DeepSeek 671B, Qwen-2.5-MoE, Mixtral) with lossless dot-product cancellation.',
+          description: 'Pure algebraic covariance obfuscation engineered for frontier open-weight architectures (DeepSeek-V4.1 Flash, Kimi K3.1 Pro, Qwen 3.8, Llama 4 Maverick) with lossless dot-product cancellation.',
           color: 'blue',
           features: [
             {
@@ -2057,7 +2057,7 @@ export const translations = {
             },
             {
               title: 'MLA Latent KV Cache & Router Obfuscation',
-              desc: 'Jointly obfuscates DeepSeek MLA latent tensors and MoE dynamic router gates for zero-plaintext cloud computing.',
+              desc: 'Jointly obfuscates DeepSeek-V4.1 Flash MLA v2 latent tensors and MoE dynamic router gates for zero-plaintext cloud computing.',
               tag: 'Zero-Plaintext Ops',
               icon: 'Activity',
             },
@@ -2068,17 +2068,17 @@ export const translations = {
               icon: 'Zap',
             },
           ],
-          techSpec: 'AloePri Framework · Engineered for DeepSeek 671B MoE (MLA) & Mixtral · Zero-Plaintext Attention',
+          techSpec: 'AloePri Framework · Engineered for DeepSeek-V4.1 Flash (MLA v2), Kimi K3.1 Pro (KDA), Qwen 3.8 & Llama 4 MoE · Zero-Plaintext Attention',
         },
       },
       metricsTitle: 'Empirical Benchmark Performance',
-      metricsSubtitle: 'Validated on DeepSeek-V3.1 (671B MoE) — Proof over promises',
+      metricsSubtitle: 'Validated on DeepSeek-V4.1 Flash & Kimi K3.1 Pro — Proof over promises',
       metrics: [
         {
           value: '< 3.5%',
           label: 'Accuracy Delta',
-          subtext: 'Flawlessly powers 671B reasoning with identical semantic output to plaintext',
-          verifiedOn: 'Tested on DeepSeek-V3.1 671B parameters',
+          subtext: 'Flawlessly powers frontier reasoning with identical semantic output to plaintext',
+          verifiedOn: 'Tested on DeepSeek-V4.1 Flash & Kimi K3.1',
         },
         {
           value: '0%',
@@ -2161,7 +2161,7 @@ export const translations = {
             client: 'Intranet Workstation / Employee Workspace (Plaintext)',
             gateway: 'CovarGate Governance Proxy + Dynamic Algebraic Covariance Perturbation P·X·P⁻¹',
             transport: 'mTLS Encrypted Public Transit (Pure High-Dimensional Gaussian Noise)',
-            compute: 'Cloud Zero-Plaintext Compute Node (DeepSeek-671B / Kimi-480B)',
+            compute: 'Cloud Zero-Plaintext Compute Node (DeepSeek-V4.1 Flash / Kimi K3.1 Pro / Qwen 3.8 / Llama 4)',
             recovery: 'Local Client Nanosecond Matrix Self-Cancellation Recovery',
           },
           features: [

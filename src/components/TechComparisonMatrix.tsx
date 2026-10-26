@@ -44,10 +44,10 @@ export const TechComparisonMatrix: React.FC<TechComparisonMatrixProps> = ({
         nameEn: 'CovarAI Hybrid Covariance',
         badge: lang === 'en' ? '★ Production-Grade SOTA' : lang === 'zh-TW' ? '★ 最佳生產級架構' : '★ 最佳生产级架构',
         verdict: lang === 'en'
-          ? 'Near-zero latency (<3.5%), native support for 671B MoE & 2M context, dual mathematical + physical perimeter.'
+          ? 'Near-zero latency (<3.5%), native support for DeepSeek-V4.1 Flash & 2M context, dual mathematical + physical perimeter.'
           : lang === 'zh-TW'
-          ? '微秒級延遲損耗 (<3.5%)，原生支持 DeepSeek 671B MoE 與 200K~2M 超長上下文，具備數學不可逆與物理飛地雙重防線。'
-          : '微秒级延迟损耗 (<3.5%)，原生支持 DeepSeek 671B MoE 与 200K~2M 超长上下文，具备数学不可逆与物理飞地双重防线。',
+          ? '微秒級延遲損耗 (<3.5%)，原生支持 DeepSeek-V4.1 Flash 與 200K~2M 超長上下文，具備數學不可逆與物理飛地雙重防線。'
+          : '微秒级延迟损耗 (<3.5%)，原生支持 DeepSeek-V4.1 Flash 与 200K~2M 超长上下文，具备数学不可逆与物理飞地双重防线。',
       },
       fhe: {
         name: '全同态加密 (FHE)',
@@ -83,8 +83,8 @@ export const TechComparisonMatrix: React.FC<TechComparisonMatrixProps> = ({
     dimensions: [
       {
         id: 'moe_scale',
-        title: lang === 'en' ? '671B+ MoE Model Scale Support' : lang === 'zh-TW' ? '萬億/千億 MoE 大模型支持度' : '万亿/千亿 MoE 大模型支持度',
-        desc: lang === 'en' ? 'Ability to run DeepSeek-V3/R1 671B, Kimi 480B, Qwen 72B' : lang === 'zh-TW' ? '原生流暢運行 DeepSeek-671B、Kimi-480B 等前沿 MoE 模型' : '原生流畅运行 DeepSeek-671B、Kimi-480B 等前沿 MoE 模型',
+        title: lang === 'en' ? 'Frontier Open-Source Model Support' : lang === 'zh-TW' ? '前沿開源大模型支持度 (DeepSeek/Kimi/Qwen/Llama)' : '前沿开源大模型支持度 (DeepSeek/Kimi/Qwen/Llama)',
+        desc: lang === 'en' ? 'Ability to run DeepSeek-V4.1 Flash, Kimi K3.1 Pro, Qwen 3.8, Llama 4 Maverick' : lang === 'zh-TW' ? '原生流暢運行 DeepSeek-V4.1 Flash、Kimi K3.1 Pro、Qwen 3.8、Llama 4 Maverick 等前沿開源模型' : '原生流畅运行 DeepSeek-V4.1 Flash、Kimi K3.1 Pro、Qwen 3.8、Llama 4 Maverick 等前沿开源模型',
         covar: { status: 'pass', text: lang === 'en' ? 'Native Full Support (671B+)' : lang === 'zh-TW' ? '原生全量支持 (671B+)' : '原生全量支持 (671B+)', highlight: true },
         fhe: { status: 'fail', text: lang === 'en' ? 'Impossible (<1B toy models only)' : lang === 'zh-TW' ? '完全不支持 (僅限 <1B 玩具模型)' : '完全不支持 (仅限 <1B 玩具模型)' },
         tee: { status: 'warn', text: lang === 'en' ? 'Partial (VRAM Bound & Slow)' : lang === 'zh-TW' ? '部分支持 (顯存受限/需昂貴卡群)' : '部分支持 (显存受限/需昂贵卡群)' },

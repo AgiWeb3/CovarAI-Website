@@ -29,7 +29,7 @@ interface TcoRoiCalculatorProps {
   onRequestDemo?: (details?: string) => void;
 }
 
-type ModelType = 'deepseek671b' | 'kimi_moe' | 'glm4_moe' | 'qwen_max';
+type ModelType = 'deepseek_v4_flash' | 'kimi_k3' | 'qwen_38' | 'llama_4';
 type TimeHorizon = '1' | '3' | '5';
 type CurrencyType = 'USD' | 'CNY';
 
@@ -38,7 +38,7 @@ export const TcoRoiCalculator: React.FC<TcoRoiCalculatorProps> = ({
   onRequestDemo,
 }) => {
   // Input States
-  const [modelType, setModelType] = useState<ModelType>('deepseek671b');
+  const [modelType, setModelType] = useState<ModelType>('deepseek_v4_flash');
   const [dailyTokensM, setDailyTokensM] = useState<number>(100); // 10M to 1000M tokens/day
   const [timeHorizon, setTimeHorizon] = useState<TimeHorizon>('3');
   const [currency, setCurrency] = useState<CurrencyType>('USD');
@@ -52,7 +52,7 @@ export const TcoRoiCalculator: React.FC<TcoRoiCalculatorProps> = ({
   // Currency Exchange Rate USD to CNY (~7.25)
   const rate = currency === 'CNY' ? 7.25 : 1.0;
 
-  // Model Specs & Baseline Costs (Top Frontier MoE Models: DeepSeek 671B, Kimi 480B, GLM-4 355B, Qwen 2.5 72B/MoE)
+  // Model Specs & Baseline Costs (Top Frontier Models: DeepSeek-V4.1 Flash, Kimi K3.1 Pro, Qwen 3.8, Llama 4 Maverick)
   const modelData: Record<
     ModelType,
     {
@@ -69,97 +69,97 @@ export const TcoRoiCalculator: React.FC<TcoRoiCalculatorProps> = ({
       isMoE: boolean;
     }
   > = {
-    deepseek671b: {
-      name: 'DeepSeek-R1 / V3 (671B MoE · 37B Active)',
+    deepseek_v4_flash: {
+      name: 'DeepSeek-V4.1 Flash (MoE · Extreme Throughput)',
       archBadge:
         lang === 'en'
-          ? '671B MoE · 128 Experts · MLA Latent Attention'
+          ? 'Next-Gen Flash MoE · MLA v2 Attention · 1M Context'
           : lang === 'zh-TW'
-          ? '671B MoE · 128 路由專家 · MLA 潛在注意力'
-          : '671B MoE · 128 路由专家 · MLA 潜在注意力',
+          ? '次世代 Flash MoE · MLA v2 極速注意力 · 100萬上下文'
+          : '次世代 Flash MoE · MLA v2 极速注意力 · 100万上下文',
       gpuNeeded:
         lang === 'en'
-          ? '8x 8-GPU Pods (64x NVIDIA H800/H20 80GB + InfiniBand)'
+          ? '4x 8-GPU Pods (32x NVIDIA H800/H20/H100 + InfiniBand)'
           : lang === 'zh-TW'
-          ? '8組 8卡機櫃 (64x NVIDIA H800/H20 80GB + InfiniBand)'
-          : '8组 8卡机柜 (64x NVIDIA H800/H20 80GB + InfiniBand)',
-      gpuCount: 64,
-      serverHardwareCapexUSD: 1850000, // $1.85M CapEx
-      baseSysadminOpexPerEngUSD: 120000, // $120k/yr per senior MLOps/Infosec engineer
-      basePowerPueOpexUSD: 165000, // Power baseline at PUE 1.35
-      publicCloudTokenCostPerMUSD: 0.14, // $0.14 per 1M tokens on cloud confidential pool
-      covarPriLicensePerMUSD: 0.04, // $0.04 per 1M tokens
-      tag: 'DeepSeek 671B MoE',
+          ? '4組 8卡機櫃 (32x NVIDIA H800/H20/H100 + InfiniBand)'
+          : '4组 8卡机柜 (32x NVIDIA H800/H20/H100 + InfiniBand)',
+      gpuCount: 32,
+      serverHardwareCapexUSD: 980000,
+      baseSysadminOpexPerEngUSD: 110000,
+      basePowerPueOpexUSD: 88000,
+      publicCloudTokenCostPerMUSD: 0.05,
+      covarPriLicensePerMUSD: 0.015,
+      tag: 'DeepSeek-V4.1 Flash',
       isMoE: true,
     },
-    kimi_moe: {
-      name: 'Kimi k1.5 / Moonshot (480B MoE · 2M Context)',
+    kimi_k3: {
+      name: 'Kimi K3.1 Pro (Moonshot AI · 2.8T MoE · KDA)',
       archBadge:
         lang === 'en'
-          ? '480B MoE · 2M Ultra-Long Context · Agentic SOTA'
+          ? '2.8T MoE · Kimi Delta Attention (KDA) · 2M Context'
           : lang === 'zh-TW'
-          ? '480B MoE · 200萬超長上下文 · Agentic SOTA'
-          : '480B MoE · 200万超长上下文 · Agentic SOTA',
+          ? '2.8T MoE · KDA 增量注意力 · 200萬上下文 SOTA'
+          : '2.8T MoE · KDA 增量注意力 · 200万上下文 SOTA',
       gpuNeeded:
         lang === 'en'
-          ? '6x 8-GPU Pods (48x NVIDIA H800/H100 80GB SXM5)'
+          ? '8x 8-GPU Pods (64x NVIDIA H100 SXM5 80GB + InfiniBand)'
           : lang === 'zh-TW'
-          ? '6組 8卡機櫃 (48x NVIDIA H800/H100 80GB SXM5)'
-          : '6组 8卡机柜 (48x NVIDIA H800/H100 80GB SXM5)',
-      gpuCount: 48,
-      serverHardwareCapexUSD: 1420000,
-      baseSysadminOpexPerEngUSD: 110000,
-      basePowerPueOpexUSD: 135000,
+          ? '8組 8卡機櫃 (64x NVIDIA H100 SXM5 80GB + InfiniBand)'
+          : '8组 8卡机柜 (64x NVIDIA H100 SXM5 80GB + InfiniBand)',
+      gpuCount: 64,
+      serverHardwareCapexUSD: 1950000,
+      baseSysadminOpexPerEngUSD: 125000,
+      basePowerPueOpexUSD: 175000,
       publicCloudTokenCostPerMUSD: 0.12,
       covarPriLicensePerMUSD: 0.035,
-      tag: 'Kimi 480B MoE',
+      tag: 'Kimi K3.1 Pro',
       isMoE: true,
     },
-    glm4_moe: {
-      name: 'GLM-4.6 / GLM-4-MoE (355B MoE · Zhipu AI)',
+    qwen_38: {
+      name: 'Qwen 3.8 (Alibaba · Multi-Tier Reasoning · Flash-Next)',
       archBadge:
         lang === 'en'
-          ? '355B MoE · MIT Open Weights · 200K Context'
+          ? 'Flagship Qwen 3.8 · Configurable Reasoning Effort · CoWork SOTA'
           : lang === 'zh-TW'
-          ? '355B MoE · MIT 開源權重 · 200K Context'
-          : '355B MoE · MIT 开源权重 · 200K Context',
+          ? '旗艦 Qwen 3.8 · 可調推理深度 · CoWorkBench 頂級基準'
+          : '旗舰 Qwen 3.8 · 可调推理深度 · CoWorkBench 顶级基准',
       gpuNeeded:
         lang === 'en'
-          ? '4x 8-GPU Pods (32x NVIDIA H800/H100 80GB)'
+          ? '4x 8-GPU Pods (32x NVIDIA H100/A100 80GB)'
           : lang === 'zh-TW'
-          ? '4組 8卡機櫃 (32x NVIDIA H800/H100 80GB)'
-          : '4组 8卡机柜 (32x NVIDIA H800/H100 80GB)',
+          ? '4組 8卡機櫃 (32x NVIDIA H100/A100 80GB)'
+          : '4组 8卡机柜 (32x NVIDIA H100/A100 80GB)',
       gpuCount: 32,
-      serverHardwareCapexUSD: 960000,
+      serverHardwareCapexUSD: 920000,
       baseSysadminOpexPerEngUSD: 100000,
-      basePowerPueOpexUSD: 92000,
-      publicCloudTokenCostPerMUSD: 0.09,
-      covarPriLicensePerMUSD: 0.026,
-      tag: 'GLM-4 355B MoE',
-      isMoE: true,
-    },
-    qwen_max: {
-      name: 'Qwen 2.5 (72B Dense / MoE Equivalent)',
-      archBadge:
-        lang === 'en'
-          ? '72B Dense / Frontier Coding & Math SOTA'
-          : lang === 'zh-TW'
-          ? '72B 旗艦稠密 / 頂級代碼與數學推理'
-          : '72B 旗舰稠密 / 顶级代码与数学推理',
-      gpuNeeded:
-        lang === 'en'
-          ? '2x 8-GPU Pods (16x NVIDIA RTX 4090/A100 80GB)'
-          : lang === 'zh-TW'
-          ? '2組 8卡機櫃 (16x NVIDIA A100 80GB)'
-          : '2组 8卡机柜 (16x NVIDIA A100 80GB)',
-      gpuCount: 16,
-      serverHardwareCapexUSD: 480000,
-      baseSysadminOpexPerEngUSD: 90000,
-      basePowerPueOpexUSD: 48000,
+      basePowerPueOpexUSD: 82000,
       publicCloudTokenCostPerMUSD: 0.06,
       covarPriLicensePerMUSD: 0.018,
-      tag: 'Qwen 2.5 72B',
-      isMoE: false,
+      tag: 'Qwen 3.8 Flash-Next',
+      isMoE: true,
+    },
+    llama_4: {
+      name: 'Llama 4 Maverick (Meta AI · 128-Expert Native MoE)',
+      archBadge:
+        lang === 'en'
+          ? '128-Expert Native MoE · 10M Token Window · Multimodal'
+          : lang === 'zh-TW'
+          ? '128 路由專家 MoE · 1000萬超長窗口 · 原生多模態'
+          : '128 路由专家 MoE · 1000万超长窗口 · 原生多模态',
+      gpuNeeded:
+        lang === 'en'
+          ? '6x 8-GPU Pods (48x NVIDIA H100 SXM5 80GB)'
+          : lang === 'zh-TW'
+          ? '6組 8卡機櫃 (48x NVIDIA H100 SXM5 80GB)'
+          : '6组 8卡机柜 (48x NVIDIA H100 SXM5 80GB)',
+      gpuCount: 48,
+      serverHardwareCapexUSD: 1450000,
+      baseSysadminOpexPerEngUSD: 115000,
+      basePowerPueOpexUSD: 135000,
+      publicCloudTokenCostPerMUSD: 0.08,
+      covarPriLicensePerMUSD: 0.025,
+      tag: 'Llama 4 Maverick',
+      isMoE: true,
     },
   };
 
@@ -205,23 +205,23 @@ export const TcoRoiCalculator: React.FC<TcoRoiCalculatorProps> = ({
     const savingsPercent = Math.round((totalSavings / privateTotalCost) * 100);
 
     const carbonFactor =
-      modelType === 'deepseek671b'
-        ? 2.0
-        : modelType === 'kimi_moe'
-        ? 1.6
-        : modelType === 'glm4_moe'
-        ? 1.2
-        : 0.8;
+      modelType === 'deepseek_v4_flash'
+        ? 1.4
+        : modelType === 'kimi_k3'
+        ? 2.2
+        : modelType === 'llama_4'
+        ? 1.8
+        : 1.2;
     const carbonSavedTons = Math.round(dailyTokensM * 365 * years * 0.00042 * carbonFactor * (customPue / 1.35));
 
     const daysToDeployPrivate =
-      modelType === 'deepseek671b'
-        ? 180
-        : modelType === 'kimi_moe'
-        ? 150
-        : modelType === 'glm4_moe'
+      modelType === 'deepseek_v4_flash'
         ? 120
-        : 90;
+        : modelType === 'kimi_k3'
+        ? 180
+        : modelType === 'llama_4'
+        ? 150
+        : 100;
     const daysToDeployCovar = 1;
 
     // Per-Token Cost comparison (Cost per 1M tokens equivalent)
@@ -305,16 +305,20 @@ Currency: ${currency} | PUE: ${customPue} | Ops Team: ${customOpsTeamSize} Engin
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/80 border border-cyan-500/40 text-cyan-300 text-xs font-mono mb-2">
             <Calculator className="w-3.5 h-3.5 text-cyan-400" />
-            <span>{lang === 'en' ? 'ENTERPRISE TCO & ROI SIMULATOR' : '企业 TCO 成本与算力收益全景测算器'}</span>
+            <span>{lang === 'en' ? 'ENTERPRISE TCO & ROI SIMULATOR' : lang === 'zh-TW' ? '企業 TCO 成本與算力收益全景測算器' : '企业 TCO 成本与算力收益全景测算器'}</span>
           </div>
           <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
             {lang === 'en'
               ? 'Private On-Premise Cluster vs. CovarAI Sovereign Cloud'
+              : lang === 'zh-TW'
+              ? '傳統本地私有化集群 vs CovarAI 零明文主權雲'
               : '传统本地私有化集群 vs CovarAI 零明文主权云'}
           </h3>
           <p className="text-xs sm:text-sm text-slate-400 mt-1">
             {lang === 'en'
               ? 'Comprehensive breakdown of CapEx, MLOps payroll, PUE cooling, maintenance, and unit token economics.'
+              : lang === 'zh-TW'
+              ? '全面量化數億級 Token 吞吐下，重資產硬體採購、專業維運團隊薪酬、機房能耗與零信任彈性算力的總擁有成本差距。'
               : '全面量化数亿级 Token 吞吐下，重资产硬件采购、专业运维团队薪酬、机房能耗与零信任弹性算力的总拥有成本差距。'}
           </p>
         </div>
@@ -346,7 +350,7 @@ Currency: ${currency} | PUE: ${customPue} | Ops Team: ${customOpsTeamSize} Engin
             title="Export TCO Assessment"
           >
             <FileSpreadsheet className="w-3.5 h-3.5 text-cyan-400" />
-            <span>{isCopied ? (lang === 'en' ? 'COPIED!' : '已复制测算表') : (lang === 'en' ? 'Export Summary' : '导出测算数据')}</span>
+            <span>{isCopied ? (lang === 'en' ? 'COPIED!' : lang === 'zh-TW' ? '已複製測算表' : '已复制测算表') : (lang === 'en' ? 'Export Summary' : lang === 'zh-TW' ? '導出測算數據' : '导出测算数据')}</span>
           </button>
         </div>
       </div>
@@ -361,7 +365,7 @@ Currency: ${currency} | PUE: ${customPue} | Ops Team: ${customOpsTeamSize} Engin
           <div>
             <label className="text-xs font-mono text-cyan-400 block mb-2.5 font-bold uppercase tracking-wider flex items-center gap-2">
               <Layers className="w-4 h-4" />
-              <span>1. {lang === 'en' ? 'Target Model Architecture' : '目标大模型基座架构'}</span>
+              <span>1. {lang === 'en' ? 'Target Model Architecture' : lang === 'zh-TW' ? '目標大模型基座架構' : '目标大模型基座架构'}</span>
             </label>
             <div className="space-y-2.5">
               {(Object.keys(modelData) as ModelType[]).map((key) => {
@@ -412,7 +416,7 @@ Currency: ${currency} | PUE: ${customPue} | Ops Team: ${customOpsTeamSize} Engin
             <div className="flex items-center justify-between">
               <label className="text-xs font-mono text-purple-400 font-bold uppercase tracking-wider flex items-center gap-2">
                 <Zap className="w-4 h-4" />
-                <span>2. {lang === 'en' ? 'Daily Token Throughput' : '企业日均 Token 吞吐量'}</span>
+                <span>2. {lang === 'en' ? 'Daily Token Throughput' : lang === 'zh-TW' ? '企業日均 Token 吞吐量' : '企业日均 Token 吞吐量'}</span>
               </label>
               <span className="text-base font-mono font-black text-cyan-300 px-2 py-0.5 rounded bg-cyan-950/80 border border-cyan-800">
                 {dailyTokensM}M <span className="text-[10px] text-slate-400 font-normal">Tokens/Day</span>

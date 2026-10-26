@@ -482,7 +482,7 @@ export const PromptSandboxMatrix: React.FC<PromptSandboxMatrixProps> = ({ lang }
                 <div className="p-3.5 bg-blue-950/40 rounded-lg border border-blue-800/60 text-blue-200 text-xs space-y-2">
                   <div className="flex items-center gap-2 text-blue-300 font-bold">
                     <Cpu className="w-4 h-4 text-blue-400" />
-                    <span>DeepSeek-671B MoE / H100 Public Cluster</span>
+                    <span>DeepSeek-V4.1 Flash · H100 Public Cluster</span>
                   </div>
                   <p className="text-slate-300 text-xs leading-relaxed">{currentScenarioData.cloudGpuView}</p>
                   <div className="text-[10px] text-emerald-400 font-mono">

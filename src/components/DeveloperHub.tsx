@@ -68,7 +68,7 @@ export const DeveloperHub: React.FC<DeveloperHubProps> = ({
         <div className="text-center max-w-3xl mx-auto mb-10" data-aos="fade-up">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#061c0e] border border-[#1f794d]/50 text-[#80f2b0] text-xs font-mono mb-4">
             <Zap className="w-3.5 h-3.5 text-[#4ee48b]" />
-            <span>{lang === 'en' ? '3-LINE TRANSPARENT PROXY · <3.5% LATENCY DELTA · NATIVE 671B MoE' : lang === 'zh-TW' ? '3 行代碼透明代理 · 延遲損耗 <3.5% · 原生相容 671B MoE' : '3 行代码透明代理 · 延迟损耗 <3.5% · 原生兼容 671B MoE'}</span>
+            <span>{lang === 'en' ? '3-LINE TRANSPARENT PROXY · <3.5% LATENCY DELTA · DEEPSEEK V4.1 FLASH / KIMI K3 / QWEN 3.8' : lang === 'zh-TW' ? '3 行代碼透明代理 · 延遲損耗 <3.5% · 原生賦能 DeepSeek-V4.1 / Kimi K3 / Qwen 3.8' : '3 行代码透明代理 · 延迟损耗 <3.5% · 原生赋能 DeepSeek-V4.1 / Kimi K3 / Qwen 3.8'}</span>
           </div>
 
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight mb-4">
@@ -102,7 +102,7 @@ export const DeveloperHub: React.FC<DeveloperHubProps> = ({
             {
               label: lang === 'en' ? 'End-to-End Latency Delta' : lang === 'zh-TW' ? '端到端推理額外延遲損耗' : '端到端推理额外延迟损耗',
               val: '< 3.5%',
-              sub: lang === 'en' ? 'DeepSeek 671B @ 42.8 t/s' : lang === 'zh-TW' ? 'DeepSeek 671B 實測 42.8 t/s' : 'DeepSeek 671B 实测 42.8 t/s',
+              sub: lang === 'en' ? 'DeepSeek-V4.1 Flash @ 78.5 t/s' : lang === 'zh-TW' ? 'DeepSeek-V4.1 Flash 實測 78.5 t/s' : 'DeepSeek-V4.1 Flash 实测 78.5 t/s',
               color: 'text-[#80f2b0]',
             },
             {

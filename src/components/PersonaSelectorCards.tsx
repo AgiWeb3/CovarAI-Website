@@ -105,10 +105,10 @@ export const PersonaSelectorCards: React.FC<PersonaSelectorCardsProps> = ({
       badge: lang === 'en' ? 'Developer & Docs Hub' : lang === 'zh-TW' ? '架構師與開發者專區' : '架构师与开发者专区',
       headline:
         lang === 'en'
-          ? '3-Line Code Proxy & <3.5% Latency on DeepSeek 671B'
+          ? '3-Line Code Proxy & <3.5% Latency on DeepSeek-V4.1 Flash'
           : lang === 'zh-TW'
-          ? '3 行代碼無感接入，671B MoE 延遲損耗 <3.5%'
-          : '3 行代码无感接入，671B MoE 延迟损耗 <3.5%',
+          ? '3 行代碼無感接入，DeepSeek-V4.1 Flash 延遲損耗 <3.5%'
+          : '3 行代码无感接入，DeepSeek-V4.1 Flash 延迟损耗 <3.5%',
       coreValue:
         lang === 'en'
           ? 'Drop-in transparent proxy for OpenAI SDK / LangChain / Spring AI, FHE vs TEE vs CovarAI matrix, and 5-layer Onion anatomy.'
@@ -125,10 +125,10 @@ export const PersonaSelectorCards: React.FC<PersonaSelectorCardsProps> = ({
           ? '0 改造相容 OpenAI SDK'
           : '0 改造兼容 OpenAI SDK',
         lang === 'en'
-          ? 'DeepSeek 671B <3.5% Delta'
+          ? 'DeepSeek-V4.1 Flash <3.5% Delta'
           : lang === 'zh-TW'
-          ? '671B MoE 延遲損耗 < 3.5%'
-          : '671B MoE 延迟损耗 < 3.5%',
+          ? 'DeepSeek-V4.1 Flash 延遲損耗 < 3.5%'
+          : 'DeepSeek-V4.1 Flash 延迟损耗 < 3.5%',
         lang === 'en'
           ? 'FHE vs TEE vs CovarAI Matrix'
           : lang === 'zh-TW'

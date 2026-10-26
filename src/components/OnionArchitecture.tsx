@@ -578,7 +578,7 @@ export const OnionArchitecture: React.FC<OnionArchitectureProps> = ({ lang }) =>
                     {lang === 'en' ? 'Inference Latency & Throughput Benchmark' : '推理延迟 (TPOT) 与吞吐量 (TPS) 深度基准'}
                   </h4>
                   <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-950 text-cyan-400 border border-cyan-800">
-                    DeepSeek 671B MoE
+                    DeepSeek-V4.1 Flash MoE
                   </span>
                 </div>
                 <p className="text-xs text-slate-400 font-mono">
@@ -854,7 +854,7 @@ export const OnionArchitecture: React.FC<OnionArchitectureProps> = ({ lang }) =>
                     ? '大模型密態計算工程全維度矩陣對比 (Engineering Benchmark Matrix)'
                     : '大模型密态计算工程全维度矩阵对比 (Engineering Benchmark Matrix)'}
                 </span>
-                <span className="text-[11px] text-cyan-400">DeepSeek-671B MoE / Qwen-2.5-MoE</span>
+                <span className="text-[11px] text-cyan-400">DeepSeek-V4.1 Flash · Kimi K3.1 Pro · Qwen 3.8 · Llama 4</span>
               </div>
 
               <div className="overflow-x-auto">
@@ -960,17 +960,17 @@ export const OnionArchitecture: React.FC<OnionArchitectureProps> = ({ lang }) =>
                     <span>
                       {lang === 'en' ? (
                         <>
-                          • <strong>CovarPri Algebraic Obfuscation</strong>: Tailored for <strong>open-weight & controllable MoE models</strong> (e.g., DeepSeek-V3/R1 671B MoE, Qwen-2.5-MoE, Mixtral 8x22B enterprise private/hosted instances), performing covariant transformations on underlying operators and tensors.<br />
+                          • <strong>CovarPri Algebraic Obfuscation</strong>: Tailored for <strong>frontier open-weight & controllable models</strong> (e.g., DeepSeek-V4.1 Flash, Kimi K3.1 Pro, Qwen 3.8, Llama 4 Maverick hosted instances), performing covariant transformations on underlying operators and tensors.<br />
                           • <strong>Closed-Source Black-Box APIs (OpenAI / Claude)</strong>: Because third-party proprietary weights and kernels are completely opaque, <strong>CovarPri tensor obfuscation does not apply</strong>. The platform utilizes <strong>CovarGate Governance Firewall</strong> on the client-side for millisecond-level PII/PHI neural redaction, format-preserving tokenization, and Tool Calling action locks.
                         </>
                       ) : lang === 'zh-TW' ? (
                         <>
-                          • <strong>CovarPri 代數混淆</strong>：專用於<strong>最新開源與可控權重 MoE 架構</strong>（如 DeepSeek-V3/R1 671B MoE, Qwen-2.5-MoE, Mixtral 8x22B 等企業私有化或託管實例），因需對模型底層算子與權重張量進行協變變換。<br />
+                          • <strong>CovarPri 代數混淆</strong>：專用於<strong>最新前沿開源與可控權重架構</strong>（如 DeepSeek-V4.1 Flash, Kimi K3.1 Pro, Qwen 3.8, Llama 4 Maverick 等企業私有化或託管實例），因需對模型底層算子與權重張量進行協變變換。<br />
                           • <strong>閉源黑盒 API (OpenAI / Claude)</strong>：因第三方商業模型權重與底層計算過程完全封閉，<strong>CovarPri 張量混淆對其無效</strong>。系統統籌由 <strong>CovarGate 治理防火牆</strong>在客戶端實施毫秒級 PII/PHI 實體動態脫敏、格式保留加密與 Tool Calling 動作鎖兜底。
                         </>
                       ) : (
                         <>
-                          • <strong>CovarPri 代数混淆</strong>：专用于<strong>最新开源与可控权重 MoE 架构</strong>（如 DeepSeek-V3/R1 671B MoE, Qwen-2.5-MoE, Mixtral 8x22B 等企业私有化或托管实例），因需对模型底层算子与权重张量进行协变变换。<br />
+                          • <strong>CovarPri 代数混淆</strong>：专用于<strong>最新前沿开源与可控权重架构</strong>（如 DeepSeek-V4.1 Flash, Kimi K3.1 Pro, Qwen 3.8, Llama 4 Maverick 等企业私有化或托管实例），因需对模型底层算子与权重张量进行协变变换。<br />
                           • <strong>闭源黑盒 API (OpenAI / Claude)</strong>：因第三方商业模型权重与底层计算过程完全封闭，<strong>CovarPri 张量混淆对其无效</strong>。系统统一由 <strong>CovarGate 治理防火墙</strong>在客户端实施毫秒级 PII/PHI 实体动态脱敏、格式保留加密与 Tool Calling 动作锁兜底。
                         </>
                       )}
@@ -1144,7 +1144,7 @@ export const OnionArchitecture: React.FC<OnionArchitectureProps> = ({ lang }) =>
                         <h4 className="text-white font-bold text-base">
                           {lang === 'en' ? 'Untrusted Public GPU Cloud Cluster' : lang === 'zh-TW' ? '不可信公有雲 / GPU 算力集群' : '不可信公有云 / GPU 算力集群'}
                         </h4>
-                        <span className="text-[11px] text-blue-400 font-mono">DeepSeek-671B MoE / H100 Cluster</span>
+                        <span className="text-[11px] text-blue-400 font-mono">DeepSeek-V4.1 Flash · Kimi K3.1 Pro · Qwen 3.8</span>
                       </div>
                     </div>
                     <ul className="space-y-2.5 text-xs text-slate-300">
@@ -1235,10 +1235,10 @@ export const OnionArchitecture: React.FC<OnionArchitectureProps> = ({ lang }) =>
                   </div>
                   <p className="text-xs text-slate-400 leading-relaxed">
                     {lang === 'en'
-                      ? 'Proprietary adaptation for DeepSeek-V3/R1 671B compressed Multi-Head Latent Attention (MLA) and MoE sparse gating, delivering native CUDA confidential tensor acceleration and microsecond-level reconstruction.'
+                      ? 'Proprietary adaptation for DeepSeek-V4.1 Flash compressed Multi-Head Latent Attention (MLA v2) and MoE sparse gating, delivering native CUDA confidential tensor acceleration and microsecond-level reconstruction.'
                       : lang === 'zh-TW'
-                      ? '獨家適配 DeepSeek-V3/R1 671B 的 MLA 壓縮 KV Cache 與 MoE 稀疏專家激活門控，實現超大規模混合專家架構的原生 CUDA 密態張量加速與微秒級點積還原。'
-                      : '独家适配 DeepSeek-V3/R1 671B 的 MLA 压缩 KV Cache 与 MoE 稀疏专家激活门控，实现超大规模混合专家架构的原生 CUDA 密态张量加速与微秒级点积还原。'}
+                      ? '獨家適配 DeepSeek-V4.1 Flash 的 MLA v2 壓縮 KV Cache 與 MoE 稀疏專家激活門控，實現超大規模混合專家架構的原生 CUDA 密態張量加速與微秒級點積還原。'
+                      : '独家适配 DeepSeek-V4.1 Flash 的 MLA v2 压缩 KV Cache 与 MoE 稀疏专家激活门控，实现超大规模混合专家架构的原生 CUDA 密态张量加速与微秒级点积还原。'}
                   </p>
                 </div>
 
